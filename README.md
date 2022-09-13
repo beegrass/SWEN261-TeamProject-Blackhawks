@@ -6,7 +6,7 @@ An online E-store system built in Java 8=>11 and ___ _replace with other platfor
 ## Team
 
 - Vincent Schwartz
-- MEMBER2
+- Angela Ngo 
 - MEMBER3
 - MEMBER4
 
