@@ -8,7 +8,7 @@ An online E-store system built in Java 8=>11 and ___ _replace with other platfor
 - Vincent Schwartz
 - Hayden Cabral
 - Angela Ngo 
-- MEMBER4
+- Ethan Abbate
 
 
 ## Prerequisites
