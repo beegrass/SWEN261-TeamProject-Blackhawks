@@ -36,8 +36,8 @@ public class Jersey {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Jersey(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("number") int number, @JsonProperty("price") double price,
-    @JsonProperty("color") String color, @JsonProperty("image") String image) {
+    public Jersey(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("number") int number, 
+    @JsonProperty("price") double price, @JsonProperty("color") String color, @JsonProperty("image") String image) {
         this.name = name;
         this.number = number;
         this.price = price;

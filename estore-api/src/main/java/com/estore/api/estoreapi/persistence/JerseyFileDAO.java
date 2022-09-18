@@ -164,8 +164,15 @@ public class JerseyFileDAO implements JerseyDAO {
 
     @Override
     public Jersey createJersey(Jersey jersey) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        synchronized(jerseys) {
+            // We create a new hero object because the id field is immutable
+            // and we need to assign the next unique id
+            Jersey newJersey = new Jersey(nextId(), jersey.getName(), jersey.getNumber(), jersey.getPrice(), 
+            jersey.getColor(), jersey.getImage());
+            jerseys.put(newJersey.getId(), newJersey);
+            save(); // may throw an IOException
+            return newJersey;
+        }
     }
 
     @Override
