@@ -46,4 +46,34 @@ public class JerseyController {
         this.jerseyDao = jerseyDao;
     }
         
+        /**
+     * Responds to the GET request for all {@linkplain Jersey jerseys} whose name contains
+     * the text in name
+     * 
+     * @param name The name parameter which contains the text used to find the {@link Jersey jerseys}
+     * 
+     * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * <p>
+     * Example: Find all Jersey that contain the text "ma"
+     * GET http://localhost:8080/heroes/?name=ma
+     * 
+     * @Author Angela Ngo
+     */
+    @GetMapping("/")
+    public ResponseEntity<Jersey[]> searchJersey(@RequestParam String name) {
+        LOG.info("GET /jerseys/?name="+name);
+
+        // Replace below with your implementation
+        try {
+            Jersey[] jerseys = jerseyDao.findJerseys(name);
+            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
+    }
 }
