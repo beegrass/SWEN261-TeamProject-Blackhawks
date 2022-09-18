@@ -64,6 +64,18 @@ public class Jersey {
     public String getName() {return name;}
 
     /**
+     * Sets the number of the jersey - necessary for JSON object to Java object deserialization
+     * @param name The number of the jersey
+     */
+    public void setNumber(int number) {this.number = number;}
+
+    /**
+     * Retrieves the name of the jersey
+     * @return The name of the jersey
+     */
+    public int getNumber() {return number;}
+
+    /**
      * Sets the price of the jersey - necessary for JSON object to Java object deserialization
      * @param price The price of the jersey
      */
