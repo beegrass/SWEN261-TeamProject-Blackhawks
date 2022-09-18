@@ -4,6 +4,12 @@ import java.io.IOException;
 
 import com.estore.api.estoreapi.model.Jersey;
 
+/**
+ * Defines the interface for Jersey object persistence
+ * 
+ * @author Angela Ngo
+ */
+
 public interface JerseyDAO {
     /**
      * Retrieves all {@linkplain Jersey jersey's}
