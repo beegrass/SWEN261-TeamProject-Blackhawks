@@ -26,7 +26,7 @@ import com.estore.api.estoreapi.model.Jersey;
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
  * 
- * @author Hayden Cabral
+ * @author Ethan Abbate, Hayden Cabral, Angela Ngo, Vincent Schwartz
  */
 
 @RestController
@@ -45,5 +45,7 @@ public class JerseyController {
     public JerseyController(JerseyDAO jerseyDao) {
         this.jerseyDao = jerseyDao;
     }
+
+
         
 }
