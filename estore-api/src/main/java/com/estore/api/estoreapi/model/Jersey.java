@@ -52,10 +52,22 @@ public class Jersey {
     public int getId() {return id;}
 
     /**
+     * Sets the name of the jersey - necessary for JSON object to Java object deserialization
+     * @param name The name of the jersey
+     */
+    public void setName(String name) {this.name = name;}
+
+    /**
      * Retrieves the name of the jersey
      * @return The name of the jersey
      */
     public String getName() {return name;}
+
+    /**
+     * Sets the price of the jersey - necessary for JSON object to Java object deserialization
+     * @param price The price of the jersey
+     */
+    public void setPrice(double price) {this.price = price;}
 
     /**
      * Retrieves the price of the jersey
@@ -64,16 +76,37 @@ public class Jersey {
     public double getPrice() {return price;}
 
     /**
-     * Retrieves the id of the jersey
-     * @return The id of the jersey
+     * Sets the color of the jersey - necessary for JSON object to Java object deserialization
+     * @param color The color of the jersey
+     */
+    public void setColor(String color) {this.color = color;}
+
+    /**
+     * Retrieves the color of the jersey
+     * @return The color of the jersey
      */
     public String getColor() {return color;}
 
     /**
-     * Retrieves the id of the jersey
-     * @return The id of the jersey
+     * Sets the image path of the jersey - necessary for JSON object to Java object deserialization
+     * @param image The image path of the jersey
+     */
+    public void setImage(String image) {this.image = image;}
+
+    /**
+     * Retrieves the image path of the jersey
+     * @return The iamge path of the jersey
      */
     public String getImage() {return image;}
+
+    /**
+     * {@inheritDoc}
+     * To do: finish toString
+     */
+    @Override
+    public String toString() {
+        return "";
+    }
     
 
 }
