@@ -62,8 +62,8 @@ public class JerseyController {
         try {
 
             //check if a hero already exists with the given hero's name
-            Jersey[] givenName = jerseyDao.findJerseys(jersey.getName());
-            if(givenName.length == 0 || givenName == null)
+            Jersey[] givenJersey = jerseyDao.findJerseys(jersey.getName(), jersey.getNumber(), jersey.getColor(), jersey.getImage());
+            if(givenJersey.length == 0 || givenJersey == null)
             {
                 Jersey newJersey = jerseyDao.createJersey(jersey);
                 return new ResponseEntity<Jersey>(newJersey, HttpStatus.CREATED);

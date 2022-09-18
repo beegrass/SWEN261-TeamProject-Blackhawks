@@ -29,7 +29,7 @@ public interface JerseyDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Jersey[] findJerseys(String containsText) throws IOException;
+    Jersey[] findJerseys(String name, int number, String color, String image) throws IOException;
 
     /**
      * Retrieves a {@linkplain Jersey jersey} with the given id
