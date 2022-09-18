@@ -63,12 +63,12 @@ public class JerseyController {
      * @Author Angela Ngo
      */
     @GetMapping("/")
-    public ResponseEntity<Jersey[]> searchJersey(@RequestParam String name) {
-        LOG.info("GET /jerseys/?name="+name);
+    public ResponseEntity<Jersey[]> searchJersey(@RequestParam String name, @RequestParam int number, @RequestParam String color, @RequestParam String image) {
+        LOG.info("GET /jerseys/?name="+name+"/?number="+number+"/?color="+color+"/?image="+image);
 
         // Replace below with your implementation
         try {
-            Jersey[] jerseys = jerseyDao.findJerseys(name);
+            Jersey[] jerseys = jerseyDao.findJerseys(name,number,color, image);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
