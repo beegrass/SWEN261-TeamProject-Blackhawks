@@ -12,7 +12,7 @@ public interface JerseyDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Jersey[] getJersey() throws IOException;
+    Jersey[] getJerseys() throws IOException;
 
     /**
      * Finds all {@linkplain Jersey jerseys} whose name contains the given text
