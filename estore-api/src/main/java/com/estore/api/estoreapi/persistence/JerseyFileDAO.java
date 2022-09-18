@@ -12,8 +12,14 @@ import org.springframework.stereotype.Component;
 
 import com.estore.api.estoreapi.model.Jersey;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
- * @author Hayden Cabral, Angela Ngo, Ethan Abbate, Vince Schwartz
+ * Implements the functionality for JSON file-based peristance for Heroes
+ * 
+ * {@literal @}Component Spring annotation instantiates a single instance of this
+ * class and injects the instance into other classes as needed
+ * 
+ * @author Ethan Abbate, Hayden Cabral, Angela Ngo, Vincent Schwartz
  */
 
 @Component
