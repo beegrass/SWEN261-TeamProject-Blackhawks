@@ -1,9 +1,14 @@
-/*@Author Angela Ngo  */
 package com.estore.api.estoreapi.persistence;
 
 import java.io.IOException;
 
 import com.estore.api.estoreapi.model.Jersey;
+
+/**
+ * Defines the interface for Jersey object persistence
+ * 
+ * @author Angela Ngo
+ */
 
 public interface JerseyDAO {
     /**
