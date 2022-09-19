@@ -12,7 +12,7 @@
       <useDefaultExcludes>false</useDefaultExcludes>
       <includes>
         <include>HELP.md</include>
-        <include>pom.xml</include>
+        <include>docs/pom.xml</include>
       </includes>
     </fileSet>
     <fileSet>
