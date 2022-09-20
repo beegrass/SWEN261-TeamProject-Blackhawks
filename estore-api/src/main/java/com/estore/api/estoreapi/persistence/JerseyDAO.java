@@ -25,11 +25,11 @@ public interface JerseyDAO {
      * 
      * @param containsText The text to match against
      * 
-     * @return An array of {@link Hero heroes} whose names contains the given text, may be empty
+     * @return An array of {@link Jersey jerseys} whose names contains the given text, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Jersey[] findJerseys(String name, int number, String color, String image) throws IOException;
+    Jersey[] findJerseys(String information) throws IOException;
 
     /**
      * Retrieves a {@linkplain Jersey jersey} with the given id
