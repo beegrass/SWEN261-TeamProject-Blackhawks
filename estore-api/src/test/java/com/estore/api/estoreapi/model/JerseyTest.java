@@ -155,6 +155,7 @@ public class JerseyTest {
         int number = 50;
         double price = 129.99;
         String color = "Red";
+        String size = "Medium";
         String image = "Image.png";
 
         Jersey jersey = new Jersey(id,name,number,price,color, size, image);
