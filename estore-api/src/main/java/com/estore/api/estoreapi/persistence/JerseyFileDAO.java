@@ -173,7 +173,7 @@ public class JerseyFileDAO implements JerseyDAO {
             // We create a new hero object because the id field is immutable
             // and we need to assign the next unique id
             Jersey newJersey = new Jersey(nextId(), jersey.getName(), jersey.getNumber(), jersey.getPrice(), 
-            jersey.getColor(), jersey.getImage());
+            jersey.getColor(), jersey.getSize(), jersey.getImage());
             jerseys.put(newJersey.getId(), newJersey);
             save(); // may throw an IOException
             return newJersey;
