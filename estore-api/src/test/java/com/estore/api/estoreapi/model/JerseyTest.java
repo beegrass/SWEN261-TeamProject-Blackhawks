@@ -20,10 +20,12 @@ public class JerseyTest {
         int expected_number = 50;
         double expected_price = 129.99;
         String expected_color = "Red";
+        String expected_size = "Medium";
         String expected_image = "Image.png";
 
         // Invoke
-        Jersey jersey = new Jersey(expected_id, expected_name, expected_number, expected_price, expected_color, expected_image);
+        Jersey jersey = new Jersey(expected_id, expected_name, expected_number, expected_price, expected_color, 
+        expected_size, expected_image);
 
         // Analyze
         assertEquals(expected_id,jersey.getId());
@@ -31,6 +33,7 @@ public class JerseyTest {
         assertEquals(expected_number,jersey.getNumber());
         assertEquals(expected_price,jersey.getPrice());
         assertEquals(expected_color,jersey.getColor());
+        assertEquals(expected_size,jersey.getSize());
         assertEquals(expected_image,jersey.getImage());
     }
 
@@ -42,9 +45,10 @@ public class JerseyTest {
         int number = 50;
         double price = 129.99;
         String color = "Red";
+        String size = "Medium";
         String image = "Image.png";
 
-        Jersey jersey = new Jersey(id,name,number,price,color,image);
+        Jersey jersey = new Jersey(id,name,number,price,color, size, image);
 
         String expected_name = "Galactic Agent";
 
@@ -63,9 +67,10 @@ public class JerseyTest {
         int number = 50;
         double price = 129.99;
         String color = "Red";
+        String size = "Medium";
         String image = "Image.png";
 
-        Jersey jersey = new Jersey(id,name,number,price,color,image);
+        Jersey jersey = new Jersey(id,name,number,price,color, size, image);
 
         int expected_number = 20;
 
@@ -84,9 +89,10 @@ public class JerseyTest {
         int number = 50;
         double price = 129.99;
         String color = "Red";
+        String size = "Medium";
         String image = "Image.png";
 
-        Jersey jersey = new Jersey(id,name,number,price,color,image);
+        Jersey jersey = new Jersey(id,name,number,price,color, size, image);
 
         double expected_price = 100.99;
 
@@ -105,9 +111,10 @@ public class JerseyTest {
         int number = 50;
         double price = 129.99;
         String color = "Red";
+        String size = "Medium";
         String image = "Image.png";
 
-        Jersey jersey = new Jersey(id,name,number,price,color,image);
+        Jersey jersey = new Jersey(id,name,number,price,color, size, image);
 
         String expected_color = "Yellow";
 
@@ -116,6 +123,28 @@ public class JerseyTest {
 
         // Analyze
         assertEquals(expected_color,jersey.getColor());
+    }
+
+    @Test
+    public void testSize() {
+        // Setup
+        int id = 99;
+        String name = "Wi-Fire";
+        int number = 50;
+        double price = 129.99;
+        String color = "Red";
+        String size = "Medium";
+        String image = "Image.png";
+
+        Jersey jersey = new Jersey(id,name,number,price,color, size, image);
+
+        String expected_size = "Large";
+
+        // Invoke
+        jersey.setSize(expected_size);
+
+        // Analyze
+        assertEquals(expected_size,jersey.getSize());
     }
 
     @Test
@@ -128,7 +157,7 @@ public class JerseyTest {
         String color = "Red";
         String image = "Image.png";
 
-        Jersey jersey = new Jersey(id,name,number,price,color,image);
+        Jersey jersey = new Jersey(id,name,number,price,color, size, image);
 
         String expected_image = "Image.jpg";
 
