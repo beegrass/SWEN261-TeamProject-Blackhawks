@@ -76,8 +76,8 @@ public class JerseyFileDAO implements JerseyDAO {
 
             if ((name == null || jersey.getName().contains(name)) &&
                 (number == 0 || jersey.getNumber() == number) &&  
-                 (color == null || jersey.getColor().contains(color)) &&
-                 (image == null || jersey.getImage().contains(image))) {
+                (color == null || jersey.getColor().contains(color)) &&
+                (image == null || jersey.getImage().contains(image))) {
                     
                 jerseyArrayList.add(jersey);
             }

@@ -27,30 +27,30 @@ import org.junit.jupiter.api.Test;
  */
 @Tag("Persistence-tier")
 public class JerseyFileDAOTest {
-    // JerseyFileDAO jerseyFileDAO;
-    // Jersey[] testJerseys;
-    // ObjectMapper mockObjectMapper;
+    JerseyFileDAO jerseyFileDAO;
+    Jersey[] testJerseys;
+    ObjectMapper mockObjectMapper;
 
-    // /**
-    //  * Before each test, we will create and inject a Mock Object Mapper to
-    //  * isolate the tests from the underlying file
-    //  * @throws IOException
-    //  */
-    // @BeforeEach
-    // public void setupJerseyFileDAO() throws IOException {
-    //     mockObjectMapper = mock(ObjectMapper.class);
-    //     testJerseys = new Jersey[3];
-    //     testJerseys[0] = new Jersey(99, "Jack Hughes", 5, 99.99, "Black", "Image.png");
-    //     testJerseys[1] = new Jersey(100, "Poopy someone", 1, 50.99, "Red", "Image.png");
-    //     testJerseys[2] = new Jersey(101, "Patrick Kane", 88, 129.99, "Red", "Image.png");
+    /**
+     * Before each test, we will create and inject a Mock Object Mapper to
+     * isolate the tests from the underlying file
+     * @throws IOException
+     */
+    @BeforeEach
+    public void setupJerseyFileDAO() throws IOException {
+        mockObjectMapper = mock(ObjectMapper.class);
+        testJerseys = new Jersey[3];
+        testJerseys[0] = new Jersey(99, "Jack Hughes", 5, 99.99, "Black", "Medium","Image.png");
+        testJerseys[1] = new Jersey(100, "Poopy someone", 1, 50.99, "Red", "Size","Image.png");
+        testJerseys[2] = new Jersey(101, "Patrick Kane", 88, 129.99, "Red", "Large","Image.png");
 
-    //     // When the object mapper is supposed to read from the file
-    //     // the mock object mapper will return the hero array above
-    //     when(mockObjectMapper
-    //         .readValue(new File("doesnt_matter.txt"),Jersey[].class))
-    //             .thenReturn(testJerseys);
-    //             jerseyFileDAO = new JerseyFileDAO("doesnt_matter.txt",mockObjectMapper);
-    // }
+        // When the object mapper is supposed to read from the file
+        // the mock object mapper will return the hero array above
+        when(mockObjectMapper
+            .readValue(new File("doesnt_matter.txt"),Jersey[].class))
+                .thenReturn(testJerseys);
+                jerseyFileDAO = new JerseyFileDAO("doesnt_matter.txt",mockObjectMapper);
+    }
 
     // @Test
     // public void testGetJerseys() {
@@ -98,21 +98,26 @@ public class JerseyFileDAOTest {
     // //     assertEquals(heroFileDAO.heroes.size(),testHeroes.length-1);
     // // }
 
-    // @Test
-    // public void testCreateJersey() throws IOException {
-    //     // Setup
-    //     Jersey jersey = new Jersey(102,"Wonder-Person", 53, 129.99, "Red", "Image.png");
+    @Test
+    public void testCreateJersey() throws IOException {
+        // Setup
+        Jersey jersey = new Jersey(102,"Wonder-Person", 53, 129.99, "Red", "Medium", "Image.png");
 
-    //     // Invoke
-    //     Jersey result = assertDoesNotThrow(() -> jerseyFileDAO.createJersey(jersey),
-    //                             "Unexpected exception thrown");
+        // Invoke
+        Jersey result = assertDoesNotThrow(() -> jerseyFileDAO.createJersey(jersey),
+                                "Unexpected exception thrown");
 
-    //     // Analyze
-    //     assertNotNull(result);
-    //     Jersey actual = jerseyFileDAO.getJersey(jersey.getId());
-    //     assertEquals(actual.getId(),jersey.getId());
-    //     assertEquals(actual.getName(),jersey.getName());
-    // }
+        // Analyze
+        assertNotNull(result);
+        Jersey actual = jerseyFileDAO.getJersey(jersey.getId());
+        assertEquals(actual.getId(),jersey.getId());
+        assertEquals(actual.getName(),jersey.getName());
+        assertEquals(actual.getNumber(),jersey.getNumber());
+        assertEquals(actual.getPrice(),jersey.getPrice());
+        assertEquals(actual.getColor(),jersey.getColor());
+        assertEquals(actual.getSize(),jersey.getSize());
+        assertEquals(actual.getImage(),jersey.getImage());
+    }
 
     // @Test
     // public void testUpdateJersey() throws IOException {
