@@ -57,7 +57,7 @@ public class JerseyFileDAO implements JerseyDAO {
      * @return  The array of {@link Jersey jerseys}, may be empty
      */
     private Jersey[] getJerseysArray() {
-        return getJerseysArray(null, 0, null, null);
+        return getJerseysArray(null, 0, null, null, null);
     }
 
     /**
@@ -69,15 +69,16 @@ public class JerseyFileDAO implements JerseyDAO {
      * 
      * @return  The array of {@link Jersey jerseys}, may be empty
      */
-    private Jersey[] getJerseysArray(String name, int number, String color, String image) { // if containsText == null, no filter
+    private Jersey[] getJerseysArray(String name, int number, String color, String size, String image) { // if containsText == null, no filter
         ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
 
         for (Jersey jersey : jerseys.values()) {
 
             if ((name == null || jersey.getName().contains(name)) &&
                 (number == 0 || jersey.getNumber() == number) &&  
-                 (color == null || jersey.getColor().contains(color)) &&
-                 (image == null || jersey.getImage().contains(image))) {
+                (color == null || jersey.getColor().contains(color)) &&
+                (size == null || jersey.getSize().contains(size)) &&
+                (image == null || jersey.getImage().contains(image))) {
                     
                 jerseyArrayList.add(jersey);
             }
@@ -148,9 +149,9 @@ public class JerseyFileDAO implements JerseyDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Jersey[] findJerseys(String name, int number, String color, String image) throws IOException {
+    public Jersey[] findJerseys(String name, int number, String color, String size,  String image) throws IOException {
         synchronized(jerseys) {
-            return getJerseysArray(name, number, color, image);
+            return getJerseysArray(name, number, color, size, image);
         }
     }
 
