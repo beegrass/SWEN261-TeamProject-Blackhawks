@@ -47,22 +47,21 @@ public class JerseyController {
     }
 
     /**
-     * Creates a {@linkplain Jersey hero} with the provided hero object
+     * Creates a {@linkplain Jersey jersey} with the provided jersey object
      * 
-     * @param hero - The {@link Jersey hero} to create
+     * @param jersey - The {@link Jersey jersey} to create
      * 
-     * @return ResponseEntity with created {@link Jersey hero} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Jersey hero} object already exists<br>
+     * @return ResponseEntity with created {@link Jersey jersey} object and HTTP status of CREATED<br>
+     * ResponseEntity with HTTP status of CONFLICT if {@link Jersey jersey} object already exists<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Jersey> createHero(@RequestBody Jersey jersey) {
-        LOG.info("POST /heroes " + jersey);
-
+    public ResponseEntity<Jersey> createJersey(@RequestBody Jersey jersey) {
+        LOG.info("POST /jerseys " + jersey);
         try {
-
-            //check if a hero already exists with the given hero's name
-            Jersey[] givenJersey = jerseyDao.findJerseys(jersey.getName(), jersey.getNumber(), jersey.getColor(), jersey.getImage());
+            //check if a jersey already exists with the given jersey's name
+            Jersey[] givenJersey = jerseyDao.findJerseys(jersey.getName(), jersey.getNumber(), 
+                jersey.getColor(), jersey.getSize(), jersey.getImage());
             if(givenJersey.length == 0 || givenJersey == null)
             {
                 Jersey newJersey = jerseyDao.createJersey(jersey);

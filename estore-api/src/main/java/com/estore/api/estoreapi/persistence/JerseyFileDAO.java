@@ -7,14 +7,15 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.estore.api.estoreapi.model.Jersey;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Implements the functionality for JSON file-based peristance for Heroes
+ * Implements the functionality for JSON file-based peristance for Jerseys
  * 
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
@@ -57,7 +58,7 @@ public class JerseyFileDAO implements JerseyDAO {
      * @return  The array of {@link Jersey jerseys}, may be empty
      */
     private Jersey[] getJerseysArray() {
-        return getJerseysArray(null, 0, null, null);
+        return getJerseysArray(null, 0, null, null, null);
     }
 
     /**
@@ -69,7 +70,7 @@ public class JerseyFileDAO implements JerseyDAO {
      * 
      * @return  The array of {@link Jersey jerseys}, may be empty
      */
-    private Jersey[] getJerseysArray(String name, int number, String color, String image) { // if containsText == null, no filter
+    private Jersey[] getJerseysArray(String name, int number, String color, String size, String image) { // if containsText == null, no filter
         ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
 
         for (Jersey jersey : jerseys.values()) {
@@ -77,6 +78,7 @@ public class JerseyFileDAO implements JerseyDAO {
             if ((name == null || jersey.getName().contains(name)) &&
                 (number == 0 || jersey.getNumber() == number) &&  
                 (color == null || jersey.getColor().contains(color)) &&
+                (size == null || jersey.getSize().contains(size)) &&
                 (image == null || jersey.getImage().contains(image))) {
                     
                 jerseyArrayList.add(jersey);
@@ -148,9 +150,9 @@ public class JerseyFileDAO implements JerseyDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Jersey[] findJerseys(String name, int number, String color, String image) throws IOException {
+    public Jersey[] findJerseys(String name, int number, String color, String size,  String image) throws IOException {
         synchronized(jerseys) {
-            return getJerseysArray(name, number, color, image);
+            return getJerseysArray(name, number, color, size, image);
         }
     }
 
@@ -173,7 +175,7 @@ public class JerseyFileDAO implements JerseyDAO {
             // We create a new hero object because the id field is immutable
             // and we need to assign the next unique id
             Jersey newJersey = new Jersey(nextId(), jersey.getName(), jersey.getNumber(), jersey.getPrice(), 
-            jersey.getColor(), jersey.getSize(), jersey.getImage());
+                jersey.getColor(), jersey.getSize(), jersey.getImage());
             jerseys.put(newJersey.getId(), newJersey);
             save(); // may throw an IOException
             return newJersey;
