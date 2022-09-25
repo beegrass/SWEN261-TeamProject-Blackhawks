@@ -27,30 +27,30 @@ import org.junit.jupiter.api.Test;
  */
 @Tag("Persistence-tier")
 public class JerseyFileDAOTest {
-    // JerseyFileDAO jerseyFileDAO;
-    // Jersey[] testJerseys;
-    // ObjectMapper mockObjectMapper;
+    JerseyFileDAO jerseyFileDAO;
+    Jersey[] testJerseys;
+    ObjectMapper mockObjectMapper;
 
-    // /**
-    //  * Before each test, we will create and inject a Mock Object Mapper to
-    //  * isolate the tests from the underlying file
-    //  * @throws IOException
-    //  */
-    // @BeforeEach
-    // public void setupJerseyFileDAO() throws IOException {
-    //     mockObjectMapper = mock(ObjectMapper.class);
-    //     testJerseys = new Jersey[3];
-    //     testJerseys[0] = new Jersey(99, "Jack Hughes", 5, 99.99, "Black", "Image.png");
-    //     testJerseys[1] = new Jersey(100, "Poopy someone", 1, 50.99, "Red", "Image.png");
-    //     testJerseys[2] = new Jersey(101, "Patrick Kane", 88, 129.99, "Red", "Image.png");
+    /**
+     * Before each test, we will create and inject a Mock Object Mapper to
+     * isolate the tests from the underlying file
+     * @throws IOException
+     */
+    @BeforeEach
+    public void setupJerseyFileDAO() throws IOException {
+        mockObjectMapper = mock(ObjectMapper.class);
+        testJerseys = new Jersey[3];
+        testJerseys[0] = new Jersey(99, "Jack Hughes", 5, 99.99, "Black", "Medium","Image.png");
+        testJerseys[1] = new Jersey(100, "Poopy someone", 1, 50.99, "Red", "Size","Image.png");
+        testJerseys[2] = new Jersey(101, "Patrick Kane", 88, 129.99, "Red", "Large","Image.png");
 
-    //     // When the object mapper is supposed to read from the file
-    //     // the mock object mapper will return the hero array above
-    //     when(mockObjectMapper
-    //         .readValue(new File("doesnt_matter.txt"),Jersey[].class))
-    //             .thenReturn(testJerseys);
-    //             jerseyFileDAO = new JerseyFileDAO("doesnt_matter.txt",mockObjectMapper);
-    // }
+        // When the object mapper is supposed to read from the file
+        // the mock object mapper will return the hero array above
+        when(mockObjectMapper
+            .readValue(new File("doesnt_matter.txt"),Jersey[].class))
+                .thenReturn(testJerseys);
+                jerseyFileDAO = new JerseyFileDAO("doesnt_matter.txt",mockObjectMapper);
+    }
 
     // @Test
     // public void testGetJerseys() {
@@ -63,16 +63,15 @@ public class JerseyFileDAOTest {
     //         assertEquals(jerseys[i],testJerseys[i]);
     // }
 
-    // @Test
-    // public void testFindJerseys() {
-    //     // Invoke
-    //     Jersey[] jerseys = jerseyFileDAO.findJerseys("Patrick Kane", 88, "Red", "Image.png");
+    @Test
+    public void testFindJerseyArray() throws IOException {
+        // Invoke
+        Jersey[] jerseys = jerseyFileDAO.findJerseys("Patrick Kane");
 
-    //     // Analyze
-    //     assertEquals(jerseys.length,2);
-    //     assertEquals(jerseys[0],testJerseys[1]);
-    //     assertEquals(jerseys[1],testJerseys[2]);
-    // }
+        // Analyze
+
+        assertEquals(jerseys[0].getName(),testJerseys[2].getName() );
+        }
 
     // @Test
     // public void testGetJersey() throws IOException {

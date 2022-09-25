@@ -76,8 +76,8 @@ public class JerseyFileDAO implements JerseyDAO {
 
         for (Jersey jersey : jerseys.values()) {
 
-            if(information == null || jersey.getColor() == information 
-                || jersey.getName() == information || jersey.getSize() == information || 
+            if(information == null || jersey.getColor().equals(information) 
+                || jersey.getName().equals(information)|| jersey.getSize() == information || 
                 jersey.getNumber() == Integer.valueOf(information) || jersey.getPrice() == Double.valueOf(information)){
                     jerseyArrayList.add(jersey);
                 }
