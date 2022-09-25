@@ -46,6 +46,27 @@ public class JerseyController {
         this.jerseyDao = jerseyDao;
     }
 
+       /**
+     * Updates the {@linkplain Jersey jersey} with the provided {@linkplain Jersey jersey} object, if it exists
+     * 
+     * @param jersey The {@link Jersey jersey} to update
+     * 
+     * @return ResponseEntity with updated {@link Jersey jersey} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("")
+    public ResponseEntity<Jersey> updateJersey(@RequestBody Jersey jersey) {
+        LOG.info("PUT /jerseys " + jersey);
+        try {
+            Jersey updated = jerseyDao.updateJersey(jersey);
+            if (updated != null) {
+                jerseyDao.updateJersey(updated);
+                return new ResponseEntity<Jersey>(updated,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
 
 /**
      * Responds to the GET request for a {@linkplain Jersey jersey} for the given id
@@ -96,7 +117,6 @@ public class JerseyController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
     /**
      * Creates a {@linkplain Jersey jersey} with the provided jersey object
      * 
@@ -122,17 +142,10 @@ public class JerseyController {
             {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
-
-            
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-        
-
- 
-
-
+    }   
 }

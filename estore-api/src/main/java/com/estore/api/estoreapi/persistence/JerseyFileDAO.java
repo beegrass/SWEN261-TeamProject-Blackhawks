@@ -181,11 +181,16 @@ public class JerseyFileDAO implements JerseyDAO {
             return newJersey;
         }
     }
-
+    
     @Override
     public Jersey updateJersey(Jersey jersey) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
-    }
+        synchronized(jerseys) {
+            if (jerseys.containsKey(jersey.getId()) == false)
+                return null;  // hero does not exist
 
+            jerseys.put(jersey.getId(),jersey);
+            save(); // may throw an IOException
+            return jersey;
+        }
+    }
 }

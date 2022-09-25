@@ -98,41 +98,41 @@ public class JerseyFileDAOTest {
     // //     assertEquals(heroFileDAO.heroes.size(),testHeroes.length-1);
     // // }
 
-    @Test
-    public void testCreateJersey() throws IOException {
-        // Setup
-        Jersey jersey = new Jersey(102,"Wonder-Person", 53, 129.99, "Red", "Medium", "Image.png");
-
-        // Invoke
-        Jersey result = assertDoesNotThrow(() -> jerseyFileDAO.createJersey(jersey),
-                                "Unexpected exception thrown");
-
-        // Analyze
-        assertNotNull(result);
-        Jersey actual = jerseyFileDAO.getJersey(jersey.getId());
-        assertEquals(actual.getId(),jersey.getId());
-        assertEquals(actual.getName(),jersey.getName());
-        assertEquals(actual.getNumber(),jersey.getNumber());
-        assertEquals(actual.getPrice(),jersey.getPrice());
-        assertEquals(actual.getColor(),jersey.getColor());
-        assertEquals(actual.getSize(),jersey.getSize());
-        assertEquals(actual.getImage(),jersey.getImage());
-    }
-
     // @Test
-    // public void testUpdateJersey() throws IOException {
+    // public void testCreateJersey() throws IOException {
     //     // Setup
-    //     Jersey jersey = new Jersey(99,"Galactic Agent", 30, 20.99, "Red", "Image.png");
+    //     Jersey jersey = new Jersey(102,"Wonder-Person", 53, 129.99, "Red", "Medium", "Image.png");
 
     //     // Invoke
-    //     Jersey result = assertDoesNotThrow(() -> jerseyFileDAO.updateJersey(jersey),
+    //     Jersey result = assertDoesNotThrow(() -> jerseyFileDAO.createJersey(jersey),
     //                             "Unexpected exception thrown");
 
     //     // Analyze
     //     assertNotNull(result);
     //     Jersey actual = jerseyFileDAO.getJersey(jersey.getId());
-    //     assertEquals(actual,jersey);
+    //     assertEquals(actual.getId(),jersey.getId());
+    //     assertEquals(actual.getName(),jersey.getName());
+    //     assertEquals(actual.getNumber(),jersey.getNumber());
+    //     assertEquals(actual.getPrice(),jersey.getPrice());
+    //     assertEquals(actual.getColor(),jersey.getColor());
+    //     assertEquals(actual.getSize(),jersey.getSize());
+    //     assertEquals(actual.getImage(),jersey.getImage());
     // }
+
+    @Test
+    public void testUpdateJersey() throws IOException {
+        // Setup
+        Jersey jersey = new Jersey(99, "GA", 30, 20.99, "red", "XL", "Image.png");
+
+        // Invoke
+        Jersey result = assertDoesNotThrow(() -> jerseyFileDAO.updateJersey(jersey),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertNotNull(result);
+        Jersey actual = jerseyFileDAO.getJersey(jersey.getId());
+        assertEquals(actual,jersey);
+    }
 
     // @Test
     // public void testSaveException() throws IOException{
