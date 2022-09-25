@@ -67,6 +67,12 @@ public class JerseyController {
             else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 /**
      * Responds to the GET request for a {@linkplain Jersey jersey} for the given id
