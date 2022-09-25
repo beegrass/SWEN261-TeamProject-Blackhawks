@@ -62,9 +62,9 @@ public class JerseyController {
      * 
      * @Author Angela Ngo
      */
-    @GetMapping("/name={name}")
+    @RequestMapping("/name={name}")
     public ResponseEntity<Jersey[]> searchJerseyName(@RequestParam String name) {
-        LOG.info("GET /jerseys/name="+name);
+        LOG.info("GET /jersey/name="+name);
 
         // Replace below with your implementation
         try {
@@ -142,8 +142,32 @@ public class JerseyController {
         
     // }
 
-    // //@DeleteMapping("/")
-
+    // /**
+    //  * Deletes a {@linkplain Hero hero} with the given id
+    //  * 
+    //  * @param id The id of the {@link Hero hero} to deleted
+    //  * 
+    //  * @return ResponseEntity HTTP status of OK if deleted<br>
+    //  * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+    //  * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+    //  */
+    // @DeleteMapping("/id={id}")
+    // public ResponseEntity<Jersey> deleteHero(@PathVariable int id) {
+    //     LOG.info("DELETE /jersey/id=" + id);
+    //     try {
+    //         if(jerseyDao.getJersey(id) != null){
+    //             jerseyDao.deleteJersey(id);
+    //             return new ResponseEntity<Jersey>(jerseyDao.getJersey(id), HttpStatus.OK); 
+    //         }else{
+    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //         }
+    //     }
+    //     catch(IOException e) {
+    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
+    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+        
+    // }
     
 }
 

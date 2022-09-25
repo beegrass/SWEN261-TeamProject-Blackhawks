@@ -180,4 +180,15 @@ public class JerseyFileDAO implements JerseyDAO {
         return null;
     }
 
+    @Override
+    public boolean deleteJersey(int id) throws IOException {
+        synchronized(jerseys) {
+            if (jerseys.containsKey(id)) {
+                jerseys.remove(id);
+                return save();
+            }
+            else
+                return false;
+        }
+    }
 }

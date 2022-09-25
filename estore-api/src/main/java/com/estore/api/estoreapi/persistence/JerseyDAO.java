@@ -70,4 +70,17 @@ public interface JerseyDAO {
      */
     Jersey updateJersey(Jersey jersey) throws IOException;
 
+       /**
+     * Deletes a {@linkplain Jersey jersey} with the given id
+     * 
+     * @param id The id of the {@link Jersey jersey}
+     * 
+     * @return true if the {@link Jersey jersey} was deleted
+     * <br>
+     * false if jersey with the given id does not exist
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    boolean deleteJersey(int id) throws IOException;
+
 }
