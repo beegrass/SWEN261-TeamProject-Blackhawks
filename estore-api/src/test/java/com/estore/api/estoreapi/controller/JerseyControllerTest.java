@@ -1,6 +1,7 @@
 package com.estore.api.estoreapi.controller;
 
 import com.estore.api.estoreapi.persistence.JerseyDAO;
+import com.estore.api.estoreapi.persistence.JerseyFileDAO;
 
 @org.junit.jupiter.api.Tag("Controller-tier")
 public class JerseyControllerTest {
@@ -40,7 +41,8 @@ public class JerseyControllerTest {
     public void testUpdateJerseyHandleException() throws java.io.IOException { /* compiled code */ }
 
     @org.junit.jupiter.api.Test
-    public void testGetJerseys() throws java.io.IOException { /* compiled code */ }
+    public void testGetJerseys() throws java.io.IOException {}
+
 
     @org.junit.jupiter.api.Test
     public void testGetJerseysHandleException() throws java.io.IOException { /* compiled code */ }

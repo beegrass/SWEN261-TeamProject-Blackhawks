@@ -62,9 +62,9 @@ public class JerseyController {
      * 
      * @Author Angela Ngo
      */
-    @GetMapping("/")
+    @GetMapping("/name={name}")
     public ResponseEntity<Jersey[]> searchJerseyName(@RequestParam String name) {
-        LOG.info("GET /jerseys/?name="+name);
+        LOG.info("GET /jerseys/name="+name);
 
         // Replace below with your implementation
         try {
@@ -79,69 +79,70 @@ public class JerseyController {
     }
 
     
-    @GetMapping("/")
-    public ResponseEntity<Jersey[]> searchJerseyNumber(@RequestParam int number) {
-        LOG.info("GET /jerseys/?number="+number);
+    // @GetMapping("/{number}")
+    // public ResponseEntity<Jersey[]> searchJerseyNumber(@RequestParam int number) {
+    //     LOG.info("GET /jerseys/"+number);
 
-        // Replace below with your implementation
-        String numString = String.valueOf(number);
-        try {
-            Jersey[] jerseys = jerseyDao.findJerseys(numString);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    //     // Replace below with your implementation
+    //     String numString = String.valueOf(number);
+    //     try {
+    //         Jersey[] jerseys = jerseyDao.findJerseys(numString);
+    //         return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+    //     }
+    //     catch(IOException e) {
+    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
+    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
         
-    }
+    // }
 
-    @GetMapping("/")
-    public ResponseEntity<Jersey[]> searchJerseyColor(@RequestParam String color) {
-        LOG.info("GET /jerseys/?color="+color);
+    // // @GetMapping("/color={color}")
+    // // public ResponseEntity<Jersey[]> searchJerseyColor(@RequestParam String color) {
+    // //     LOG.info("GET /jerseys/color="+color);
 
-        try {
-            Jersey[] jerseys = jerseyDao.findJerseys(color);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    // //     try {
+    // //         Jersey[] jerseys = jerseyDao.findJerseys(color);
+    // //         return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+    // //     }
+    // //     catch(IOException e) {
+    // //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
+    // //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    // //     }
         
-    }
+    // // }
 
 
-    @GetMapping("/")
-    public ResponseEntity<Jersey[]> searchJerseyPrice(@RequestParam Double price) {
-        LOG.info("GET /jerseys/?price="+price);
-        String numString = String.valueOf(price);
-        try {
-            Jersey[] jerseys = jerseyDao.findJerseys(numString);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    // @GetMapping("/{price}")
+    // public ResponseEntity<Jersey[]> searchJerseyPrice(@RequestParam Double price) {
+    //     LOG.info("GET /jerseys/"+price);
+    //     String numString = String.valueOf(price);
+    //     try {
+    //         Jersey[] jerseys = jerseyDao.findJerseys(numString);
+    //         return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+    //     }
+    //     catch(IOException e) {
+    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
+    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
         
-    }
+    // }
 
-    @GetMapping("/")
-    public ResponseEntity<Jersey[]> searchJerseySize(@RequestParam String size) {
-        LOG.info("GET /jerseys/?size="+ size);
+    // @GetMapping("/{size}")
+    // public ResponseEntity<Jersey[]> searchJerseySize(@RequestParam String size) {
+    //     LOG.info("GET /jerseys/"+ size);
       
-        try {
-            Jersey[] jerseys = jerseyDao.findJerseys(size);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    //     try {
+    //         Jersey[] jerseys = jerseyDao.findJerseys(size);
+    //         return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+    //     }
+    //     catch(IOException e) {
+    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
+    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
         
-    }
+    // }
 
+    // //@DeleteMapping("/")
 
     
 }
