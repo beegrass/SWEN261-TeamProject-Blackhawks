@@ -63,24 +63,19 @@ public class JerseyFileDAOTest {
     //         assertEquals(jerseys[i],testJerseys[i]);
     // }
 
+    //     // Analyze
+
+    //     assertEquals(jerseys[0].getName(),testJerseys[2].getName() );
+    //     }
+
     @Test
-    public void testFindJerseyArray() throws IOException {
+    public void testGetJersey() throws IOException {
         // Invoke
-        Jersey[] jerseys = jerseyFileDAO.findJerseys("Patrick Kane");
+        Jersey jersey = jerseyFileDAO.getJersey(99);
 
-        // Analyze
-
-        assertEquals(jerseys[0].getName(),testJerseys[2].getName() );
-        }
-
-    // @Test
-    // public void testGetJersey() throws IOException {
-    //     // Invoke
-    //     Jersey jersey = jerseyFileDAO.getJersey(99);
-
-    //     // Analzye
-    //     assertEquals(jersey,testJerseys[0]);
-    // }
+        // Analzye
+        assertEquals(jersey,testJerseys[0]);
+    }
 
     // // @Test
     // // public void testDeleteJersey() {
@@ -97,21 +92,26 @@ public class JerseyFileDAOTest {
     // //     assertEquals(heroFileDAO.heroes.size(),testHeroes.length-1);
     // // }
 
-    // @Test
-    // public void testCreateJersey() throws IOException {
-    //     // Setup
-    //     Jersey jersey = new Jersey(102,"Wonder-Person", 53, 129.99, "Red", "Image.png");
+    @Test
+    public void testCreateJersey() throws IOException {
+        // Setup
+        Jersey jersey = new Jersey(102,"Wonder-Person", 53, 129.99, "Red", "Medium", "Image.png");
 
-    //     // Invoke
-    //     Jersey result = assertDoesNotThrow(() -> jerseyFileDAO.createJersey(jersey),
-    //                             "Unexpected exception thrown");
+        // Invoke
+        Jersey result = assertDoesNotThrow(() -> jerseyFileDAO.createJersey(jersey),
+                                "Unexpected exception thrown");
 
-    //     // Analyze
-    //     assertNotNull(result);
-    //     Jersey actual = jerseyFileDAO.getJersey(jersey.getId());
-    //     assertEquals(actual.getId(),jersey.getId());
-    //     assertEquals(actual.getName(),jersey.getName());
-    // }
+        // Analyze
+        assertNotNull(result);
+        Jersey actual = jerseyFileDAO.getJersey(jersey.getId());
+        assertEquals(actual.getId(),jersey.getId());
+        assertEquals(actual.getName(),jersey.getName());
+        assertEquals(actual.getNumber(),jersey.getNumber());
+        assertEquals(actual.getPrice(),jersey.getPrice());
+        assertEquals(actual.getColor(),jersey.getColor());
+        assertEquals(actual.getSize(),jersey.getSize());
+        assertEquals(actual.getImage(),jersey.getImage());
+    }
 
     // @Test
     // public void testUpdateJersey() throws IOException {
@@ -193,4 +193,13 @@ public class JerseyFileDAOTest {
     //                     () -> new JerseyFileDAO("doesnt_matter.txt",mockObjectMapper),
     //                     "IOException not thrown");
     // }
+    @Test
+    public void testGetJerseysName() throws IOException {
+        // Invoke
+        Jersey[] jersey = jerseyFileDAO.findJerseysName("Patrick");
+
+        // Analzye
+        assertEquals("Patrick Kane", jersey[0].getName());
+        assertEquals(jersey.length, 1);
+    }
 }

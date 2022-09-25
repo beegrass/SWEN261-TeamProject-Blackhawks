@@ -1,12 +1,15 @@
 package com.estore.api.estoreapi.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.File;
 import java.io.IOException;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -18,36 +21,55 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @org.junit.jupiter.api.Tag("Controller-tier")
 public class JerseyControllerTest {
     private JerseyController jerseycontroller;
-    private JerseyFileDAO mockJerseyFileDAO;
-    Jersey[] testJerseys;
-    ObjectMapper mockObjectMapper;
-    
-    public JerseyControllerTest() { /* compiled code */ }
+    private JerseyDAO mockJerseyDAO;
 
-    @org.junit.jupiter.api.BeforeEach
-    public void setupJerseyController() throws IOException { 
-        mockObjectMapper = mock(ObjectMapper.class);
-        testJerseys = new Jersey[3];
-        testJerseys[0] = new Jersey(99, "Jack Hughes", 5, 99.99, "Black", "Medium","Image.png");
-        testJerseys[1] = new Jersey(100, "Poopy someone", 1, 50.99, "Red", "Size","Image.png");
-        testJerseys[2] = new Jersey(101, "Patrick Kane", 88, 129.99, "Red", "Large","Image.png");
 
-        // When the object mapper is supposed to read from the file
-        // the mock object mapper will return the hero array above
-        when(mockObjectMapper
-            .readValue(new File("doesnt_matter.txt"),Jersey[].class))
-                .thenReturn(testJerseys);
-                mockJerseyFileDAO = new JerseyFileDAO("doesnt_matter.txt",mockObjectMapper);
+    @BeforeEach
+    public void setupJerseyController() { 
+        mockJerseyDAO = mock(JerseyDAO.class);
+        jerseycontroller = new JerseyController(mockJerseyDAO);
      }
 
     @org.junit.jupiter.api.Test
-    public void testGetJersey() throws java.io.IOException { /* compiled code */ }
+    public void testGetJersey() throws java.io.IOException {// getJersey may throw IOException
+        // Setup
+        Jersey jersey = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        // When the same id is passed in, our mock Hero DAO will return the Hero object
+        when(mockJerseyDAO.getJersey(jersey.getId())).thenReturn(jersey);
+
+        // Invoke
+        ResponseEntity<Jersey> response = jerseycontroller.getJersey(jersey.getId());
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(jersey,response.getBody());}
 
     @org.junit.jupiter.api.Test
-    public void testGetJerseyNotFound() throws java.lang.Exception { /* compiled code */ }
+    public void testGetJerseyNotFound() throws java.lang.Exception { 
+        int jerseyId = 99;
 
-    @org.junit.jupiter.api.Test
-    public void testGetJerseyHandleException() throws java.lang.Exception { /* compiled code */ }
+        when(mockJerseyDAO.getJersey(jerseyId)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Jersey> response = jerseycontroller.getJersey(jerseyId);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    public void testGetJerseyHandleException() throws java.lang.Exception { 
+        // Setup
+        int jerseyId = 99;
+        // When getHero is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockJerseyDAO).getJersey(jerseyId);
+
+        // Invoke
+        ResponseEntity<Jersey> response = jerseycontroller.getJersey(jerseyId);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 
     @org.junit.jupiter.api.Test
     public void testCreateJersey() throws java.io.IOException { /* compiled code */ }
@@ -68,11 +90,34 @@ public class JerseyControllerTest {
     public void testUpdateJerseyHandleException() throws java.io.IOException { /* compiled code */ }
 
     @org.junit.jupiter.api.Test
-    public void testGetJerseys() throws java.io.IOException {}
+    public void testGetJerseys() throws java.io.IOException {
+        // Setup
+        Jersey[] heroes = new Jersey[2];
+        heroes[0] = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        heroes[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
+        // When getHeroes is called return the heroes created above
+        when(mockJerseyDAO.getJerseys()).thenReturn(heroes);
 
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseycontroller.getJerseys();
 
-    @org.junit.jupiter.api.Test
-    public void testGetJerseysHandleException() throws java.io.IOException { /* compiled code */ }
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(heroes,response.getBody());
+    }
+
+    @Test
+    public void testGetJerseysHandleException() throws java.io.IOException { 
+        // Setup
+        // When getHeroes is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockJerseyDAO).getJerseys();
+
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseycontroller.getJerseys();
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 
     // @org.junit.jupiter.api.Test
     // public void testSearchJerseys() throws java.io.IOException { /* compiled code */ }

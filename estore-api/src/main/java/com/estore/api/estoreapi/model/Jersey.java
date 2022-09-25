@@ -20,8 +20,8 @@ public class Jersey {
     @JsonProperty("number") private int number;
     @JsonProperty("price") private double price;
     @JsonProperty("color") private String color;
-    @JsonProperty("image") private String image;
     @JsonProperty("size") private String size;
+    @JsonProperty("image") private String image;
 
     /**
      * Create a jersey with the given name, number, price, color, and image path
@@ -30,8 +30,8 @@ public class Jersey {
      * @param number The number that goes on the jersey
      * @param price The price of the jersey
      * @param color The color of the jersey
-     * @param image The picture of the jersey
      * @param size The size of the jersey
+     * @param image The picture of the jersey
      * 
      * {@literal @}JsonProperty is used in serialization and deserialization
      * of the JSON object to the Java object in mapping the fields.  If a field
@@ -105,14 +105,14 @@ public class Jersey {
     public String getColor() {return color;}
 
     /**
-     * Sets the name of the jersey - necessary for JSON object to Java object deserialization
-     * @param name The name of the jersey
+     * Sets the size of the jersey - necessary for JSON object to Java object deserialization
+     * @param size The size of the jersey
      */
     public void setSize(String size) {this.size = size;}
 
     /**
-     * Retrieves the name of the jersey
-     * @return The name of the jersey
+     * Retrieves the size of the jersey
+     * @return The size of the jersey
      */
     public String getSize() {return size;}
 
@@ -134,7 +134,7 @@ public class Jersey {
      */
     @Override
     public String toString() {
-        return "";
+        return this.id + " " + this.name + " " + this.price + " " + this.color + " " + this.size;
     }
     
 

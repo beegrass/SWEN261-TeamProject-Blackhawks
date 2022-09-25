@@ -7,14 +7,15 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.estore.api.estoreapi.model.Jersey;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Implements the functionality for JSON file-based peristance for Heroes
+ * Implements the functionality for JSON file-based peristance for Jerseys
  * 
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
@@ -57,7 +58,7 @@ public class JerseyFileDAO implements JerseyDAO {
      * @return  The array of {@link Jersey jerseys}, may be empty
      */
     private Jersey[] getJerseysArray() {
-        return getJerseysArray(null);
+        return getJerseysArray(null, 0, null, null, null);
     }
 
     /**
@@ -71,17 +72,19 @@ public class JerseyFileDAO implements JerseyDAO {
      * Searches based on one query information (can be a string version of a number or double as well)
      * @return  The array of {@link Jersey jerseys}, may be empty
      */
-    private Jersey[] getJerseysArray(String information) { // if containsText == null, no filter
+    private Jersey[] getJerseysArray(String name, int number, String color, String size, String image) { // if containsText == null, no filter
         ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
 
         for (Jersey jersey : jerseys.values()) {
 
-            if(information == null || jersey.getColor().equals(information) 
-                || jersey.getName().equals(information)|| jersey.getSize() == information || 
-                jersey.getNumber() == Integer.valueOf(information) || jersey.getPrice() == Double.valueOf(information)){
-                    jerseyArrayList.add(jersey);
-                }
-            
+            if ((name == null || jersey.getName().contains(name)) &&
+                (number == 0 || jersey.getNumber() == number) &&  
+                (color == null || jersey.getColor().contains(color)) &&
+                (size == null || jersey.getSize().contains(size)) &&
+                (image == null || jersey.getImage().contains(image))) {
+                    
+                jerseyArrayList.add(jersey);
+            }
         }
 
         Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
@@ -135,6 +138,7 @@ public class JerseyFileDAO implements JerseyDAO {
         return true;
     }
 
+    
         /**
     ** {@inheritDoc}
      */
@@ -149,9 +153,9 @@ public class JerseyFileDAO implements JerseyDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Jersey[] findJerseys(String information) throws IOException {
+    public Jersey[] findJerseys(String name, int number, String color, String size,  String image) throws IOException {
         synchronized(jerseys) {
-            return getJerseysArray(information);
+            return getJerseysArray(name, number, color, size, image);
         }
     }
 
@@ -170,8 +174,15 @@ public class JerseyFileDAO implements JerseyDAO {
 
     @Override
     public Jersey createJersey(Jersey jersey) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        synchronized(jerseys) {
+            // We create a new hero object because the id field is immutable
+            // and we need to assign the next unique id
+            Jersey newJersey = new Jersey(nextId(), jersey.getName(), jersey.getNumber(), jersey.getPrice(), 
+                jersey.getColor(), jersey.getSize(), jersey.getImage());
+            jerseys.put(newJersey.getId(), newJersey);
+            save(); // may throw an IOException
+            return newJersey;
+        }
     }
 
     @Override
@@ -191,4 +202,156 @@ public class JerseyFileDAO implements JerseyDAO {
                 return false;
         }
     }
+
+    /**
+     * This returns an array of jerseys with the given name 
+     * @param name
+     * @return jerseyArray
+     */
+    private Jersey[] getJerseysName(String name) {
+        ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
+
+        for (Jersey jersey : jerseys.values()) {
+
+            if (name == null || jersey.getName().contains(name)) {
+                    
+                jerseyArrayList.add(jersey);
+            }
+        }
+
+        Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
+        jerseyArrayList.toArray(jerseyArray);
+        return jerseyArray;
+    }
+    
+
+     /**
+      * this takes from the getJerseyName
+    ** {@inheritDoc}
+     */
+    @Override
+    public Jersey[] findJerseysName(String name) throws IOException {
+        synchronized(jerseys) {
+            return getJerseysName(name);
+        }
+    }
+
+    /**
+     * This returns an array of jerseys with the given number
+     * @param number
+     * @return jerseyArray
+     */
+    private Jersey[] getJerseysNumber(int number) {
+        ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
+
+        for (Jersey jersey : jerseys.values()) {
+
+            if (number == 0 || jersey.getNumber() == number) {
+                    
+                jerseyArrayList.add(jersey);
+            }
+        }
+
+        Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
+        jerseyArrayList.toArray(jerseyArray);
+        return jerseyArray;
+    }
+    
+
+    @Override
+    public Jersey[] findJerseysNumber(int number) throws IOException {
+        synchronized(jerseys) {
+            return getJerseysNumber(number);
+        }
+    }
+
+     /**
+     * This returns an array of jerseys with the given number
+     * @param number
+     * @return jerseyArray
+     */
+    private Jersey[] getJerseysPrice(double price) {
+        ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
+
+        for (Jersey jersey : jerseys.values()) {
+
+            if (jersey.getPrice() == price) {
+                    
+                jerseyArrayList.add(jersey);
+            }
+        }
+
+        Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
+        jerseyArrayList.toArray(jerseyArray);
+        return jerseyArray;
+    }
+    
+
+
+    @Override
+    public Jersey[] findJerseysPrice(double price) throws IOException {
+        synchronized(jerseys) {
+            return getJerseysPrice(price);
+        }
+    }
+
+
+    
+     /**
+     * This returns an array of jerseys with the given number
+     * @param Color
+     * @return jerseyArray
+     */
+    private Jersey[] getJerseysColor(String color) {
+        ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
+
+        for (Jersey jersey : jerseys.values()) {
+
+            if (color == null || jersey.getColor().contains(color)) {
+                    
+                jerseyArrayList.add(jersey);
+            }
+        }
+
+        Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
+        jerseyArrayList.toArray(jerseyArray);
+        return jerseyArray;
+    }
+
+
+    @Override
+    public Jersey[] findJerseysColor(String color) throws IOException {
+        synchronized(jerseys) {
+            return getJerseysColor(color);
+        }
+    }
+
+    /**
+     * This returns an array of jerseys with the given number
+     * @param Color
+     * @return jerseyArray
+     */
+    private Jersey[] getJerseysSize(String size) {
+        ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
+
+            for (Jersey jersey : jerseys.values()) {
+    
+                if (size == null || jersey.getSize().contains(size)) {
+                        
+                    jerseyArrayList.add(jersey);
+                }
+            }
+    
+            Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
+            jerseyArrayList.toArray(jerseyArray);
+            return jerseyArray;
+    }
+
+    @Override
+    public Jersey[] findJerseysSize(String size) throws IOException {
+        synchronized(jerseys) {
+            return getJerseysSize(size);
+        }
+    }
+
 }

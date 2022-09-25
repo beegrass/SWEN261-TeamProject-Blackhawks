@@ -26,7 +26,7 @@ import com.estore.api.estoreapi.model.Jersey;
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
  * 
- * @author Hayden Cabral
+ * @author Ethan Abbate, Hayden Cabral, Angela Ngo, Vincent Schwartz
  */
 
 @RestController
@@ -46,7 +46,91 @@ public class JerseyController {
         this.jerseyDao = jerseyDao;
     }
 
-        
+
+/**
+     * Responds to the GET request for a {@linkplain Jersey jersey} for the given id
+     * 
+     * @param id The id used to locate the {@link Jersey jersey}
+     * 
+     * @return ResponseEntity with {@link Jersey jersey} object and HTTP status of OK if found<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Jersey> getJersey(@PathVariable int id) {
+        LOG.info("GET /jerseys/" + id);
+        try {
+            Jersey jersey = jerseyDao.getJersey(id);
+            if (jersey != null)
+                return new ResponseEntity<Jersey>(jersey,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Responds to the GET request for all {@linkplain Jersey jersey}
+     * 
+     * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("")
+    public ResponseEntity<Jersey[]> getJerseys() {
+        LOG.info("GET /jerseys");
+
+        // Replace below with your implementation
+        try {
+            Jersey[] jerseys = jerseyDao.getJerseys();
+            if(jerseys != null) {
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(jerseys, HttpStatus.NOT_FOUND);
+            }
+        } catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Creates a {@linkplain Jersey jersey} with the provided jersey object
+     * 
+     * @param jersey - The {@link Jersey jersey} to create
+     * 
+     * @return ResponseEntity with created {@link Jersey jersey} object and HTTP status of CREATED<br>
+     * ResponseEntity with HTTP status of CONFLICT if {@link Jersey jersey} object already exists<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PostMapping("")
+    public ResponseEntity<Jersey> createJersey(@RequestBody Jersey jersey) {
+        LOG.info("POST /jerseys " + jersey);
+        try {
+            //check if a jersey already exists with the given jersey's name
+            Jersey[] givenJersey = jerseyDao.findJerseys(jersey.getName(), jersey.getNumber(), 
+                jersey.getColor(), jersey.getSize(), jersey.getImage());
+            if(givenJersey.length == 0 || givenJersey == null)
+            {
+                Jersey newJersey = jerseyDao.createJersey(jersey);
+                return new ResponseEntity<Jersey>(newJersey, HttpStatus.CREATED);
+            }
+            else
+            {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+
+            
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+             
         /**
      * Responds to the GET request for all {@linkplain Jersey jerseys} whose name contains
      * the text in name
@@ -62,13 +146,32 @@ public class JerseyController {
      * 
      * @Author Angela Ngo
      */
-    @RequestMapping("/name={name}")
+    @GetMapping("/")
     public ResponseEntity<Jersey[]> searchJerseyName(@RequestParam String name) {
-        LOG.info("GET /jersey/name="+name);
+
+        LOG.info("GET /jerseys/?name=" +name);
+
+        try {
+            Jersey[] jerseysName = jerseyDao.findJerseysName(name);
+            return new ResponseEntity<Jersey[]>(jerseysName, HttpStatus.OK); 
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
+        
+    }
+
+    
+    @GetMapping("/{number}")
+    public ResponseEntity<Jersey[]> searchJerseyNumber(@RequestParam int number) {
+        LOG.info("GET /jerseys/"+number);
 
         // Replace below with your implementation
+        String numString = String.valueOf(number);
         try {
-            Jersey[] jerseys = jerseyDao.findJerseys(name);
+            Jersey[] jerseys = jerseyDao.findJerseys(numString);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
@@ -77,24 +180,6 @@ public class JerseyController {
         }
         
     }
-
-    
-    // @GetMapping("/{number}")
-    // public ResponseEntity<Jersey[]> searchJerseyNumber(@RequestParam int number) {
-    //     LOG.info("GET /jerseys/"+number);
-
-    //     // Replace below with your implementation
-    //     String numString = String.valueOf(number);
-    //     try {
-    //         Jersey[] jerseys = jerseyDao.findJerseys(numString);
-    //         return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-    //     }
-    //     catch(IOException e) {
-    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
-    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-        
-    // }
 
     // // @GetMapping("/color={color}")
     // // public ResponseEntity<Jersey[]> searchJerseyColor(@RequestParam String color) {
