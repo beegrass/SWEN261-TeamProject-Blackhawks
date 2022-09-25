@@ -132,4 +132,54 @@ public class JerseyController {
         }
     }
         
+
+ /**
+     * Responds to the GET request for a {@linkplain Jersey jersey} for the given id
+     * 
+     * @param id The id used to locate the {@link Jersey jersey}
+     * 
+     * @return ResponseEntity with {@link Jersey jersey} object and HTTP status of OK if found<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Jersey> getJersey(@PathVariable int id) {
+        LOG.info("GET /jerseys/" + id);
+        try {
+            Jersey jersey = jerseyDao.getJersey(id);
+            if (jersey != null)
+                return new ResponseEntity<Jersey>(jersey,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Responds to the GET request for a {@linkplain Jersey jersey} for the given id
+     * 
+     * @param id The id used to locate the {@link Jersey jersey}
+     * 
+     * @return ResponseEntity with {@link Jersey jersey} object and HTTP status of OK if found<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Jersey[]> getJerseys() {
+        LOG.info("GET /jerseys");
+        try {
+            Jersey[] jerseys = jerseyDao.getJerseys();
+            if (jerseys != null)
+                return new ResponseEntity<Jersey[]>(jerseys,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
