@@ -52,16 +52,16 @@ public class JerseyFileDAOTest {
                 jerseyFileDAO = new JerseyFileDAO("doesnt_matter.txt",mockObjectMapper);
     }
 
-    // @Test
-    // public void testGetJerseys() {
-    //     // Invoke
-    //     Jersey[] jerseys = jerseyFileDAO.getJerseys();
+    @Test
+    public void testGetJerseys() {
+        // Invoke
+        Jersey[] jerseys = jerseyFileDAO.getJerseys();
 
-    //     // Analyze
-    //     assertEquals(jerseys.length,testJerseys.length);
-    //     for (int i = 0; i < testJerseys.length;++i)
-    //         assertEquals(jerseys[i],testJerseys[i]);
-    // }
+        // Analyze
+        assertEquals(jerseys.length,testJerseys.length);
+        for (int i = 0; i < testJerseys.length;++i)
+            assertEquals(jerseys[i],testJerseys[i]);
+    }
 
     // @Test
     // public void testFindJerseys() {
@@ -74,14 +74,14 @@ public class JerseyFileDAOTest {
     //     assertEquals(jerseys[1],testJerseys[2]);
     // }
 
-    // @Test
-    // public void testGetJersey() throws IOException {
-    //     // Invoke
-    //     Jersey jersey = jerseyFileDAO.getJersey(99);
+    @Test
+    public void testGetJersey() throws IOException {
+        // Invoke
+        Jersey jersey = jerseyFileDAO.getJersey(99);
 
-    //     // Analzye
-    //     assertEquals(jersey,testJerseys[0]);
-    // }
+        // Analzye
+        assertEquals(jersey,testJerseys[0]);
+    }
 
     // // @Test
     // // public void testDeleteJersey() {
