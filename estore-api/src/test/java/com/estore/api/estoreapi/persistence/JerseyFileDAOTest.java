@@ -23,8 +23,9 @@ import org.junit.jupiter.api.Test;
 /**
  * Test the Jersey File DAO class
  * 
- * @author SWEN Faculty
+ * @author Ethan Abbate, Hayden Cabral, Angela Ngo, Vincent Schwartz
  */
+
 @Tag("Persistence-tier")
 public class JerseyFileDAOTest {
     JerseyFileDAO jerseyFileDAO;

@@ -8,7 +8,7 @@
 // /**
 //  * The unit test suite for the Hero class
 //  * 
-//  * @author SWEN Faculty
+//  * @author Vincent Schwartz
 //  */
 // @Tag("Model-tier")
 // public class JerseyTest {

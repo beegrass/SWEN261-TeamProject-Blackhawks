@@ -20,6 +20,12 @@ import com.estore.api.estoreapi.persistence.JerseyDAO;
 import com.estore.api.estoreapi.persistence.JerseyFileDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Test the Jersey File DAO class
+ * 
+ * @author Ethan Abbate, Hayden Cabral, Angela Ngo, Vincent Schwartz
+ */
+
 @org.junit.jupiter.api.Tag("Controller-tier")
 public class JerseyControllerTest {
     private JerseyController jerseycontroller;
