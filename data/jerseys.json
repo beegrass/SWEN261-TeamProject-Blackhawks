@@ -1,1 +1,47 @@
-[{"id":1,"name":null,"number":0,"price":0.0,"color":null,"size":null,"image":null},{"id":2,"name":"Patrick Kane","number":88,"price":99.99,"color":"red","size":"Large","image":"image2.png"},{"id":3,"name":"blank","number":10000,"price":0.0,"color":"RED","size":"XL","image":"image.png"},{"id":4,"name":"New QUY","number":6,"price":99.99,"color":"black","size":"Small","image":"image3.png"},{"id":5,"name":"Test after Merge","number":6,"price":99.99,"color":"black","size":"Small","image":"image3.png"}]
+[
+    {
+        "id": 1,
+        "name": "Matt Patts",
+        "number": 0,
+        "price": 0.0,
+        "color": "black",
+        "size": "Medium",
+        "image": "img.png"
+    },
+    {
+        "id": 2,
+        "name": "Patrick Kane",
+        "number": 88,
+        "price": 99.99,
+        "color": "red",
+        "size": "Large",
+        "image": "image2.png"
+    },
+    {
+        "id": 3,
+        "name": "blank",
+        "number": 10000,
+        "price": 0.0,
+        "color": "RED",
+        "size": "Extra Large",
+        "image": "image.png"
+    },
+    {
+        "id": 4,
+        "name": "New QUY",
+        "number": 6,
+        "price": 99.99,
+        "color": "black",
+        "size": "Small",
+        "image": "image3.png"
+    },
+    {
+        "id": 5,
+        "name": "Test after Merge",
+        "number": 6,
+        "price": 99.99,
+        "color": "black",
+        "size": "Small",
+        "image": "image3.png"
+    }
+]

@@ -15,6 +15,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.estore.api.estoreapi.model.Jersey;
+import com.estore.api.estoreapi.persistence.JerseyDAO;
+import com.estore.api.estoreapi.persistence.JerseyFileDAO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @org.junit.jupiter.api.Tag("Controller-tier")
 public class JerseyControllerTest {
     private JerseyController jerseycontroller;
@@ -149,14 +154,61 @@ public class JerseyControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
+    // @org.junit.jupiter.api.Test
+    // public void testSearchJerseys() throws java.io.IOException { /* compiled code */ }
     @org.junit.jupiter.api.Test
-    public void testSearchJerseys() throws java.io.IOException { /* compiled code */ }
+    public void testSearchName()throws java.io.IOException{
+        ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyName("Patrick Kane");
+        Jersey[] jersey= a.getBody();
+        assertEquals("Patrick Kane", jersey[0].getName());
+        assertEquals(1, jersey.length);
+    }
+
+    // @org.junit.jupiter.api.Test
+    // public void testSearchColor()throws java.io.IOException{
+    //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyColor("Red");
+    //     Jersey[] jersey= a.getBody();
+    //     assertEquals(2, jersey.length); // in test file there should only be two red shirts
+    //     assertEquals("Red", jersey[0].getColor());
+    // }
+
+    // @org.junit.jupiter.api.Test
+    // public void testSearchNumber()throws java.io.IOException{
+    //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyNumber(88);
+    //     Jersey[] jersey= a.getBody();
+    //     assertEquals("Patrick Kane", jersey[0].getName());
+    //     assertEquals(1, jersey.length);
+    //     assertEquals(5, jersey[0].getNumber());
+
+    // }
+
+    // @org.junit.jupiter.api.Test
+    // public void testSearchPrice()throws java.io.IOException{
+    //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyPrice(129.99);
+    //     Jersey[] jersey= a.getBody();
+    //     assertEquals("Patrick Kane", jersey[0].getName());
+    //     assertEquals(1, jersey.length);
+    //     assertEquals(88, jersey[0].getNumber());
+
+    // }
+
+    // @org.junit.jupiter.api.Test
+    // public void testSearchNumber()throws java.io.IOException{
+    //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseySize("Large");
+    //     Jersey[] jersey= a.getBody();
+    //     assertEquals("Patrick Kane", jersey[0].getName());
+    //     assertEquals(1, jersey.length);
+    //     assertEquals(88, jersey[0].getNumber());
+
+    // }
+
+
+
+    // @org.junit.jupiter.api.Test
+    // public void testSearchJerseysHandleException() throws java.io.IOException { /* compiled code */ }
 
     @org.junit.jupiter.api.Test
-    public void testSearchJerseysHandleException() throws java.io.IOException { /* compiled code */ }
-
-    @org.junit.jupiter.api.Test
-    public void testDeleteJerseys() throws java.io.IOException { /* compiled code */ }
+    public void testDeleteJerseys() throws java.io.IOException { }
 
     @org.junit.jupiter.api.Test
     public void testDeleteJerseyNotFound() throws java.io.IOException { /* compiled code */ }
