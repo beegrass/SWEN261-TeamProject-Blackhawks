@@ -169,6 +169,7 @@ public class JerseyController {
      * <p>
      * Example: Find all heroes that contain the text "ma"
      * GET http://localhost:8080/heroes/?name=ma
+     * @Author Angela Ngo
      */
     @GetMapping("/searchByName/")
     public ResponseEntity<Jersey[]> searchJerseyName(@RequestParam String name) {
@@ -199,7 +200,7 @@ public class JerseyController {
      * Responds to the GET request for all {@linkplain Jersey jerseys} whose name contains
      * the text in name
      * 
-     * @param name The name parameter which contains the text used to find the {@link Jersey jerseys}
+     * @param color The color parameter which contains the text used to find the {@link Jersey jerseys}
      * 
      * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
      * HTTP status of OK<br>
@@ -207,6 +208,7 @@ public class JerseyController {
      * <p>
      * Example: Find all heroes that contain the text "ma"
      * GET http://localhost:8080/heroes/?name=ma
+     * @Author Angela Ngo 
      */
     @GetMapping("/searchByColor/")
     //@RequestMapping(value="/jerseys/?color={color}",method = RequestMethod.GET)
@@ -227,10 +229,10 @@ public class JerseyController {
 
 
      /**
-     * Responds to the GET request for all {@linkplain Jersey jerseys} whose name contains
-     * the text in name
+     * Responds to the GET request for all {@linkplain Jersey jerseys} whose size contains
+     * the text in size
      * 
-     * @param name The name parameter which contains the text used to find the {@link Jersey jerseys}
+     * @param size The size parameter which contains the text used to find the {@link Jersey jerseys}
      * 
      * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
      * HTTP status of OK<br>
@@ -238,6 +240,8 @@ public class JerseyController {
      * <p>
      * Example: Find all heroes that contain the text "ma"
      * GET http://localhost:8080/heroes/?name=ma
+     * 
+     * @Author Angela Ngo 
      */
     @GetMapping("/searchBySize/")
     //@RequestMapping(value="/jerseys/?color={color}",method = RequestMethod.GET)
@@ -257,10 +261,9 @@ public class JerseyController {
     }
 
      /**
-     * Responds to the GET request for all {@linkplain Jersey jerseys} whose name contains
-     * the text in name
+     * Responds to the GET request for all {@linkplain Jersey jerseys} whose jerseys number corresponds with the given
      * 
-     * @param name The name parameter which contains the text used to find the {@link Jersey jerseys}
+     * @param number The number parameter which contains the text used to find the {@link Jersey jerseys}
      * 
      * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
      * HTTP status of OK<br>
@@ -290,7 +293,7 @@ public class JerseyController {
      * Responds to the GET request for all {@linkplain Jersey jerseys} whose name contains
      * the text in name
      * 
-     * @param name The name parameter which contains the text used to find the {@link Jersey jerseys}
+     * @param price The name parameter which contains the text used to find the {@link Jersey jerseys}
      * 
      * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
      * HTTP status of OK<br>
@@ -298,6 +301,7 @@ public class JerseyController {
      * <p>
      * Example: Find all heroes that contain the text "ma"
      * GET http://localhost:8080/heroes/?name=ma
+     * @Author Angela Ngo
      */
     @GetMapping("/searchByPrice/")
     //@RequestMapping(value="/jerseys/?color={color}",method = RequestMethod.GET)

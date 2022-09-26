@@ -139,7 +139,7 @@ public class JerseyFileDAO implements JerseyDAO {
     }
 
     
-        /**
+    /**
     ** {@inheritDoc}
      */
     @Override
@@ -172,6 +172,10 @@ public class JerseyFileDAO implements JerseyDAO {
         }
     }
 
+    /**
+     * @param jersey this is the given jersey that we want to add to the map of jerseys
+     * @return newJersey this returns the jersey that was created 
+     */
     @Override
     public Jersey createJersey(Jersey jersey) throws IOException {
         synchronized(jerseys) {
@@ -185,6 +189,10 @@ public class JerseyFileDAO implements JerseyDAO {
         }
     }
     
+    /**
+     * @param jersey takes in a jersey to put into jerseys map 
+     * @return jersey this returns the jersey that was updated
+     */
     @Override
     public Jersey updateJersey(Jersey jersey) throws IOException {
         synchronized(jerseys) {
@@ -196,6 +204,8 @@ public class JerseyFileDAO implements JerseyDAO {
             return jersey;
         }
     }
+
+
     @Override
     public boolean deleteJersey(int id) throws IOException {
         synchronized(jerseys) {
@@ -272,7 +282,7 @@ public class JerseyFileDAO implements JerseyDAO {
 
      /**
      * This returns an array of jerseys with the given number
-     * @param number
+     * @param price
      * @return jerseyArray
      */
     private Jersey[] getJerseysPrice(double price) {
@@ -303,7 +313,7 @@ public class JerseyFileDAO implements JerseyDAO {
 
     
      /**
-     * This returns an array of jerseys with the given number
+     * This returns an array of jerseys with the given color string
      * @param Color
      * @return jerseyArray
      */
@@ -332,8 +342,8 @@ public class JerseyFileDAO implements JerseyDAO {
     }
 
     /**
-     * This returns an array of jerseys with the given number
-     * @param Color
+     * This returns an array of jerseys with the given size
+     * @param size
      * @return jerseyArray
      */
     private Jersey[] getJerseysSize(String size) {
