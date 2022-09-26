@@ -156,13 +156,13 @@ public class JerseyControllerTest {
 
     // @org.junit.jupiter.api.Test
     // public void testSearchJerseys() throws java.io.IOException { /* compiled code */ }
-    @org.junit.jupiter.api.Test
-    public void testSearchName()throws java.io.IOException{
-        ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyName("Patrick Kane");
-        Jersey[] jersey= a.getBody();
-        assertEquals("Patrick Kane", jersey[0].getName());
-        assertEquals(1, jersey.length);
-    }
+    // @org.junit.jupiter.api.Test
+    // public void testSearchName()throws java.io.IOException{
+    //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyName("Patrick Kane");
+    //     Jersey[] jersey= a.getBody();
+    //     assertEquals("Patrick Kane", jersey[0].getName());
+    //     assertEquals(1, jersey.length);
+    // }
 
     // @org.junit.jupiter.api.Test
     // public void testSearchColor()throws java.io.IOException{
