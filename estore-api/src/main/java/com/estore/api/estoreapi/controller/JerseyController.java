@@ -178,7 +178,11 @@ public class JerseyController {
         // Replace below with your implementation
         try {
             Jersey [] jerseys = jerseyDao.findJerseysName(name);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+            if(jerseys.length == 0){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }else{
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+            }
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -218,7 +222,11 @@ public class JerseyController {
         // Replace below with your implementation
         try {
             Jersey [] jerseys = jerseyDao.findJerseysColor(color);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+            if(jerseys.length == 0){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }else{
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+            } 
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -251,7 +259,11 @@ public class JerseyController {
         // Replace below with your implementation
         try {
             Jersey [] jerseys = jerseyDao.findJerseysSize(size);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+            if(jerseys.length == 0){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }else{
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+            }
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -280,7 +292,11 @@ public class JerseyController {
         // Replace below with your implementation
         try {
             Jersey [] jerseys = jerseyDao.findJerseysNumber(number);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+            if(jerseys.length == 0){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }else{
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+            }
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -311,7 +327,11 @@ public class JerseyController {
         // Replace below with your implementation
         try {
             Jersey [] jerseys = jerseyDao.findJerseysPrice(price);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+            if(jerseys.length == 0){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }else{
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+            } 
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
