@@ -179,7 +179,7 @@ public class JerseyController {
         try {
             Jersey [] jerseys = jerseyDao.findJerseysName(name);
             if(jerseys.length == 0){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.NOT_FOUND);
             }else{
                 return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
             }
@@ -223,10 +223,10 @@ public class JerseyController {
         try {
             Jersey [] jerseys = jerseyDao.findJerseysColor(color);
             if(jerseys.length == 0){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.NOT_FOUND);
             }else{
                 return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-            } 
+            }
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -260,7 +260,7 @@ public class JerseyController {
         try {
             Jersey [] jerseys = jerseyDao.findJerseysSize(size);
             if(jerseys.length == 0){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.NOT_FOUND);
             }else{
                 return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
             }
@@ -293,7 +293,7 @@ public class JerseyController {
         try {
             Jersey [] jerseys = jerseyDao.findJerseysNumber(number);
             if(jerseys.length == 0){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.NOT_FOUND);
             }else{
                 return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
             }
@@ -328,10 +328,10 @@ public class JerseyController {
         try {
             Jersey [] jerseys = jerseyDao.findJerseysPrice(price);
             if(jerseys.length == 0){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.NOT_FOUND);
             }else{
                 return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-            } 
+            }
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
