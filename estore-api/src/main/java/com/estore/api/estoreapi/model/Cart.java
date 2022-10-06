@@ -1,6 +1,12 @@
 package com.estore.api.estoreapi.model;
 
 import java.util.Hashtable;
+import java.util.Set;
+import java.util.logging.Logger;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.estore.api.estoreapi.model.Jersey;
 
 /**
  * Represents a Cart entity
@@ -14,16 +20,37 @@ public class Cart {
         //chose dict bc we dont need ordering and it has easy access
         //Jersey is the jersey object
         //Integer is a quantity counter, how many of jersey in cart
-    private Hashtable<Jersey, Integer> jerseysDict;
+    private static final Logger LOG = Logger.getLogger(Jersey.class.getName());
 
-    //will keep track of the total cost of the cart
-    private double totalCost;
-
-    public Cart()
-    {
-        jerseysDict = new Hashtable<Jersey, Integer>();
-        totalCost = 0.0;
+    // Package private for tests
+    static final String STRING_FORMAT = "Jersey [id=%d, name=%s]";
+    
+    @JsonProperty("jerseysDict") private Hashtable<Jersey, Integer> jerseysDict;
+    @JsonProperty("totalCost") private double totalCost;
+    
+    /**
+     * Create a jersey with the given name, number, price, color, and image path
+     * @param id The id of the jersey
+     * @param name The name that goes on the jersey
+     * 
+     * {@literal @}JsonProperty is used in serialization and deserialization
+     * of the JSON object to the Java object in mapping the fields.  If a field
+     * is not provided in the JSON object, the Java field gets the default Java
+     * value, i.e. 0 for int
+     */
+    public Cart(@JsonProperty("jerseysDict") Hashtable<Jersey, Integer> jerseysDict, 
+        @JsonProperty("totalCost") double totalCost) {
+        this.jerseysDict = jerseysDict;
+        this.totalCost = totalCost;
     }
+
+    public Set<Jersey> getJerseys(){
+        return jerseysDict.keySet();
+    }
+
+    
+
+
 
     // /**
     //  * Given a jersey, adds said jersey to the dictionary and adds
