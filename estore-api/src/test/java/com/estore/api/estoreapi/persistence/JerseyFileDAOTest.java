@@ -92,26 +92,27 @@ public class JerseyFileDAOTest {
     // //     assertEquals(heroFileDAO.heroes.size(),testHeroes.length-1);
     // // }
 
-    // @Test
-    // public void testCreateJersey() throws IOException {
-    //     // Setup
-    //     Jersey jersey = new Jersey(102,"Wonder-Person", 53, 129.99, "Red", "Medium", "Image.png");
+    @Test
+    public void testCreateJersey() throws IOException {
+        // Setup
+        Jersey jersey = new Jersey(102,"Wonder-Person", 53, 129.99, "Red", "Medium", "Image.png");
 
-    //     // Invoke
-    //     Jersey result = assertDoesNotThrow(() -> jerseyFileDAO.createJersey(jersey),
-    //                             "Unexpected exception thrown");
+        // Invoke
+        Jersey result = assertDoesNotThrow(() -> jerseyFileDAO.createJersey(jersey),
+                                "Unexpected exception thrown");
 
-    //     // Analyze
-    //     assertNotNull(result);
-    //     Jersey actual = jerseyFileDAO.getJersey(jersey.getId());
-    //     assertEquals(actual.getId(),jersey.getId());
-    //     assertEquals(actual.getName(),jersey.getName());
-    //     assertEquals(actual.getNumber(),jersey.getNumber());
-    //     assertEquals(actual.getPrice(),jersey.getPrice());
-    //     assertEquals(actual.getColor(),jersey.getColor());
-    //     assertEquals(actual.getSize(),jersey.getSize());
-    //     assertEquals(actual.getImage(),jersey.getImage());
-    // }
+        // Analyze
+        assertNotNull(result);
+        Jersey actual = jerseyFileDAO.getJersey(jersey.getId());
+        assertEquals(actual.getId(),jersey.getId());
+        assertEquals(actual.getName(),jersey.getName());
+        assertEquals(actual.getNumber(),jersey.getNumber());
+        assertEquals(actual.getPrice(),jersey.getPrice());
+        assertEquals(actual.getColor(),jersey.getColor());
+        assertEquals(actual.getSize(),jersey.getSize());
+        assertEquals(actual.getImage(),jersey.getImage());
+    }
+    
 
     @Test
     public void testUpdateJersey() throws IOException {
