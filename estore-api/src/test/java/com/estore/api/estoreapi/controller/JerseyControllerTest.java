@@ -1,7 +1,5 @@
 package com.estore.api.estoreapi.controller;
 
-import com.estore.api.estoreapi.model.Jersey;
-import com.estore.api.estoreapi.persistence.JerseyDAO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -9,36 +7,37 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
+import com.estore.api.estoreapi.persistence.JerseyDAO;
+import com.estore.api.estoreapi.model.Jersey;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.estore.api.estoreapi.model.Jersey;
-import com.estore.api.estoreapi.persistence.JerseyDAO;
-import com.estore.api.estoreapi.persistence.JerseyFileDAO;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 /**
- * Test the Jersey File DAO class
+ * Test the Jersey Controller class
  * 
  * @author Ethan Abbate, Hayden Cabral, Angela Ngo, Vincent Schwartz
  */
 
-@org.junit.jupiter.api.Tag("Controller-tier")
+@Tag("Controller-tier")
 public class JerseyControllerTest {
     private JerseyController jerseycontroller;
     private JerseyDAO mockJerseyDAO;
 
-
+    /**
+     * Before each test, create a new JerseyController object and inject
+     * a mock Jersey DAO
+     */
     @BeforeEach
     public void setupJerseyController() { 
         mockJerseyDAO = mock(JerseyDAO.class);
         jerseycontroller = new JerseyController(mockJerseyDAO);
      }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testGetJersey() throws java.io.IOException {// getJersey may throw IOException
         // Setup
         Jersey jersey = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
