@@ -3,10 +3,9 @@ package com.estore.api.estoreapi.persistence;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-// import static org.junit.jupiter.api.Assertions.assertNull;
-// import static org.junit.jupiter.api.Assertions.assertThrows;
-// import static org.mockito.ArgumentMatchers.any;
-// import static org.mockito.Mockito.doThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -175,25 +174,26 @@ public class JerseyFileDAOTest {
     //     assertNull(result);
     // }
 
-    // @Test
-    // public void testConstructorException() throws IOException {
-    //     // Setup
-    //     ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
-    //     // We want to simulate with a Mock Object Mapper that an
-    //     // exception was raised during JSON object deseerialization
-    //     // into Java objects
-    //     // When the Mock Object Mapper readValue method is called
-    //     // from the HeroFileDAO load method, an IOException is
-    //     // raised
-    //     doThrow(new IOException())
-    //         .when(mockObjectMapper)
-    //             .readValue(new File("doesnt_matter.txt"),Jersey[].class);
+    @Test
+    public void testConstructorException() throws IOException {
+        // Setup
+        ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
+        // We want to simulate with a Mock Object Mapper that an
+        // exception was raised during JSON object deseerialization
+        // into Java objects
+        // When the Mock Object Mapper readValue method is called
+        // from the HeroFileDAO load method, an IOException is
+        // raised
+        doThrow(new IOException())
+            .when(mockObjectMapper)
+                .readValue(new File("doesnt_matter.txt"),Jersey[].class);
 
-    //     // Invoke & Analyze
-    //     assertThrows(IOException.class,
-    //                     () -> new JerseyFileDAO("doesnt_matter.txt",mockObjectMapper),
-    //                     "IOException not thrown");
-    // }
+        // Invoke & Analyze
+        assertThrows(IOException.class,
+                        () -> new JerseyFileDAO("doesnt_matter.txt",mockObjectMapper),
+                        "IOException not thrown");
+    }
+    
     @Test
     public void testGetJerseysName() throws IOException {
         // Invoke
