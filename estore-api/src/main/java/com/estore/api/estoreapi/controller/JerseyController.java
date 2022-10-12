@@ -139,9 +139,8 @@ public class JerseyController {
         LOG.info("POST /jerseys " + jersey);
         try {
             //check if a jersey already exists with the given jersey's name
-            Jersey[] givenJersey = jerseyDao.findJerseys(jersey.getName(), jersey.getNumber(), 
-                jersey.getColor(), jersey.getSize(), jersey.getImage());
-            if(givenJersey.length == 0 || givenJersey == null)
+            Jersey result = jerseyDao.createJersey(jersey);
+            if(result != null)
             {
                 Jersey newJersey = jerseyDao.createJersey(jersey);
                 return new ResponseEntity<Jersey>(newJersey, HttpStatus.CREATED);
