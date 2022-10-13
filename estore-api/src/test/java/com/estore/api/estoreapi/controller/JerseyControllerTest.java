@@ -229,7 +229,7 @@ public class JerseyControllerTest {
     }
 
     @Test
-    public void testSearchJerseysHandleException() throws IOException { // findJerseys may throw IOException
+    public void testSearchJerseysNameHandleException() throws IOException { // findJerseys may throw IOException
         // Setup
         String searchString = "an";
         // When createHero is called on the Mock Hero DAO, throw an IOException
@@ -242,48 +242,104 @@ public class JerseyControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
-    // @Test
-    // public void testSearchColor()throws java.io.IOException{
-    //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyColor("Red");
-    //     Jersey[] jersey= a.getBody();
-    //     assertEquals(2, jersey.length); // in test file there should only be two red shirts
-    //     assertEquals("Red", jersey[0].getColor());
-    // }
+    @Test
+    public void testSearchJerseysColor()throws java.io.IOException{
+        // Setup
+        String searchString = "Medium";
+        Jersey[] jerseys = new Jersey[2];
+        jerseys[0] = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        jerseys[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
+        // When findHeroes is called with the search string, return the two
+        /// heroes above
+        when(mockJerseyDAO.findJerseysColor(searchString)).thenReturn(jerseys);
 
-    // @Test
-    // public void testSearchNumber()throws java.io.IOException{
-    //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyNumber(88);
-    //     Jersey[] jersey= a.getBody();
-    //     assertEquals("Patrick Kane", jersey[0].getName());
-    //     assertEquals(1, jersey.length);
-    //     assertEquals(5, jersey[0].getNumber());
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseyController.searchJerseyColor(searchString);
 
-    // }
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(jerseys,response.getBody());
+    }
 
-    // @Test
-    // public void testSearchPrice()throws java.io.IOException{
-    //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyPrice(129.99);
-    //     Jersey[] jersey= a.getBody();
-    //     assertEquals("Patrick Kane", jersey[0].getName());
-    //     assertEquals(1, jersey.length);
-    //     assertEquals(88, jersey[0].getNumber());
+    @Test
+    public void testSearchJerseysColorHandleException() throws IOException { // findJerseys may throw IOException
+        // Setup
+        String searchString = "an";
+        // When createHero is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockJerseyDAO).findJerseysColor(searchString);
 
-    // }
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseyController.searchJerseyColor(searchString);
 
-    // @Test
-    // public void testSearchNumber()throws java.io.IOException{
-    //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseySize("Large");
-    //     Jersey[] jersey= a.getBody();
-    //     assertEquals("Patrick Kane", jersey[0].getName());
-    //     assertEquals(1, jersey.length);
-    //     assertEquals(88, jersey[0].getNumber());
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 
-    // }
+    @Test
+    public void testSearchJerseysNumber()throws java.io.IOException{
+        // Setup
+        int searchNum = 88;
+        Jersey[] jerseys = new Jersey[2];
+        jerseys[0] = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        jerseys[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
+        // When findHeroes is called with the search string, return the two
+        /// heroes above
+        when(mockJerseyDAO.findJerseysNumber(searchNum)).thenReturn(jerseys);
 
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseyController.searchJerseyNumber(searchNum);
 
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(jerseys,response.getBody());
+    }
 
-    // @Test
-    // public void testSearchJerseysHandleException() throws java.io.IOException { /* compiled code */ }
+    @Test
+    public void testSearchJerseysNumberHandleException() throws IOException { // findJerseys may throw IOException
+        // Setup
+        int searchNum = 88;
+        // When createHero is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockJerseyDAO).findJerseysNumber(searchNum);
+
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseyController.searchJerseyNumber(searchNum);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
+    public void testSearchJerseysPrice()throws java.io.IOException{
+        // Setup
+        double searchDouble = 88;
+        Jersey[] jerseys = new Jersey[2];
+        jerseys[0] = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        jerseys[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
+        // When findHeroes is called with the search string, return the two
+        /// heroes above
+        when(mockJerseyDAO.findJerseysPrice(searchDouble)).thenReturn(jerseys);
+
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseyController.searchJerseyPrice(searchDouble);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(jerseys,response.getBody());
+    }
+
+    @Test
+    public void testSearchJerseysPriceHandleException() throws IOException { // findJerseys may throw IOException
+        // Setup
+        double searchDouble = 88;
+        // When createHero is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockJerseyDAO).findJerseysPrice(searchDouble);
+
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseyController.searchJerseyPrice(searchDouble);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 
     @Test
     public void testDeleteJerseys() throws java.io.IOException { 
