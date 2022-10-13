@@ -112,7 +112,6 @@ public class JerseyController {
     public ResponseEntity<Jersey[]> getJerseys() {
         LOG.info("GET /jerseys");
 
-        // Replace below with your implementation
         try {
             Jersey[] jerseys = jerseyDao.getJerseys();
             if(jerseys != null) {
@@ -175,7 +174,7 @@ public class JerseyController {
         LOG.info("GET /jerseys/searchByName/?name="+name);
 
         try {
-            Jersey [] jerseys = jerseyDao.findJerseys(name, 0, null, null);
+            Jersey [] jerseys = jerseyDao.findJerseys(name, 0, 0.0, null, null);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
@@ -211,9 +210,8 @@ public class JerseyController {
     public ResponseEntity<Jersey[]> searchJerseyColor(@RequestParam String color) {
         LOG.info("GET /jerseys/searchByColor/?color="+color);
 
-        // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, color, null);
+            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, 0.0, color, null);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
@@ -244,9 +242,8 @@ public class JerseyController {
     public ResponseEntity<Jersey[]> searchJerseySize(@RequestParam String size) {
         LOG.info("GET /jerseys/searchBySize/?size="+size);
 
-        // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, null, size);
+            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, 0.0, null, size);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
@@ -270,9 +267,8 @@ public class JerseyController {
     public ResponseEntity<Jersey[]> searchJerseyNumber(@RequestParam int number) {
         LOG.info("GET /jerseys/searchByNumber/?number="+number);
 
-        // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseys(null, number, null, null);
+            Jersey [] jerseys = jerseyDao.findJerseys(null, number, 0.0, null, null);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
@@ -301,9 +297,8 @@ public class JerseyController {
     public ResponseEntity<Jersey[]> searchJerseyPrice(@RequestParam double price) {
         LOG.info("GET /jerseys/searchByPrice/?price="+price);
 
-        // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseysPrice(price);
+            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, price, null, null);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
