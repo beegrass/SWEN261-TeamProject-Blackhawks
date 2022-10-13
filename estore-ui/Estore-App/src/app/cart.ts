@@ -1,4 +1,6 @@
 export interface Cart {
-    id: number;
-    name: string;
+    
+    total_amount_jerseys : number; 
+    total_price : number; 
+
   }
