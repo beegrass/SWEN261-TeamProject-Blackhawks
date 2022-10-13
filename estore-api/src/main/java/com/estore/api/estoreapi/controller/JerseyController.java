@@ -352,8 +352,7 @@ public class JerseyController {
     public ResponseEntity<Jersey> deleteJersey(@PathVariable int id) {
         LOG.info("DELETE /jerseys/" + id);
         try {
-            if(jerseyDao.getJersey(id) != null){
-                jerseyDao.deleteJersey(id);
+            if(jerseyDao.deleteJersey(id)){
                 return new ResponseEntity<Jersey>(jerseyDao.getJersey(id), HttpStatus.OK); 
             }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);

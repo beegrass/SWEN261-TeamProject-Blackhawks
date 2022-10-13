@@ -51,7 +51,7 @@ public class JerseyControllerTest {
         assertEquals(HttpStatus.OK,response.getStatusCode());
         assertEquals(jersey,response.getBody());}
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testGetJerseyNotFound() throws java.lang.Exception { 
         int jerseyId = 99;
 
@@ -78,7 +78,7 @@ public class JerseyControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testCreateJersey() throws java.io.IOException { 
         // Setup
         Jersey jersey = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
@@ -94,7 +94,7 @@ public class JerseyControllerTest {
         assertEquals(jersey,response.getBody());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testCreateJerseyFailed() throws java.io.IOException { 
         // Setup
         Jersey jersey = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
@@ -109,7 +109,7 @@ public class JerseyControllerTest {
         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testCreateJerseyHandleException() throws java.io.IOException { 
         // Setup
         Jersey jersey = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
@@ -124,7 +124,7 @@ public class JerseyControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testUpdateJersey() throws java.io.IOException {
         // Setup
         Jersey jersey = new Jersey(1, "GA", 100, 9.99, "red", "XK", "Image.png");
@@ -140,7 +140,7 @@ public class JerseyControllerTest {
         assertEquals(jersey,response.getBody());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testUpdateJerseyFailed() throws java.io.IOException { 
         // setup
         Jersey jersey = new Jersey(372891, "GA", 100, 9.99, "red", "XL", "Image.png");
@@ -153,7 +153,7 @@ public class JerseyControllerTest {
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testUpdateJerseyHandleException() throws java.io.IOException {
         Jersey jersey = new Jersey(5, "handle", 100, 9.99, "red", "XL", "Image.png");
         
@@ -166,21 +166,34 @@ public class JerseyControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testGetJerseys() throws java.io.IOException {
         // Setup
-        Jersey[] heroes = new Jersey[2];
-        heroes[0] = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
-        heroes[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
+        Jersey[] jerseys = new Jersey[2];
+        jerseys[0] = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        jerseys[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
         // When getHeroes is called return the heroes created above
-        when(mockJerseyDAO.getJerseys()).thenReturn(heroes);
+        when(mockJerseyDAO.getJerseys()).thenReturn(jerseys);
 
         // Invoke
         ResponseEntity<Jersey[]> response = jerseyController.getJerseys();
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
-        assertEquals(heroes,response.getBody());
+        assertEquals(jerseys,response.getBody());
+    }
+
+    @Test
+    public void testGetJerseysNotFound() throws java.io.IOException {
+        // Setup
+        // When getHeroes is called on the Mock Hero DAO, throw an IOException
+        when(mockJerseyDAO.getJerseys()).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseyController.getJerseys();
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
 
     @Test
@@ -196,17 +209,40 @@ public class JerseyControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
-    // @org.junit.jupiter.api.Test
-    // public void testSearchJerseys() throws java.io.IOException { /* compiled code */ }
-    // @org.junit.jupiter.api.Test
-    // public void testSearchName()throws java.io.IOException{
-    //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyName("Patrick Kane");
-    //     Jersey[] jersey= a.getBody();
-    //     assertEquals("Patrick Kane", jersey[0].getName());
-    //     assertEquals(1, jersey.length);
-    // }
+    @Test
+    public void testSearchJerseysName()throws java.io.IOException{
+        // Setup
+        String searchString = "Pat";
+        Jersey[] jerseys = new Jersey[2];
+        jerseys[0] = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        jerseys[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
+        // When findHeroes is called with the search string, return the two
+        /// heroes above
+        when(mockJerseyDAO.findJerseysName(searchString)).thenReturn(jerseys);
 
-    // @org.junit.jupiter.api.Test
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseyController.searchJerseyName(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(jerseys,response.getBody());
+    }
+
+    @Test
+    public void testSearchJerseysHandleException() throws IOException { // findJerseys may throw IOException
+        // Setup
+        String searchString = "an";
+        // When createHero is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockJerseyDAO).findJerseysName(searchString);
+
+        // Invoke
+        ResponseEntity<Jersey[]> response = jerseyController.searchJerseyName(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    // @Test
     // public void testSearchColor()throws java.io.IOException{
     //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyColor("Red");
     //     Jersey[] jersey= a.getBody();
@@ -214,7 +250,7 @@ public class JerseyControllerTest {
     //     assertEquals("Red", jersey[0].getColor());
     // }
 
-    // @org.junit.jupiter.api.Test
+    // @Test
     // public void testSearchNumber()throws java.io.IOException{
     //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyNumber(88);
     //     Jersey[] jersey= a.getBody();
@@ -224,7 +260,7 @@ public class JerseyControllerTest {
 
     // }
 
-    // @org.junit.jupiter.api.Test
+    // @Test
     // public void testSearchPrice()throws java.io.IOException{
     //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseyPrice(129.99);
     //     Jersey[] jersey= a.getBody();
@@ -234,7 +270,7 @@ public class JerseyControllerTest {
 
     // }
 
-    // @org.junit.jupiter.api.Test
+    // @Test
     // public void testSearchNumber()throws java.io.IOException{
     //     ResponseEntity<Jersey[]> a = jerseycontroller.searchJerseySize("Large");
     //     Jersey[] jersey= a.getBody();
@@ -246,15 +282,46 @@ public class JerseyControllerTest {
 
 
 
-    // @org.junit.jupiter.api.Test
+    // @Test
     // public void testSearchJerseysHandleException() throws java.io.IOException { /* compiled code */ }
 
-    @org.junit.jupiter.api.Test
-    public void testDeleteJerseys() throws java.io.IOException { }
+    @Test
+    public void testDeleteJerseys() throws java.io.IOException { 
+        // Setup
+        int jerseyId = 99;
+        // when deleteJersey is called return true, simulating successful deletion
+        when(mockJerseyDAO.deleteJersey(jerseyId)).thenReturn(true);
 
-    @org.junit.jupiter.api.Test
-    public void testDeleteJerseyNotFound() throws java.io.IOException { /* compiled code */ }
+        // Invoke
+        ResponseEntity<Jersey> response = jerseyController.deleteJersey(jerseyId);
 
-    @org.junit.jupiter.api.Test
-    public void testDeleteJerseyHandleException() throws java.io.IOException { /* compiled code */ }
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteJerseyNotFound() throws IOException { // deleteHero may throw IOException
+        // Setup
+        int jerseyId = 99;
+        // when deleteHero is called return false, simulating failed deletion
+        when(mockJerseyDAO.deleteJersey(jerseyId)).thenReturn(false);
+
+        // Invoke
+        ResponseEntity<Jersey> response = jerseyController.deleteJersey(jerseyId);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteJerseyHandleException() throws java.io.IOException { // Setup
+        int jerseyId = 99;
+        // When deleteHero is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockJerseyDAO).deleteJersey(jerseyId);
+
+        // Invoke
+        ResponseEntity<Jersey> response = jerseyController.deleteJersey(jerseyId);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());}
 }
