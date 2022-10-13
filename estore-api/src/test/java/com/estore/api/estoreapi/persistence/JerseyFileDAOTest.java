@@ -41,7 +41,7 @@ public class JerseyFileDAOTest {
         mockObjectMapper = mock(ObjectMapper.class);
         testJerseys = new Jersey[3];
         testJerseys[0] = new Jersey(99, "Jack Hughes", 5, 99.99, "Black", "Medium","Image.png");
-        testJerseys[1] = new Jersey(100, "Poopy someone", 1, 50.99, "Red", "Size","Image.png");
+        testJerseys[1] = new Jersey(100, "Poopy someone", 1, 50.99, "Red", "Small","Image.png");
         testJerseys[2] = new Jersey(101, "Patrick Kane", 88, 129.99, "Red", "Large","Image.png");
 
         // When the object mapper is supposed to read from the file
@@ -52,21 +52,79 @@ public class JerseyFileDAOTest {
                 jerseyFileDAO = new JerseyFileDAO("doesnt_matter.txt",mockObjectMapper);
     }
 
-    // @Test
-    // public void testGetJerseys() {
-    //     // Invoke
-    //     Jersey[] jerseys = jerseyFileDAO.getJerseys();
+    @Test
+    public void testGetJerseys() {
+        // Invoke
+        Jersey[] jerseys = jerseyFileDAO.getJerseys();
 
-    //     // Analyze
-    //     assertEquals(jerseys.length,testJerseys.length);
-    //     for (int i = 0; i < testJerseys.length;++i)
-    //         assertEquals(jerseys[i],testJerseys[i]);
-    // }
+        // Analyze
+        assertEquals(jerseys.length,testJerseys.length);
+        for (int i = 0; i < testJerseys.length;++i)
+            assertEquals(jerseys[i],testJerseys[i]);
+    }
 
-    //     // Analyze
+    @Test
+    public void testFindJerseyNameOnly() throws IOException {
+        // Invoke
+        Jersey[] jerseys = jerseyFileDAO.findJerseys("Patr", 0, null, null);
 
-    //     assertEquals(jerseys[0].getName(),testJerseys[2].getName() );
-    //     }
+        // Analyze
+        assertEquals(jerseys.length,1);
+        assertEquals(jerseys[0],testJerseys[2]);
+    }
+
+    @Test
+    public void testFindJerseyNumOnly() throws IOException {
+        // Invoke
+        Jersey[] jerseys = jerseyFileDAO.findJerseys(null, 88, null, null);
+
+        // Analyze
+        assertEquals(jerseys.length,1);
+        assertEquals(jerseys[0],testJerseys[2]);
+    }
+
+    @Test
+    public void testFindJerseyColorOnly() throws IOException {
+        // Invoke
+        Jersey[] jerseys = jerseyFileDAO.findJerseys(null, 0, "Red", null);
+
+        // Analyze
+        assertEquals(jerseys.length,2);
+        assertEquals(jerseys[0],testJerseys[1]);
+        assertEquals(jerseys[1],testJerseys[2]);
+    }
+
+    @Test
+    public void testFindJerseySizeOnly() throws IOException {
+        // Invoke
+        Jersey[] jerseys = jerseyFileDAO.findJerseys(null, 0, null, "Large");
+
+        // Analyze
+        assertEquals(jerseys.length,1);
+        assertEquals(jerseys[0],testJerseys[2]);
+    }
+
+    @Test
+    public void testFindJersey() throws IOException {
+        // Invoke
+        Jersey[] jerseys = jerseyFileDAO.findJerseys("Jack", 5, "Black", "Medium");
+
+        // Analyze
+        assertEquals(jerseys.length,1);
+        assertEquals(jerseys[0],testJerseys[0]);
+    }
+
+    @Test
+    public void testFindJerseyAll() throws IOException {
+        // Invoke
+        Jersey[] jerseys = jerseyFileDAO.findJerseys(null, 0, null, null);
+
+        // Analyze
+        assertEquals(jerseys.length,3);
+        assertEquals(jerseys[0],testJerseys[0]);
+        assertEquals(jerseys[1],testJerseys[1]);
+        assertEquals(jerseys[2],testJerseys[2]);
+    }
 
     @Test
     public void testGetJersey() throws IOException {
@@ -198,7 +256,7 @@ public class JerseyFileDAOTest {
     @Test
     public void testGetJerseysName() throws IOException {
         // Invoke
-        Jersey[] jersey = jerseyFileDAO.findJerseysName("Patrick");
+        Jersey[] jersey = jerseyFileDAO.findJerseys("Patrick", 0, null, null);
 
         // Analzye
         assertEquals("Patrick Kane", jersey[0].getName());

@@ -175,7 +175,7 @@ public class JerseyController {
         LOG.info("GET /jerseys/searchByName/?name="+name);
 
         try {
-            Jersey [] jerseys = jerseyDao.findJerseysName(name);
+            Jersey [] jerseys = jerseyDao.findJerseys(name, 0, null, null);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
@@ -213,7 +213,7 @@ public class JerseyController {
 
         // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseysColor(color);
+            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, color, null);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
@@ -246,7 +246,7 @@ public class JerseyController {
 
         // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseysSize(size);
+            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, null, size);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
@@ -272,7 +272,7 @@ public class JerseyController {
 
         // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseysNumber(number);
+            Jersey [] jerseys = jerseyDao.findJerseys(null, number, null, null);
             return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {

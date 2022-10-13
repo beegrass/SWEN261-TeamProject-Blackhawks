@@ -218,7 +218,7 @@ public class JerseyControllerTest {
         jerseys[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
         // When findHeroes is called with the search string, return the two
         /// heroes above
-        when(mockJerseyDAO.findJerseysName(searchString)).thenReturn(jerseys);
+        when(mockJerseyDAO.findJerseys(searchString, 0, null, null)).thenReturn(jerseys);
 
         // Invoke
         ResponseEntity<Jersey[]> response = jerseyController.searchJerseyName(searchString);
@@ -233,7 +233,7 @@ public class JerseyControllerTest {
         // Setup
         String searchString = "an";
         // When createHero is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockJerseyDAO).findJerseysName(searchString);
+        doThrow(new IOException()).when(mockJerseyDAO).findJerseys(searchString, 0, null, null);
 
         // Invoke
         ResponseEntity<Jersey[]> response = jerseyController.searchJerseyName(searchString);
@@ -251,7 +251,7 @@ public class JerseyControllerTest {
         jerseys[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
         // When findHeroes is called with the search string, return the two
         /// heroes above
-        when(mockJerseyDAO.findJerseysSize(searchString)).thenReturn(jerseys);
+        when(mockJerseyDAO.findJerseys(null, 0, null, searchString)).thenReturn(jerseys);
 
         // Invoke
         ResponseEntity<Jersey[]> response = jerseyController.searchJerseySize(searchString);
@@ -266,7 +266,7 @@ public class JerseyControllerTest {
         // Setup
         String searchString = "an";
         // When createHero is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockJerseyDAO).findJerseysSize(searchString);
+        doThrow(new IOException()).when(mockJerseyDAO).findJerseys(null, 0, null, searchString);
 
         // Invoke
         ResponseEntity<Jersey[]> response = jerseyController.searchJerseySize(searchString);
@@ -284,7 +284,7 @@ public class JerseyControllerTest {
         jerseys[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
         // When findHeroes is called with the search string, return the two
         /// heroes above
-        when(mockJerseyDAO.findJerseysColor(searchString)).thenReturn(jerseys);
+        when(mockJerseyDAO.findJerseys(null, 0, searchString, null)).thenReturn(jerseys);
 
         // Invoke
         ResponseEntity<Jersey[]> response = jerseyController.searchJerseyColor(searchString);
@@ -299,7 +299,7 @@ public class JerseyControllerTest {
         // Setup
         String searchString = "an";
         // When createHero is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockJerseyDAO).findJerseysColor(searchString);
+        doThrow(new IOException()).when(mockJerseyDAO).findJerseys(null, 0, searchString, null);
 
         // Invoke
         ResponseEntity<Jersey[]> response = jerseyController.searchJerseyColor(searchString);
@@ -317,7 +317,7 @@ public class JerseyControllerTest {
         jerseys[1] = new Jersey(100,"Patrick Kane", 88, 129.99, "Red", "Large", "image1.png");
         // When findHeroes is called with the search string, return the two
         /// heroes above
-        when(mockJerseyDAO.findJerseysNumber(searchNum)).thenReturn(jerseys);
+        when(mockJerseyDAO.findJerseys(null, searchNum, null, null)).thenReturn(jerseys);
 
         // Invoke
         ResponseEntity<Jersey[]> response = jerseyController.searchJerseyNumber(searchNum);
@@ -332,7 +332,7 @@ public class JerseyControllerTest {
         // Setup
         int searchNum = 88;
         // When createHero is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockJerseyDAO).findJerseysNumber(searchNum);
+        doThrow(new IOException()).when(mockJerseyDAO).findJerseys(null, searchNum, null, null);
 
         // Invoke
         ResponseEntity<Jersey[]> response = jerseyController.searchJerseyNumber(searchNum);

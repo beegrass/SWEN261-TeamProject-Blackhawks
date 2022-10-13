@@ -58,7 +58,7 @@ public class JerseyFileDAO implements JerseyDAO {
      * @return  The array of {@link Jersey jerseys}, may be empty
      */
     private Jersey[] getJerseysArray() {
-        return getJerseysArray(null, 0, null, null, null);
+        return getJerseysArray(null, 0, null, null);
     }
 
     /**
@@ -72,7 +72,7 @@ public class JerseyFileDAO implements JerseyDAO {
      * Searches based on one query information (can be a string version of a number or double as well)
      * @return  The array of {@link Jersey jerseys}, may be empty
      */
-    private Jersey[] getJerseysArray(String name, int number, String color, String size, String image) { // if containsText == null, no filter
+    private Jersey[] getJerseysArray(String name, int number, String color, String size) { // if containsText == null, no filter
         ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
 
         for (Jersey jersey : jerseys.values()) {
@@ -80,11 +80,8 @@ public class JerseyFileDAO implements JerseyDAO {
             if ((name == null || jersey.getName().contains(name)) &&
                 (number == 0 || jersey.getNumber() == number) &&  
                 (color == null || jersey.getColor().contains(color)) &&
-                (size == null || jersey.getSize().contains(size)) &&
-                (image == null || jersey.getImage().contains(image))) {
-                    
-                jerseyArrayList.add(jersey);
-            }
+                (size == null || jersey.getSize().contains(size)))
+                    jerseyArrayList.add(jersey);
         }
 
         Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
@@ -153,9 +150,9 @@ public class JerseyFileDAO implements JerseyDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Jersey[] findJerseys(String name, int number, String color, String size,  String image) throws IOException {
+    public Jersey[] findJerseys(String name, int number, String color, String size) throws IOException {
         synchronized(jerseys) {
-            return getJerseysArray(name, number, color, size, image);
+            return getJerseysArray(name, number, color, size);
         }
     }
 
@@ -223,62 +220,62 @@ public class JerseyFileDAO implements JerseyDAO {
      * @param name
      * @return jerseyArray
      */
-    private Jersey[] getJerseysName(String name) {
-        ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
+    // private Jersey[] getJerseysName(String name) {
+    //     ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
 
-        for (Jersey jersey : jerseys.values()) {
+    //     for (Jersey jersey : jerseys.values()) {
 
-            if (jersey.getName().contains(name)) {
+    //         if (jersey.getName().contains(name)) {
                     
-                jerseyArrayList.add(jersey);
-            }
-        }
+    //             jerseyArrayList.add(jersey);
+    //         }
+    //     }
 
-        Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
-        jerseyArrayList.toArray(jerseyArray);
-        return jerseyArray;
-    }
+    //     Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
+    //     jerseyArrayList.toArray(jerseyArray);
+    //     return jerseyArray;
+    // }
     
 
-     /**
-      * this takes from the getJerseyName
-    ** {@inheritDoc}
-     */
-    @Override
-    public Jersey[] findJerseysName(String name) throws IOException {
-        synchronized(jerseys) {
-            return getJerseysName(name);
-        }
-    }
+    //  /**
+    //   * this takes from the getJerseyName
+    // ** {@inheritDoc}
+    //  */
+    // @Override
+    // public Jersey[] findJerseysName(String name) throws IOException {
+    //     synchronized(jerseys) {
+    //         return getJerseysName(name);
+    //     }
+    // }
 
     /**
      * This returns an array of jerseys with the given number
      * @param number
      * @return jerseyArray
      */
-    private Jersey[] getJerseysNumber(int number) {
-        ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
+    // private Jersey[] getJerseysNumber(int number) {
+    //     ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
 
-        for (Jersey jersey : jerseys.values()) {
+    //     for (Jersey jersey : jerseys.values()) {
 
-            if (jersey.getNumber() == number) {
+    //         if (jersey.getNumber() == number) {
                     
-                jerseyArrayList.add(jersey);
-            }
-        }
+    //             jerseyArrayList.add(jersey);
+    //         }
+    //     }
 
-        Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
-        jerseyArrayList.toArray(jerseyArray);
-        return jerseyArray;
-    }
+    //     Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
+    //     jerseyArrayList.toArray(jerseyArray);
+    //     return jerseyArray;
+    // }
     
 
-    @Override
-    public Jersey[] findJerseysNumber(int number) throws IOException {
-        synchronized(jerseys) {
-            return getJerseysNumber(number);
-        }
-    }
+    // @Override
+    // public Jersey[] findJerseysNumber(int number) throws IOException {
+    //     synchronized(jerseys) {
+    //         return getJerseysNumber(number);
+    //     }
+    // }
 
      /**
      * This returns an array of jerseys with the given number
@@ -317,56 +314,56 @@ public class JerseyFileDAO implements JerseyDAO {
      * @param Color
      * @return jerseyArray
      */
-    private Jersey[] getJerseysColor(String color) {
-        ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
+    // private Jersey[] getJerseysColor(String color) {
+    //     ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
 
-        for (Jersey jersey : jerseys.values()) {
+    //     for (Jersey jersey : jerseys.values()) {
 
-            if (jersey.getColor().contains(color)) {
+    //         if (jersey.getColor().contains(color)) {
                     
-                jerseyArrayList.add(jersey);
-            }
-        }
+    //             jerseyArrayList.add(jersey);
+    //         }
+    //     }
 
-        Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
-        jerseyArrayList.toArray(jerseyArray);
-        return jerseyArray;
-    }
+    //     Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
+    //     jerseyArrayList.toArray(jerseyArray);
+    //     return jerseyArray;
+    // }
 
 
-    @Override
-    public Jersey[] findJerseysColor(String color) throws IOException {
-        synchronized(jerseys) {
-            return getJerseysColor(color);
-        }
-    }
+    // @Override
+    // public Jersey[] findJerseysColor(String color) throws IOException {
+    //     synchronized(jerseys) {
+    //         return getJerseysColor(color);
+    //     }
+    // }
 
     /**
      * This returns an array of jerseys with the given size
      * @param size
      * @return jerseyArray
      */
-    private Jersey[] getJerseysSize(String size) {
-        ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
+    // private Jersey[] getJerseysSize(String size) {
+    //     ArrayList<Jersey> jerseyArrayList = new ArrayList<>();
 
-            for (Jersey jersey : jerseys.values()) {
+    //         for (Jersey jersey : jerseys.values()) {
     
-                if (size == null || jersey.getSize().contains(size)) {
+    //             if (size == null || jersey.getSize().contains(size)) {
                         
-                    jerseyArrayList.add(jersey);
-                }
-            }
+    //                 jerseyArrayList.add(jersey);
+    //             }
+    //         }
     
-            Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
-            jerseyArrayList.toArray(jerseyArray);
-            return jerseyArray;
-    }
+    //         Jersey[] jerseyArray = new Jersey[jerseyArrayList.size()];
+    //         jerseyArrayList.toArray(jerseyArray);
+    //         return jerseyArray;
+    // }
 
-    @Override
-    public Jersey[] findJerseysSize(String size) throws IOException {
-        synchronized(jerseys) {
-            return getJerseysSize(size);
-        }
-    }
+    // @Override
+    // public Jersey[] findJerseysSize(String size) throws IOException {
+    //     synchronized(jerseys) {
+    //         return getJerseysSize(size);
+    //     }
+    // }
 
 }
