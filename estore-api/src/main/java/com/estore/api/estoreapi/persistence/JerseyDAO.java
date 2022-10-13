@@ -27,13 +27,12 @@ public interface JerseyDAO {
      * @param number The number to match against
      * @param color The color to match against
      * @param size The size to match against
-     * @param image The image to match against
      * 
      * @return An array of {@link Jersey jerseys} whose names contains the given text, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Jersey[] findJerseys(String name, int number, String color, String size, String image) throws IOException;
+    Jersey[] findJerseys(String name, int number, double price, String color, String size) throws IOException;
 
     /**
      * Finds all {@linkplain Jersey jerseys} whose name contains the given text
@@ -141,6 +140,5 @@ public interface JerseyDAO {
      * @throws IOException if underlying storage cannot be accessed
      */
     boolean deleteJersey(int id) throws IOException;
-
 
 }

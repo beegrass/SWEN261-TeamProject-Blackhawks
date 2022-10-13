@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 // import org.springframework.web.client.HttpClientErrorException.NotFound;
 
@@ -112,7 +110,6 @@ public class JerseyController {
     public ResponseEntity<Jersey[]> getJerseys() {
         LOG.info("GET /jerseys");
 
-        // Replace below with your implementation
         try {
             Jersey[] jerseys = jerseyDao.getJerseys();
             if(jerseys != null) {
@@ -174,14 +171,9 @@ public class JerseyController {
     public ResponseEntity<Jersey[]> searchJerseyName(@RequestParam String name) {
         LOG.info("GET /jerseys/searchByName/?name="+name);
 
-        // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseysName(name);
-            if(jerseys.length == 0){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }else{
-                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-            }
+            Jersey [] jerseys = jerseyDao.findJerseys(name, 0, 0.0, null, null);
+            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -191,17 +183,15 @@ public class JerseyController {
     }
 
     /**
-     * 
-     * public ResponseEntity<Jersey[]> searchJerseyName(@RequestParam (name = "name")String name) 
-     * 
-     * instead of having it be just looking for a singular thing you need to specify what youre looking for (like color)and then take in another parameter String information
+     * instead of having it be just looking for a singular thing you need to specify what youre 
+     * looking for (like color) and then take in another parameter String information
      */
     
 
 
-      /**
-     * Responds to the GET request for all {@linkplain Jersey jerseys} whose name contains
-     * the text in name
+    /**
+     * Responds to the GET request for all {@linkplain Jersey jerseys} whose color contains
+     * the text in color
      * 
      * @param color The color parameter which contains the text used to find the {@link Jersey jerseys}
      * 
@@ -209,8 +199,8 @@ public class JerseyController {
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
-     * Example: Find all heroes that contain the text "ma"
-     * GET http://localhost:8080/heroes/?name=ma
+     * Example: Find all jerseys that contain the text "bl"
+     * GET http://localhost:8080/jerseys/?name=ma
      * @Author Angela Ngo 
      */
     @GetMapping("/searchByColor/")
@@ -218,14 +208,9 @@ public class JerseyController {
     public ResponseEntity<Jersey[]> searchJerseyColor(@RequestParam String color) {
         LOG.info("GET /jerseys/searchByColor/?color="+color);
 
-        // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseysColor(color);
-            if(jerseys.length == 0){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }else{
-                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-            } 
+            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, 0.0, color, null);
+            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -245,8 +230,8 @@ public class JerseyController {
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
-     * Example: Find all heroes that contain the text "ma"
-     * GET http://localhost:8080/heroes/?name=ma
+     * Example: Find all jerseys that contain the text "me"
+     * GET http://localhost:8080/jerseys/?name=ma
      * 
      * @Author Angela Ngo 
      */
@@ -255,14 +240,9 @@ public class JerseyController {
     public ResponseEntity<Jersey[]> searchJerseySize(@RequestParam String size) {
         LOG.info("GET /jerseys/searchBySize/?size="+size);
 
-        // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseysSize(size);
-            if(jerseys.length == 0){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }else{
-                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-            }
+            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, 0.0, null, size);
+            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -272,30 +252,22 @@ public class JerseyController {
     }
 
      /**
-     * Responds to the GET request for all {@linkplain Jersey jerseys} whose jerseys number corresponds with the given
+     * Responds to the GET request for all {@linkplain Jersey jerseys} whose jerseys number corresponds with the given number
      * 
      * @param number The number parameter which contains the text used to find the {@link Jersey jerseys}
      * 
      * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     * <p>
-     * Example: Find all heroes that contain the text "ma"
-     * GET http://localhost:8080/heroes/?name=ma
      */
     @GetMapping("/searchByNumber/")
     //@RequestMapping(value="/jerseys/?color={color}",method = RequestMethod.GET)
     public ResponseEntity<Jersey[]> searchJerseyNumber(@RequestParam int number) {
         LOG.info("GET /jerseys/searchByNumber/?number="+number);
 
-        // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseysNumber(number);
-            if(jerseys.length == 0){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }else{
-                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-            }
+            Jersey [] jerseys = jerseyDao.findJerseys(null, number, 0.0, null, null);
+            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -323,14 +295,9 @@ public class JerseyController {
     public ResponseEntity<Jersey[]> searchJerseyPrice(@RequestParam double price) {
         LOG.info("GET /jerseys/searchByPrice/?price="+price);
 
-        // Replace below with your implementation
         try {
-            Jersey [] jerseys = jerseyDao.findJerseysPrice(price);
-            if(jerseys.length == 0){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }else{
-                return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-            } 
+            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, price, null, null);
+            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -352,8 +319,7 @@ public class JerseyController {
     public ResponseEntity<Jersey> deleteJersey(@PathVariable int id) {
         LOG.info("DELETE /jerseys/" + id);
         try {
-            if(jerseyDao.getJersey(id) != null){
-                jerseyDao.deleteJersey(id);
+            if(jerseyDao.deleteJersey(id)){
                 return new ResponseEntity<Jersey>(jerseyDao.getJersey(id), HttpStatus.OK); 
             }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
