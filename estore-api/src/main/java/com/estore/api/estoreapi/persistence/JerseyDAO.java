@@ -86,10 +86,4 @@ public interface JerseyDAO {
      */
     boolean deleteJersey(int id) throws IOException;
 
-    // Jersey[] findJerseysName(String name) throws IOException;
-    // Jersey[] findJerseysNumber(int number) throws IOException;
-    Jersey[] findJerseysPrice(double price) throws IOException;
-    // Jersey[] findJerseysColor(String color) throws IOException;
-    // Jersey[] findJerseysSize(String size)throws IOException;
-
 }
