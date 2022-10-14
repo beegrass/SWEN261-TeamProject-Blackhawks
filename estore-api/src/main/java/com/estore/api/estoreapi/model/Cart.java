@@ -1,6 +1,6 @@
 package com.estore.api.estoreapi.model;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -25,7 +25,7 @@ public class Cart {
     // Package private for tests
     static final String STRING_FORMAT = "Jersey [id=%d, name=%s]";
     
-    @JsonProperty("jerseysDict") private Hashtable<Jersey, Integer> cart;
+    @JsonProperty("jerseysDict") private HashMap<Jersey, Integer> cart;
     @JsonProperty("totalCost") private double totalCost;
     
     /**
@@ -38,7 +38,7 @@ public class Cart {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Cart(@JsonProperty("cart") Hashtable<Jersey, Integer> cart, 
+    public Cart(@JsonProperty("cart") HashMap<Jersey, Integer> cart, 
         @JsonProperty("totalCost") double totalCost) {
         this.cart = cart;
         this.totalCost = totalCost;
@@ -48,7 +48,18 @@ public class Cart {
         return cart.keySet();
     }
 
-    
+    public HashMap<Jersey, Integer> getEntireCart(){
+        return cart; 
+    }
+    public double getTotalCost(){
+        for(Jersey jersey: cart.keySet()){
+            int quantity_jersey_type = cart.get(jersey); 
+            totalCost += (jersey.getPrice() * quantity_jersey_type); 
+        }
+        return totalCost; 
+    }
+
+
 
     
 
