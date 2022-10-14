@@ -25,7 +25,7 @@ public class Cart {
     // Package private for tests
     static final String STRING_FORMAT = "Jersey [id=%d, name=%s]";
     
-    @JsonProperty("jerseysDict") private Hashtable<Jersey, Integer> jerseysDict;
+    @JsonProperty("jerseysDict") private Hashtable<Jersey, Integer> cart;
     @JsonProperty("totalCost") private double totalCost;
     
     /**
@@ -38,15 +38,17 @@ public class Cart {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Cart(@JsonProperty("jerseysDict") Hashtable<Jersey, Integer> jerseysDict, 
+    public Cart(@JsonProperty("cart") Hashtable<Jersey, Integer> cart, 
         @JsonProperty("totalCost") double totalCost) {
-        this.jerseysDict = jerseysDict;
+        this.cart = cart;
         this.totalCost = totalCost;
     }
 
     public Set<Jersey> getJerseys(){
-        return jerseysDict.keySet();
+        return cart.keySet();
     }
+
+    
 
     
 

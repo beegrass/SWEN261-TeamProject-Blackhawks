@@ -2,8 +2,6 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.model.Jersey;
@@ -38,7 +36,7 @@ public interface CartDAO {
      * 
      * @throws IOException if there is no Jersey object in the HashMap Keys 
      * */
-    HashMap<Jersey, Integer> incrementJerseyTypeAmount(Jersey jersey) throws IOException;
+    boolean incrementJerseyTypeAmount(Jersey jersey) throws IOException;
 
     /**
      * Decremements the amount of {@linkplain Jersey jersey} with the given jersey object in 
@@ -52,7 +50,7 @@ public interface CartDAO {
      * 
      * @throws IOException if there is no Jersey objects in the HashMap keys
      * */
-    HashMap<Jersey, Integer> decrementJerseyTypeAmount(Jersey jersey); 
+    boolean decrementJerseyTypeAmount(Jersey jersey); 
 
     /**
      * Adds a new {@linkplain Jersey jersey} key into the cart's Hashmap 
@@ -65,7 +63,7 @@ public interface CartDAO {
      * 
      * @throws IOException if there null fields in the Jersey parameter 
      * */
-    HashMap<Jersey, Integer> addJerseyToCart(Jersey jersey); 
+    boolean addJerseyToCart(Jersey jersey); 
 
     /**
      * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 
@@ -86,16 +84,16 @@ public interface CartDAO {
      * */
     boolean deleteEntireCart(); 
 
-    /**
-     * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 
-     * 
-     * @param jersey the key to delete from cart{@link Jersey jersey}
-     * 
-     * @return true if the {@link Jersey jersey} was successfully deleted 
-     * 
-     * @throws IOException if jersey with the given object does not exist
-     * */
-    int getTotalCountJerseys(HashMap<Jersey, Integer> cart);
+    // /**
+    //  * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 
+    //  * 
+    //  * @param jersey the key to delete from cart{@link Jersey jersey}
+    //  * 
+    //  * @return true if the {@link Jersey jersey} was successfully deleted 
+    //  * 
+    //  * @throws IOException if jersey with the given object does not exist
+    //  * */
+    // int getTotalCountJerseys(HashMap<Jersey, Integer> cart);
     
-    int getTotalCostJerseys(HashMap<Jersey, Integer> cart);
+    // int getTotalCostJerseys(HashMap<Jersey, Integer> cart);
 }
