@@ -97,14 +97,28 @@ public class Cart {
     }
 
     public boolean deleteEntireCart(){
-        boolean cart_empty = true; 
+        boolean cart_empty = false; 
         if(cart.isEmpty() == false){
             for(Jersey key : cart.keySet()){
                 cart.remove(key); 
             }
-            cart_empty = true; 
+            cart_empty = true;
         }
         return cart_empty; 
+    }
+
+
+    public static void main(String [] args){
+        /*testing purposes */
+        HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
+        Cart cart = new Cart(cartTable); 
+        Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
+        cart.addNewJerseyToCart(jersey); 
+        boolean actual = cart.deleteEntireCart();
+        
+
+        System.out.println("result: " + actual );
+
     }
 
 }
