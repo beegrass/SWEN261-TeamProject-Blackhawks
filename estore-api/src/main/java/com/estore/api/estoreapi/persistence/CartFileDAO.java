@@ -23,14 +23,12 @@ import com.estore.api.estoreapi.model.Jersey;
  */
 public class CartFileDAO implements CartDAO {
 
-    private Cart cart;   // Provides a local cache of the jersey objects
-    private HashMap<Jersey, Integer> cartMap; 
+    private Cart cart;   // Provides a local cache of the jersey objects 
     // so that we don't need to read from the file
     // each time
    
     public CartFileDAO(Cart cart) throws IOException {
        this.cart = cart;
-       cartMap = cart.getEntireCart(); 
     }
 
     @Override
@@ -40,56 +38,32 @@ public class CartFileDAO implements CartDAO {
 
     @Override
     public boolean incrementJerseyTypeAmount(Jersey jersey){
-        boolean valid = false; 
-        if(cartMap.containsKey(jersey) == true){
-            cartMap.put(jersey, cartMap.get(jersey) + 1);
-            valid = true; 
-        }
-        return valid; 
+        boolean is_incremented = cart.incrementJerseyTypeFromCart(jersey); 
+        return is_incremented; 
     }
 
     @Override
     public boolean decrementJerseyTypeAmount(Jersey jersey) {
-        boolean valid = false; 
-        if(cartMap.containsKey(jersey) == true){
-            int newAmount = cartMap.get(jersey) -1;
-
-            if(newAmount <= 0){
-                cartMap.remove(jersey); 
-            }else{
-                cartMap.put(jersey, newAmount);
-            } 
-            valid = true; 
-        }
-        return valid; 
+        boolean is_decremented = cart.decrementJerseyTypeFromCart(jersey);
+        return is_decremented;  
     }
 
     @Override
     public boolean addJerseyToCart(Jersey jersey) {
-       cartMap.put(jersey, 1);
-       return true; 
+       boolean is_added = cart.addNewJerseyToCart(jersey); 
+       return is_added; 
     }
 
     @Override
     public boolean deleteEntireJerseyFromCart(Jersey jersey) {
-        boolean valid = false;
-        if(cartMap.containsKey(jersey) == true){
-            cartMap.remove(jersey);
-            valid = true;
-        }
-        return valid; 
+        boolean is_deleted = cart.deleteJerseyType(jersey); 
+        return is_deleted; 
     }
 
     @Override
     public boolean deleteEntireCart() throws IOException {
-        boolean cart_empty = true; 
-        if(cartMap.isEmpty() == false){
-            for(Jersey key : cartMap.keySet()){
-                cartMap.remove(key); 
-            }
-            cart_empty = true; 
-        }
-        return cart_empty; 
+       boolean cart_empty = cart.deleteEntireCart(); 
+       return cart_empty; 
     }
 
 }

@@ -6,12 +6,12 @@ import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.estore.api.estoreapi.model.Jersey;
+
 
 /**
  * Represents a Cart entity
  * 
- * @author Vincent Schwartz
+ * @author Angela Ngo 
  */
 
 public class Cart {
@@ -38,10 +38,9 @@ public class Cart {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Cart(@JsonProperty("cart") HashMap<Jersey, Integer> cart, 
-        @JsonProperty("totalCost") double totalCost) {
+    public Cart(@JsonProperty("cart") HashMap<Jersey, Integer> cart) {
         this.cart = cart;
-        this.totalCost = totalCost;
+        this.totalCost = 0.00;
     }
 
     public Set<Jersey> getJerseys(){
@@ -59,46 +58,53 @@ public class Cart {
         return totalCost; 
     }
 
+    public boolean addNewJerseyToCart(Jersey jersey){
+        cart.put(jersey, 1); 
+        return true; 
+    }
 
+    public boolean decrementJerseyTypeFromCart(Jersey jersey){
+        boolean valid = false; 
+        if(cart.containsKey(jersey) == true){
+            int newAmount = cart.get(jersey) -1;
 
-    
+            if(newAmount <= 0){
+                cart.remove(jersey); 
+            }else{
+                cart.put(jersey, newAmount);
+            } 
+            valid = true; 
+        }
+        return valid; 
+    }
 
+    public boolean incrementJerseyTypeFromCart(Jersey jersey){
+        boolean valid = false; 
+        if(cart.containsKey(jersey) == true){
+            cart.put(jersey, cart.get(jersey) + 1);
+            valid = true; 
+        }
+        return valid;  
+    }
 
+    public boolean deleteJerseyType(Jersey jersey){
+        boolean valid = false;
+        if(cart.containsKey(jersey) == true){
+            cart.remove(jersey);
+            valid = true;
+        }
+        return valid; 
+    }
 
-    // /**
-    //  * Given a jersey, adds said jersey to the dictionary and adds
-    //  * its cost to the total cost. If jersey is already in the cart,
-    //  * increase its quantity count.
-    //  * @param jersey the jersey being added to cart
-    //  * @return void
-    //  */
-    // public void addToCart(Jersey jersey)
-    // {
-    //     int jerseyId = jersey.getId();
-    //     if(jerseysDict.contains(jerseyId))
-    //     {
-    //         int previousQuantity = jerseysDict.get(jersey);
-    //         jerseysDict.put(jersey, previousQuantity++);
-    //     }
-    //     else
-    //     {
-    //         jerseysDict.put(jersey, 1);
-    //     }
-
-    //     double jerseyCost = jersey.getPrice();
-    //     totalCost += jerseyCost;
-    // }
-
-    // /**
-    //  * Given a jersey, removes one of said jersey from cart
-    //  * and subtracts its price from the totalCost
-    //  * @param jersey the jersey being removed from the cart
-    //  * @return void
-    //  */
-    // public void removeFromCart(Jersey jersey)
-    // {
-
-    // }
-
+    public boolean deleteEntireCart(){
+        boolean cart_empty = true; 
+        if(cart.isEmpty() == false){
+            for(Jersey key : cart.keySet()){
+                cart.remove(key); 
+            }
+            cart_empty = true; 
+        }
+        return cart_empty; 
+    }
 
 }
