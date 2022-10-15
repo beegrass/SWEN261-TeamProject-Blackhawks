@@ -82,7 +82,7 @@ public interface CartDAO {
      * 
      * @throws IOException if Cart is empty
      * */
-    boolean deleteEntireCart(); 
+    boolean deleteEntireCart() throws IOException; 
 
     // /**
     //  * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 

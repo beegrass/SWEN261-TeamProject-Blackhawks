@@ -39,7 +39,7 @@ public class CartFileDAO implements CartDAO {
     }
 
     @Override
-    public boolean incrementJerseyTypeAmount(Jersey jersey) throws IOException {
+    public boolean incrementJerseyTypeAmount(Jersey jersey){
         boolean valid = false; 
         if(cartMap.containsKey(jersey) == true){
             cartMap.put(jersey, cartMap.get(jersey) + 1);
@@ -81,7 +81,7 @@ public class CartFileDAO implements CartDAO {
     }
 
     @Override
-    public boolean deleteEntireCart() {
+    public boolean deleteEntireCart() throws IOException {
         boolean cart_empty = true; 
         if(cartMap.isEmpty() == false){
             for(Jersey key : cartMap.keySet()){
