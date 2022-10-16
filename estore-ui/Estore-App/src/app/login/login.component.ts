@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +8,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) { }
+
+  username: string = "";
+  // Example 1: <input [(ngModel)]="person.firstName" name="first">
+
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
+  /**
+   * Method that returns the username from the text form
+   * navigates user to logout page for now but will be changed to 
+   * main page later.
+   * @returns Returns entered username
+   */
+  onSubmit(): string {
     this.router.navigate(['/logout'])
+    console.warn("username: " + this.username) 
+    return this.username;
+  }
+
+  isAdmin(): boolean {
+    console.warn("admin" == this.onSubmit().toLowerCase())
+    return "admin" == this.onSubmit().toLowerCase();
   }
 
 }
