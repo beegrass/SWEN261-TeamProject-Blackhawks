@@ -37,12 +37,6 @@ public class CartFileDAO implements CartDAO {
     }
 
     @Override
-    public boolean incrementJerseyTypeAmount(Jersey jersey){
-        boolean is_incremented = cart.incrementJerseyTypeFromCart(jersey); 
-        return is_incremented; 
-    }
-
-    @Override
     public boolean decrementJerseyTypeAmount(Jersey jersey) {
         boolean is_decremented = cart.decrementJerseyTypeFromCart(jersey);
         return is_decremented;  
@@ -50,7 +44,7 @@ public class CartFileDAO implements CartDAO {
 
     @Override
     public boolean addJerseyToCart(Jersey jersey) {
-       boolean is_added = cart.addNewJerseyToCart(jersey); 
+       boolean is_added = cart.addJerseyToCart(jersey); 
        return is_added; 
     }
 

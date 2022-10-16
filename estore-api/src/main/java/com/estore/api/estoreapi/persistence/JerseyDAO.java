@@ -34,60 +34,6 @@ public interface JerseyDAO {
      */
     Jersey[] findJerseys(String name, int number, double price, String color, String size) throws IOException;
 
-    /**
-     * Finds all {@linkplain Jersey jerseys} whose name contains the given text
-     * 
-     * @param name The name to match against
-     * 
-     * @return An array of {@link Jersey jerseys} whose names contains the given text, may be empty
-     * 
-     * @throws IOException if an issue with underlying storage
-     */
-    Jersey[] findJerseysName(String name) throws IOException;
-
-    /**
-     * Finds all {@linkplain Jersey jerseys} whose number matches the given number
-     * 
-     * @param number The number to match against
-     * 
-     * @return An array of {@link Jersey jerseys} whose numbers matches the given number, may be empty
-     * 
-     * @throws IOException if an issue with underlying storage
-     */
-    Jersey[] findJerseysNumber(int number) throws IOException;
-
-    /**
-     * Finds all {@linkplain Jersey jerseys} whose price matches the given price
-     * 
-     * @param price The price to match against
-     * 
-     * @return An array of {@link Jersey jerseys} whose prices matches the given price, may be empty
-     * 
-     * @throws IOException if an issue with underlying storage
-     */
-    Jersey[] findJerseysPrice(double price) throws IOException;
-
-    /**
-     * Finds all {@linkplain Jersey jerseys} whose color contains the given text
-     * 
-     * @param color The color to match against
-     * 
-     * @return An array of {@link Jersey jerseys} whose colors contains the given text, may be empty
-     * 
-     * @throws IOException if an issue with underlying storage
-     */
-    Jersey[] findJerseysColor(String color) throws IOException;
-
-    /**
-     * Finds all {@linkplain Jersey jerseys} whose size contains the given text
-     * 
-     * @param size The size to match against
-     * 
-     * @return An array of {@link Jersey jerseys} whose sizes contains the given text, may be empty
-     * 
-     * @throws IOException if an issue with underlying storage
-     */
-    Jersey[] findJerseysSize(String size)throws IOException;
 
     /**
      * Retrieves a {@linkplain Jersey jersey} with the given id

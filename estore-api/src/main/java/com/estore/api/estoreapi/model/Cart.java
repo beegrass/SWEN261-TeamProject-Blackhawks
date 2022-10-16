@@ -64,22 +64,30 @@ public class Cart {
      * @return totalCost of the entire cart
      */
     public double getTotalCost(){
-        for(Jersey jersey: cart.keySet()){
-            int quantity_jersey_type = cart.get(jersey); 
-            totalCost += (jersey.getPrice() * quantity_jersey_type); 
-        }
         return totalCost; 
     }
 
     /**
-     * Adds a new jersey to the cart and has the default value of 1\
+     * Adds a jersey to cart. If already in cart, increment quantity, otherwise
+     * add to cart with quantity 1.
      * Returns True if it works 
      * @param jersey - the jersey you want to add to your cart 
-     * @return boolean value 
+     * @return valid - the jersey was added or not
      */
-    public boolean addNewJerseyToCart(Jersey jersey){
-        cart.put(jersey, 1); 
-        return true; 
+    public boolean addJerseyToCart(Jersey jersey){
+        boolean valid = true;
+        if(cart.containsKey(jersey))
+        {
+            int quantity = cart.get(jersey);
+            quantity++;
+            cart.put(jersey, quantity);
+        }
+        else
+        {
+            cart.put(jersey, 1);
+        }
+        totalCost += jersey.getPrice();
+        return valid; 
     }
 
 
@@ -90,31 +98,20 @@ public class Cart {
      */
     public boolean decrementJerseyTypeFromCart(Jersey jersey){
         boolean valid = false; 
-        if(cart.containsKey(jersey) == true){
-            int newAmount = cart.get(jersey) -1;
+        if(cart.containsKey(jersey)){
+            int quantity = cart.get(jersey);
+            quantity--;
+            cart.put(jersey, quantity);
 
-            if(newAmount <= 0){
-                cart.remove(jersey); 
-            }else{
-                cart.put(jersey, newAmount);
-            } 
-            valid = true; 
+            totalCost -= quantity * jersey.getPrice();
+
+            if(cart.get(jersey) == 0)
+            {
+                cart.remove(jersey);
+            }
+            valid = true;
         }
         return valid; 
-    }
-
-    /**
-     * Increments the quantity of the given type of jersey if its found in the cart 
-     * @param jersey ({@linkplain Jersey jersey} )
-     * @return valid - returns true if works false if not 
-     */
-    public boolean incrementJerseyTypeFromCart(Jersey jersey){
-        boolean valid = false; 
-        if(cart.containsKey(jersey) == true){
-            cart.put(jersey, cart.get(jersey) + 1);
-            valid = true; 
-        }
-        return valid;  
     }
 
     /**
@@ -125,10 +122,13 @@ public class Cart {
      */
     public boolean deleteJerseyType(Jersey jersey){
         boolean valid = false;
-        if(cart.containsKey(jersey) == true){
+        if(cart.containsKey(jersey)){
+            int quantity = cart.get(jersey);
+            totalCost -= jersey.getPrice() * quantity;
             cart.remove(jersey);
             valid = true;
         }
+
         return valid; 
     }
 
@@ -143,6 +143,7 @@ public class Cart {
                 cart.remove(key); 
             }
             cartEmpty = true;
+            totalCost = 0.00;
         }
         return cartEmpty; 
     }
@@ -164,7 +165,10 @@ public class Cart {
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
         Cart cart = new Cart(cartTable); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
-        cart.addNewJerseyToCart(jersey); 
+        cart.addJerseyToCart(jersey); 
+        cart.addJerseyToCart(jersey); 
+        cart.addJerseyToCart(jersey); 
+        System.out.println(cart.getEntireCart().toString());
         boolean actual = cart.deleteEntireCart();
         
 

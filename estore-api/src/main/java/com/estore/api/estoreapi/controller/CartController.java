@@ -49,7 +49,7 @@ public class CartController {
         LOG.info("DELETE /cart " + jersey); 
 
         boolean is_valid = cartDAO.deleteEntireJerseyFromCart(jersey);
-        if(is_valid == true){
+        if(is_valid){
             return new ResponseEntity<Cart>(cart, HttpStatus.OK); 
         }else{
             return new ResponseEntity<Cart>( HttpStatus.NOT_FOUND);
@@ -58,7 +58,7 @@ public class CartController {
 
     public ResponseEntity<Cart> decrementJerseyTypeCart(@RequestBody Cart cart, Jersey jersey){
         boolean is_valid = cartDAO.decrementJerseyTypeAmount(jersey); 
-        if(is_valid == true){
+        if(is_valid){
             return new ResponseEntity<Cart>(cart, HttpStatus.OK);
         }else{
             return new ResponseEntity<Cart>( HttpStatus.NOT_FOUND);
@@ -69,23 +69,14 @@ public class CartController {
     public ResponseEntity<Cart> incrementJerseyTypeCart(@RequestBody Cart cart, Jersey jersey){
         
         boolean is_valid;
-        try {
-            is_valid = cartDAO.incrementJerseyTypeAmount(jersey);
-            if(is_valid == true){
-                return new ResponseEntity<Cart>(cart, HttpStatus.OK);
-            }else{
-                return new ResponseEntity<Cart>( HttpStatus.NOT_FOUND);
-            }
-        } catch (IOException e) {
-            return new ResponseEntity<Cart> (HttpStatus.INTERNAL_SERVER_ERROR); 
-        } 
+        return new ResponseEntity<Cart>(cart, HttpStatus.OK); 
        
     }
 
     public ResponseEntity<Cart> deleteEntireCart(@RequestBody Cart cart){
         try{
             boolean is_valid = cartDAO.deleteEntireCart(); 
-            if(is_valid == true){
+            if(is_valid){
                 return new ResponseEntity<Cart>(cart, HttpStatus.OK);
             }else{
                 return new ResponseEntity<Cart>( HttpStatus.NOT_FOUND);
