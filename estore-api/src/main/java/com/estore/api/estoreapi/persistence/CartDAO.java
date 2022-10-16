@@ -9,7 +9,7 @@ import com.estore.api.estoreapi.model.Jersey;
 /**
  * Defines the interface for Jersey object persistence
  * 
- * @author Vincent Schwartz, Angela Ngo
+ * @author Angela Ngo and Vincent Schwartz, Angela Ngo Schwartz
  */
 
 
