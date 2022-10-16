@@ -1,3 +1,7 @@
+h1 {
+    text-align: center;
+}
+
 h2 {
     text-align: center;
 }
@@ -9,8 +13,13 @@ h2 {
     height: 300px;
 }
 
-.user-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.nav-login {
+   position: relative;
+   left: 640px;
+   bottom: 140px;
+}
+
+.login-button {
+    transition: 0.4s;
+    width: 255px;
 }

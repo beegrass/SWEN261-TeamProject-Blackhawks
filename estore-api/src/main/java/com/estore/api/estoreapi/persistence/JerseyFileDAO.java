@@ -216,5 +216,35 @@ public class JerseyFileDAO implements JerseyDAO {
         }
     }
 
+    @Override
+    public Jersey[] findJerseysName(String name) throws IOException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Jersey[] findJerseysNumber(int number) throws IOException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Jersey[] findJerseysPrice(double price) throws IOException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Jersey[] findJerseysColor(String color) throws IOException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Jersey[] findJerseysSize(String size) throws IOException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
 }
