@@ -1,5 +1,6 @@
 package com.estore.api.estoreapi.model;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -64,6 +65,7 @@ public class Cart {
      * @return totalCost of the entire cart
      */
     public double getTotalCost(){
+        totalCost = Math.round(totalCost * 100.0)/100.0;
         return totalCost; 
     }
 
@@ -168,6 +170,7 @@ public class Cart {
         cart.addJerseyToCart(jersey); 
         cart.addJerseyToCart(jersey); 
         cart.addJerseyToCart(jersey); 
+        System.out.println(cart.getTotalCost());
         System.out.println(cart.getEntireCart().toString());
         boolean actual = cart.deleteEntireCart();
         
