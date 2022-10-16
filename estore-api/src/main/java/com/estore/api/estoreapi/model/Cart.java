@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a Cart entity
  * 
- * @author Angela Ngo 
+ * @author Angela Ngo and Vincent Schwartz
  */
 
 public class Cart {
@@ -173,7 +173,6 @@ public class Cart {
         System.out.println(cart.getTotalCost());
         System.out.println(cart.getEntireCart().toString());
         boolean actual = cart.deleteEntireCart();
-        
 
         System.out.println("result: " + actual );
 
