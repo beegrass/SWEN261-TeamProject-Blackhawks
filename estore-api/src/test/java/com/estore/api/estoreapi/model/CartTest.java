@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit test suite for Cart class
- * @Author Angela Ngo 
+ * @Author Angela Ngo and Vincent Schwartz
  */
 @Tag("Model-tier")
 public class CartTest {
@@ -128,7 +128,7 @@ public class CartTest {
         cart.addJerseyToCart(jersey);
         boolean actual = cart.addJerseyToCart(jersey);
         assertEquals(actual, true);
-        assertEquals(cart.getEntireCart().get(jersey), 1);
+        assertEquals(cart.getEntireCart().get(jersey), 2);
         
     }
 

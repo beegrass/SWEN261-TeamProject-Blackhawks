@@ -183,11 +183,60 @@ public class JerseyController {
     }
 
     /**
-     * instead of having it be just looking for a singular thing you need to specify what youre 
-     * looking for (like color) and then take in another parameter String information
+     * Responds to the GET request for all {@linkplain Jersey jerseys} whose jerseys number corresponds with the given number
+     * 
+     * @param number The number parameter which contains the text used to find the {@link Jersey jerseys}
+     * 
+     * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    
+    @GetMapping("/searchByNumber/")
+    //@RequestMapping(value="/jerseys/?color={color}",method = RequestMethod.GET)
+    public ResponseEntity<Jersey[]> searchJerseyNumber(@RequestParam int number) {
+        LOG.info("GET /jerseys/searchByNumber/?number="+number);
 
+        try {
+            Jersey [] jerseys = jerseyDao.findJerseys(null, number, 0.0, null, null);
+            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
+    }
+
+    /**
+     * Responds to the GET request for all {@linkplain Jersey jerseys} whose name contains
+     * the text in name
+     * 
+     * @param price The name parameter which contains the text used to find the {@link Jersey jerseys}
+     * 
+     * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * <p>
+     * Example: Find all heroes that contain the text "ma"
+     * GET http://localhost:8080/heroes/?name=ma
+     * @Author Angela Ngo
+     */
+    @GetMapping("/searchByPrice/")
+    //@RequestMapping(value="/jerseys/?color={color}",method = RequestMethod.GET)
+    public ResponseEntity<Jersey[]> searchJerseyPrice(@RequestParam double price) {
+        LOG.info("GET /jerseys/searchByPrice/?price="+price);
+
+        try {
+            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, price, null, null);
+            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
+    }
+   
 
     /**
      * Responds to the GET request for all {@linkplain Jersey jerseys} whose color contains
@@ -251,60 +300,6 @@ public class JerseyController {
         
     }
 
-     /**
-     * Responds to the GET request for all {@linkplain Jersey jerseys} whose jerseys number corresponds with the given number
-     * 
-     * @param number The number parameter which contains the text used to find the {@link Jersey jerseys}
-     * 
-     * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
-     * HTTP status of OK<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     */
-    @GetMapping("/searchByNumber/")
-    //@RequestMapping(value="/jerseys/?color={color}",method = RequestMethod.GET)
-    public ResponseEntity<Jersey[]> searchJerseyNumber(@RequestParam int number) {
-        LOG.info("GET /jerseys/searchByNumber/?number="+number);
-
-        try {
-            Jersey [] jerseys = jerseyDao.findJerseys(null, number, 0.0, null, null);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        
-    }
-
-     /**
-     * Responds to the GET request for all {@linkplain Jersey jerseys} whose name contains
-     * the text in name
-     * 
-     * @param price The name parameter which contains the text used to find the {@link Jersey jerseys}
-     * 
-     * @return ResponseEntity with array of {@link Jersey jersey} objects (may be empty) and
-     * HTTP status of OK<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     * <p>
-     * Example: Find all heroes that contain the text "ma"
-     * GET http://localhost:8080/heroes/?name=ma
-     * @Author Angela Ngo
-     */
-    @GetMapping("/searchByPrice/")
-    //@RequestMapping(value="/jerseys/?color={color}",method = RequestMethod.GET)
-    public ResponseEntity<Jersey[]> searchJerseyPrice(@RequestParam double price) {
-        LOG.info("GET /jerseys/searchByPrice/?price="+price);
-
-        try {
-            Jersey [] jerseys = jerseyDao.findJerseys(null, 0, price, null, null);
-            return new ResponseEntity<Jersey[]>(jerseys, HttpStatus.OK); 
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        
-    }
 
       /**
      * Deletes a {@linkplain Jersey jersey} with the given id

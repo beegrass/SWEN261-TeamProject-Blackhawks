@@ -67,10 +67,7 @@ public class CartController {
     }
 
     public ResponseEntity<Cart> incrementJerseyTypeCart(@RequestBody Cart cart, Jersey jersey){
-        
-        boolean is_valid;
         return new ResponseEntity<Cart>(cart, HttpStatus.OK); 
-       
     }
 
     public ResponseEntity<Cart> deleteEntireCart(@RequestBody Cart cart){
