@@ -8,10 +8,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d012cd8590f5520085635b0c5b8dc57542acd9b9
 /**
  * Unit test suite for Cart class
  * @Author Angela Ngo and Vincent Schwartz

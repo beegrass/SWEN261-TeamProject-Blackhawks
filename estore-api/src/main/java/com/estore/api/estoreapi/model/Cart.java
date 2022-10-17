@@ -1,6 +1,6 @@
 package com.estore.api.estoreapi.model;
 
-import java.math.BigDecimal;
+
 import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Logger;
