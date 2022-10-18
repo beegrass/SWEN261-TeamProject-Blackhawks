@@ -25,20 +25,6 @@ public interface CartDAO {
     HashMap<Jersey, Integer> getJerseysInCart() throws IOException;
 
     /**
-     * Increments the amount of {@linkplain Jersey jersey} with the given jersey object in 
-     * cart's map 
-     * 
-     * @param jersey the key of the object incremented {@link Jersey jersey}
-     * 
-     * @return HashMap<Jersey, Integer> {@link Jersey jersey} was successfully incremented in the HashMap
-     * <br>
-     * false if jersey with the given object does not exist in the HashMap Key
-     * 
-     * @throws IOException if there is no Jersey object in the HashMap Keys 
-     * */
-    boolean incrementJerseyTypeAmount(Jersey jersey) throws IOException;
-
-    /**
      * Decremements the amount of {@linkplain Jersey jersey} with the given jersey object in 
      * cart's map 
      * 
