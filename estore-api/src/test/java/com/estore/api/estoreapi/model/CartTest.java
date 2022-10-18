@@ -18,14 +18,14 @@ public class CartTest {
     @Test
     public void testGetEntireCart(){
        HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-       Cart cart = new Cart(cartTable); 
+       Cart cart = new Cart(cartTable,1); 
        assertEquals(cart.getEntireCart(), cartTable); 
     }
 
     @Test
     public void testGetTotalCost(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
 
         assertEquals(cart.getTotalCost(), 0.00); 
     }
@@ -33,7 +33,7 @@ public class CartTest {
     @Test
     public void testGetJerseys(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
         cart.addJerseyToCart(jersey); 
 
@@ -45,7 +45,7 @@ public class CartTest {
     @Test 
     public void testGetEntireCartFill(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
         cart.addJerseyToCart(jersey); 
         Jersey j2 = new Jersey(2,"pail",23,123.55,"Black", "Medium", "img.png");
@@ -60,7 +60,7 @@ public class CartTest {
     @Test
     public void testGetTotalCostFill(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
         cart.addJerseyToCart(jersey); 
         Jersey j2 = new Jersey(2,"pail",23,123.55,"Black", "Medium", "img.png");
@@ -74,7 +74,7 @@ public class CartTest {
     @Test 
     public void testAddNewJerseyTypeFromCart(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
        
         boolean actual =  cart.addJerseyToCart(jersey); 
@@ -85,7 +85,7 @@ public class CartTest {
     @Test
     public void testDecrementJerseyTypeFromCartFalse(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
         
         boolean actual = cart.decrementJerseyTypeFromCart(jersey);
@@ -96,7 +96,7 @@ public class CartTest {
     @Test
     public void testDecrementJerseyTypeFromCartTrue1(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
         cart.addJerseyToCart(jersey); 
 
@@ -108,7 +108,7 @@ public class CartTest {
     @Test
     public void testDecrementJerseyTypeFromCartTrue2(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
         cart.addJerseyToCart(jersey);
         cart.addJerseyToCart(jersey); 
@@ -122,7 +122,7 @@ public class CartTest {
     @Test 
     public void testIncrementJerseyTypeFromCartTrue(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
         cart.addJerseyToCart(jersey);
         boolean actual = cart.addJerseyToCart(jersey);
@@ -135,7 +135,7 @@ public class CartTest {
     @Test 
     public void testDeleteJerseyTypeTrue(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
         cart.addJerseyToCart(jersey);
         
@@ -148,7 +148,7 @@ public class CartTest {
     @Test 
     public void testDeleteJerseyTypeFalse(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
         cart.addJerseyToCart(jersey);
         Jersey j2 = new Jersey(3, "meow man", 36, 2536.33, "Red", "Large", "img.png");
@@ -161,7 +161,7 @@ public class CartTest {
     @Test
     public void testDeleteEntireCart(){
         HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
+        Cart cart = new Cart(cartTable,1); 
         Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
         cart.addJerseyToCart(jersey); 
         boolean actual = cart.deleteEntireCart();

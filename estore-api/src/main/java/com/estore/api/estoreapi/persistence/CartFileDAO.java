@@ -1,5 +1,6 @@
 package com.estore.api.estoreapi.persistence;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
 import org.springframework.stereotype.Component;
 
 import com.estore.api.estoreapi.model.Cart;
-import com.estore.api.estoreapi.model.Item;
+
 import com.estore.api.estoreapi.model.Jersey;
 
 /**
@@ -30,7 +31,7 @@ import com.estore.api.estoreapi.model.Jersey;
 public class CartFileDAO implements CartDAO {
 
 	private static final Logger LOG  = Logger.getLogger(JerseyFileDAO.class.getName());
-    private Cart cart; 
+    private HashMap<Integer, Cart> allCarts; 
 
     private ObjectMapper objectMapper;  // Provides conversion between jersey
                                         // objects and JSON text format written
@@ -39,93 +40,137 @@ public class CartFileDAO implements CartDAO {
     private String filename;    // Filename to read from and write to@Override
 	
 
-    public CartFileDAO(@Value("${cart.file}") String filename, ObjectMapper objectMapper, Cart cart) throws IOException{
+    public CartFileDAO(@Value("${cart.file}") String filename, ObjectMapper objectMapper) throws IOException{
         this.filename = filename; 
         this.objectMapper = objectMapper; 
-        this.cart = cart; 
         load(); 
     }
 
-    // private synchronized static int nextId(){
-    //     int id = nextId; 
-    //     nextId++; 
-    //     return id;
-    // }
+    private synchronized static int nextId(){
+        int id = nextId; 
+        nextId++; 
+        return id;
+    }
 
     private boolean load() throws IOException{
         File file = new File(filename); 
-        Item [] itemArray = objectMapper.readValue(file, Item[].class);
-        
-        for(Item item: itemArray){
-            cart.getEntireCart().put(item.getJersey(), item.getQuantity()); 
+        nextId = 0; 
+        Cart [] cartArray = objectMapper.readValue(file, Cart[].class);
+        allCarts = new HashMap<>(); 
+        for(Cart cart : cartArray){
+            allCarts.put(cart.getId(), cart);
+            if(cart.getId() > nextId){
+                nextId = cart.getId(); 
+            }
         }
+        ++nextId; 
         return true; 
+
     }
 
     private boolean save() throws IOException {
-        Item[] itemArray = getEntireCartForJsonItems(); 
-
+        Cart [] cartArray = getCartsArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
         // with the file or reading from the file
-        objectMapper.writeValue(new File(filename),itemArray);
+        objectMapper.writeValue(new File(filename),cartArray);
         return true;
     }
 
-    public HashMap<Jersey, Integer> getEntireCart() throws IOException {
-		return cart.getEntireCart(); 
-	}
-
-    
-    public Item[] getEntireCartForJsonItems() throws IOException{
-        HashMap<Jersey, Integer> cartMap = cart.getEntireCart(); 
-        Item [] itemArray = new Item[cartMap.keySet().size()]; 
-        int count = 0; 
-        for(Jersey jersey : cartMap.keySet()){
-            itemArray[count] = new Item(jersey, cartMap.get(jersey)); 
+    /**
+     * returns an array of the current carts 
+     * @return cartArray
+     */
+    public Cart[] getCartsArray(){
+        ArrayList<Cart> cartArrayList = new ArrayList<>();
+        for(Cart cart : allCarts.values()){
+            cartArrayList.add(cart); 
         }
-        return itemArray; 
+        Cart[] cartArray = new Cart[cartArrayList.size()];
+        cartArrayList.toArray(cartArray);
+        return cartArray; 
     }
 
-	@Override
-	public boolean decrementJerseyTypeAmount(Jersey jersey) throws IOException {
-		boolean isDecremented;
+    /**
+     * gets the cart hashMap not the object
+     * @param cartId - id of the cart 
+     */
+    @Override
+    public HashMap<Jersey, Integer> getEntireCart(int cartId) throws IOException {
+        return allCarts.get(cartId).getEntireCart(); 
+    }
+
+    /**
+     * Returns the specific object cart from the 
+     * @param cartId
+     * @return Cart
+     */
+    public Cart getSpecificCart(int cartId){
+        return allCarts.get(cartId); 
+    }
+
+    /**
+     * This decrements the quantity of a certain jersey from a given jersey and cartId 
+     * @param cartId - the id of the cart wanted to select 
+     * @param jersey - the jersey wanted to decrement from the quantity
+     */
+    @Override
+    public boolean decrementJerseyTypeAmount(int cartId, Jersey jersey) throws IOException {
+        Cart cart = getSpecificCart(cartId); 
+        boolean isDecremented; 
         synchronized(cart){
             isDecremented = cart.decrementJerseyTypeFromCart(jersey);
+            save();
         }
-        save(); 
-        return isDecremented;
-	}
+        return isDecremented; 
+    }
 
-	@Override
-	public boolean addJerseyToCart(Jersey jersey) throws IOException {
-		boolean isAdded;
+    @Override
+    public boolean addJerseyToCart(int cartId, Jersey jersey) throws IOException {
+        Cart cart = getSpecificCart(cartId); 
+        boolean isAdded; 
         synchronized(cart){
             isAdded = cart.addJerseyToCart(jersey); 
+            save();
         }
-        save();
-        return isAdded;
-	}
+        return isAdded; 
+    }
 
-	@Override
-	public boolean deleteEntireJerseyFromCart(Jersey jersey) throws IOException {
-		boolean isDeletedEntireJersey; 
+    @Override
+    public boolean deleteEntireJerseyFromCart(int cartId, Jersey jersey) throws IOException {
+        Cart cart = getSpecificCart(cartId);
+        boolean isDeleted;
         synchronized(cart){
-            isDeletedEntireJersey = cart.deleteJerseyType(jersey); 
+            isDeleted = cart.deleteJerseyType(jersey);
+            save();
         }
-        save(); 
-        return isDeletedEntireJersey; 
-	}
+        return isDeleted;
+    }
 
-	@Override
-	public boolean deleteEntireCart() throws IOException {
-		boolean isDeleted; 
+    @Override
+    public boolean deleteEntireCart(int cartId) throws IOException {
+        Cart cart = getSpecificCart(cartId);
+        boolean isDeleted; 
         synchronized(cart){
             isDeleted = cart.deleteEntireCart();
+            save(); 
         }
-        save(); 
-        return isDeleted; 
-	}
+        return isDeleted;
+    }
+
+    @Override
+    public Cart createNewCart(Cart cart) throws IOException {
+        synchronized(allCarts){
+            Cart newCart = new Cart(cart.getEntireCart(), nextId());
+            allCarts.put(newCart.getId(), newCart);
+            save(); 
+            return newCart;
+        }
+    }
+
     
+
+
+
 }

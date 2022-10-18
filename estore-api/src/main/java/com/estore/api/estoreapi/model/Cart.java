@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a Cart entity
  * 
- * @author Angela Ngo and Vincent Schwartz
+ * @author Angela Ngo
  */
 
 public class Cart {
@@ -26,9 +26,9 @@ public class Cart {
     // Package private for tests
     static final String STRING_FORMAT = "Jersey [id=%d, name=%s]";
     
-    @JsonProperty("jerseysDict") private HashMap<Jersey, Integer> cart;
+    @JsonProperty("cart") private HashMap<Jersey, Integer> cart;
     @JsonProperty("totalCost") private double totalCost;
-    
+    @JsonProperty("id") private int id;
     /**
      * Create a jersey with the given name, number, price, color, and image path
      * @param id The id of the jersey
@@ -39,9 +39,10 @@ public class Cart {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Cart(@JsonProperty("cart") HashMap<Jersey, Integer> cart) {
+    public Cart(@JsonProperty("cart") HashMap<Jersey, Integer> cart, @JsonProperty("id") int id) {
         this.cart = cart;
         this.totalCost = 0.00;
+        this.id = id; 
     }
 
     /**
@@ -145,7 +146,6 @@ public class Cart {
                 cart.remove(key); 
             }
             cartEmpty = true;
-            totalCost = 0.00;
         }
         return cartEmpty; 
     }
@@ -162,20 +162,24 @@ public class Cart {
         return total; 
     }
 
-    public static void main(String [] args){
-        /*testing purposes */
-        HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-        Cart cart = new Cart(cartTable); 
-        Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
-        cart.addJerseyToCart(jersey); 
-        cart.addJerseyToCart(jersey); 
-        cart.addJerseyToCart(jersey); 
-        System.out.println(cart.getTotalCost());
-        System.out.println(cart.getEntireCart().toString());
-        boolean actual = cart.deleteEntireCart();
-
-        System.out.println("result: " + actual );
-
+    public int getId(){
+        return id; 
     }
+
+    // public static void main(String [] args){
+    //     /*testing purposes */
+    //     HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
+    //     Cart cart = new Cart(cartTable); 
+    //     Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
+    //     cart.addJerseyToCart(jersey); 
+    //     cart.addJerseyToCart(jersey); 
+    //     cart.addJerseyToCart(jersey); 
+    //     System.out.println(cart.getTotalCost());
+    //     System.out.println(cart.getEntireCart().toString());
+    //     boolean actual = cart.deleteEntireCart();
+
+    //     System.out.println("result: " + actual );
+
+    // }
 
 }

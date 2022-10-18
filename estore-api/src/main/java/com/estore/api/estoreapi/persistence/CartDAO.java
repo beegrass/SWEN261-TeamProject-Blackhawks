@@ -22,7 +22,7 @@ public interface CartDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    HashMap<Jersey, Integer> getEntireCart() throws IOException;
+    HashMap<Jersey, Integer> getEntireCart(int cartId) throws IOException;
 
     /**
      * Decremements the amount of {@linkplain Jersey jersey} with the given jersey object in 
@@ -36,7 +36,7 @@ public interface CartDAO {
      * 
      * @throws IOException if there is no Jersey objects in the HashMap keys
      * */
-    boolean decrementJerseyTypeAmount(Jersey jersey) throws IOException; 
+    boolean decrementJerseyTypeAmount(int cartId, Jersey jersey) throws IOException; 
 
     /**
      * Adds a new {@linkplain Jersey jersey} key into the cart's Hashmap 
@@ -49,7 +49,7 @@ public interface CartDAO {
      * 
      * @throws IOException if there null fields in the Jersey parameter 
      * */
-    boolean addJerseyToCart(Jersey jersey) throws IOException; 
+    boolean addJerseyToCart(int cartId, Jersey jersey) throws IOException; 
 
     /**
      * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 
@@ -60,7 +60,7 @@ public interface CartDAO {
      * 
      * @throws IOException if jersey with the given object does not exist
      * */
-    boolean deleteEntireJerseyFromCart(Jersey jersey) throws IOException;
+    boolean deleteEntireJerseyFromCart(int cartId, Jersey jersey) throws IOException;
 
     /**
      * deletes all jerseys from the Cart {@link HashMap<Jersey, Integer> Cart}
@@ -68,7 +68,9 @@ public interface CartDAO {
      * 
      * @throws IOException if Cart is empty
      * */
-    boolean deleteEntireCart() throws IOException; 
+    boolean deleteEntireCart(int cartId) throws IOException; 
+
+    Cart createNewCart(Cart cart) throws IOException; 
 
     // /**
     //  * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 
