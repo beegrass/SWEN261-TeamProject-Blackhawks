@@ -12,4 +12,18 @@ export class InventoryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  createJersey(): void {
+
+  }
+
+  deleteJersey(): void {
+
+  }
+
+  updateJersey(): void {
+
+  }
+
+
+
 }
