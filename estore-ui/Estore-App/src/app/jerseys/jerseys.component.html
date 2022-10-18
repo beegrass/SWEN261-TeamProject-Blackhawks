@@ -1,9 +1,11 @@
 <h2>My Jerseys</h2>
+
 <ul class="jerseys">
-    <li *ngFor="let jersey of jerseys">
-    <button type="button">
-      <span class="badge">{{jersey.id}}</span>
+  <li *ngFor="let jersey of jerseys">
+    <button [class.selected]="jersey === selectedJersey" type="button" (click)="onSelect(jersey)">
       <span class="name">{{jersey.name}}</span>
     </button>
   </li>
 </ul>
+
+<app-jersey-detail [jersey]="selectedJersey"></app-jersey-detail>

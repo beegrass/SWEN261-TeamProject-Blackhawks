@@ -10,10 +10,15 @@ import { JERSEYS } from '../mock-jerseys';
 export class JerseysComponent implements OnInit {
 
   jerseys = JERSEYS;
+  selectedJersey?: Jersey;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSelect(jersey: Jersey): void {
+    this.selectedJersey = jersey;
   }
 
 }
