@@ -13,8 +13,7 @@ import { JerseysComponent } from './jerseys/jerseys.component';
     AppComponent,
     CartComponent,
     CheckoutComponent,
-    InventoryComponent,
-    JerseysComponent
+    JerseysComponent,
   ],
   imports: [
     BrowserModule,

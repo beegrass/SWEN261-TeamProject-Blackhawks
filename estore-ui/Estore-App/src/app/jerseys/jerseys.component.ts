@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JerseyService } from '../jersey.service';
 
 @Component({
   selector: 'app-jerseys',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JerseysComponent implements OnInit {
 
-  constructor() { }
+  constructor(private jerseyService: JerseyService) { }
 
   ngOnInit(): void {
+  }
+
+  add(): void {
+    
+  }
+
+  delete(): void {
+
+  }
+
+  getJerseys(): void {
+
   }
 
 }
