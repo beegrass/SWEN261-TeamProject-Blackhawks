@@ -26,9 +26,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CartFileDAOTest {
     CartFileDAO cartFileDAO;
-    Cart testCart;
-    Item[] testItems; 
+    Cart[] testCarts; 
     ObjectMapper mockObjectMapper;
+    Jersey [] testJersey; 
 
     /**
      * Before each test, we will create and inject a Mock Object Mapper to
@@ -38,53 +38,112 @@ public class CartFileDAOTest {
     @BeforeEach
     public void setupCartFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
-        testCart = new Cart(new HashMap<>()); 
-        testItems = new Item[3];
-        testItems[0] = new Item(new Jersey(99, "Jack Hughes", 5, 99.99, "Black", "Medium","Image.png"), 1);
-        testItems[1] = new Item(new Jersey(100, "Poopy someone", 1, 50.99, "Red", "Small","Image.png"), 1);
-        testItems[2] = new Item(new Jersey(101, "Patrick Kane", 88, 129.99, "Red", "Large","Image.png"),1);
-        // When the object mapper is supposed to read from the file
-        // the mock object mapper will return the hero array above
+        testCarts = new Cart[2]; 
+    
+        testCarts[0] = new Cart(new HashMap<Jersey, Integer>(),1); 
+        testCarts[1] =new Cart(new HashMap<Jersey, Integer>(), 2); 
+
+        testJersey = new Jersey[3]; 
+        testJersey[0] =  new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
+        testJersey[1] = new Jersey(2, "patrick kane", 10, 250.30, "Red", "Small", "img.png");
+        testJersey[2] = new Jersey(3, "meow man", 36, 2536.33, "Red", "Large", "img.png");
+        
+        // two jerseys 
+        testCarts[0].addJerseyToCart(testJersey[0]);
+        testCarts[0].addJerseyToCart(testJersey[1]);
+
+        //3 jersey
+        testCarts[1].addJerseyToCart(testJersey[2]);
+        testCarts[1].addJerseyToCart(testJersey[0]);
+        testCarts[1].addJerseyToCart(testJersey[0]);
+        
         when(mockObjectMapper
-            .readValue(new File("doesnt_matter.txt"),Item[].class))
-                .thenReturn(testItems);
-                cartFileDAO = new CartFileDAO("doesnt_matter.txt",mockObjectMapper, testCart);
+            .readValue(new File("doesnt_matter.txt"),Cart[].class))
+                .thenReturn(testCarts);
+                cartFileDAO = new CartFileDAO("doesnt_matter.txt",mockObjectMapper);
+    }
+
+    @Test
+    public void testGetEntireCart() throws IOException{
+        HashMap<Jersey, Integer> actual = cartFileDAO.getEntireCart(1); 
+        assertEquals(2, actual.size());
+    }
+
+    @Test
+    public void testGetCartsArray(){
+        Cart [] actual = cartFileDAO.getCartsArray();
+        assertEquals(2, actual.length);
     }
 
     @Test
     public void testDecrementJerseyTypeAmount() throws IOException{
-        Jersey jersey = testItems[2].getJersey();
-        boolean isDecremented = cartFileDAO.decrementJerseyTypeAmount(jersey);
-        assertEquals(true, isDecremented);
-        assertEquals(false, testCart.getEntireCart().containsKey(jersey));
-    }
-
-    @Test 
-    public void testAddJerseyToCart() throws IOException{
-        Jersey jersey = testItems[1].getJersey();
-        boolean isAdded = cartFileDAO.addJerseyToCart(jersey);
-        assertEquals(true, isAdded);
-        assertEquals(2, testCart.getEntireCart().get(jersey));
-    } 
-
-    @Test 
-    public void testDeleteEntireJerseyFromCart() throws IOException{
-        Jersey jersey = testItems[1].getJersey(); 
-        boolean isDeleted = cartFileDAO.deleteEntireJerseyFromCart(jersey);
-        assertEquals(true, isDeleted);
-        assertEquals(false, testCart.getEntireCart().containsKey(jersey));
-
+        int cartId = 2;
+        Jersey jersey = testJersey[0];
+        boolean actual = cartFileDAO.decrementJerseyTypeAmount(cartId, jersey);
+        assertEquals(true, actual);
+        assertEquals(2, testCarts[1].totalJerseysInCart()); 
     }
 
     @Test
-    public void testDeleteEntireCart() throws IOException{
-        boolean isDeleted = cartFileDAO.deleteEntireCart();
-        assertEquals(true, isDeleted);
+    public void testGetSpecifcCart(){
+        int cartId = 1; 
+        Cart actual = cartFileDAO.getSpecificCart(cartId); 
 
-        assertEquals(0.00, testCart.getTotalCost());
+        assertEquals(testCarts[0], actual);
+        assertEquals(testCarts[0].getId(), actual.getId());
     }
 
+    @Test
+    public void addJerseyToCart() throws IOException{
+        int cartId = 1;
+        Jersey jersey = testJersey[0];
 
+        boolean actual = cartFileDAO.addJerseyToCart(cartId, jersey);
+        Cart cart = cartFileDAO.getSpecificCart(cartId);
+        assertEquals(true, actual);
+        assertEquals(3, cart.totalJerseysInCart());
+    }
+
+    @Test
+    public void testAddNewJerseyToCart() throws IOException{
+        // this is just seeing if i can insert a entirely different jersey in
+        int cartId  = 1; 
+        Jersey jersey =  testJersey[2];
+        boolean actual = cartFileDAO.addJerseyToCart(cartId, jersey);
+
+        Cart cart = cartFileDAO.getSpecificCart(cartId);
+        assertEquals(true, actual);
+        assertEquals(3, cart.totalJerseysInCart());
+    }
+
+    @Test
+    public void testDeleteEntireJerseyFromCart() throws IOException{
+        int cartId = 1; 
+        Jersey jersey = testJersey[0];
+
+        boolean actual = cartFileDAO.deleteEntireJerseyFromCart(cartId, jersey);
+        Cart cart = cartFileDAO.getSpecificCart(cartId); 
+        assertEquals(true, actual);
+        assertEquals(1, cart.totalJerseysInCart());
+    }
+
+    @Test  void testCreateNewCart() throws IOException{
+        Cart newCart = new Cart(new HashMap<Jersey, Integer>(),3 );
+        Cart actual = cartFileDAO.createNewCart(newCart);
+        
+        assertEquals(newCart.totalJerseysInCart(), actual.totalJerseysInCart());
+        assertEquals(newCart.getTotalCost(), actual.getTotalCost());
+        //SassertEquals(newCart, actual);
+    }
+    @Test
+    public void testDeleteEntireCart() throws IOException{
+        int cartId = 1;
+        boolean actual = cartFileDAO.deleteEntireCart(cartId); 
+        assertEquals(true, actual);
+        assertEquals(2, cartFileDAO.getCartsArray().length);
+        assertEquals(0, cartFileDAO.getSpecificCart(cartId).totalJerseysInCart());
+        
+    }
 
 
 }

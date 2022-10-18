@@ -142,9 +142,7 @@ public class Cart {
     public boolean deleteEntireCart(){
         boolean cartEmpty = false; 
         if(cart.isEmpty() == false){
-            for(Jersey key : cart.keySet()){
-                cart.remove(key); 
-            }
+            cart = new HashMap<>();
             cartEmpty = true;
         }
         return cartEmpty; 

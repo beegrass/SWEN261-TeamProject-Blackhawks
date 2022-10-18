@@ -5,16 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
-import org.springframework.stereotype.Component;
+
 
 import com.estore.api.estoreapi.model.Cart;
 
@@ -152,7 +149,8 @@ public class CartFileDAO implements CartDAO {
     public boolean deleteEntireCart(int cartId) throws IOException {
         Cart cart = getSpecificCart(cartId);
         boolean isDeleted; 
-        synchronized(cart){
+        
+        synchronized(allCarts){
             isDeleted = cart.deleteEntireCart();
             save(); 
         }
@@ -161,7 +159,7 @@ public class CartFileDAO implements CartDAO {
 
     @Override
     public Cart createNewCart(Cart cart) throws IOException {
-        synchronized(allCarts){
+        synchronized(cart){
             Cart newCart = new Cart(cart.getEntireCart(), nextId());
             allCarts.put(newCart.getId(), newCart);
             save(); 
