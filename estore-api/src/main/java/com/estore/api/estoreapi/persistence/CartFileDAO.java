@@ -98,14 +98,21 @@ public class CartFileDAO implements CartDAO {
         return allCarts.get(cartId).getEntireCart(); 
     }
 
+    
     /**
      * Returns the specific object cart from the 
      * @param cartId
      * @return Cart
      */
-    public Cart getSpecificCart(int cartId){
-        return allCarts.get(cartId); 
+    @Override
+    public Cart getSpecificCart(int cartId) throws IOException {
+        Cart cart = null; 
+        if(allCarts.containsKey(cartId) == true){
+            cart = allCarts.get(cartId); 
+        }
+        return cart; 
     }
+
 
     /**
      * This decrements the quantity of a certain jersey from a given jersey and cartId 
@@ -166,8 +173,6 @@ public class CartFileDAO implements CartDAO {
             return newCart;
         }
     }
-
-    
 
 
 

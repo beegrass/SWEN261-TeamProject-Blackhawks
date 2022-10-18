@@ -26,7 +26,7 @@ public class Cart {
     // Package private for tests
     static final String STRING_FORMAT = "Jersey [id=%d, name=%s]";
     
-    @JsonProperty("cart") private HashMap<Jersey, Integer> cart;
+    @JsonProperty("cartMap") private HashMap<Jersey, Integer> cart;
     @JsonProperty("totalCost") private double totalCost;
     @JsonProperty("id") private int id;
     /**
@@ -39,7 +39,7 @@ public class Cart {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Cart(@JsonProperty("cart") HashMap<Jersey, Integer> cart, @JsonProperty("id") int id) {
+    public Cart(@JsonProperty("cartMap") HashMap<Jersey, Integer> cart, @JsonProperty("id") int id) {
         this.cart = cart;
         this.totalCost = 0.00;
         this.id = id; 

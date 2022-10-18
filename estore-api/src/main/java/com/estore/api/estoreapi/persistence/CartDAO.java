@@ -72,6 +72,7 @@ public interface CartDAO {
 
     Cart createNewCart(Cart cart) throws IOException; 
 
+    Cart getSpecificCart(int cartId) throws IOException; 
     // /**
     //  * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 
     //  * 
