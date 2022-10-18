@@ -15,8 +15,8 @@ export class JerseyService {
   };
 
   constructor(
-    private http: HttpClient,
-    private messageService: JerseyService) { }
+    private http: HttpClient
+    ) { }
 
   /** GET Jerseys from the server */
   getJerseys(): Observable<Jersey[]> {
@@ -96,6 +96,4 @@ export class JerseyService {
       return of(result as T);
     };
   }
-
-
 }
