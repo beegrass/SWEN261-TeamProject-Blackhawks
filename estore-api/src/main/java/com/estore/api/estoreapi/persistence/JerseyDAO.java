@@ -34,7 +34,6 @@ public interface JerseyDAO {
      */
     Jersey[] findJerseys(String name, int number, double price, String color, String size) throws IOException;
 
-<<<<<<< HEAD
     /**
      * Finds all {@linkplain Jersey jerseys} whose name contains the given text
      * 
@@ -45,7 +44,6 @@ public interface JerseyDAO {
      * @throws IOException if an issue with underlying storage
      */
     
-=======
 
     /**
      * Retrieves a {@linkplain Jersey jersey} with the given id
@@ -58,7 +56,6 @@ public interface JerseyDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
->>>>>>> 18aed20debb865a85afbe76845b9edcfe64b2b4e
     Jersey getJersey(int id) throws IOException;
     
   
