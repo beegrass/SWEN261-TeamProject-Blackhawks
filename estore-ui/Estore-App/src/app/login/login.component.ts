@@ -31,6 +31,10 @@ export class LoginComponent implements OnInit {
     return this.username;
   }
 
+  /**
+   * Method that returns if the user is the admin or not
+   * @returns true if admin, false is customer
+   */
   isAdmin(): boolean {
     console.warn("admin" == this.onSubmit().toLowerCase())
     return "admin" == this.onSubmit().toLowerCase();
