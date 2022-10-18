@@ -14,6 +14,7 @@ import { JerseysComponent } from './jerseys/jerseys.component';
     CartComponent,
     CheckoutComponent,
     JerseysComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,

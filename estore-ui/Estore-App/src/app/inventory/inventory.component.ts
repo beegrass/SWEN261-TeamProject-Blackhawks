@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Jersey } from '../jersey';
+import { JerseyService } from '../jersey.service';
 
 @Component({
   selector: 'app-inventory',
@@ -6,24 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
+  jerseys: Jersey[] = [];
 
-  constructor() { }
+  constructor(private jerseyService: JerseyService) { }
 
   ngOnInit(): void {
+    this.getJerseys();
   }
 
-  createJersey(): void {
-
+  getJerseys(): void {
+    this.jerseyService.getJerseys()
+      .subscribe(jerseys => this.jerseys = jerseys.slice(1, 5));
   }
-
-  deleteJersey(): void {
-
-  }
-
-  updateJersey(): void {
-
-  }
-
-
-
 }
