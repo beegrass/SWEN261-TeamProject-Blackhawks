@@ -1,1 +1,9 @@
-<p>jerseys works!</p>
+<h2>My Jerseys</h2>
+<ul class="jerseys">
+    <li *ngFor="let jersey of jerseys">
+    <button type="button">
+      <span class="badge">{{jersey.id}}</span>
+      <span class="name">{{jersey.name}}</span>
+    </button>
+  </li>
+</ul>
