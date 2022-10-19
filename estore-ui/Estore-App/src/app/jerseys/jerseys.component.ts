@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Jersey } from '../jersey';
+import { JERSEYS } from '../mock-jerseys';
 import { JerseyService } from '../jersey.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-jerseys',
@@ -10,9 +12,10 @@ import { JerseyService } from '../jersey.service';
 export class JerseysComponent implements OnInit {
   jerseys: Jersey[] = [];
 
-  constructor(private jerseyService: JerseyService) { }
+  constructor(private jerseyService: JerseyService, private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.getJerseys();
   }
 
   getJerseys(): void {

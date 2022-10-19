@@ -1,1 +1,8 @@
-<p>jerseys works!</p>
+<ul class="jerseys">
+  <li *ngFor="let jersey of jerseys">
+    <a routerLink="/detail/{{jersey.id}}">
+      <span class ="badge">{{jersey.id}}</span> 
+    </a>
+      <span class="name">{{jersey.name}}</span>
+  </li>
+</ul>

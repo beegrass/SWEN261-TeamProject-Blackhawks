@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap, Observable, of } from 'rxjs';
 import { Jersey } from './jersey';
+import { JERSEYS } from './mock-jerseys';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { MessageService } from './message.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +16,7 @@ export class JerseyService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+  messageService: any;
 
   constructor(
     private http: HttpClient
@@ -51,6 +55,9 @@ export class JerseyService {
       return of([]);
     }
     return this.http.get<Jersey[]>(`${this.JerseysUrl}/?name=${term}`).pipe(
+      tap(x => x.length ?
+        this.log(`found jerseys matching "${term}"`) :
+        this.log(`no jerseys matching "${term}"`)),
       catchError(this.handleError<Jersey[]>('searchJerseys', []))
     );
   }
@@ -79,6 +86,11 @@ export class JerseyService {
       catchError(this.handleError<any>('updateJersey'))
     );
   }
+  /** Log a JerseyService message with the MessageService */
+  private log(message: string) {
+    this.messageService.add(`JerseyService: ${message}`);
+  }
+
 
   /**
    * Handle Http operation that failed.
@@ -91,6 +103,9 @@ export class JerseyService {
     return (error: any): Observable<T> => {
 
       console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
