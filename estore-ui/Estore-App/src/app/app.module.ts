@@ -7,6 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
+
+import { CheckoutComponent } from './checkout/checkout.component';
+
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { Router, RouterModule } from '@angular/router';
@@ -16,10 +19,14 @@ import { JerseySearchComponent } from './jersey-search/jersey-search.component';
 import { JerseyDetailComponent } from './jersey-detail/jersey-detail.component';
 import { CustDashboardComponent } from './cust-dashboard/cust-dashboard.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     CartComponent,
+
+    CheckoutComponent
+
     LoginComponent,
     LogoutComponent,
     JerseysComponent,
