@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: CustDashboardComponent },
   { path: 'detail/:id', component: JerseyDetailComponent },
   { path: 'jerseys', component: JerseysComponent },
