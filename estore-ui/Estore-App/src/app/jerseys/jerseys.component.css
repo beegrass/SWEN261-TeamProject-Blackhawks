@@ -1,20 +1,20 @@
-/* HeroesComponent's private CSS styles */
-.heroes {
+/* jerseysComponent's private CSS styles */
+.jerseys {
     margin: 0 0 2em 0;
     list-style-type: none;
     padding: 0;
     width: 15em;
   }
-  .heroes li {
+  .jerseys li {
     position: relative;
     cursor: pointer;
   }
   
-  .heroes li:hover {
+  .jerseys li:hover {
     left: .1em;
   }
   
-  .heroes a {
+  .jerseys a {
     color: #333;
     text-decoration: none;
     background-color: #EEE;
@@ -26,17 +26,17 @@
     width: 100%;
   }
   
-  .heroes a:hover {
+  .jerseys a:hover {
     color: #2c3a41;
     background-color: #e6e6e6;
   }
   
-  .heroes a:active {
+  .jerseys a:active {
     background-color: #525252;
     color: #fafafa;
   }
   
-  .heroes .badge {
+  .jerseys .badge {
     display: inline-block;
     font-size: small;
     color: white;
