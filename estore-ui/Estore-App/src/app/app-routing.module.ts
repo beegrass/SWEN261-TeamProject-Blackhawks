@@ -7,6 +7,17 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+import { JerseysComponent } from './jerseys/jerseys.component';
+import { CustDashboardComponent } from './cust-dashboard/cust-dashboard.component';
+import { JerseyDetailComponent } from './jersey-detail/jersey-detail.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: CustDashboardComponent },
+  { path: 'detail/:id', component: JerseyDetailComponent },
+  { path: 'jerseys', component: JerseysComponent },
+
 ];
 
 @NgModule({

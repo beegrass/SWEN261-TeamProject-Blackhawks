@@ -1,0 +1,9 @@
+<h2>Top Jerseys</h2>
+<div class="jerseys-menu">
+  <a *ngFor="let jersey of jerseys"
+      routerLink="/detail/{{jersey.id}}">
+      {{jersey.name}}
+  </a>
+</div>
+
+<app-jersey-search></app-jersey-search>

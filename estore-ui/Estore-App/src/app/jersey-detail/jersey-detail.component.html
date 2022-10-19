@@ -1,0 +1,28 @@
+<!-- <div *ngIf="jersey">
+
+    <h2>{{jersey.name | uppercase}} Details</h2>
+    <h2>{{selectedJersey.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{jersey.id}}</div>
+    <div><span>id: </span>{{jersey.name}}</div>
+    <div><span>number: </span>{{jersey.number}}</div>
+    <div><span>price: </span>{{jersey.price}}</div>
+    <div><span>color: </span>{{jersey.color}}</div>
+    <div><span>size: </span>{{jersey.size}}</div>
+  
+  </div> -->
+
+  <div *ngIf="jersey">
+
+    <h2>{{jersey.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{jersey.id}}</div>
+    <div><span>name: </span>{{jersey.name}}</div>
+    <div><span>number: </span>{{jersey.number}}</div>
+    <div><span>price: </span>{{jersey.price}}</div>
+    <div><span>color: </span>{{jersey.color}}</div>
+    <div><span>size: </span>{{jersey.size}}</div>
+    <!-- <div>
+      <label for="jersey-name">Jersey name: </label>
+      <input id="jersey-name" [(ngModel)]="jersey.name" placeholder="name">
+    </div> -->
+  
+  </div>
