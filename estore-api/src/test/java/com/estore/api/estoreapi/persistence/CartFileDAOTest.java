@@ -11,6 +11,7 @@ import java.util.Hashtable;
 import org.junit.jupiter.api.BeforeEach;
 
 import com.estore.api.estoreapi.model.Jersey;
+import com.estore.api.estoreapi.model.Cart;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -20,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 
 public class CartFileDAOTest {
-    CartFileDAO cartFileDAO;
+    //CartFileDAO cartFileDAO;
     HashMap<Jersey, Integer> testCart;
     ObjectMapper mockObjectMapper;
 
