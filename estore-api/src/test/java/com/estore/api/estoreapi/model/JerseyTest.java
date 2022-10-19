@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 @Tag("Model-tier")
 public class JerseyTest {
     @Test
-    public void testController() {
+    public void testCtor() {
         // Setup
         int expected_id = 99;
         String expected_name = "Wi-Fire";
