@@ -1,0 +1,11 @@
+<h1>Chicago Blackhawks</h1>
+<h2>Login page</h2>
+<div class="user-form">
+    Username: 
+    <form (ngSubmit) = "onSubmit() && isAdmin()">
+        <input [(ngModel)]="username" name="username" placeholder="username">
+    </form>
+</div>
+<div class="nav-login" >
+    <button class="login-button" [routerLink]="['/jerseys']">Sign in</button>
+</div>
