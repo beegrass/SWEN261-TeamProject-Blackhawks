@@ -1,11 +1,8 @@
-<h2>My Jerseys</h2>
-
 <ul class="jerseys">
   <li *ngFor="let jersey of jerseys">
-    <button [class.selected]="jersey === selectedJersey" type="button" (click)="onSelect(jersey)">
+    <a routerLink="/detail/{{jersey.id}}">
+      <span class ="badge">{{jersey.id}}</span> 
+    </a>
       <span class="name">{{jersey.name}}</span>
-    </button>
   </li>
 </ul>
-
-<app-jersey-detail [jersey]="selectedJersey"></app-jersey-detail>

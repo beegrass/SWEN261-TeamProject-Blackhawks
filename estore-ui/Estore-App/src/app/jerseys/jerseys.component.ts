@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Jersey } from '../jersey';
 import { JERSEYS } from '../mock-jerseys';
+import { JerseyService } from '../jersey.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-jerseys',
@@ -9,16 +11,17 @@ import { JERSEYS } from '../mock-jerseys';
 })
 export class JerseysComponent implements OnInit {
 
-  jerseys = JERSEYS;
-  selectedJersey?: Jersey;
+  jerseys: Jersey[] = [];
 
-  constructor() { }
+  constructor(private jerseyService: JerseyService, private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.getJerseys();
   }
 
-  onSelect(jersey: Jersey): void {
-    this.selectedJersey = jersey;
+  getJerseys(): void {
+    this.jerseyService.getJerseys()
+      .subscribe(jerseys => this.jerseys = jerseys);
   }
 
 }
