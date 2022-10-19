@@ -37,7 +37,7 @@ public class CartFileDAO implements CartDAO {
     private String filename;    // Filename to read from and write to@Override
 	
 
-    public CartFileDAO(@Value("${cart.file}") String filename, ObjectMapper objectMapper) throws IOException{
+    public CartFileDAO(@Value("${carts.json}") String filename, ObjectMapper objectMapper) throws IOException{
         this.filename = filename; 
         this.objectMapper = objectMapper; 
         load(); 
@@ -120,40 +120,56 @@ public class CartFileDAO implements CartDAO {
      * @param jersey - the jersey wanted to decrement from the quantity
      */
     @Override
-    public boolean decrementJerseyTypeAmount(int cartId, Jersey jersey) throws IOException {
+    public Cart decrementJerseyTypeAmount(int cartId, Jersey jersey) throws IOException {
         Cart cart = getSpecificCart(cartId); 
         boolean isDecremented; 
         synchronized(cart){
             isDecremented = cart.decrementJerseyTypeFromCart(jersey);
             save();
         }
-        return isDecremented; 
+
+        if(isDecremented == false){
+            return null;
+        }else{
+            return cart; 
+        } 
     }
 
     @Override
-    public boolean addJerseyToCart(int cartId, Jersey jersey) throws IOException {
+    public Cart addJerseyToCart(int cartId, Jersey jersey) throws IOException {
         Cart cart = getSpecificCart(cartId); 
         boolean isAdded; 
         synchronized(cart){
             isAdded = cart.addJerseyToCart(jersey); 
             save();
         }
-        return isAdded; 
+
+        if(isAdded == false){
+            return null;
+        }else{
+            return cart; 
+        } 
     }
 
     @Override
-    public boolean deleteEntireJerseyFromCart(int cartId, Jersey jersey) throws IOException {
+    public Cart deleteEntireJerseyFromCart(int cartId, Jersey jersey) throws IOException {
         Cart cart = getSpecificCart(cartId);
         boolean isDeleted;
         synchronized(cart){
             isDeleted = cart.deleteJerseyType(jersey);
             save();
         }
-        return isDeleted;
+        
+        if(isDeleted == false){
+            return null;
+        }else{
+            return cart; 
+        } 
+
     }
 
     @Override
-    public boolean deleteEntireCart(int cartId) throws IOException {
+    public Cart deleteEntireCart(int cartId) throws IOException {
         Cart cart = getSpecificCart(cartId);
         boolean isDeleted; 
         
@@ -161,7 +177,13 @@ public class CartFileDAO implements CartDAO {
             isDeleted = cart.deleteEntireCart();
             save(); 
         }
-        return isDeleted;
+        
+        if(isDeleted == false){
+            return null;
+        }else{
+            return cart; 
+        } 
+
     }
 
     @Override

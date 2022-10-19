@@ -61,9 +61,9 @@ public class CartController {
         LOG.info("PUT /cart/decrement/?cart=" + cartId + "&jerseyId=" + jerseyId); 
         try{
             Jersey jersey = jerseyDAO.getJersey(jerseyId);
-            boolean isDecremented = cartDAO.decrementJerseyTypeAmount(cartId, jersey); 
-            if(isDecremented == true){
-                return new ResponseEntity<Cart>(cartDAO.getSpecificCart(cartId), HttpStatus.OK); 
+            Cart result = cartDAO.decrementJerseyTypeAmount(cartId, jersey); 
+            if(result!=null){
+                return new ResponseEntity<Cart>(result, HttpStatus.OK); 
             }else{
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
@@ -77,9 +77,9 @@ public class CartController {
         LOG.info("PUT /cart/increment/?cart=" + cartId + "&jerseyId=" + jerseyId); 
         try{
             Jersey jersey = jerseyDAO.getJersey(jerseyId);
-            boolean isAdded = cartDAO.addJerseyToCart(cartId, jersey); 
-            if(isAdded == true){
-                return new ResponseEntity<Cart>(cartDAO.getSpecificCart(cartId), HttpStatus.OK); 
+            Cart result = cartDAO.addJerseyToCart(cartId, jersey); 
+            if( result != null){
+                return new ResponseEntity<Cart>(result, HttpStatus.OK); 
             }else{
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
@@ -93,9 +93,9 @@ public class CartController {
         LOG.info("PUT /cart/deleteJerseyType/?cart=" + cartId + "&jerseyId=" + jerseyId); 
         try{
             Jersey jersey = jerseyDAO.getJersey(jerseyId);
-            boolean isDeleted= cartDAO.deleteEntireJerseyFromCart(cartId, jersey); 
-            if(isDeleted == true){
-                return new ResponseEntity<Cart>(cartDAO.getSpecificCart(cartId), HttpStatus.OK); 
+            Cart result =  cartDAO.deleteEntireJerseyFromCart(cartId, jersey); 
+            if(result != null){
+                return new ResponseEntity<Cart>(result, HttpStatus.OK); 
             }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -108,9 +108,9 @@ public class CartController {
     public ResponseEntity<Cart> deleteEntireCart(@RequestParam int cartId){
         LOG.info("PUT /cart/deleteJerseyType/?cart=" + cartId ); 
         try{
-            boolean isDeleted = cartDAO.deleteEntireCart(cartId); 
-            if(isDeleted == true){
-                return new ResponseEntity<Cart>(cartDAO.getSpecificCart(cartId),HttpStatus.OK);
+            Cart result = cartDAO.deleteEntireCart(cartId); 
+            if(result != null){
+                return new ResponseEntity<Cart>(result,HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
             }

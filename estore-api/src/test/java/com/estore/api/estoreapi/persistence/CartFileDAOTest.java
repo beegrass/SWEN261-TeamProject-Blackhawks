@@ -79,13 +79,13 @@ public class CartFileDAOTest {
     public void testDecrementJerseyTypeAmount() throws IOException{
         int cartId = 2;
         Jersey jersey = testJersey[0];
-        boolean actual = cartFileDAO.decrementJerseyTypeAmount(cartId, jersey);
-        assertEquals(true, actual);
+        Cart cart = cartFileDAO.decrementJerseyTypeAmount(cartId, jersey);
+        assertEquals(2, cart.totalJerseysInCart());
         assertEquals(2, testCarts[1].totalJerseysInCart()); 
     }
 
     @Test
-    public void testGetSpecifcCart(){
+    public void testGetSpecifcCart() throws IOException{
         int cartId = 1; 
         Cart actual = cartFileDAO.getSpecificCart(cartId); 
 
@@ -98,9 +98,7 @@ public class CartFileDAOTest {
         int cartId = 1;
         Jersey jersey = testJersey[0];
 
-        boolean actual = cartFileDAO.addJerseyToCart(cartId, jersey);
-        Cart cart = cartFileDAO.getSpecificCart(cartId);
-        assertEquals(true, actual);
+        Cart cart =  cartFileDAO.addJerseyToCart(cartId, jersey);
         assertEquals(3, cart.totalJerseysInCart());
     }
 
@@ -109,10 +107,8 @@ public class CartFileDAOTest {
         // this is just seeing if i can insert a entirely different jersey in
         int cartId  = 1; 
         Jersey jersey =  testJersey[2];
-        boolean actual = cartFileDAO.addJerseyToCart(cartId, jersey);
+        Cart cart = cartFileDAO.addJerseyToCart(cartId, jersey);
 
-        Cart cart = cartFileDAO.getSpecificCart(cartId);
-        assertEquals(true, actual);
         assertEquals(3, cart.totalJerseysInCart());
     }
 
@@ -121,9 +117,8 @@ public class CartFileDAOTest {
         int cartId = 1; 
         Jersey jersey = testJersey[0];
 
-        boolean actual = cartFileDAO.deleteEntireJerseyFromCart(cartId, jersey);
-        Cart cart = cartFileDAO.getSpecificCart(cartId); 
-        assertEquals(true, actual);
+        Cart cart =  cartFileDAO.deleteEntireJerseyFromCart(cartId, jersey);
+        
         assertEquals(1, cart.totalJerseysInCart());
     }
 
@@ -138,10 +133,10 @@ public class CartFileDAOTest {
     @Test
     public void testDeleteEntireCart() throws IOException{
         int cartId = 1;
-        boolean actual = cartFileDAO.deleteEntireCart(cartId); 
-        assertEquals(true, actual);
+        Cart cart = cartFileDAO.deleteEntireCart(cartId); 
+
         assertEquals(2, cartFileDAO.getCartsArray().length);
-        assertEquals(0, cartFileDAO.getSpecificCart(cartId).totalJerseysInCart());
+        assertEquals(0, cart.totalJerseysInCart());
         
     }
 
