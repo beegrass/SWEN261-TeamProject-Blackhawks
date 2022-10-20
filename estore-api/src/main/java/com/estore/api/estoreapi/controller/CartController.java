@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.model.Jersey;
 import com.estore.api.estoreapi.persistence.CartDAO;
-import com.estore.api.estoreapi.persistence.CartFileDAO;
+
 import com.estore.api.estoreapi.persistence.JerseyDAO;
-import com.estore.api.estoreapi.persistence.JerseyFileDAO;
+
 
 /**
  * @author Angela Ngo
@@ -30,9 +30,10 @@ import com.estore.api.estoreapi.persistence.JerseyFileDAO;
 @RestController
 @RequestMapping("cart")
 public class CartController {
-    private static final Logger LOG = Logger.getLogger(JerseyController.class.getName());
+    private static final Logger LOG = Logger.getLogger(CartController.class.getName());
     private CartDAO cartDAO; 
     private JerseyDAO jerseyDAO; 
+
     public CartController(CartDAO cartDAO, JerseyDAO jerseyDAO){
         this.cartDAO = cartDAO;
         this.jerseyDAO = jerseyDAO; 

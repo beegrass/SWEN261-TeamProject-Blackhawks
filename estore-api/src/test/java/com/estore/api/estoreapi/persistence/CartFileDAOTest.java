@@ -6,15 +6,15 @@ import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.ArrayList;
+
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
+
 
 import com.estore.api.estoreapi.model.Cart;
-import com.estore.api.estoreapi.model.Item;
 import com.estore.api.estoreapi.model.Jersey;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,9 +39,11 @@ public class CartFileDAOTest {
     public void setupCartFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testCarts = new Cart[2]; 
-    
-        testCarts[0] = new Cart(new HashMap<Jersey, Integer>(),1); 
-        testCarts[1] =new Cart(new HashMap<Jersey, Integer>(), 2); 
+        List<Jersey> list1 = new ArrayList<>();
+        List<Jersey> list2 = new ArrayList<>();
+
+        testCarts[0] = new Cart(list1 , 1); 
+        testCarts[1] =new Cart(list2, 2); 
 
         testJersey = new Jersey[3]; 
         testJersey[0] =  new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
@@ -64,9 +66,9 @@ public class CartFileDAOTest {
     }
 
     @Test
-    public void testGetEntireCart() throws IOException{
-        HashMap<Jersey, Integer> actual = cartFileDAO.getEntireCart(1); 
-        assertEquals(2, actual.size());
+    public void testGetJerseysFromCart() throws IOException{
+        Jersey [] actual = cartFileDAO.getJerseysFromCart(1); 
+        assertEquals(2, actual.length);
     }
 
     @Test
@@ -123,11 +125,11 @@ public class CartFileDAOTest {
     }
 
     @Test  void testCreateNewCart() throws IOException{
-        Cart newCart = new Cart(new HashMap<Jersey, Integer>(),3 );
+        Cart newCart = new Cart(new ArrayList<Jersey>(),3 );
         Cart actual = cartFileDAO.createNewCart(newCart);
         
-        assertEquals(newCart.totalJerseysInCart(), actual.totalJerseysInCart());
-        assertEquals(newCart.getTotalCost(), actual.getTotalCost());
+        assertEquals(0, actual.totalJerseysInCart());
+        assertEquals(0.00, actual.getTotalCost());
         //SassertEquals(newCart, actual);
     }
     @Test

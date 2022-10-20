@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.naming.MalformedLinkException;
 
@@ -40,16 +41,26 @@ public class CartControllerTest {
     @Test
     public void testDecrementJerseyTypeAmount() throws IOException{
         int cartId = 1; 
-        int jerseyId = 9;
-        Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
-        Cart cart = mockCartDAO.getSpecificCart(cartId);
-        when(mockCartDAO.decrementJerseyTypeAmount(cartId, jersey)).thenReturn(cart);
+        
+        int jerseyId = 99;
+        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+        Cart cart = new Cart(new ArrayList<Jersey>(), cartId);
+        cart.addJerseyToCart(j1);
+        cart.addJerseyToCart(j2);
+        cart.addJerseyToCart(j1);
+
+        cart.decrementJerseyTypeFromCart(j1); 
+
+        when(mockJerseyDAO.getJersey(jerseyId)).thenReturn(j1);
+        when(mockCartDAO.decrementJerseyTypeAmount(cartId, j1)).thenReturn(cart);
         
         ResponseEntity<Cart> response = cartController.decrementJerseyTypeAmount(cartId, jerseyId); 
-        Cart actualCart = mockCartDAO.getSpecificCart(cartId);
-        assertEquals(actualCart, response.getBody());
+        
+        assertEquals(cart, response.getBody());
         //assertEquals(2, response.getBody().totalJerseysInCart());
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        // its detecting the jersey as null 
     }
 
     @Test
@@ -57,7 +68,7 @@ public class CartControllerTest {
         int cartId = 1;
         int jerseyId = 8; // this is not in the map: fails when not contained 
         Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
-        Cart cart = mockCartDAO.getSpecificCart(cartId);
+    
         when(mockCartDAO.decrementJerseyTypeAmount(cartId, jersey)).thenReturn(null);
 
         ResponseEntity<Cart> response = cartController.decrementJerseyTypeAmount(cartId, jerseyId);
@@ -83,16 +94,22 @@ public class CartControllerTest {
 
     @Test
     public void testAddJerseyToCart()throws IOException{
-        int cartId = 2;
-        int jerseyId = 2;
-        Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
-        Cart cart = mockCartDAO.getSpecificCart(cartId);
-        when(mockCartDAO.addJerseyToCart(cartId, jersey)).thenReturn(cart);
-
-        ResponseEntity<Cart> response = cartController.addJerseyToCart(cartId, jerseyId);
-        Cart actualCart = mockCartDAO.getSpecificCart(cartId);
-        assertEquals(actualCart, response.getBody());
-        //assertEquals(actualCart.totalJerseysInCart(), response.getBody().totalJerseysInCart());
+        int cartId = 1; 
+        
+        int jerseyId = 99;
+        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+        Cart cart = new Cart(new ArrayList<Jersey>(), cartId);
+        cart.addJerseyToCart(j1);
+        cart.addJerseyToCart(j2);
+        
+        when(mockJerseyDAO.getJersey(jerseyId)).thenReturn(j1);
+        when(mockCartDAO.addJerseyToCart(cartId, j1)).thenReturn(cart);
+        
+        ResponseEntity<Cart> response = cartController.addJerseyToCart(cartId, jerseyId); 
+        
+        assertEquals(cart, response.getBody());
+        //assertEquals(2, response.getBody().totalJerseysInCart());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
@@ -101,7 +118,6 @@ public class CartControllerTest {
         int cartId = 2;
         int jerseyId = 99;
         Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
-        Cart cart = mockCartDAO.getSpecificCart(cartId);
         when(mockCartDAO.addJerseyToCart(cartId, jersey)).thenReturn(null);
 
         ResponseEntity<Cart> response = cartController.addJerseyToCart(cartId, jerseyId);
@@ -126,16 +142,26 @@ public class CartControllerTest {
     @Test
     public void testDeleteJerseyType() throws IOException{
         int cartId = 1; 
-        int jerseyId = 9;
-        Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
-        Cart cart = mockCartDAO.getSpecificCart(cartId);
-        when(mockCartDAO.deleteEntireJerseyFromCart(cartId, jersey)).thenReturn(cart);
-        Cart actualCart = mockCartDAO.getSpecificCart(cartId);
+        
+        int jerseyId = 99;
+        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+        Cart cart = new Cart(new ArrayList<Jersey>(), cartId);
+        cart.addJerseyToCart(j1);
+        cart.addJerseyToCart(j2);
+        cart.addJerseyToCart(j1);
 
-        ResponseEntity<Cart> response = cartController.deleteJerseyType(cartId, jerseyId);
+        cart.deleteJerseyType(j1); 
 
-        //assertEquals(1, response.getBody().totalJerseysInCart());
+        when(mockJerseyDAO.getJersey(jerseyId)).thenReturn(j1);
+        when(mockCartDAO.deleteEntireJerseyFromCart(cartId, j1)).thenReturn(cart);
+        
+        ResponseEntity<Cart> response = cartController.deleteJerseyType(cartId, jerseyId); 
+        
+        assertEquals(cart, response.getBody());
+        //assertEquals(2, response.getBody().totalJerseysInCart());
         assertEquals(HttpStatus.OK, response.getStatusCode());
+    
     }
 
     @Test
@@ -143,29 +169,26 @@ public class CartControllerTest {
         int cartId = 1; 
         int jerseyId = 9;
         Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
-        Cart cart = mockCartDAO.getSpecificCart(cartId);
         when(mockCartDAO.deleteEntireJerseyFromCart(cartId, jersey)).thenReturn(null);
 
         ResponseEntity<Cart> response = cartController.deleteJerseyType(cartId, jerseyId);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
-    // @Test
-    // public void testDeleteJerseyTypeFailHandleException() throws IOException{
-    //     int cartId = 1; 
-    //     int jerseyId = 9;
-    //     Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
-    //     Cart cart = mockCartDAO.getSpecificCart(cartId);
-    //     when(mockCartDAO.deleteEntireJerseyFromCart(cartId, jersey)).thenReturn();
-
-    //     ResponseEntity<Cart> response = cartController.deleteJerseyType(cartId, jerseyId);
-    //     assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-    // }
+  
 
     @Test
     public void testDeleteEntireCart() throws IOException{
-        int cartId = 1;
-        Cart cart = mockCartDAO.getSpecificCart(cartId);
+        int cartId = 1; 
+        
+        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+        Cart cart = new Cart(new ArrayList<Jersey>(), cartId);
+        cart.addJerseyToCart(j1);
+        cart.addJerseyToCart(j2);
+        cart.addJerseyToCart(j1);
+
+        cart.deleteEntireCart();
         when(mockCartDAO.deleteEntireCart(cartId)).thenReturn(cart);
 
         ResponseEntity<Cart> response = cartController.deleteEntireCart(cartId);
@@ -184,19 +207,24 @@ public class CartControllerTest {
 
     @Test
     public void testGetSpecifcCart() throws IOException{
-        int cartId = 1;
-        Cart cart = mockCartDAO.getSpecificCart(cartId);
-        when(mockCartDAO.getSpecificCart(cartId)).thenReturn(cart);
+        int cartId = 1; 
+        
+        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+        Cart cart = new Cart(new ArrayList<Jersey>(), cartId);
+        cart.addJerseyToCart(j1);
 
+        when(mockCartDAO.getSpecificCart(cartId)).thenReturn(cart);
         ResponseEntity<Cart> response= cartController.getSpecificCart(cartId);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(cart, response.getBody());
 
     }
 
     @Test
     public void testGetSpecifcCartFail() throws IOException{
         int cartId = 3;
-        Cart cart = mockCartDAO.getSpecificCart(cartId);
+        
         when(mockCartDAO.getSpecificCart(cartId)).thenReturn(null);
 
         ResponseEntity<Cart> response= cartController.getSpecificCart(cartId);

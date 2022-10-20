@@ -4,14 +4,14 @@ package com.estore.api.estoreapi.persistence;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
+import java.util.Arrays;
+import java.util.List;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.springframework.beans.factory.annotation.Value;
-
+import org.springframework.stereotype.Component;
 
 import com.estore.api.estoreapi.model.Cart;
 
@@ -25,10 +25,11 @@ import com.estore.api.estoreapi.model.Jersey;
  * 
  * @author Angela Ngo
  */
+@Component
 public class CartFileDAO implements CartDAO {
 
-	private static final Logger LOG  = Logger.getLogger(JerseyFileDAO.class.getName());
-    private HashMap<Integer, Cart> allCarts; 
+	private static final Logger LOG  = Logger.getLogger(CartFileDAO.class.getName());
+    private TreeMap<Integer, Cart> allCarts; 
 
     private ObjectMapper objectMapper;  // Provides conversion between jersey
                                         // objects and JSON text format written
@@ -37,15 +38,17 @@ public class CartFileDAO implements CartDAO {
     private String filename;    // Filename to read from and write to@Override
 	
 
-    public CartFileDAO(@Value("${carts.json}") String filename, ObjectMapper objectMapper) throws IOException{
+    public CartFileDAO(@Value("${carts.file}") String filename, ObjectMapper objectMapper) throws IOException{
         this.filename = filename; 
         this.objectMapper = objectMapper; 
         load(); 
     }
 
+    
+
     private synchronized static int nextId(){
         int id = nextId; 
-        nextId++; 
+        ++nextId; 
         return id;
     }
 
@@ -53,7 +56,7 @@ public class CartFileDAO implements CartDAO {
         File file = new File(filename); 
         nextId = 0; 
         Cart [] cartArray = objectMapper.readValue(file, Cart[].class);
-        allCarts = new HashMap<>(); 
+        allCarts = new TreeMap<>(); 
         for(Cart cart : cartArray){
             allCarts.put(cart.getId(), cart);
             if(cart.getId() > nextId){
@@ -90,11 +93,11 @@ public class CartFileDAO implements CartDAO {
     }
 
     /**
-     * gets the cart hashMap not the object
+     * gets the cart contents of a specific cart 
      * @param cartId - id of the cart 
      */
     @Override
-    public HashMap<Jersey, Integer> getEntireCart(int cartId) throws IOException {
+    public Jersey[] getJerseysFromCart(int cartId) throws IOException {
         return allCarts.get(cartId).getEntireCart(); 
     }
 
@@ -123,49 +126,47 @@ public class CartFileDAO implements CartDAO {
     public Cart decrementJerseyTypeAmount(int cartId, Jersey jersey) throws IOException {
         Cart cart = getSpecificCart(cartId); 
         boolean isDecremented; 
-        synchronized(cart){
+        synchronized(allCarts){
             isDecremented = cart.decrementJerseyTypeFromCart(jersey);
             save();
+            if(isDecremented == false){
+                return null;
+            }else{
+                return cart; 
+            } 
         }
-
-        if(isDecremented == false){
-            return null;
-        }else{
-            return cart; 
-        } 
     }
 
     @Override
     public Cart addJerseyToCart(int cartId, Jersey jersey) throws IOException {
         Cart cart = getSpecificCart(cartId); 
         boolean isAdded; 
-        synchronized(cart){
+        synchronized(allCarts){
             isAdded = cart.addJerseyToCart(jersey); 
             save();
+            if(isAdded == false){
+                return null;
+            }else{
+                return cart; 
+            } 
         }
-
-        if(isAdded == false){
-            return null;
-        }else{
-            return cart; 
-        } 
     }
 
     @Override
     public Cart deleteEntireJerseyFromCart(int cartId, Jersey jersey) throws IOException {
         Cart cart = getSpecificCart(cartId);
         boolean isDeleted;
-        synchronized(cart){
+        synchronized(allCarts){
             isDeleted = cart.deleteJerseyType(jersey);
             save();
+            if(isDeleted == false){
+                return null;
+            }else{
+                return cart; 
+            } 
+    
         }
         
-        if(isDeleted == false){
-            return null;
-        }else{
-            return cart; 
-        } 
-
     }
 
     @Override
@@ -176,20 +177,20 @@ public class CartFileDAO implements CartDAO {
         synchronized(allCarts){
             isDeleted = cart.deleteEntireCart();
             save(); 
+            if(isDeleted == false){
+                return null;
+            }else{
+                return cart; 
+            } 
+    
         }
-        
-        if(isDeleted == false){
-            return null;
-        }else{
-            return cart; 
-        } 
-
     }
 
     @Override
     public Cart createNewCart(Cart cart) throws IOException {
-        synchronized(cart){
-            Cart newCart = new Cart(cart.getEntireCart(), nextId());
+        synchronized(allCarts){
+            List<Jersey> converted = Arrays.asList(cart.getEntireCart());
+            Cart newCart = new Cart(converted, nextId());
             allCarts.put(newCart.getId(), newCart);
             save(); 
             return newCart;

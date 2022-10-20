@@ -1,8 +1,8 @@
 package com.estore.api.estoreapi.model;
 
 
-import java.util.HashMap;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -26,7 +26,7 @@ public class Cart {
     // Package private for tests
     static final String STRING_FORMAT = "Jersey [id=%d, name=%s]";
     
-    @JsonProperty("cartMap") private HashMap<Jersey, Integer> cart;
+    @JsonProperty("cartArray") private List<Jersey> cart;
     @JsonProperty("totalCost") private double totalCost;
     @JsonProperty("id") private int id;
     /**
@@ -39,35 +39,49 @@ public class Cart {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Cart(@JsonProperty("cartMap") HashMap<Jersey, Integer> cart, @JsonProperty("id") int id) {
+    public Cart(@JsonProperty("cartArray") List<Jersey> cart, @JsonProperty("id") int id) {
         this.cart = cart;
         this.totalCost = 0.00;
         this.id = id; 
     }
 
     /**
-     * returns the types of Jerseys that are contained in the cart 
+     * returns the jerseys that are contained in the cart 
      * @return cart.keySet() of {@linkplain} Jersey jerseys types that are in the cart 
      */
-    public Set<Jersey> getJerseys(){
-        return cart.keySet();
+    public Jersey[] getEntireCart(){
+        Jersey [] returned = new Jersey[cart.size()];
+        cart.toArray(returned);
+        return returned;  
     }
 
     /**
-     *  returns the entire cart's contents (type of  Jersey, Quantity)
-     * @return cart : the hashmap that contains the jersey and the quantity of how of each type 
+     * Returns the amount of given jersey in cart 
+     * @param jersey
+     * @return count - amount of given jersey
      */
-    public HashMap<Jersey, Integer> getEntireCart(){
-        return cart; 
-    }
-
+    public int getQuantity(Jersey jersey){
+        int count = 0;
+        for(int i = 0; i < cart.size(); i++){
+            if(cart.get(i).getId() == jersey.getId()){
+                count++;
+            }
+        }
+        return count;
+   }
     /**
-     * Returns the total cost of the jerseys price * the quantity 
+     * Returns the total cost of the the entire cart
      * @return totalCost of the entire cart
      */
     public double getTotalCost(){
-        totalCost = Math.round(totalCost * 100.0)/100.0;
-        return totalCost; 
+        double total = 0;
+        for(int i = 0 ; i < cart.size(); i++){
+            total+= cart.get(i).getPrice(); 
+        }
+
+        total = Math.round(total * 100.0)/100.0;
+        totalCost = total; 
+        return total; 
     }
 
     /**
@@ -78,19 +92,8 @@ public class Cart {
      * @return valid - the jersey was added or not
      */
     public boolean addJerseyToCart(Jersey jersey){
-        boolean valid = true;
-        if(cart.containsKey(jersey))
-        {
-            int quantity = cart.get(jersey);
-            quantity++;
-            cart.put(jersey, quantity);
-        }
-        else
-        {
-            cart.put(jersey, 1);
-        }
-        totalCost += jersey.getPrice();
-        return valid; 
+        cart.add(jersey); 
+        return true; 
     }
 
 
@@ -100,19 +103,11 @@ public class Cart {
      * @return valid boolean
      */
     public boolean decrementJerseyTypeFromCart(Jersey jersey){
-        boolean valid = false; 
-        if(cart.containsKey(jersey)){
-            int quantity = cart.get(jersey);
-            quantity--;
-            cart.put(jersey, quantity);
-
-            totalCost -= quantity * jersey.getPrice();
-
-            if(cart.get(jersey) == 0)
-            {
-                cart.remove(jersey);
-            }
-            valid = true;
+        boolean valid = false;
+        if(cart.contains(jersey) == true && getQuantity(jersey) > 0){
+            cart.remove(jersey); 
+            totalCost = getTotalCost(); 
+            valid = true; 
         }
         return valid; 
     }
@@ -121,14 +116,15 @@ public class Cart {
      * Deletes the given jersey and all of the quantities of it from the cart
      * returns true when done 
      * @param jersey
-     * @return Jersey jersey
+     * @return valid 
      */
     public boolean deleteJerseyType(Jersey jersey){
         boolean valid = false;
-        if(cart.containsKey(jersey)){
-            int quantity = cart.get(jersey);
-            totalCost -= jersey.getPrice() * quantity;
-            cart.remove(jersey);
+        if(cart.contains(jersey) == true){
+            while(cart.contains(jersey) == true){
+                cart.remove(jersey);
+            }
+            //totalCost = getTotalCost(); 
             valid = true;
         }
 
@@ -140,11 +136,12 @@ public class Cart {
      * @return cartEmpty returns true if works false if not 
      */
     public boolean deleteEntireCart(){
-        boolean cartEmpty = false; 
-        if(cart.isEmpty() == false){
-            cart = new HashMap<>();
-            cartEmpty = true;
-        }
+        boolean cartEmpty = false;
+        if(cart.size() > 0){
+            cart.removeAll(cart); 
+            totalCost = 0.00; 
+            cartEmpty = true; 
+        } 
         return cartEmpty; 
     }
 
@@ -153,31 +150,26 @@ public class Cart {
      * @return total
      */
     public int totalJerseysInCart(){
-        int total = 0;
-        for(Jersey jersey: cart.keySet()){
-            total += (cart.get(jersey));
-        }
-        return total; 
+        return cart.size();  
     }
 
     public int getId(){
         return id; 
     }
 
-    // public static void main(String [] args){
-    //     /*testing purposes */
-    //     HashMap<Jersey, Integer> cartTable = new HashMap<>(); 
-    //     Cart cart = new Cart(cartTable); 
-    //     Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
-    //     cart.addJerseyToCart(jersey); 
-    //     cart.addJerseyToCart(jersey); 
-    //     cart.addJerseyToCart(jersey); 
-    //     System.out.println(cart.getTotalCost());
-    //     System.out.println(cart.getEntireCart().toString());
-    //     boolean actual = cart.deleteEntireCart();
+    public static void main(String [] args){
+        /*testing purposes */
+        ArrayList<Jersey> jerseyArray = new ArrayList<Jersey>(); 
+        Cart cart = new Cart(jerseyArray,1); 
+        Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
+        cart.addJerseyToCart(jersey); 
+        cart.addJerseyToCart(jersey); 
+        cart.addJerseyToCart(jersey); 
+      
+        boolean actual =cart.deleteJerseyType(jersey); 
+        System.out.println("cart:" + cart.getQuantity(jersey));
+        System.out.println("result: " + actual );
 
-    //     System.out.println("result: " + actual );
-
-    // }
+    }
 
 }
