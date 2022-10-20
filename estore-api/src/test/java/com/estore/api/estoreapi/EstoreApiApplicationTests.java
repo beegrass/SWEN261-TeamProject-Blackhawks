@@ -8,9 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest;
  * This is a built in test that comes with the Spring framework that validates
  * that the REST API service starts (that's it)
  */
-@Tag("Controller-tier")
+@Tag("Model-tier")
+// @Tag("Controller-tier")
+// @Tag("Persistence-tier")
 @SpringBootTest
-class HeroesApiApplicationTests {
+class EstoreApiApplicationTests {
 
 	@Test
 	void testContextLoads() {

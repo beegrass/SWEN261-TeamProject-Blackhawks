@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.model;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a Jersey entity
  * 
@@ -136,6 +137,9 @@ public class Jersey {
     public String toString() {
         return this.id + " " + this.name + " " + this.price + " " + this.color + " " + this.size;
     }
+    
+    
+  
     
 
 }
