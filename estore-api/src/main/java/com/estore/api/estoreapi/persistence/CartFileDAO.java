@@ -128,7 +128,7 @@ public class CartFileDAO implements CartDAO {
         Cart cart = allCarts.get(cartId);
         boolean isDecremented; 
         synchronized(allCarts){
-            if(cart != null){ 
+            if(cart != null ){ 
                 isDecremented = cart.decrementJerseyTypeFromCart(jerseyId);
                 if(isDecremented == false){
                     return null; 
