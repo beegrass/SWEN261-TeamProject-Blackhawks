@@ -48,18 +48,18 @@ Maintain Inventory
 Color Blindness Accessibility
 
 ### Roadmap of Enhancements
-> _Provide a list of top-level features in the order you plan to consider them._
+GUI usability improvements
+Inventory Management and Storefront GUI
+Accessibility features
 
 
 ## Application Domain
 
 This section describes the application domain.
 
-![Domain Model](domain-model-placeholder.png)
+![Domain Model](domain-model.png)
 
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+Almost everything within the domain depends on whether the user is an admin or not, as in each case many features become available depending on the answer. In addition, the Jersey object is the backbone of the store, as this is the only product that the store will sell.
 
 
 ## Architecture and Design
