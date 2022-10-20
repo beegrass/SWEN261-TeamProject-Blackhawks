@@ -1,7 +1,9 @@
 package com.estore.api.estoreapi.model;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -92,7 +94,7 @@ public class Cart {
      * @return valid - the jersey was added or not
      */
     public boolean addJerseyToCart(Jersey jersey){
-        cart.add(jersey); 
+        cart.add(jersey);
         return true; 
     }
 
@@ -102,33 +104,54 @@ public class Cart {
      * @param jersey
      * @return valid boolean
      */
-    public boolean decrementJerseyTypeFromCart(Jersey jersey){
+    public boolean decrementJerseyTypeFromCart(int jerseyId){
         boolean valid = false;
-        if(cart.contains(jersey) == true && getQuantity(jersey) > 0){
-            cart.remove(jersey); 
-            totalCost = getTotalCost(); 
-            valid = true; 
+        for(Jersey jersey : cart){
+            if(jersey.getId() == jerseyId){
+                cart.remove(jersey);
+                totalCost = getTotalCost();
+                return true; 
+            }
         }
         return valid; 
+        // if(cart.contains(jersey) == true){
+        //     cart.remove(jersey); 
+        //     totalCost = getTotalCost(); 
+        //     valid = true; 
+        // }
+        // return valid; 
     }
 
     /**
      * Deletes the given jersey and all of the quantities of it from the cart
      * returns true when done 
      * @param jersey
-     * @return valid 
+     * @return valid - true if deleted false if not there or not deleted
      */
-    public boolean deleteJerseyType(Jersey jersey){
+    public boolean deleteJerseyType(Jersey jersey){ 
         boolean valid = false;
         if(cart.contains(jersey) == true){
             while(cart.contains(jersey) == true){
                 cart.remove(jersey);
             }
-            //totalCost = getTotalCost(); 
+            while(cart.contains(jersey) == true){
+                cart.remove(jersey); 
+            }
+            totalCost = getTotalCost(); 
             valid = true;
         }
 
         return valid; 
+    }
+
+    private ArrayList<Integer> getIndexesOfJerseys(Jersey jersey){
+        ArrayList<Integer> indexes = new ArrayList<>();
+        for(int i = 0; i < cart.size(); i++){
+            if(cart.get(i) == jersey){
+                indexes.add(i);
+            }
+        }
+        return indexes; 
     }
 
     /**
@@ -157,19 +180,18 @@ public class Cart {
         return id; 
     }
 
-    public static void main(String [] args){
-        /*testing purposes */
-        ArrayList<Jersey> jerseyArray = new ArrayList<Jersey>(); 
-        Cart cart = new Cart(jerseyArray,1); 
-        Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
-        cart.addJerseyToCart(jersey); 
-        cart.addJerseyToCart(jersey); 
-        cart.addJerseyToCart(jersey); 
+    // public static void main(String [] args){
+    //     /*testing purposes */
+    //     ArrayList<Jersey> jerseyArray = new ArrayList<Jersey>(); 
+    //     Cart cart = new Cart(jerseyArray,1); 
+    //     Jersey jersey = new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
+    //     cart.addJerseyToCart(jersey); 
+     
       
-        boolean actual =cart.deleteJerseyType(jersey); 
-        System.out.println("cart:" + cart.getQuantity(jersey));
-        System.out.println("result: " + actual );
+    //     boolean actual =cart.decrementJerseyTypeFromCart(jersey); 
+    //     System.out.println("cart:" + cart.getQuantity(jersey));
+    //     System.out.println("result: " + actual );
 
-    }
+    // }
 
 }

@@ -50,10 +50,10 @@ public class CartControllerTest {
         cart.addJerseyToCart(j2);
         cart.addJerseyToCart(j1);
 
-        cart.decrementJerseyTypeFromCart(j1); 
+        cart.decrementJerseyTypeFromCart(j1.getId()); 
 
         when(mockJerseyDAO.getJersey(jerseyId)).thenReturn(j1);
-        when(mockCartDAO.decrementJerseyTypeAmount(cartId, j1)).thenReturn(cart);
+        when(mockCartDAO.decrementJerseyTypeAmount(cartId, j1.getId())).thenReturn(cart);
         
         ResponseEntity<Cart> response = cartController.decrementJerseyTypeAmount(cartId, jerseyId); 
         
@@ -69,7 +69,7 @@ public class CartControllerTest {
         int jerseyId = 8; // this is not in the map: fails when not contained 
         Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
     
-        when(mockCartDAO.decrementJerseyTypeAmount(cartId, jersey)).thenReturn(null);
+        when(mockCartDAO.decrementJerseyTypeAmount(cartId, jerseyId)).thenReturn(null);
 
         ResponseEntity<Cart> response = cartController.decrementJerseyTypeAmount(cartId, jerseyId);
         //Cart actualCart = mockCartDAO.getSpecificCart(cartId);
@@ -82,7 +82,7 @@ public class CartControllerTest {
         int cartId = 1;
         int jerseyId = 26; // this is not in the map: fails when not contained 
         Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
-        doThrow(new IOException()).when(mockCartDAO).decrementJerseyTypeAmount(cartId, jersey);
+        doThrow(new IOException()).when(mockCartDAO).decrementJerseyTypeAmount(cartId, jerseyId);
 
         //when(mockCartDAO.decrementJerseyTypeAmount(cartId, jersey)).thenReturn(false);
 

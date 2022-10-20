@@ -44,7 +44,7 @@ public class CartController {
         LOG.info("POST /cart " + cart);
         try{
             Cart createdCart = cartDAO.createNewCart(cart); 
-            if(createdCart != null){
+            if(createdCart.getEntireCart().length > 0){
                 Cart newCart = cartDAO.createNewCart(cart); 
                 return new ResponseEntity<Cart>(newCart, HttpStatus.CREATED);
             }else{
@@ -59,10 +59,9 @@ public class CartController {
 
     @PutMapping("/decrement/")
     public ResponseEntity<Cart> decrementJerseyTypeAmount(@RequestParam int cartId, @RequestParam int jerseyId){
-        LOG.info("PUT /cart/decrement/?cart=" + cartId + "&jerseyId=" + jerseyId); 
+        LOG.info("PUT /cart/decrement/?cartId=" + cartId + "&jerseyId=" + jerseyId); 
         try{
-            Jersey jersey = jerseyDAO.getJersey(jerseyId);
-            Cart result = cartDAO.decrementJerseyTypeAmount(cartId, jersey); 
+            Cart result = cartDAO.decrementJerseyTypeAmount(cartId, jerseyId); 
             if(result!=null){
                 return new ResponseEntity<Cart>(result, HttpStatus.OK); 
             }else{
@@ -107,7 +106,7 @@ public class CartController {
 
     @PutMapping("/deleteEntireCart/")
     public ResponseEntity<Cart> deleteEntireCart(@RequestParam int cartId){
-        LOG.info("PUT /cart/deleteJerseyType/?cart=" + cartId ); 
+        LOG.info("PUT /cart/deleteEntireCart/?cart=" + cartId ); 
         try{
             Cart result = cartDAO.deleteEntireCart(cartId); 
             if(result != null){
@@ -120,20 +119,20 @@ public class CartController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{cartId}")
     public ResponseEntity<Cart> getSpecificCart(@PathVariable int cartId){
         LOG.info("GET /cart/" + cartId);
-        try{
+        //try{
             Cart cart = cartDAO.getSpecificCart(cartId); 
             if(cart != null){
                 return new ResponseEntity<Cart>(cart, HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
             }
-        }catch(IOException e){
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        // }catch(IOException e){
+        //     LOG.log(Level.SEVERE,e.getLocalizedMessage());
+        //     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        // }
     }
     
 
