@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch CartFileDAO",
+            "request": "launch",
+            "mainClass": "com.estore.api.estoreapi.persistence.CartFileDAO",
+            "projectName": "estore-api"
+        },
+        {
+            "type": "java",
             "name": "Launch Cart",
             "request": "launch",
             "mainClass": "com.estore.api.estoreapi.model.Cart",
