@@ -7,48 +7,44 @@
                 "number": 5,
                 "price": 179.95,
                 "color": "Red",
-                "size": "Medium",
+                "size": "Large",
                 "image": "./images/connor_murphy_5_red.jpg"
             }
         ],
-        "id": 1,
-        "entireCart": [
-            {
-                "id": 5,
-                "name": "Connor Murphy",
-                "number": 5,
-                "price": 179.95,
-                "color": "Red",
-                "size": "Medium",
-                "image": "./images/connor_murphy_5_red.jpg"
-            }
-        ],
-        "totalCost": 179.95
+        "totalCost":309.94,
+        "id":1
     },
     {
-        "cartArray": [
+        "cartArray":[
             {
-                "id": 5,
-                "name": "Connor Murphy",
-                "number": 5,
-                "price": 179.95,
+                "id": 7,
+                "name": "Jeremy Roenick",
+                "number": 27,
+                "price": 200.35,
+                "color": "Red",
+                "size": "Small",
+                "image": "./images/jeremy_roenick_27_red.jpg"
+            },
+            {
+                "id": 11,
+                "name": "Eddie Olczyk",
+                "number": 16,
+                "price": 190.99,
                 "color": "Red",
                 "size": "Medium",
-                "image": "./images/connor_murphy_5_red.jpg"
-            }
-        ],
-        "id": 2,
-        "entireCart": [
+                "image": "./images/eddie_olczyk_16_red.jpg"
+            },
             {
-                "id": 5,
-                "name": "Connor Murphy",
-                "number": 5,
-                "price": 179.95,
+                "id": 11,
+                "name": "Eddie Olczyk",
+                "number": 16,
+                "price": 190.99,
                 "color": "Red",
                 "size": "Medium",
-                "image": "./images/connor_murphy_5_red.jpg"
+                "image": "./images/eddie_olczyk_16_red.jpg"
             }
         ],
-        "totalCost": 179.95
+        "totalCost":582.33,
+        "id":2
     }
 ]
