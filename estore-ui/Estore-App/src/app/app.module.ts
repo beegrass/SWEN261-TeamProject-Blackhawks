@@ -24,9 +24,7 @@ import { CustDashboardComponent } from './cust-dashboard/cust-dashboard.componen
   declarations: [
     AppComponent,
     CartComponent,
-
-    CheckoutComponent
-
+    CheckoutComponent,
     LoginComponent,
     LogoutComponent,
     JerseysComponent,
