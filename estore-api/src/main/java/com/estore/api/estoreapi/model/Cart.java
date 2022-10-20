@@ -1,7 +1,6 @@
 package com.estore.api.estoreapi.model;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,14 +18,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Cart {
     
-    //will hold the jerseys in cart
-        //chose dict bc we dont need ordering and it has easy access
-        //Jersey is the jersey object
-        //Integer is a quantity counter, how many of jersey in cart
+//     //will hold the jerseys in cart
+//         //chose dict bc we dont need ordering and it has easy access
+//         //Jersey is the jersey object
+//         //Integer is a quantity counter, how many of jersey in cart
     private static final Logger LOG = Logger.getLogger(Jersey.class.getName());
 
-    // Package private for tests
-    static final String STRING_FORMAT = "Jersey [id=%d, name=%s]";
+//     // Package private for tests
+//     static final String STRING_FORMAT = "Jersey [id=%d, name=%s]";
     
     @JsonProperty("cartArray") private List<Jersey> cart;
     @JsonProperty("totalCost") private double totalCost;
@@ -139,10 +138,10 @@ public class Cart {
             }
             totalCost = getTotalCost(); 
             valid = true;
-        }
-
-        return valid; 
     }
+
+         return valid; 
+     }
 
     private ArrayList<Integer> getIndexesOfJerseys(Jersey jersey){
         ArrayList<Integer> indexes = new ArrayList<>();
@@ -180,6 +179,7 @@ public class Cart {
         return id; 
     }
 
+
     // public static void main(String [] args){
     //     /*testing purposes */
     //     ArrayList<Jersey> jerseyArray = new ArrayList<Jersey>(); 
@@ -194,4 +194,4 @@ public class Cart {
 
     // }
 
-}
+ }

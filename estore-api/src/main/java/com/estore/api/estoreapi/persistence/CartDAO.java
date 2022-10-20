@@ -2,14 +2,13 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.IOException;
 
-
 import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.model.Jersey;
 
 /**
  * Defines the interface for Jersey object persistence
  * 
- * @author Angela Ngo and Vincent Schwartz, Angela Ngo Schwartz
+ * @author Angela Ngo
  */
 
 
@@ -95,5 +94,5 @@ public interface CartDAO {
     //  * */
     // int getTotalCountJerseys(HashMap<Jersey, Integer> cart);
     
-    // int getTotalCostJerseys(HashMap<Jersey, Integer> cart);
+//     // int getTotalCostJerseys(HashMap<Jersey, Integer> cart);
 }
