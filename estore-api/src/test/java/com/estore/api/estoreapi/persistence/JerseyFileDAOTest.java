@@ -64,8 +64,6 @@ public class JerseyFileDAOTest {
             assertEquals(jerseys[i],testJerseys[i]);
     }
 
-    
-
     @Test
     public void testFindJerseyNameOnly() throws IOException {
         // Invoke

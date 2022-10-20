@@ -33,10 +33,10 @@ public interface CartDAO {
      * @return Cart if the {@link Jersey jersey} was successfully decremented in the arraylist
      * <br>
      * false if jersey with the given object does not exist in the Cart 
-     * @throws IOException
      * 
+     * @throws IOException if there is no Jersey objects in the Cart
      * */
-    Cart decrementJerseyTypeAmount(int cartId, int jerseyId) throws IOException; 
+    Cart decrementJerseyTypeAmount(int cartId, Jersey jersey) throws IOException; 
 
     /**
      * Adds a new {@linkplain Jersey jersey} key into the cart's arraylist  
@@ -46,8 +46,8 @@ public interface CartDAO {
      * @return Cart object if the {@link Jersey jersey} was successfully incremented 
      * <br>
      * false if jersey with the given object does not exist
-     * @throws IOException if there is an issue with save ()
      * 
+     * @throws IOException if there null fields in the Jersey parameter 
      * */
     Cart addJerseyToCart(int cartId, Jersey jersey) throws IOException; 
 
@@ -57,8 +57,8 @@ public interface CartDAO {
      * @param jersey the jersey wanted to entirely remove from the arraylist in {@link Cart cart}
      * 
      * @return Cart if all instances of {@link Jersey jersey} was successfully deleted 
-     * @throws IOException if there is an issue with save()
      * 
+     * @throws IOException if jersey with the given object does not exist
      * */
     Cart deleteEntireJerseyFromCart(int cartId, Jersey jersey) throws IOException;
 
@@ -66,7 +66,7 @@ public interface CartDAO {
      * deletes all jerseys from the carts array list 
      * @return Cart (empty) if the contents of Cart was successfully entirely deleted 
      * 
-     * @throws IOException if Cart doesnt exist 
+     * @throws IOException if Cart is empty
      * */
     Cart deleteEntireCart(int cartId) throws IOException; 
 
@@ -81,9 +81,10 @@ public interface CartDAO {
     /**
      * retrieves a specific cart from the hashmap in cartfileDAO
      * @param cartId
-     * @return Cart
+     * @return
+     * @throws IOException if the cart doesnt exist in the 
      */
-    Cart getSpecificCart(int cartId); 
+    Cart getSpecificCart(int cartId) throws IOException; 
     // /**
     //  * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 
     //  * 

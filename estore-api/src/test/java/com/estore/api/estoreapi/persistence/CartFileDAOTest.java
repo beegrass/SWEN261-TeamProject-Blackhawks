@@ -81,7 +81,7 @@ public class CartFileDAOTest {
     public void testDecrementJerseyTypeAmount() throws IOException{
         int cartId = 2;
         Jersey jersey = testJersey[0];
-        Cart cart = cartFileDAO.decrementJerseyTypeAmount(cartId, jersey.getId());
+        Cart cart = cartFileDAO.decrementJerseyTypeAmount(cartId, jersey);
         assertEquals(2, cart.totalJerseysInCart());
         assertEquals(2, testCarts[1].totalJerseysInCart()); 
     }

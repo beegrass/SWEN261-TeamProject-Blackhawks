@@ -53,9 +53,9 @@ public class CartFileDAO implements CartDAO {
     }
 
     private boolean load() throws IOException{
-    
+        File file = new File(filename); 
         nextId = 0; 
-        Cart [] cartArray = objectMapper.readValue(new File(filename), Cart[].class);
+        Cart [] cartArray = objectMapper.readValue(file, Cart[].class);
         allCarts = new TreeMap<>(); 
         for(Cart cart : cartArray){
             allCarts.put(cart.getId(), cart);
@@ -108,7 +108,7 @@ public class CartFileDAO implements CartDAO {
      * @return Cart
      */
     @Override
-    public Cart getSpecificCart(int cartId) {
+    public Cart getSpecificCart(int cartId) throws IOException {
         Cart cart = null; 
         if(allCarts.containsKey(cartId) == true){
             cart = allCarts.get(cartId); 
@@ -121,35 +121,27 @@ public class CartFileDAO implements CartDAO {
      * This decrements the quantity of a certain jersey from a given jersey and cartId 
      * @param cartId - the id of the cart wanted to select 
      * @param jersey - the jersey wanted to decrement from the quantity
-     * @throws IOException
      */
     @Override
-    public Cart decrementJerseyTypeAmount(int cartId, int jerseyId) throws IOException {
-        Cart cart = allCarts.get(cartId);
+    public Cart decrementJerseyTypeAmount(int cartId, Jersey jersey) throws IOException {
+        Cart cart = getSpecificCart(cartId); 
         boolean isDecremented; 
         synchronized(allCarts){
-            if(cart != null){ 
-                isDecremented = cart.decrementJerseyTypeFromCart(jerseyId);
-                if(isDecremented == false){
-                    return null; 
-                }
-                allCarts.replace(cartId, cart);
-                save();
+            isDecremented = cart.decrementJerseyTypeFromCart(jersey);
+            save();
+            if(isDecremented == false){
+                return null;
+            }else{
                 return cart; 
-            }
-            return null; 
-        
+            } 
         }
     }
 
     @Override
-    public Cart addJerseyToCart(int cartId, Jersey jersey) throws IOException{
+    public Cart addJerseyToCart(int cartId, Jersey jersey) throws IOException {
         Cart cart = getSpecificCart(cartId); 
         boolean isAdded; 
         synchronized(allCarts){
-            if(jersey == null || cart == null){
-                return null; 
-            }
             isAdded = cart.addJerseyToCart(jersey); 
             save();
             if(isAdded == false){
@@ -165,9 +157,6 @@ public class CartFileDAO implements CartDAO {
         Cart cart = getSpecificCart(cartId);
         boolean isDeleted;
         synchronized(allCarts){
-            if(jersey == null || cart == null){
-                return null; 
-            }
             isDeleted = cart.deleteJerseyType(jersey);
             save();
             if(isDeleted == false){
@@ -199,12 +188,9 @@ public class CartFileDAO implements CartDAO {
 
     @Override
     public Cart createNewCart(Cart cart) throws IOException {
-        
         synchronized(allCarts){
-            // Jersey [] testing = new Jersey[1];
-            // testing[0] = new Jersey(10,"poop",25,125.55,"Red", "large", "img.png"); 
             List<Jersey> converted = Arrays.asList(cart.getEntireCart());
-            Cart newCart = new Cart(converted, nextId());  //nextId());
+            Cart newCart = new Cart(converted, nextId());
             allCarts.put(newCart.getId(), newCart);
             save(); 
             return newCart;

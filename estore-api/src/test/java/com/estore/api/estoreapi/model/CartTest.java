@@ -84,7 +84,7 @@ public class CartTest {
         
         cart.addJerseyToCart(jersey);
         cart.addJerseyToCart(jersey);  
-        cart.decrementJerseyTypeFromCart(jersey.getId());
+        cart.decrementJerseyTypeFromCart(jersey);
         int actual = cart.getEntireCart().length;
         assertEquals(1, actual);
 
@@ -98,7 +98,7 @@ public class CartTest {
         cart.addJerseyToCart(jersey); 
         Jersey jersey1 = new Jersey(2,"pail",23,123.55,"Black", "Medium", "img.png");
     
-        boolean actual = cart.decrementJerseyTypeFromCart(jersey1.getId());
+        boolean actual = cart.decrementJerseyTypeFromCart(jersey1);
         assertEquals(actual, false);
         assertEquals(cart.getEntireCart().length, 1);
     }
