@@ -1,43 +1,69 @@
 /* jerseysComponent's private CSS styles */
 .jerseys {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 15em;
-  }
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
 
-  .jerseys img {
-    height: 200;
-    width: 200;
-    border-radius: 8px;
-    border: 1px solid #ddd
-  }
+.jerseys img {
+  height: 200;
+  width: 200;
+  border-radius: 8px;
+  border: 1px solid #ddd
+}
 
-  .jerseys img:hover {
-    box-shadow: 0 0 2px 1px rgb(255, 0, 0);
-  }
+.jerseys img:hover {
+  box-shadow: 0 0 2px 1px rgb(255, 0, 0);
+}
 
-  .jerseys img:active {
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
-  }
+.jerseys img:active {
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+}
 
-  .jerseys table {
-    width: 100%;
-  }
-  
-  .jerseys .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #405061;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    min-width: 16px;
-    text-align: right;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
-  }
+.jerseys table {
+  width: 100%;
+}
+
+.jerseys .name-badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #405061;
+  line-height: 1em;
+  position: center;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  min-width: 16px;
+  text-align: right;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+
+.jerseys .name {
+  align-self: center;
+}
+
+.info {
+  background-color: rgb(194, 194, 194);
+  align-items: center;
+  border-radius: 4px 4px 4px 4px;
+  border-color: rgb(194, 194, 194);
+  table-layout: fixed;
+}
+
+.info .name {
+  background-color: rgba(234,70,86,255);
+  border-radius: 4px 0 0 4px;
+  align-self: center;
+}
+
+.jerseys .price-badge {
+  background-color: #d4d5d6;
+}
+
+td {
+  text-align: center;
+}

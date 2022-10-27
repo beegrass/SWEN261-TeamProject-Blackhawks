@@ -9,7 +9,11 @@
         <a routerLink="/detail/{{jersey.id}}">
           <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
         </a>
-        <span class="name">{{jersey.name}} : {{jersey.size}}</span>
+        <table class="info">
+          <th class="name">{{jersey.name}} {{jersey.number}}</th>
+          <th class="size">{{jersey.size}}</th>
+        </table> 
+        <span class="price-badge">${{jersey.price}}</span> 
       </td>
     </ng-container>
   </table>
