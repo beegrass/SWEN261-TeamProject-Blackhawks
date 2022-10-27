@@ -83,16 +83,5 @@ public interface CartDAO {
      * @return Cart
      */
     Cart getSpecificCart(int cartId); 
-    // /**
-    //  * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 
-    //  * 
-    //  * @param jersey the key to delete from cart{@link Jersey jersey}
-    //  * 
-    //  * @return true if the {@link Jersey jersey} was successfully deleted 
-    //  * 
-    //  * @throws IOException if jersey with the given object does not exist
-    //  * */
-    // int getTotalCountJerseys(HashMap<Jersey, Integer> cart);
-    
-//     // int getTotalCostJerseys(HashMap<Jersey, Integer> cart);
+   
 }
