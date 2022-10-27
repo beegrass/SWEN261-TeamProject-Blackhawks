@@ -6,7 +6,7 @@
         "price": 129.99,
         "color": "Red",
         "size": "Small",
-        "image": "./images/chris_chelios_7_red.jpg"
+        "image": "assets/chris_chelios_7_red.jpg"
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@
         "price": 129.99,
         "color": "Red",
         "size": "Medium",
-        "image": "./images/chris_chelios_7_red.jpg"
+        "image": "assets/chris_chelios_7_red.jpg"
     },
     {
         "id": 3,
@@ -24,7 +24,7 @@
         "price": 129.99,
         "color": "Red",
         "size": "Large",
-        "image": "./images/chris_chelios_7_red.jpg"
+        "image": "assets/chris_chelios_7_red.jpg"
     },
     {
         "id": 4,
@@ -33,7 +33,7 @@
         "price": 179.95,
         "color": "Red",
         "size": "Small",
-        "image": "./images/connor_murphy_5_red.jpg"
+        "image": "assets/connor_murphy_5_red.jpg"
     },
     {
         "id": 5,
@@ -42,7 +42,7 @@
         "price": 179.95,
         "color": "Red",
         "size": "Medium",
-        "image": "./images/connor_murphy_5_red.jpg"
+        "image": "assets/connor_murphy_5_red.jpg"
     },
     {
         "id": 6,
@@ -51,7 +51,7 @@
         "price": 179.95,
         "color": "Red",
         "size": "Large",
-        "image": "./images/connor_murphy_5_red.jpg"
+        "image": "assets/connor_murphy_5_red.jpg"
     },
     {
         "id": 7,
@@ -60,7 +60,7 @@
         "price": 200.35,
         "color": "Red",
         "size": "Small",
-        "image": "./images/jeremy_roenick_27_red.jpg"
+        "image": "assets/jeremy_roenick_27_red.jpg"
     },
     {
         "id": 8,
@@ -69,7 +69,7 @@
         "price": 200.35,
         "color": "Red",
         "size": "Medium",
-        "image": "./images/jeremy_roenick_27_red.jpg"
+        "image": "assets/jeremy_roenick_27_red.jpg"
     },
     {
         "id": 9,
@@ -78,7 +78,7 @@
         "price": 200.35,
         "color": "Red",
         "size": "Large",
-        "image": "./images/jeremy_roenick_27_red.jpg"
+        "image": "assets/jeremy_roenick_27_red.jpg"
     },
     {
         "id": 10,
@@ -87,7 +87,7 @@
         "price": 190.99,
         "color": "Red",
         "size": "Small",
-        "image": "./images/eddie_olczyk_16_red.jpg"
+        "image": "assets/eddie_olczyk_16_red.jpg"
     },
     {
         "id": 11,
@@ -96,7 +96,7 @@
         "price": 190.99,
         "color": "Red",
         "size": "Medium",
-        "image": "./images/eddie_olczyk_16_red.jpg"
+        "image": "assets/eddie_olczyk_16_red.jpg"
     },
     {
         "id": 12,
@@ -105,7 +105,7 @@
         "price": 190.99,
         "color": "Red",
         "size": "Large",
-        "image": "./images/eddie_olczyk_16_red.jpg"
+        "image": "assets/eddie_olczyk_16_red.jpg"
     },
     {
         "id": 13,
@@ -114,7 +114,7 @@
         "price": 300.00,
         "color": "Red",
         "size": "Small",
-        "image": "./images/johnathan_Toews_19_red.jpg"
+        "image": "assets/johnathan_Toews_19_red.jpg"
     },
     {
         "id": 14,
@@ -123,7 +123,7 @@
         "price": 300.00,
         "color": "Red",
         "size": "Medium",
-        "image": "./images/johnathan_Toews_19_red.jpg"
+        "image": "assets/johnathan_Toews_19_red.jpg"
     },
     {
         "id": 15,
@@ -132,7 +132,7 @@
         "price": 300.00,
         "color": "Red",
         "size": "Large",
-        "image": "./images/johnathan_Toews_19_red.jpg"
+        "image": "assets/johnathan_Toews_19_red.jpg"
     },
     {
         "id": 16,
@@ -141,7 +141,7 @@
         "price": 168.99,
         "color": "Red",
         "size": "Small",
-        "image": "./images/patrick_kane_88_red.jpg"
+        "image": "assets/patrick_kane_88_red.jpg"
     },
     {
         "id": 17,
@@ -150,7 +150,7 @@
         "price": 168.99,
         "color": "Red",
         "size": "Medium",
-        "image": "./images/patrick_kane_88_red.jpg"
+        "image": "assets/patrick_kane_88_red.jpg"
     },
     {
         "id": 18,
@@ -159,7 +159,7 @@
         "price": 168.99,
         "color": "Red",
         "size": "Large",
-        "image": "./images/patrick_kane_88_red.jpg"
+        "image": "assets/patrick_kane_88_red.jpg"
     },
     {
         "id": 19,
@@ -168,7 +168,7 @@
         "price": 120.00,
         "color": "White",
         "size": "Small",
-        "image": "./images/johnathan_Toews_19_white.jpg"
+        "image": "assets/johnathan_Toews_19_white.jpg"
     },
     {
         "id": 20,
@@ -177,7 +177,7 @@
         "price": 120.00,
         "color": "White",
         "size": "Medium",
-        "image": "./images/johnathan_Toews_19_white.jpg"
+        "image": "assets/johnathan_Toews_19_white.jpg"
     },
     {
         "id": 21,
@@ -186,7 +186,7 @@
         "price": 120.00,
         "color": "White",
         "size": "Large",
-        "image": "./images/johnathan_Toews_19_white.jpg"
+        "image": "assets/johnathan_Toews_19_white.jpg"
     },
     {
         "id": 22,
@@ -195,7 +195,7 @@
         "price": 285.99,
         "color": "White",
         "size": "Small",
-        "image": "./images/patrick_kane_88_white.jpg"
+        "image": "assets/patrick_kane_88_white.jpg"
     },
     {
         "id": 23,
@@ -204,7 +204,7 @@
         "price": 285.99,
         "color": "White",
         "size": "Medium",
-        "image": "./images/patrick_kane_88_white.jpg"
+        "image": "assets/patrick_kane_88_white.jpg"
     },
     {
         "id": 24,
@@ -213,7 +213,7 @@
         "price": 285.99,
         "color": "White",
         "size": "Large",
-        "image": "./images/patrick_kane_88_white.jpg"
+        "image": "assets/patrick_kane_88_white.jpg"
     },
     {
         "id": 25,
@@ -222,7 +222,7 @@
         "price": 300.00,
         "color": "Red",
         "size": "Small",
-        "image": "./images/reese_johnson_52_red.jpg"
+        "image": "assets/reese_johnson_52_red.jpg"
     },
     {
         "id": 26,
@@ -231,7 +231,7 @@
         "price": 300.00,
         "color": "Red",
         "size": "Medium",
-        "image": "./images/reese_johnson_52_red.jpg"
+        "image": "assets/reese_johnson_52_red.jpg"
     },
     {
         "id": 27,
@@ -240,7 +240,7 @@
         "price": 300.00,
         "color": "Red",
         "size": "Large",
-        "image": "./images/reese_johnson_52_red.jpg"
+        "image": "assets/reese_johnson_52_red.jpg"
     },
     {
         "id": 28,
@@ -249,7 +249,7 @@
         "price": 300.00,
         "color": "Red",
         "size": "Small",
-        "image": "./images/reese_johnson_52_red.jpg"
+        "image": "assets/reese_johnson_52_red.jpg"
     },
     {
         "id": 29,
@@ -258,7 +258,7 @@
         "price": 300.00,
         "color": "Red",
         "size": "Medium",
-        "image": "./images/reese_johnson_52_red.jpg"
+        "image": "assets/reese_johnson_52_red.jpg"
     },
     {
         "id": 30,
@@ -267,7 +267,7 @@
         "price": 300.00,
         "color": "Red",
         "size": "Large",
-        "image": "./images/reese_johnson_52_red.jpg"
+        "image": "assets/reese_johnson_52_red.jpg"
     }
 ]
    

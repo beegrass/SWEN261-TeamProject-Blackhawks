@@ -5,35 +5,24 @@
     padding: 0;
     width: 15em;
   }
-  .jerseys li {
-    position: relative;
-    cursor: pointer;
+
+  .jerseys img {
+    height: 200;
+    width: 200;
+    border-radius: 8px;
+    border: 1px solid #ddd
   }
-  
-  .jerseys li:hover {
-    left: .1em;
+
+  .jerseys img:hover {
+    box-shadow: 0 0 2px 1px rgb(255, 0, 0);
   }
-  
-  .jerseys a {
-    color: #333;
-    text-decoration: none;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
-    display: block;
+
+  .jerseys img:active {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+  }
+
+  .jerseys table {
     width: 100%;
-  }
-  
-  .jerseys a:hover {
-    color: #2c3a41;
-    background-color: #e6e6e6;
-  }
-  
-  .jerseys a:active {
-    background-color: #525252;
-    color: #fafafa;
   }
   
   .jerseys .badge {
