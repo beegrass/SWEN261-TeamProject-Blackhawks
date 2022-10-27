@@ -2,15 +2,18 @@ package com.estore.api.estoreapi.model;
 
 /**
  * @author Ethan Abbate, Angela Ngo 
- * Interface for Customer and Admin 
+ * Parent class for Customer and Admin 
  */
-public abstract class User {
+
+public class User {
     private String username; 
     private boolean type; 
+    private int id; 
 
-    public User(String username, boolean type){
+    public User(String username, boolean type, int id){
         this.type = type; 
         this.username = username; 
+        this.id = id; 
     }
 
     public String getUsername(){
@@ -19,6 +22,10 @@ public abstract class User {
     
     public boolean getUserType(){
         return type; 
+    }
+
+    public int getUserId(){
+        return id; 
     }
    
 }
