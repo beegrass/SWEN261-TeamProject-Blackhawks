@@ -59,7 +59,7 @@ public interface JerseyDAO {
     Jersey getJersey(int id) throws IOException;
     
   
-     /**
+    /**
      * Creates and saves a {@linkplain Jersey jersey}
      * 
      * @param jersey {@linkplain Jersey jersey} object to be created and saved
@@ -84,7 +84,7 @@ public interface JerseyDAO {
      */
     Jersey updateJersey(Jersey jersey) throws IOException;
 
-       /**
+    /**
      * Deletes a {@linkplain Jersey jersey} with the given id
      * 
      * @param id The id of the {@link Jersey jersey}

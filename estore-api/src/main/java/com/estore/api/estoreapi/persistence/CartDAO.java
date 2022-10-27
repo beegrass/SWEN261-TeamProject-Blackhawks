@@ -1,7 +1,6 @@
 package com.estore.api.estoreapi.persistence;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.model.Jersey;
@@ -9,7 +8,7 @@ import com.estore.api.estoreapi.model.Jersey;
 /**
  * Defines the interface for Jersey object persistence
  * 
- * @author Vincent Schwartz, Angela Ngo
+ * @author Angela Ngo
  */
 
 
@@ -18,58 +17,72 @@ public interface CartDAO {
     /**
      * Retrieves all {@linkplain Jersey jersey's}
      * 
-     * @return A set of {@link Jersey jerseys} objects, may be empty
+     * @return An array of {@link Jersey jerseys} objects, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
-    HashMap<Jersey, Integer> getJerseysInCart() throws IOException;
+    Jersey[] getJerseysFromCart(int cartId) throws IOException;
 
     /**
      * Decremements the amount of {@linkplain Jersey jersey} with the given jersey object in 
      * cart's map 
      * 
-     * @param jersey the key of the object incremented {@link Jersey jersey}
+     * @param jersey the key of the object decremented {@link Jersey jersey}
      * 
-     * @return HashMap<Jersey, Integer> if the {@link Jersey jersey} was successfully decremented in the HashMap 
+     * @return Cart if the {@link Jersey jersey} was successfully decremented in the arraylist
      * <br>
-     * false if jersey with the given object does not exist in the Hashmap Keys 
+     * false if jersey with the given object does not exist in the Cart 
+     * @throws IOException
      * 
-     * @throws IOException if there is no Jersey objects in the HashMap keys
      * */
-    boolean decrementJerseyTypeAmount(Jersey jersey); 
+    Cart decrementJerseyTypeAmount(int cartId, int jerseyId) throws IOException; 
 
     /**
-     * Adds a new {@linkplain Jersey jersey} key into the cart's Hashmap 
+     * Adds a new {@linkplain Jersey jersey} key into the cart's arraylist  
      * 
-     * @param jersey the new key of the HashMap{@link Jersey jersey}
+     * @param jersey the jersey wanted to put into array in {@link Cart cart}
      * 
-     * @return HashMap<Jersey, Integer> if the {@link Jersey jersey} was successfully incremented 
+     * @return Cart object if the {@link Jersey jersey} was successfully incremented 
      * <br>
      * false if jersey with the given object does not exist
+     * @throws IOException if there is an issue with save ()
      * 
-     * @throws IOException if there null fields in the Jersey parameter 
      * */
-    boolean addJerseyToCart(Jersey jersey); 
+    Cart addJerseyToCart(int cartId, Jersey jersey) throws IOException; 
 
     /**
      * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 
      * 
-     * @param jersey the key to delete from cart{@link Jersey jersey}
+     * @param jersey the jersey wanted to entirely remove from the arraylist in {@link Cart cart}
      * 
-     * @return true if the {@link Jersey jersey} was successfully deleted 
+     * @return Cart if all instances of {@link Jersey jersey} was successfully deleted 
+     * @throws IOException if there is an issue with save()
      * 
-     * @throws IOException if jersey with the given object does not exist
      * */
-    boolean deleteEntireJerseyFromCart(Jersey jersey);
+    Cart deleteEntireJerseyFromCart(int cartId, Jersey jersey) throws IOException;
 
     /**
-     * deletes all jerseys from the Cart {@link HashMap<Jersey, Integer> Cart}
-     * @return true if the contents of Cart was successfully entirely deleted 
+     * deletes all jerseys from the carts array list 
+     * @return Cart (empty) if the contents of Cart was successfully entirely deleted 
      * 
-     * @throws IOException if Cart is empty
+     * @throws IOException if Cart doesnt exist 
      * */
-    boolean deleteEntireCart() throws IOException; 
+    Cart deleteEntireCart(int cartId) throws IOException; 
 
+    /**
+     * Creates a new cart for a user 
+     * @param cart the cart that we want to add to the json file 
+     * @return Cart if it was successfully created null if otherwise
+     * @throws IOException if there was an issue with the cart object
+     */
+    Cart createNewCart(Cart cart) throws IOException; 
+
+    /**
+     * retrieves a specific cart from the hashmap in cartfileDAO
+     * @param cartId
+     * @return Cart
+     */
+    Cart getSpecificCart(int cartId); 
     // /**
     //  * deletes the jersey{@linkplain Jersey jersey} key and its associated number of values from the cart 
     //  * 
@@ -81,5 +94,5 @@ public interface CartDAO {
     //  * */
     // int getTotalCountJerseys(HashMap<Jersey, Integer> cart);
     
-    // int getTotalCostJerseys(HashMap<Jersey, Integer> cart);
+//     // int getTotalCostJerseys(HashMap<Jersey, Integer> cart);
 }
