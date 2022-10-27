@@ -2,10 +2,11 @@
 <h2>Login page</h2>
 <div class="user-form">
     Username: 
-    <form (ngSubmit) = "onSubmit() && isAdmin()">
+    <form (ngSubmit) = "isAdmin()">
         <input [(ngModel)]="username" name="username" placeholder="username">
     </form>
 </div>
+
 <div class="nav-login" >
-    <button class="login-button" [routerLink]="['/jerseys']">Sign in</button>
+    <button class="login-button" (click) = "isAdmin()">Sign in</button>
 </div>
