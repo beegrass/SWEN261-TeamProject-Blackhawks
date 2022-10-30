@@ -1,57 +1,57 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Cart } from './cart';
+// import { Injectable } from '@angular/core';
+// import { Observable, of } from 'rxjs';
+// import { catchError, map, tap } from 'rxjs/operators';
+// import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { Cart } from './cart';
 
 
-@Injectable({
-    providedIn: 'root'
-  })
-  export class CartService {
+// @Injectable({
+//     providedIn: 'root'
+//   })
+//   export class CartService {
   
   
-    private CartsUrl = 'http://localhost:8080/Cart' // URL to our api
-    httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    messageService: any;
+//     private CartsUrl = 'http://localhost:8080/Cart' // URL to our api
+//     httpOptions = {
+//       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+//     };
+//     messageService: any;
   
-    constructor(
-      private http: HttpClient
-      ) { }
+//     constructor(
+//       private http: HttpClient
+//       ) { }
 
 
-    getTotalCost(): number {
-        const url = `${this.CartsUrl}/getTotalCost`;
-        return (this.http.get<Cart>(url)).pipe(
-            catchError(this.handleError<Cart>(`getTotalCost`))
-        );
-        }
+//     getTotalCost(): number {
+//         const url = `${this.CartsUrl}/getTotalCost`;
+//         return (this.http.get<Cart>(url)).pipe(
+//             catchError(this.handleError<Cart>(`getTotalCost`))
+//         );
+//         }
 
-    private log(message: string) {
-        this.messageService.add(`CartService: ${message}`);
-    }
+//     private log(message: string) {
+//         this.messageService.add(`CartService: ${message}`);
+//     }
 
-/**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   *
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+// /**
+//    * Handle Http operation that failed.
+//    * Let the app continue.
+//    *
+//    * @param operation - name of the operation that failed
+//    * @param result - optional value to return as the observable result
+//    */
+//   private handleError<T>(operation = 'operation', result?: T) {
+//     return (error: any): Observable<T> => {
 
-      console.error(error); // log to console instead
+//       console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+//       // TODO: better job of transforming error for user consumption
+//       this.log(`${operation} failed: ${error.message}`);
 
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-}
+//       // Let the app keep running by returning an empty result.
+//       return of(result as T);
+//     };
+//   }
+// }
     
   

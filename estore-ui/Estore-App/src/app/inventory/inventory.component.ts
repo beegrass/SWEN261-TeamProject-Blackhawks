@@ -18,6 +18,20 @@ export class InventoryComponent implements OnInit {
 
   getJerseys(): void {
     this.jerseyService.getJerseys()
-      .subscribe(jerseys => this.jerseys = jerseys.slice(1, 5));
+      .subscribe(jerseys => this.jerseys = jerseys);
+  }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.jerseyService.addJersey({ name } as Jersey)
+      .subscribe(Jersey => {
+        this.jerseys.push(Jersey);
+      });
+  }
+
+  delete(jersey: Jersey): void {
+    this.jerseys = this.jerseys.filter(h => h !== jersey);
+    this.jerseyService.deleteJersey(jersey.id).subscribe();
   }
 }
