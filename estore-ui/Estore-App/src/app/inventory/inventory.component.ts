@@ -10,6 +10,9 @@ import { JerseyService } from '../jersey.service';
 export class InventoryComponent implements OnInit {
   jerseys: Jersey[] = [];
 
+  showAdd: boolean = false;
+  showModify: boolean = false;
+
   constructor(private jerseyService: JerseyService) { }
 
   ngOnInit(): void {
@@ -34,4 +37,9 @@ export class InventoryComponent implements OnInit {
     this.jerseys = this.jerseys.filter(h => h !== jersey);
     this.jerseyService.deleteJersey(jersey.id).subscribe();
   }
+
+  
+
+
+  
 }
