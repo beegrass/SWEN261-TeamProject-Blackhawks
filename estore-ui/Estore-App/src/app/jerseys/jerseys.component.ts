@@ -12,6 +12,8 @@ import { MessageService } from '../message.service';
 export class JerseysComponent implements OnInit {
   jerseys: Jersey[] = [];
 
+  loops: Number[] = [0, 0, 0];
+
   constructor(private jerseyService: JerseyService, private messageService: MessageService) { }
 
   ngOnInit(): void {
