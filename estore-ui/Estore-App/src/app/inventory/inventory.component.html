@@ -1,10 +1,10 @@
+<a routerLink="">Logout</a>
 <h1 style = "color: #aa0404; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Inventory Management</h1>
 <h3>Current Inventory:</h3>
 
 
 <button (click) = "showAdd = !showAdd" (click) = "showModify = false"type="button" class="options-button">Add Jersey</button>
 <button (click) = "showModify = !showModify" (click) = "showAdd = false" class="options-button">Modify Jersey</button>
-
 
 
 <div *ngIf="showAdd">
