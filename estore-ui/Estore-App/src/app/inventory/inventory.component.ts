@@ -23,4 +23,17 @@ export class InventoryComponent implements OnInit {
     this.jerseyService.getJerseys()
       .subscribe(jerseys => this.jerseys = jerseys);
   }
+
+  add(name: string, num: string, p: string, color: string, size: string, image: string): void {
+    let number = parseFloat(num);
+    let price = parseFloat(p);
+    console.log("added jersey")
+  
+    name = name.trim();
+    if (!name || !number || !color || !size || !image) { return; }
+    this.jerseyService.addJersey({ name, number, price, color, size, image } as Jersey)
+      .subscribe(jersey => {
+        this.jerseys.push(jersey);
+      });
+  }
 }

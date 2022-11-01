@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Jersey } from '../jersey';
-import { JERSEYS } from '../mock-jerseys';
+// import { JERSEYS } from '../mock-jerseys';
 import { JerseyService } from '../jersey.service';
 import { MessageService } from '../message.service';
 

@@ -1,8 +1,8 @@
-export enum Size {
-    Small = 1,
-    Medium = 2,
-    Large = 3,
-}
+// export enum Size {
+//     Small = 1,
+//     Medium = 2,
+//     Large = 3,
+// }
 
 export interface Jersey {
     id: number;
@@ -10,6 +10,6 @@ export interface Jersey {
     number: number;
     price: number;
     color: string;
-    size: Size;
+    size: string;
     image: string;
 }
