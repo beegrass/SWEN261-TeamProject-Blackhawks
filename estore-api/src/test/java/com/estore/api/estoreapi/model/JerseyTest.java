@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
- * The unit test suite for the Hero class
+ * The unit test suite for the Jersey class
  * 
  * @author Vincent Schwartz
  */
