@@ -1,0 +1,45 @@
+<h1 style = "color: #aa0404; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Inventory Management</h1>
+<h3>Current Inventory:</h3>
+
+
+<button (click) = "showAdd = !showAdd" (click) = "showModify = false"type="button" class="options-button">Add Jersey</button>
+<button (click) = "showModify = !showModify" (click) = "showAdd = false" class="options-button">Modify Jersey</button>
+
+
+
+<div *ngIf="showAdd">
+    <form>
+        <h3>Add Jersey</h3>
+        <input placeholder="Name" id="new-jersey" #jerseyName/>
+        <input placeholder="Number (0-99)"/>
+        <input placeholder="Price"/>
+        <input placeholder="Color"/>
+
+        <input id = "small" type = "radio" value = "S" name = "size"/>
+        <label for="small">S </label>
+        <input id = "medium" type = "radio" value = "M" name = "size"/>
+        <label for="small">M </label>
+        <input id = "large" type = "radio" value = "L" name = "size"/>
+        <label for="small">L </label>
+    </form>
+</div>
+
+<div *ngIf="showModify">
+    <form>
+        <h3>Modify Jersey</h3>
+        <input placeholder="Name" id="new-jersey" #jerseyName/>
+        <input placeholder="Number (0-99)"/>
+        <input placeholder="Price"/>
+        <input placeholder="Color"/>
+
+        <input id = "small" type = "radio" value = "S" name = "size"/>
+        <label for="small">S </label>
+        <input id = "medium" type = "radio" value = "M" name = "size"/>
+        <label for="small">M </label>
+        <input id = "large" type = "radio" value = "L" name = "size"/>
+        <label for="small">L </label>
+    </form>
+</div>
+
+<!-- <button type="button" class="options-button" (click)="add(jerseyName.value); jerseyName.value=''">Add Jersey</button> -->
+

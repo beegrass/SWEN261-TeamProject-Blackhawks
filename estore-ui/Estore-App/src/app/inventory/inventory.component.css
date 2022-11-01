@@ -1,0 +1,9 @@
+.options-button {
+    color:white;
+    background-color: #aa0404;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+.options-button:hover {
+    background-color: #a04545;
+  }

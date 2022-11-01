@@ -11,37 +11,50 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class JerseyService {
 
+
+  private JerseysUrl = 'http://localhost:8080/Jerseys' // URL to our api
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  messageService: any;
+
   constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
+    private http: HttpClient
+    ) { }
 
-  private jerseysUrl = 'http://localhost:8080/jerseys';  // URL to web api
-
-  /** GET jersey by id. Will 404 if id not found */
-  getJersey(id: number): Observable<Jersey> {
-    const url = `${this.jerseysUrl}/${id}`;
-    return this.http.get<Jersey>(url).pipe(
-      tap(_ => this.log(`fetched jersey id=${id}`)),
-      catchError(this.handleError<Jersey>(`getJersey id=${id}`))
-    );
-  }
-
-  /** GET jerseys from the server */
+  /** GET Jerseys from the server */
   getJerseys(): Observable<Jersey[]> {
-    return this.http.get<Jersey[]>(this.jerseysUrl)
+    return this.http.get<Jersey[]>(this.JerseysUrl)
       .pipe(
-        tap(_ => this.log('fetched jerseys')),
         catchError(this.handleError<Jersey[]>('getJerseys', []))
       );
   }
 
-  /* GET jerseys whose name contains search term */
+  /** GET Jersey by id. Return `undefined` when id not found */
+  getJerseyNo404<Data>(id: number): Observable<Jersey> {
+    const url = `${this.JerseysUrl}/?id=${id}`;
+    return this.http.get<Jersey[]>(url)
+      .pipe(
+        map(Jerseys => Jerseys[0]), // returns a {0|1} element array
+        catchError(this.handleError<Jersey>(`getJersey id=${id}`))
+      );
+  }
+
+  /** GET Jersey by id. Will 404 if id not found */
+  getJersey(id: number): Observable<Jersey> {
+    const url = `${this.JerseysUrl}/${id}`;
+    return this.http.get<Jersey>(url).pipe(
+      catchError(this.handleError<Jersey>(`getJersey id=${id}`))
+    );
+  }
+
+  /* GET Jerseys whose name contains search term */
   searchJerseys(term: string): Observable<Jersey[]> {
     if (!term.trim()) {
       // if not search term, return empty Jersey array.
       return of([]);
     }
-    return this.http.get<Jersey[]>(`${this.jerseysUrl}/?name=${term}`).pipe(
+    return this.http.get<Jersey[]>(`${this.JerseysUrl}/?name=${term}`).pipe(
       tap(x => x.length ?
         this.log(`found jerseys matching "${term}"`) :
         this.log(`no jerseys matching "${term}"`)),
@@ -49,6 +62,30 @@ export class JerseyService {
     );
   }
 
+  //////// Save methods //////////
+
+  /** POST: add a new Jersey to the server */
+  addJersey(Jersey: Jersey): Observable<Jersey> {
+    return this.http.post<Jersey>(this.JerseysUrl, Jersey, this.httpOptions).pipe(
+      catchError(this.handleError<Jersey>('addJersey'))
+    );
+  }
+
+  /** DELETE: delete the Jersey from the server */
+  deleteJersey(id: number): Observable<Jersey> {
+    const url = `${this.JerseysUrl}/${id}`;
+
+    return this.http.delete<Jersey>(url, this.httpOptions).pipe(
+      catchError(this.handleError<Jersey>('deleteJersey'))
+    );
+  }
+
+  /** PUT: update the Jersey on the server */
+  updateJersey(Jersey: Jersey): Observable<any> {
+    return this.http.put(this.JerseysUrl, Jersey, this.httpOptions).pipe(
+      catchError(this.handleError<any>('updateJersey'))
+    );
+  }
   /** Log a JerseyService message with the MessageService */
   private log(message: string) {
     this.messageService.add(`JerseyService: ${message}`);
@@ -65,7 +102,6 @@ export class JerseyService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
@@ -75,6 +111,4 @@ export class JerseyService {
       return of(result as T);
     };
   }
-
-
 }

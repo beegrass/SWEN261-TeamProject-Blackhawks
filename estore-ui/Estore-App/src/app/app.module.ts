@@ -7,8 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
-
 import { CheckoutComponent } from './checkout/checkout.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -25,7 +25,7 @@ import { CustDashboardComponent } from './cust-dashboard/cust-dashboard.componen
     AppComponent,
     CartComponent,
 
-    CheckoutComponent
+    CheckoutComponent,
 
     LoginComponent,
     LogoutComponent,
@@ -33,6 +33,10 @@ import { CustDashboardComponent } from './cust-dashboard/cust-dashboard.componen
     MessagesComponent,
     JerseyDetailComponent,
     JerseySearchComponent,
+    CartComponent,
+    CheckoutComponent,
+    JerseysComponent,
+    InventoryComponent,
     CustDashboardComponent,
   ],
   imports: [

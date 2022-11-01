@@ -20,6 +20,7 @@
         <include>src/**</include>
         <include>src/assembly/zip.xml</include>
         <include>data/**</include>
+        <include>data/carts.json</include>
       </includes>
     </fileSet>
   </fileSets>
