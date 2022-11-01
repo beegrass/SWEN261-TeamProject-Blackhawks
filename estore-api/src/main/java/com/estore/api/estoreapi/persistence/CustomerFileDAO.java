@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.persistence;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,10 +12,9 @@ import org.springframework.stereotype.Component;
 import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.model.Customer;
 import com.estore.api.estoreapi.model.Jersey;
-import com.estore.api.estoreapi.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 /**
- * Implements the functionality for JSON file-based peristance for Cart
+ * Implements the functionality for JSON file-based peristance for Customer 
  * 
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
@@ -54,6 +54,7 @@ public class CustomerFileDAO implements CustomerDAO{
         Customer [] customerArray = objectMapper.readValue(new File(filename), Customer[].class);
         allCustomers = new TreeMap<>(); 
         for(Customer customer : customerArray){
+            System.out.println(customer.getUserId());
             allCustomers.put(customer.getUserId(), customer);
             if(customer.getUserId() > nextId){
                 nextId = customer.getUserId(); 
@@ -121,30 +122,26 @@ public class CustomerFileDAO implements CustomerDAO{
             String username = customer.getUsername();
             int id = nextId(); 
             boolean userType = false; 
-            Cart cart = customer.getUsersCart(); 
-            Customer newCustomer = new Customer(username, userType, cart, id);
+            Cart givenCart = customer.getUsersCart(); 
+
+            Cart newCart = cartFileDAO.createNewCart(givenCart); 
+    
+            Customer newCustomer = new Customer(username, userType, newCart, id);
             allCustomers.put(newCustomer.getUserId(), newCustomer);
             save();
             return newCustomer; 
         }
     }
 
-    // /**
-    //  * should there be an update customer cart where they can add to their cart (like seperate methods for that?)
-    //  */
-    // @Override 
-    // public Customer updateCustomerCart(int userId, Cart cart){
-    //     synchronized(allCustomers){
-    //         if(allCustomers.containsKey(userId) == false){
-    //             return null; 
-    //         }else{
-    //             Customer customer = allCustomers.get(userId);
-    //             customer.updateCart(cart); // when the changes are made to the cart 
-    //         }
-    //     }
-    // }
-
-
+    
+    /**
+     * allows customer to add jersey to cart 
+     * @param userId - the  user id to get the specific customer 
+     * @param jersey - the jersey that you want to add to the cart
+     * @return customer - returns customer if added null if not 
+     * @throws IOException
+     */
+    @Override
     public Customer addToCart(int userId, Jersey jersey) throws IOException{
         synchronized(allCustomers){
             if(allCustomers.containsKey(userId) == false){
@@ -164,6 +161,14 @@ public class CustomerFileDAO implements CustomerDAO{
         }
     }
 
+     /**
+     * deletes the entire jersey type from the cart 
+     * @param userId - the user id of the specific customer 
+     * @param jersey - the jersey that you want to add to the cart
+     * @return customer if added null if not found 
+     * @throws IOException
+     */
+    @Override
     public Customer deleteEntireJerseyFromCart(int userId, Jersey jersey) throws IOException{
         synchronized(allCustomers){
             if(allCustomers.containsKey(userId) == false){
@@ -181,6 +186,14 @@ public class CustomerFileDAO implements CustomerDAO{
         }
     }
 
+    /**
+     * decrements the jersey type amount from the customers cart 
+     * @param userId - the user id of the specific customer  
+     * @param jersey - the jersey that you want to add to the cart
+     * @return customer if added null if not found 
+     * @throws IOException
+     */
+    @Override
     public Customer decrementJerseyTypeAmount(int userId, Jersey jersey) throws IOException{
         synchronized(allCustomers){
             if(allCustomers.containsKey(userId) == false){
@@ -198,7 +211,15 @@ public class CustomerFileDAO implements CustomerDAO{
         }
     }
 
-    public Customer deleteEntireCart(int userId, Jersey jersey) throws IOException{
+    /**
+     * delete the entire contents of the cart from the customers cart 
+     * @param userId - the user id of the specific customer  
+     * @param jersey - the jersey that you want to add to the cart
+     * @return customer if added null if not found 
+     * @throws IOException
+     */
+    @Override
+    public Customer deleteEntireCart(int userId) throws IOException{
         synchronized(allCustomers){
             if(allCustomers.containsKey(userId) == false){
                 return null;
