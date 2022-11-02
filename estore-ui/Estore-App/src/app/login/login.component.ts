@@ -35,13 +35,18 @@ export class LoginComponent implements OnInit {
    * @returns true if admin, false is customer
    */
   isAdmin(): boolean {
-    console.warn("admin" == this.onSubmit().toLowerCase())
-    if("admin" == this.onSubmit().toLowerCase()) {
-      this.router.navigate(["/inventory"])
+    var name = this.onSubmit().toLowerCase();
+    var result = name == "admin";
+    if (name == "") {
+      alert("Enter a valid username")
     } else {
-      this.router.navigate(["/jerseys"])
+      console.warn(result)
+      if (result) {
+        this.router.navigate(["/inventory"])
+      } else {
+        this.router.navigate(["/jerseys"])
+      }
     }
-    return "admin" == this.onSubmit().toLowerCase();
+    return result;
   }
-
 }

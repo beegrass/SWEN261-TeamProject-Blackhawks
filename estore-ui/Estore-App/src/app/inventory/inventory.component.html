@@ -9,17 +9,17 @@
     <form>
         <h3>Add Jersey</h3>
         <input placeholder="Name" id="new-name" #jerseyName/>
-        <input placeholder="Number (0-99)" id="new-number" type="number" min="0" max="99" #jerseyNumber/>
+        <input placeholder="Number (1-99)" id="new-number" type="number" min="0" max="100" #jerseyNumber/>
         <input placeholder="Price" id="new-price" type="number" min="0" max="999.99" #jerseyPrice/> <!--Bug here user can still type in words-->
         <input placeholder="Color" id="new-color" #jerseyColor/>
         <input placeholder="Image" id="new-image" #jerseyImage/>
-        <input id = "small" type = "radio" value = "S" name = "size" #jerseySmall/>
+        <input id = "small" type = "radio" value = "S" name = "size" ngModel name="size" #size="ngModel"/>
         <label for="small">S </label>
-        <input id = "medium" type = "radio" value = "M" name = "size"/>  <!--Bug here need to be able to get any from radio input-->
+        <input id = "medium" type = "radio" value = "M" name = "size" ngModel name="size" #size="ngModel"/>  <!--Bug here need to be able to get any from radio input-->
         <label for="small">M </label>
-        <input id = "large" type = "radio" value = "L" name = "size"/>
+        <input id = "large" type = "radio" value = "L" name = "size" ngModel name="size" #size="ngModel"/>
         <label for="small">L </label>
-        <button (click) ="add(jerseyName.value, jerseyNumber.value, jerseyPrice.value, jerseyColor.value, jerseyImage.value, jerseySmall.value); jerseyName.value=''">Submit</button>
+        <button (click) ="add(jerseyName.value, jerseyNumber.value, jerseyPrice.value, jerseyColor.value, size.value, jerseyImage.value); jerseyNumber.value='' ; jerseyName.value=''; jerseyImage.value=''; jerseyColor.value=''; jerseyPrice.value=''; ">Submit</button>
     </form>
 </div>
 

@@ -30,7 +30,10 @@ export class InventoryComponent implements OnInit {
     console.log("added jersey")
   
     name = name.trim();
-    if (!name || !number || !color || !size || !image) { return; }
+    if (!name || !number || !color || !size || !image || price == 0 || number == 99) { 
+      alert("Invalid input given jersey has not been added")
+      return; 
+    } 
     this.jerseyService.addJersey({ name, number, price, color, size, image } as Jersey)
       .subscribe(jersey => {
         this.jerseys.push(jersey);
