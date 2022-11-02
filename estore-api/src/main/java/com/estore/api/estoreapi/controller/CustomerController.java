@@ -67,7 +67,7 @@ public class CustomerController {
         try{
             Customer result = customerDAO.createNewCustomer(customer);
             if(result == null){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
             }else{
                 return new ResponseEntity<Customer>(result, HttpStatus.CREATED); 
             }
@@ -82,8 +82,8 @@ public class CustomerController {
         LOG.info("PUT /customer/add/?userId= " + userId + "&jerseyId=" + jerseyId);
         try{
             Jersey jersey = jerseyDAO.getJersey(jerseyId);
-            Customer result = customerDAO.addToCart(userId, jersey); 
-            if(result == null){
+            Customer result = customerDAO.addToCart(userId, jersey); // there is an issue with how its saving the data here 
+            if(result == null || jersey == null){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }else{
                 return new ResponseEntity<Customer>(result, HttpStatus.OK); 

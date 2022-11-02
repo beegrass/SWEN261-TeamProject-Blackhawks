@@ -119,7 +119,7 @@ public class CustomerControllerTest {
         ResponseEntity<Customer> response = customerController.createNewCustomer(customer);
 
         assertEquals(null, response.getBody()); 
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
     }
 
     @Test
