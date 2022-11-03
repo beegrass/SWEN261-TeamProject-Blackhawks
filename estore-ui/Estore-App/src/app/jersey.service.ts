@@ -35,13 +35,27 @@ export class JerseyService {
       );
   }
 
-  /* GET jerseys whose name contains search term */
+  /** GET hero by id. Return `undefined` when id not found */
+  getJerseyNo404<Data>(id: number): Observable<Jersey> {
+    const url = `${this.jerseysUrl}/?id=${id}`;
+    return this.http.get<Jersey[]>(url)
+      .pipe(
+        map(jerseys => jerseys[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? 'fetched' : 'did not find';
+          this.log(`${outcome} jersey id=${id}`);
+        }),
+        catchError(this.handleError<Jersey>(`getJersey id=${id}`))
+      );
+  }
+
+  /* GET Jersey whose name contains search term */
   searchJerseys(term: string): Observable<Jersey[]> {
     if (!term.trim()) {
-      // if not search term, return empty Jersey array.
+      // if not search term, return empty jersey array.
       return of([]);
     }
-    return this.http.get<Jersey[]>(`${this.jerseysUrl}/?name=${term}`).pipe(
+    return this.http.get<Jersey[]>(`${this.jerseysUrl}/searchByName/?name=${term}`).pipe(
       tap(x => x.length ?
         this.log(`found jerseys matching "${term}"`) :
         this.log(`no jerseys matching "${term}"`)),
