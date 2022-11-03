@@ -27,7 +27,7 @@ import com.estore.api.estoreapi.model.Jersey;
      * @return Customer is it exists, null if it doesnt 
      * @throws IOException 
      */
-    Customer getSpecificCustomer(int userId) throws IOException; 
+    Customer getSpecificCustomer(String username) throws IOException; 
 
     /**
      * 

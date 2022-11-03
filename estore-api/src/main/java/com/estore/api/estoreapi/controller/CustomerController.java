@@ -45,11 +45,27 @@ public class CustomerController {
         }
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<Customer> getSpecificCustomer(@PathVariable int userId){
-        LOG.info("GET /customer/ "+userId);
+    // @GetMapping("/{userId}")
+    // public ResponseEntity<Customer> getSpecificCustomer(@PathVariable int userId){
+    //     LOG.info("GET /customer/ "+userId);
+    //     try{
+    //         Customer customer = customerDAO.getSpecificCustomer(userId);
+    //         if(customer == null){
+    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+    //         }else{
+    //             return new ResponseEntity<Customer>(customer,HttpStatus.OK);
+    //         }
+    //     }catch(IOException e){
+    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
+    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<Customer> getSpecificCustomer(@PathVariable String username){
+        LOG.info("GET /customer/ "+username);
         try{
-            Customer customer = customerDAO.getSpecificCustomer(userId);
+            Customer customer = customerDAO.getSpecificCustomer(username);
             if(customer == null){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
             }else{
