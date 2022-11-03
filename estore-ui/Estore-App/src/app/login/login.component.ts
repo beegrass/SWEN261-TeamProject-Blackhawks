@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { Cart } from 'app/cart';
+import { CustomerService } from 'app/customer.service';
+import { CartService } from 'app/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +16,8 @@ export class LoginComponent implements OnInit {
   // Example 1: <input [(ngModel)]="person.firstName" name="first">
 
   constructor(
-    private router: Router,
+    private customerService: CustomerService,
+    private cartService: CartService,
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +42,11 @@ export class LoginComponent implements OnInit {
   isAdmin(): boolean {
     console.warn("admin" == this.onSubmit().toLowerCase());
     return "admin" == this.onSubmit().toLowerCase();
+  }
+
+  create(username: string, type: boolean): void {
+    this.customerService.userLogin(username);
+    
   }
 
 }
