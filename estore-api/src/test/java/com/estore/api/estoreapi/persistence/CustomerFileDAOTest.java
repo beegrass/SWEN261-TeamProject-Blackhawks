@@ -74,7 +74,7 @@ public class CustomerFileDAOTest {
 
     @Test
     public void testGetSpecificCustomer() throws IOException{
-        Customer result = customerFileDAO.getSpecificCustomer(1); 
+        Customer result = customerFileDAO.getSpecificCustomer("Bobby"); 
         assertEquals(result.getUserId(), testCustomers[0].getUserId());
         assertEquals(result.getUserType(), testCustomers[0].getUserType());
         assertEquals(result.getUsername(), testCustomers[0].getUsername()); 
@@ -82,7 +82,7 @@ public class CustomerFileDAOTest {
 
     @Test
     public void testGetSpecificCustomerFail() throws IOException{
-        Customer result = customerFileDAO.getSpecificCustomer(23);
+        Customer result = customerFileDAO.getSpecificCustomer("Errrrrrrr");
         assertEquals(result, null);
     }
 
