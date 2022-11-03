@@ -24,4 +24,7 @@ export class JerseysComponent implements OnInit {
     this.jerseyService.getJerseys()
     .subscribe(Jerseys => this.jerseys = Jerseys);
   }
+
+  
+
 }
