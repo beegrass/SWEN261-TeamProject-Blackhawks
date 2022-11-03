@@ -4,6 +4,11 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cart } from './cart';
 
+/**
+ * Service for angular elements to talk to the api with cart objects.
+ * 
+ * @author Hayden Cabral
+ */
 
 @Injectable({
     providedIn: 'root'

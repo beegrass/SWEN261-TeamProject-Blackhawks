@@ -24,19 +24,19 @@ export class InventoryComponent implements OnInit {
       .subscribe(jerseys => this.jerseys = jerseys);
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.jerseyService.addJersey({ name } as Jersey)
-      .subscribe(Jersey => {
-        this.jerseys.push(Jersey);
-      });
-  }
+  // add(name: string): void {
+  //   name = name.trim();
+  //   if (!name) { return; }
+  //   this.jerseyService.addJersey({ name } as Jersey)
+  //     .subscribe(Jersey => {
+  //       this.jerseys.push(Jersey);
+  //     });
+  // }
 
-  delete(jersey: Jersey): void {
-    this.jerseys = this.jerseys.filter(h => h !== jersey);
-    this.jerseyService.deleteJersey(jersey.id).subscribe();
-  }
+  // delete(jersey: Jersey): void {
+  //   this.jerseys = this.jerseys.filter(h => h !== jersey);
+  //   this.jerseyService.deleteJersey(jersey.id).subscribe();
+  // }
 
   
 
