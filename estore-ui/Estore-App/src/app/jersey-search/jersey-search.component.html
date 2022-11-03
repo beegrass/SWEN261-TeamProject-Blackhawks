@@ -5,7 +5,7 @@
   <ul class="search-result">
     <li *ngFor="let jersey of jerseys$ | async" >
       <a routerLink="/detail/{{jersey.id}}">
-        {{jersey.name}} #{{jersey.number}} in {{jersey.color}}
+        {{jersey.name}} #{{jersey.number}} in {{jersey.size}} {{jersey.color}}
       </a>
     </li>
   </ul>
