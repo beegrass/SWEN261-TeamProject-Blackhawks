@@ -78,12 +78,19 @@ export class JerseyService {
     );
   }
 
-  deleteHero(id: number): Observable<Jersey> {
+  deleteJersey(id: number): Observable<Jersey> {
     const url = `${this.jerseysUrl}/${id}`;
 
     return this.http.delete<Jersey>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted jersey id=${id}`)),
       catchError(this.handleError<Jersey>('deleteJersey'))
+    );
+  }
+
+  updateJersey(jersey: Jersey): Observable<any> {
+    return this.http.put(this.jerseysUrl, jersey, this.httpOptions).pipe(
+      tap(_ => this.log(`updated jersey id=${jersey.id}`)),
+      catchError(this.handleError<any>('updateJersey'))
     );
   }
 

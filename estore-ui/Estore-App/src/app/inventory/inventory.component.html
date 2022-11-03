@@ -1,4 +1,9 @@
-<a routerLink="">Logout</a>
+<div class="topnav">
+  <a routerLink="/jerseys">Jerseys</a>
+  <a routerLink="">Logout</a>
+</div>
+
+
 <h1 style = "color: #aa0404; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Inventory Management</h1>
 <h3>Current Inventory:</h3>
 
@@ -8,7 +13,7 @@
         <td>
             <div class = "jersey">
 
-                <a routerLink="/detail/{{jersey.id}}">
+                <a routerLink="/admin-detail/{{jersey.id}}">
                     <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
                 </a>
                 <button class = jerseyButton (click) = "delete(jersey);">&#10006;</button>

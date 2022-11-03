@@ -18,6 +18,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { JerseySearchComponent } from './jersey-search/jersey-search.component';
 import { JerseyDetailComponent } from './jersey-detail/jersey-detail.component';
 import { CustDashboardComponent } from './cust-dashboard/cust-dashboard.component';
+import { AdminDetailComponent } from './admin-detail/admin-detail.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { CustDashboardComponent } from './cust-dashboard/cust-dashboard.componen
     JerseysComponent,
     InventoryComponent,
     CustDashboardComponent,
+    AdminDetailComponent,
   ],
   imports: [
     BrowserModule,

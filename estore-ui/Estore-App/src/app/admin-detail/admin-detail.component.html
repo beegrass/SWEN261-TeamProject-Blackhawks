@@ -1,0 +1,51 @@
+<div class="topnav">
+    <a routerLink="/jerseys">Jerseys</a>
+    <a routerLink="">Logout</a>
+  </div>
+  
+  <br>
+
+  <h3>Modify Jersey</h3>
+  
+  <div *ngIf="jersey" align="center">
+    <table align="center" border="1" cellpadding="1" cellspacing="1" style="width:500px">
+      <tbody>
+        <tr>
+          <td class="image" rowspan="4" style="width:234px">
+            <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
+          </td>
+          <td class="name" style="width:253px">{{jersey.name}} #{{jersey.number}}</td>
+        </tr>
+        <tr>
+          <td class="size" style="width:253px">{{jersey.size}}</td>
+        </tr>
+        <tr>
+          <td class="price" style="width:253px">${{jersey.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  
+    <br>
+  
+    <button type="button" class="options-button" (click)="goBack()">Back</button>
+    <button class = "options-button" type="button" (click)="save()">Save</button>
+<!-- <button (click) = "showModify = !showModify" (click) = "showAdd = false" class="options-button">Modify Jersey</button> -->
+    <div *ngIf="jersey">
+        
+
+        <input id="jersey-name" [(ngModel)]="jersey.name" placeholder="Name"/>
+        <input id="jersey-number" [(ngModel)]="jersey.number" placeholder="Number (1-99)"/>
+        <input id="jersey-price" [(ngModel)]="jersey.price" placeholder="Price"/>
+        <input id="jersey-color" [(ngModel)]="jersey.color" placeholder="Color"/>
+        <input id="jersey-image" [(ngModel)]="jersey.image" placeholder="Image"/>
+        <input id = "small" type = "radio" value = "Small" name = "size" [(ngModel)]="jersey.size"/>
+        <label for="small">S </label>
+        <input id = "medium" type = "radio" value = "Medium" name = "size" ngModel [(ngModel)]="jersey.size"/>  <!--Bug here need to be able to get any from radio input-->
+        <label for="small">M </label>
+        <input id = "large" type = "radio" value = "Large" name = "size" ngModel [(ngModel)]="jersey.size"/>
+        <label for="small">L </label>
+    
+    </div>
+
+  </div>
