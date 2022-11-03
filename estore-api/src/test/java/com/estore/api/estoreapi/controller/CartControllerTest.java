@@ -8,7 +8,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.naming.MalformedLinkException;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -67,7 +67,7 @@ public class CartControllerTest {
     public void testDecrementJerseyTypeAmountFail()throws IOException{
         int cartId = 1;
         int jerseyId = 8; // this is not in the map: fails when not contained 
-        Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
+        //Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
     
         when(mockCartDAO.decrementJerseyTypeAmount(cartId, jerseyId)).thenReturn(null);
 
@@ -81,7 +81,7 @@ public class CartControllerTest {
     public void testDecrementJerseyTypeAmountHandleException()throws IOException{
         int cartId = 1;
         int jerseyId = 26; // this is not in the map: fails when not contained 
-        Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
+        //Jersey jersey = mockJerseyDAO.getJersey(jerseyId);
         doThrow(new IOException()).when(mockCartDAO).decrementJerseyTypeAmount(cartId, jerseyId);
 
         //when(mockCartDAO.decrementJerseyTypeAmount(cartId, jersey)).thenReturn(false);
@@ -198,7 +198,7 @@ public class CartControllerTest {
     @Test
     public void testDeleteEntireCartFail() throws IOException{
         int cartId = 1;
-        Cart cart = mockCartDAO.getSpecificCart(cartId);
+        //Cart cart = mockCartDAO.getSpecificCart(cartId);
         when(mockCartDAO.deleteEntireCart(cartId)).thenReturn(null);
 
         ResponseEntity<Cart> response = cartController.deleteEntireCart(cartId);
@@ -210,7 +210,7 @@ public class CartControllerTest {
         int cartId = 1; 
         
         Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
-        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+        //Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
         Cart cart = new Cart(new ArrayList<Jersey>(), cartId);
         cart.addJerseyToCart(j1);
 

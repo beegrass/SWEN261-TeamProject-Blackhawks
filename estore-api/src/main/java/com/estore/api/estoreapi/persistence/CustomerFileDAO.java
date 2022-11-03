@@ -119,6 +119,10 @@ public class CustomerFileDAO implements CustomerDAO{
     @Override 
     public Customer createNewCustomer(Customer customer) throws IOException{
         synchronized(allCustomers){
+            if(allCustomers.containsKey(customer.getUserId()) == true){
+                // if already in there 
+                return null; 
+            }
             String username = customer.getUsername();
             int id = nextId(); 
             boolean userType = false; 
@@ -176,7 +180,8 @@ public class CustomerFileDAO implements CustomerDAO{
             }else{
                 Customer customer = allCustomers.get(userId); 
                 Cart custCart = customer.getUsersCart();
-                cartFileDAO.deleteEntireJerseyFromCart(custCart.getId(), jersey);
+                Cart del = cartFileDAO.deleteEntireJerseyFromCart(custCart.getId(), jersey);
+                if(del == null){return null;}
                 Cart updated = cartFileDAO.getSpecificCart(custCart.getId());
                 customer.updateCart(updated);
                 allCustomers.put(userId,customer); 
@@ -201,7 +206,8 @@ public class CustomerFileDAO implements CustomerDAO{
             }else{
                 Customer customer = allCustomers.get(userId); 
                 Cart custCart = customer.getUsersCart();
-                cartFileDAO.decrementJerseyTypeAmount(custCart.getId(), jersey.getId());
+                Cart dec = cartFileDAO.decrementJerseyTypeAmount(custCart.getId(), jersey.getId());
+                if(dec == null){return null;}
                 Cart updated = cartFileDAO.getSpecificCart(custCart.getId());
                 customer.updateCart(updated);
                 allCustomers.put(userId,customer); 
