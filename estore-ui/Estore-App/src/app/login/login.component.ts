@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
    * @returns Returns entered username
    */
   onSubmit(): string {
-    this.router.navigate(['/logout'])
+    // this.router.navigate(['/logout'])
     console.warn("username: " + this.username) 
     return this.username;
   }
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
    * @returns true if admin, false is customer
    */
   isAdmin(): boolean {
-    console.warn("admin" == this.onSubmit().toLowerCase())
+    console.warn("admin" == this.onSubmit().toLowerCase());
     return "admin" == this.onSubmit().toLowerCase();
   }
 
