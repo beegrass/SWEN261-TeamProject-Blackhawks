@@ -10,8 +10,8 @@
 
                 <a routerLink="/detail/{{jersey.id}}">
                     <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
-                    <button class = jerseyButton>&#10006;</button>
                 </a>
+                <button class = jerseyButton (click) = "delete(jersey);">&#10006;</button>
             </div>
           <table class="info">
             <th class="name">{{jersey.name}} {{jersey.number}}</th>

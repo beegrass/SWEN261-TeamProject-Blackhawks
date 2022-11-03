@@ -78,6 +78,17 @@ export class JerseyService {
     );
   }
 
+  deleteHero(id: number): Observable<Jersey> {
+    const url = `${this.jerseysUrl}/${id}`;
+
+    return this.http.delete<Jersey>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted jersey id=${id}`)),
+      catchError(this.handleError<Jersey>('deleteJersey'))
+    );
+  }
+
+
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

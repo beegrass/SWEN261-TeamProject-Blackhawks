@@ -39,4 +39,9 @@ export class InventoryComponent implements OnInit {
         this.jerseys.push(jersey);
       });
   }
+
+  delete(jersey: Jersey): void {
+    this.jerseys = this.jerseys.filter(h => h !== jersey);
+    this.jerseyService.deleteHero(jersey.id).subscribe();
+  }
 }
