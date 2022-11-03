@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
    * @returns true if admin, false is customer
    */
   isAdmin(): boolean {
-    console.warn("admin" == this.onSubmit().toLowerCase())
+    console.warn("admin" == this.onSubmit().toLowerCase());
     return "admin" == this.onSubmit().toLowerCase();
   }
 
