@@ -1,6 +1,6 @@
-projectKey=Estore-app
+projectKey=estore-ui
 serverUrl=http://localhost:9000
 serverVersion=9.7.1.62043
-dashboardUrl=http://localhost:9000/dashboard?id=Estore-app
-ceTaskId=AYQzPe-uwLTG049qUHBo
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYQzPe-uwLTG049qUHBo
+dashboardUrl=http://localhost:9000/dashboard?id=estore-ui
+ceTaskId=AYQ18Goifkbw128hiT4Q
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYQ18Goifkbw128hiT4Q

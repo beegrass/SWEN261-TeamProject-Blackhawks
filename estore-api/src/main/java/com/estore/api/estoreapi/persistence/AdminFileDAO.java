@@ -42,6 +42,10 @@
 
 //     }
 
+//     public Admin getAdmin(){
+//         return admin; 
+//     }
+
 //     // private boolean save() throws IOException {
 //     //     Customer [] customerArray = getCustomerArray();
 
