@@ -1,1 +1,30 @@
-[{"username":"steven","typeUser":false,"userCart":{"cartArray":[{"id":1,"name":"Chris Chelios","number":7,"price":129.99,"color":"Red","size":"Small","image":"assets/chris_chelios_7_red.jpg"}],"id":1,"entireCart":[{"id":1,"name":"Chris Chelios","number":7,"price":129.99,"color":"Red","size":"Small","image":"assets/chris_chelios_7_red.jpg"}],"totalCost":129.99},"id":1,"usersCart":{"cartArray":[{"id":1,"name":"Chris Chelios","number":7,"price":129.99,"color":"Red","size":"Small","image":"assets/chris_chelios_7_red.jpg"}],"id":1,"entireCart":[{"id":1,"name":"Chris Chelios","number":7,"price":129.99,"color":"Red","size":"Small","image":"assets/chris_chelios_7_red.jpg"}],"totalCost":129.99},"userType":false,"userId":1},{"username":"jordan","typeUser":false,"userCart":{"cartArray":[{"id":5,"name":"Connor Murphy","number":5,"price":179.95,"color":"Red","size":"Medium","image":"assets/connor_murphy_5_red.jpg"},{"id":11,"name":"Eddie Olczyk","number":16,"price":190.99,"color":"Red","size":"Medium","image":"assets/eddie_olczyk_16_red.jpg"}],"id":2,"entireCart":[{"id":5,"name":"Connor Murphy","number":5,"price":179.95,"color":"Red","size":"Medium","image":"assets/connor_murphy_5_red.jpg"},{"id":11,"name":"Eddie Olczyk","number":16,"price":190.99,"color":"Red","size":"Medium","image":"assets/eddie_olczyk_16_red.jpg"}],"totalCost":370.94},"id":2,"usersCart":{"cartArray":[{"id":5,"name":"Connor Murphy","number":5,"price":179.95,"color":"Red","size":"Medium","image":"assets/connor_murphy_5_red.jpg"},{"id":11,"name":"Eddie Olczyk","number":16,"price":190.99,"color":"Red","size":"Medium","image":"assets/eddie_olczyk_16_red.jpg"}],"id":2,"entireCart":[{"id":5,"name":"Connor Murphy","number":5,"price":179.95,"color":"Red","size":"Medium","image":"assets/connor_murphy_5_red.jpg"},{"id":11,"name":"Eddie Olczyk","number":16,"price":190.99,"color":"Red","size":"Medium","image":"assets/eddie_olczyk_16_red.jpg"}],"totalCost":370.94},"userType":false,"userId":2}]
+[
+    {
+        "username": "admin", 
+        "typeUser" : true, 
+        "userCart":{
+            "cartArray":[
+
+            ], 
+            "id":1,
+            "entireCart":[
+
+            ],
+            "totalCost":0.00
+        },
+        "id": 1,
+        "entireCart":{
+            "cartArray":[
+
+            ], 
+            "id":1,
+            "entireCart":[
+
+            ],
+            "totalCost":0.00
+        },
+        "userId":1
+
+    }
+
+]
