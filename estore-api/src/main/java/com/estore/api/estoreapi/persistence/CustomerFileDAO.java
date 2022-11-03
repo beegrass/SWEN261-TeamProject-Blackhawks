@@ -98,17 +98,34 @@ public class CustomerFileDAO implements CustomerDAO{
         }
     }
 
+    // /**
+    //  * returns the customer of that id 
+    //  * @param userId - the id of the user
+    //  */
+    // @Override
+    // public Customer getSpecificCustomer(int userId) throws IOException{
+    //     if(allCustomers.containsKey(userId) == false){
+    //         return null; 
+    //     }else{
+    //         return allCustomers.get(userId); 
+    //     }
+    // }
+
+    
     /**
      * returns the customer of that id 
      * @param userId - the id of the user
      */
     @Override
-    public Customer getSpecificCustomer(int userId) throws IOException{
-        if(allCustomers.containsKey(userId) == false){
-            return null; 
-        }else{
-            return allCustomers.get(userId); 
+    public Customer getSpecificCustomer(String username) throws IOException{
+        for(Customer cust : allCustomers.values()){
+            if(cust.getUsername().equals(username) == true){
+                return allCustomers.get(cust.getUserId()); 
+            }
         }
+
+        return null; 
+        
     }
 
     /**

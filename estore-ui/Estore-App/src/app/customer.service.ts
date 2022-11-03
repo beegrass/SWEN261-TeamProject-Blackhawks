@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClientBackendService } from 'angular-in-memory-web-api';
 import { catchError, Observable, of } from 'rxjs';
 import { Cart } from './cart';
+import { CartService } from './cart.service';
+import { CartComponent } from './cart/cart.component';
 import { Customer } from './customer';
 
 
@@ -32,7 +34,8 @@ export class CustomerService {
   private log(message: string) {
     this.messageService.add(`CartService: ${message}`)
   }
-
+  
+  create(username: String)
 
   /**
    * Creates a new customer with the given username 
@@ -40,9 +43,25 @@ export class CustomerService {
    * @param customer 
    * @returns 
    */
-  userLogin(customer: Customer): Observable<Customer> {
-    const admin_id = 1; 
-    const url_get = "GET /customer/" + customer.id;
+  userLogin(username : String): Observable<Customer> {
+    
+    const url_admin = "GET /customer/admin" 
+    const url_customer = "GET /customer/"+ username; 
+    if(username == "admin"){
+      return this.http.get<Customer>(url_admin, this.httpOptions);
+    }
+    else if(username != "admin"){
+      if(this.http.get<Customer>(url_customer, this.httpOptions) == null){
+        // create a new  customer
+        Cart new_cart = 
+        Customer new_cust = new Customer()
+        return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions)
+      }
+    }
+
+
+
+
 
     if(customer.id == admin_id){
       return this.http.get<Customer>(url_get, this.httpOptions);
