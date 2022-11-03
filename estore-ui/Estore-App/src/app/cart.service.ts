@@ -72,6 +72,7 @@ import { Cart } from './cart';
     private log(message: string) {
         this.messageService.add(`CartService: ${message}`);
     }
+    
 
 
 
