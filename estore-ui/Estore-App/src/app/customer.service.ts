@@ -40,21 +40,21 @@ export class CustomerService {
    * @param customer 
    * @returns 
    */
-  userLogin(customer: Customer): Observable<Customer> {
-    const admin_id = 1; 
-    const url_get = "GET /customer/" + customer.id;
+  // userLogin(customer: Customer): Observable<Customer> {
+  //   const admin_id = 1; 
+  //   const url_get = "GET /customer/" + customer.id;
 
-    if(customer.id == admin_id){
-      return this.http.get<Customer>(url_get, this.httpOptions);
-    } else if (customer.id != admin_id && this.http.get<Customer>(url_get, this.httpOptions) == null ) {
-      return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions)
-      .pipe(
-        catchError(this.handleError<Customer>('createdCustomer'))
-      );
-    } else {
-      return this.http.get<Customer>(url_get, this.httpOptions);
-    }
-  }
+  //   if(customer.id == admin_id){
+  //     return this.http.get<Customer>(url_get, this.httpOptions);
+  //   } else if (customer.id != admin_id && this.http.get<Customer>(url_get, this.httpOptions) == null ) {
+  //     return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions)
+  //     .pipe(
+  //       catchError(this.handleError<Customer>('createdCustomer'))
+  //     );
+  //   } else {
+  //     return this.http.get<Customer>(url_get, this.httpOptions);
+  //   }
+  // }
 
   getCustomerCart(customer: Customer): Observable<Cart> {
       const url = "GET /customer/cart/?userId=" + customer.id;
