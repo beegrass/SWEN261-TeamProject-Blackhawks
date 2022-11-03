@@ -43,7 +43,7 @@ import { Cart } from './cart';
     addJerseyToCart(cartId: number, jerseyId: number): Observable<any> {
       const url = "PUT /cart/increment/?cart=" + cartId + "&jerseyId=" + jerseyId
       return this.http.put(url, this.httpOptions).pipe(
-        catchError(this.handleError<Cart>('decrementJerseyTypeAmount'))
+        catchError(this.handleError<Cart>('addJerseyToCart'))
       );
     }
 
