@@ -11,7 +11,7 @@ import { Customer } from './customer';
 })
 export class CustomerService {
 
-  private customersUrl = 'http://localhost:8080/Customers' // URL to our api
+  private customersUrl = 'http://localhost:8080/customers' // URL to our api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -33,19 +33,32 @@ export class CustomerService {
     this.messageService.add(`CartService: ${message}`)
   }
 
-  createCustomer(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions)
-    .pipe(
-      catchError(this.handleError<Customer>('getCustomer'))
-    );
+
+  /**
+   * Creates a new customer with the given username 
+   * otherwise returns a get of the customer that already exists
+   * @param customer 
+   * @returns 
+   */
+  userLogin(customer: Customer): Observable<Customer> {
+    const url_get = "GET /customer/" + customer.id;
+    if(this.http.get<Customer>(url_get, this.httpOptions) == null) {
+       return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions)
+       .pipe(
+         catchError(this.handleError<Customer>('createdCustomer'))
+       );
+    }
+    return this.http.get<Customer>(url_get, this.httpOptions);
   }
 
-  getCustomerCart(customer: Customer): Observable<Cart>{
+  getCustomerCart(customer: Customer): Observable<Cart> {
       const url = "GET /customer/cart/?userId=" + customer.id;
       return this.http.get<Cart>(url, this.httpOptions).pipe(
         catchError(this.handleError<Cart>('deleteEntireCart'))
       );
   }
+
+
 
   /**
    * Handle Http operation that failed.
