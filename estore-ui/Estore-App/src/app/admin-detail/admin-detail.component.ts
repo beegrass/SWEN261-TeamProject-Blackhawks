@@ -37,7 +37,7 @@ export class AdminDetailComponent implements OnInit {
 
   save(): void {
     if (this.jersey) {
-      this.jerseyService.updateJersey(this.jersey)
+      this.jerseyService.updateJersey(this.jersey).subscribe(() => this.goBack());
     }
   }
 }

@@ -30,7 +30,7 @@ export class InventoryComponent implements OnInit {
     console.log("added jersey")
   
     name = name.trim();
-    if (!name || !number || !color || !size || !image || price == 0 || number == 99) { 
+    if (!name || !number || !color || !size || !image || price < 0 || number > 99) { 
       alert("Invalid input given jersey has not been added")
       return; 
     } 
