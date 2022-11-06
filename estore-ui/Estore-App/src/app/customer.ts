@@ -5,4 +5,5 @@ export interface Customer {
     username: string;
     type: boolean;
     id: number;
+   
 }

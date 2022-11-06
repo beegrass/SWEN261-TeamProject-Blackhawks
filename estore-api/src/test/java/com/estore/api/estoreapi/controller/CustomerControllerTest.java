@@ -74,16 +74,16 @@ public class CustomerControllerTest {
         cart.addJerseyToCart(j1);
     
         Customer customer = new Customer("meow man", false, cart,  1);
-        when(mockCustomerDAO.getSpecificCustomer(1)).thenReturn(customer); 
-        ResponseEntity<Customer> response = customerController.getSpecificCustomer(1);
+        when(mockCustomerDAO.getSpecificCustomer("meow man")).thenReturn(customer); 
+        ResponseEntity<Customer> response = customerController.getSpecificCustomer("meow man");
         assertEquals(customer, response.getBody()); 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     public void testGetSpecifcCustomerFail() throws IOException{
-        when(mockCustomerDAO.getSpecificCustomer(25)).thenReturn(null);
-        ResponseEntity<Customer> response = customerController.getSpecificCustomer(25); 
+        when(mockCustomerDAO.getSpecificCustomer("rofneo")).thenReturn(null);
+        ResponseEntity<Customer> response = customerController.getSpecificCustomer("rofneo"); 
         assertEquals(null, response.getBody());
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }

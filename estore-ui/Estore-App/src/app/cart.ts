@@ -1,9 +1,10 @@
 import { Jersey } from "./jersey";
 
 export interface Cart {
-  id: number
-  total_price: number;
-  cartArray: Jersey[];
 
+  
+  total_price: number;
+  id : number; 
+  cartArray : Array<Jersey>
 
 }

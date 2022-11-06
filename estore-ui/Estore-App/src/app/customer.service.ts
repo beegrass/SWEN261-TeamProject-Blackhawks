@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpClientBackendService } from 'angular-in-memory-web-api';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Cart } from './cart';
 import { CartService } from './cart.service';
 import { CartComponent } from './cart/cart.component';
@@ -13,7 +13,7 @@ import { Customer } from './customer';
 })
 export class CustomerService {
 
-  private customersUrl = 'http://localhost:8080/customers' // URL to our api
+  private customersUrl = 'http://localhost:8080/Customers' // URL to our api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -36,41 +36,54 @@ export class CustomerService {
   }
   
   /**
+   * Creates an observable customer that can be used in angular
+   * @param customer - customer that will become observable
+   * @returns - the observable customer
+   */
+  createCustomer(customer : Customer): Observable<Customer> {
+    return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
+      tap((newCustomer : Customer) => this.log(`added Jersey w/ id=${newCustomer.id}`)),
+      catchError(this.handleError<Customer>('create Customer'))
+    );
+  } 
+
+  /**
+   * GET customer by id. Will return `undefined` if not found
+   */
+  getCustomer<Data>(id: number): Observable<Customer> {
+    const url = `${this.customersUrl}/?id=${id}`;
+    return this.http.get<Customer[]>(url)
+      .pipe(
+        map(customers => customers[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? 'fetched' : 'did not find';
+          this.log(`${outcome} hero id=${id}`);
+        }),
+        catchError(this.handleError<Customer>(`getHero id=${id}`))
+      );
+  }
+
+  deleteCustomer(custId: number) {
+    const url = `${this.customersUrl}/${custId}`;
+    return this.http.delete<Customer>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted hero id=${custId}`)),
+      catchError(this.handleError<Customer>('deleteHero'))
+    );
+  }
+
+  /**
    * Creates a new customer with the given username 
    * otherwise returns a get of the customer that already exists
+   * this is get customer 
    * @param customer 
    * @returns 
    */
   userLogin(username : String): Observable<Customer> {
-    
-    const url_admin = "GET /customer/admin" 
-    const url_customer = "GET /customer/"+ username; 
-    if(username == "admin"){
-      return this.http.get<Customer>(url_admin, this.httpOptions);
-    }
-    else if(username != "admin"){
-      if(this.http.get<Customer>(url_customer, this.httpOptions) == null){
-        // create a new  customer
-        Cart new_cart = 
-        Customer new_cust = new Customer()
-        return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions)
-      }
-    }
-
-
-
-
-
-    if(customer.id == admin_id){
-      return this.http.get<Customer>(url_get, this.httpOptions);
-    } else if (customer.id != admin_id && this.http.get<Customer>(url_get, this.httpOptions) == null ) {
-      return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions)
-      .pipe(
-        catchError(this.handleError<Customer>('createdCustomer'))
-      );
-    } else {
-      return this.http.get<Customer>(url_get, this.httpOptions);
-    }
+    const url = `${this.customersUrl}/${username}`;
+    return this.http.get<Customer>(url).pipe(
+      tap(_ => this.log(`fetched customer=${username}`)),
+      catchError(this.handleError<Customer>(`gettingSpecificCustomer customer=${username}`))
+    );
   }
 
   //   if(customer.id == admin_id){

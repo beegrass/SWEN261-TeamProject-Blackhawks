@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'dashboard', component: CustDashboardComponent },
   { path: 'detail/:id', component: JerseyDetailComponent },
   { path: 'jerseys', component: JerseysComponent },
-  { path: 'cart', component: CartComponent},
+  { path: '/customer/cart/?userId=:userId', component: CartComponent} //might be wrong
+
 ];
 
 @NgModule({

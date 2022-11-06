@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { CartService } from '../cart.service';
+import { CustomerService} from '../customer.service';
 import { Cart } from 'app/cart';
-import { CustomerService } from 'app/customer.service';
-import { CartService } from 'app/cart.service';
-
+import { Jersey } from "app/jersey";
+import { Customer } from 'app/customer';
+import { Observable } from 'rxjs/internal/Observable';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  customers : Customer[] = []; 
   username: string = "";
+
   // Example 1: <input [(ngModel)]="person.firstName" name="first">
 
   constructor(
-    private customerService: CustomerService,
-    private cartService: CartService,
+    private router: Router,
+    private cartService : CartService,
+    private customerService : CustomerService
   ) { }
 
   ngOnInit(): void {
@@ -44,9 +48,17 @@ export class LoginComponent implements OnInit {
     return "admin" == this.onSubmit().toLowerCase();
   }
 
-  create(username: string, type: boolean): void {
-    this.customerService.userLogin(username);
-    
+  login(username: string): void {
+    username = username.trim().toLowerCase();
+    let type = false;
+    if (!username) {return ;}
+    if (username == "admin") { type = true; }
+    // TODO: need to check if customer exists
+    // should we have a dictionary with a customer: cart relation? 
+    // not sure how to do this, might be easier to have 2 arrays
+    this.customerService.createCustomer({username, type} as Customer)
+      .subscribe(cust => {
+        this.customers.push(cust);
+      })
   }
-
 }

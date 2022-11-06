@@ -2,7 +2,7 @@
 <h2>Login page</h2>
 <div class="user-form">
     Username: 
-    <form (ngSubmit) = "isAdmin()">
+    <form (ngSubmit) = "isAdmin() && login()">
         <input [(ngModel)]="username" name="username" placeholder="username">
     </form>
 </div>
