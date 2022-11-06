@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
    * @returns Returns entered username
    */
   onSubmit(): string {
-    // this.router.navigate(['/logout'])
     console.warn("username: " + this.username) 
     return this.username;
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Cart } from 'app/cart';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -20,5 +22,8 @@ export class CheckoutComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+  // getTotalCost(): number {
+  //   return this.cartService.getTotalCost();
+  // }
 
 }

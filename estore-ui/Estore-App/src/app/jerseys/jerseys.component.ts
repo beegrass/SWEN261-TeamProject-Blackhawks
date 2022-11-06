@@ -9,7 +9,6 @@ import { CartService } from 'app/cart.service';
   styleUrls: ['./jerseys.component.css']
 })
 export class JerseysComponent implements OnInit {
-
   jerseys: Jersey[] = [];
 
   constructor(private jerseyService: JerseyService, private cartService: CartService) { }
@@ -20,7 +19,7 @@ export class JerseysComponent implements OnInit {
 
   getJerseys(): void {
     this.jerseyService.getJerseys()
-      .subscribe(jerseys => this.jerseys = jerseys);
+    .subscribe(Jerseys => this.jerseys = Jerseys);
   }
 
   addJerseyToCart(jersey: Jersey, quantity: Number): void {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Jersey } from './jersey';
-import { JERSEYS } from './mock-jerseys';
+// import { JERSEYS } from './mock-jerseys';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
@@ -10,6 +10,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class JerseyService {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(
     private http: HttpClient,
@@ -35,7 +38,7 @@ export class JerseyService {
       );
   }
 
-  /** GET hero by id. Return `undefined` when id not found */
+  /** GET jersey by id. Return `undefined` when id not found */
   getJerseyNo404<Data>(id: number): Observable<Jersey> {
     const url = `${this.jerseysUrl}/?id=${id}`;
     return this.http.get<Jersey[]>(url)
@@ -67,6 +70,30 @@ export class JerseyService {
   private log(message: string) {
     this.messageService.add(`JerseyService: ${message}`);
   }
+
+  addJersey(jersey: Jersey): Observable<Jersey> {
+    return this.http.post<Jersey>(this.jerseysUrl, jersey, this.httpOptions).pipe(
+      tap((newJersey: Jersey) => this.log(`added Jersey w/ id=${newJersey.id}`)),
+      catchError(this.handleError<Jersey>('addJersey'))
+    );
+  }
+
+  deleteJersey(id: number): Observable<Jersey> {
+    const url = `${this.jerseysUrl}/${id}`;
+
+    return this.http.delete<Jersey>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted jersey id=${id}`)),
+      catchError(this.handleError<Jersey>('deleteJersey'))
+    );
+  }
+
+  updateJersey(jersey: Jersey): Observable<any> {
+    return this.http.put(this.jerseysUrl, jersey, this.httpOptions).pipe(
+      tap(_ => this.log(`updated jersey id=${jersey.id}`)),
+      catchError(this.handleError<any>('updateJersey'))
+    );
+  }
+
 
 
   /**
