@@ -27,22 +27,16 @@ import { Cart } from './cart';
       ) { }
 
     createCart(cart: Cart): Observable<Cart> {
-      return this.http.post<Cart>(this.CartsUrl, cart, this.httpOptions)
-      .pipe(
+      return this.http.post<Cart>(this.CartsUrl, cart, this.httpOptions).pipe(
+      tap((newCart: Cart) => this.log(`added Cart w/ id=${newCart.id}`)),
         catchError(this.handleError<Cart>('getCart'))
-      );
-    }
-
-    decrementJerseyTypeAmount(cartId: number, jerseyId: number): Observable<any> {
-      const url = "PUT /cart/decrement/?cartId=" + cartId + "&jerseyId=" + jerseyId
-      return this.http.put(url, this.httpOptions).pipe(
-        catchError(this.handleError<Cart>('decrementJerseyTypeAmount'))
       );
     }
 
     addJerseyToCart(cartId: number, jerseyId: number): Observable<any> {
       const url = "PUT /cart/increment/?cart=" + cartId + "&jerseyId=" + jerseyId
       return this.http.put(url, this.httpOptions).pipe(
+        tap(_ => this.log(`updated cart id=${cartId}`)),
         catchError(this.handleError<Cart>('addJerseyToCart'))
       );
     }
@@ -57,6 +51,7 @@ import { Cart } from './cart';
     deleteEntireCart(cartId: number): Observable<Cart> {
       const url = "PUT /cart/deleteEntireCart/?cart=" + cartId
       return this.http.put<Cart>(url, this.httpOptions).pipe(
+        tap(_ => this.log(`updated cart id=${cartId}`)),
         catchError(this.handleError<Cart>('deleteEntireCart'))
       );
     }
@@ -64,6 +59,7 @@ import { Cart } from './cart';
     getSpecificCart(cartId: number): Observable<Cart> {
       const url = "GET /cart/" + cartId
       return this.http.get<Cart>(url, this.httpOptions).pipe(
+        tap(_ => this.log(`updated cart id=${cartId}`)),
         catchError(this.handleError<Cart>('deleteEntireCart'))
       );
     }
