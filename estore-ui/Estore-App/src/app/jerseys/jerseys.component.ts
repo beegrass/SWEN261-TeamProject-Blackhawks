@@ -12,8 +12,6 @@ export class JerseysComponent implements OnInit {
 
   jerseys: Jersey[] = [];
 
-  loops: Number[] = [0, 0, 0];
-
   constructor(private jerseyService: JerseyService, private cartService: CartService) { }
 
   ngOnInit(): void {

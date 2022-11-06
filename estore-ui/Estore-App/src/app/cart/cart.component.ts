@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Cart } from '../cart';
+import { Jersey } from '../jersey';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  jerseys: Jersey[] = [];
+
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
+    this.getJerseys();
+  }
+
+  getCart() : void {
+    // gets the cart
+  }
+
+  getJerseys(): void {
+    // get jerseys in the cart
   }
 
 }
