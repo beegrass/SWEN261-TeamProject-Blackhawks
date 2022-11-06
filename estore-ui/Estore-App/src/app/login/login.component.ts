@@ -48,17 +48,25 @@ export class LoginComponent implements OnInit {
     return "admin" == this.onSubmit().toLowerCase();
   }
 
+  /**
+   * This allows the user to login using a string username 
+   */
   login(username: string): void {
     username = username.trim().toLowerCase();
     let type = false;
-    if (!username) {return ;}
-    if (username == "admin") { type = true; }
-    // TODO: need to check if customer exists
-    // should we have a dictionary with a customer: cart relation? 
-    // not sure how to do this, might be easier to have 2 arrays
-    this.customerService.createCustomer({username, type} as Customer)
+    if (!username) {return ;} // check to see if this is filled 
+
+    if(this.customerService.getCustomerByUsername(username) == undefined){
+      // create a new one 
+      this.customerService.createCustomer({username, type} as Customer)
       .subscribe(cust => {
         this.customers.push(cust);
       })
+    }else if(this.customerService.getCustomerByUsername(username) != undefined){
+      this.customerService.getCustomerByUsername(username).subscribe(cust => {
+        this.customers.push(cust); 
+      })
+    }
+   
   }
 }
