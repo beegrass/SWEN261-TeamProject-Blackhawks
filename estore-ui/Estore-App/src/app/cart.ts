@@ -4,3 +4,4 @@ export interface Cart {
   total_price: number;
 
 }
+

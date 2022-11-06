@@ -7,8 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
-
 import { CheckoutComponent } from './checkout/checkout.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -18,6 +18,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { JerseySearchComponent } from './jersey-search/jersey-search.component';
 import { JerseyDetailComponent } from './jersey-detail/jersey-detail.component';
 import { CustDashboardComponent } from './cust-dashboard/cust-dashboard.component';
+import { AdminDetailComponent } from './admin-detail/admin-detail.component';
 
 
 @NgModule({
@@ -31,7 +32,12 @@ import { CustDashboardComponent } from './cust-dashboard/cust-dashboard.componen
     MessagesComponent,
     JerseyDetailComponent,
     JerseySearchComponent,
+    CartComponent,
+    CheckoutComponent,
+    JerseysComponent,
+    InventoryComponent,
     CustDashboardComponent,
+    AdminDetailComponent,
   ],
   imports: [
     BrowserModule,
