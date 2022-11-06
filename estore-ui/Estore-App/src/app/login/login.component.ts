@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
    * This allows the user to login using a string username 
    */
   login(username: string): void {
+    // alert(`username: ` + username)
     username = username.trim().toLowerCase();
     let type = false;
     if (!username) {return ;} // check to see if this is filled 
@@ -62,10 +63,12 @@ export class LoginComponent implements OnInit {
       .subscribe(cust => {
         this.customers.push(cust);
       })
+      alert(`created a new user ${username}`)
     }else if(this.customerService.getCustomerByUsername(username) != undefined){
       this.customerService.getCustomerByUsername(username).subscribe(cust => {
         this.customers.push(cust); 
       })
+      alert(`added user: ${username} to the customers array`)
     }
    
   }

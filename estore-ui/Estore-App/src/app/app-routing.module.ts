@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'dashboard', component: CustDashboardComponent },
   { path: 'detail/:id', component: JerseyDetailComponent },
   { path: 'jerseys', component: JerseysComponent },
-  { path: '/customer/cart/?userId=:userId', component: CartComponent} //might be wrong
+  // { path: '/customer/cart/?userId=:userId', component: CartComponent} //might be wrong
 
 ];
 
