@@ -52,10 +52,10 @@ export class LoginComponent implements OnInit {
    */
   login(username: string): void {
     username = username.trim().toLowerCase();
+    let cart_list: Jersey[] = [];
     let total_price = 0;
-    let jerseyArray: Array<Jersey> = [];
-    let userCart = {total_price, jerseyArray} as Cart;
-
+    let userCart = this.cartService.createCart({cart_list, total_price} as Cart);
+    
     if (!username) {
       return;
     }
@@ -65,6 +65,5 @@ export class LoginComponent implements OnInit {
       this.customers.push(cust);
     })
     console.log(this.customers)
-   
   }
 }
