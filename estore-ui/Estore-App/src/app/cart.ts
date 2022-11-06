@@ -1,6 +1,10 @@
+import { Jersey } from "./jersey";
+
 export interface Cart {
 
-  total_amount_jerseys: number;
+  
   total_price: number;
+  id : number; 
+  cartArray : Array<Jersey>
 
 }
