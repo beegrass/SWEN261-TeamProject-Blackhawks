@@ -63,6 +63,22 @@ export class CustomerService {
       );
   }
 
+  /**
+   * GET customer by username. Will return `undefined` if not found
+   */
+   getCustomerByUsername<Data>(username : string ): Observable<Customer> {
+    const url = `${this.customersUrl}/customer/${username}`;
+    return this.http.get<Customer[]>(url)
+      .pipe(
+        map(customers => customers[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? 'fetched' : 'did not find';
+          this.log(`${outcome} customer=${username}`);
+        }),
+        catchError(this.handleError<Customer>(`get customer =${username}`))
+      );
+  }
+
   deleteCustomer(custId: number) {
     const url = `${this.customersUrl}/${custId}`;
     return this.http.delete<Customer>(url, this.httpOptions).pipe(
