@@ -1,12 +1,30 @@
+<div class="topnav">
+    <a routerLink="/jerseys">Jerseys</a>
+    <a routerLink="">Logout</a>
+  
+</div>
 
 <div>
-    <h1>YOUR ITEMS</h1>
-    <ul class="cart">
-        
-        
+    <table class="jerseys">
+      <ng-container *ngFor="let jersey of jerseys">
+        <tr>
+          <a routerLink="/detail/{{jersey.id}}">
+            <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
+          </a>
+          <table class="info">
+            <th class="name">{{jersey.name}} {{jersey.number}}</th>
+            <th class="size">{{jersey.size}}</th>
+          </table> 
+          <span class="price-badge">${{jersey.price}}</span> 
+          <button type="button" class="badge" >Remove from Cart</button>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
 
-    </ul>
-
+<div id="mybutton">
+    <a routerLink="/checkout">
+        <button class="checkout">Checkout</button>
+    </a>
 </div>
-<p>cart works! meow</p>
 

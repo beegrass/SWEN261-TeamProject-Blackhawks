@@ -13,7 +13,7 @@ import { Customer } from './customer';
 })
 export class CustomerService {
 
-  private customersUrl = 'http://localhost:8080/Customers' // URL to our api
+  private customersUrl = 'http://localhost:8080/customer' // URL to our api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

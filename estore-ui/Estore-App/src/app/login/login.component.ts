@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
    * @returns Returns entered username
    */
   onSubmit(): string {
-    // this.router.navigate(['/logout'])
     console.warn("username: " + this.username) 
     return this.username;
   }
@@ -53,20 +52,18 @@ export class LoginComponent implements OnInit {
    */
   login(username: string): void {
     username = username.trim().toLowerCase();
-    let type = false;
-    if (!username) {return ;} // check to see if this is filled 
-
-    if(this.customerService.getCustomerByUsername(username) == undefined){
-      // create a new one 
-      this.customerService.createCustomer({username, type} as Customer)
-      .subscribe(cust => {
-        this.customers.push(cust);
-      })
-    }else if(this.customerService.getCustomerByUsername(username) != undefined){
-      this.customerService.getCustomerByUsername(username).subscribe(cust => {
-        this.customers.push(cust); 
-      })
+    let cart_list: Jersey[] = [];
+    let total_price = 0;
+    let userCart = this.cartService.createCart({cart_list, total_price} as Cart);
+    
+    if (!username) {
+      return;
     }
-   
+
+    this.customerService.createCustomer({userCart, username} as Customer)
+      .subscribe(cust => {
+      this.customers.push(cust);
+    })
+    console.log(this.customers)
   }
 }

@@ -6,11 +6,11 @@ import { Location } from '@angular/common';
 import { JerseyService } from '../jersey.service';
 
 @Component({
-  selector: 'app-jersey-detail',
-  templateUrl: './jersey-detail.component.html',
-  styleUrls: ['./jersey-detail.component.css']
+  selector: 'app-admin-detail',
+  templateUrl: './admin-detail.component.html',
+  styleUrls: ['./admin-detail.component.css']
 })
-export class JerseyDetailComponent implements OnInit {
+export class AdminDetailComponent implements OnInit {
   // @Input() jersey?: Jersey;
   jersey: Jersey | undefined;
 
@@ -37,8 +37,7 @@ export class JerseyDetailComponent implements OnInit {
 
   save(): void {
     if (this.jersey) {
-      this.jerseyService.updateJersey(this.jersey)
-        .subscribe(() => this.goBack());
+      this.jerseyService.updateJersey(this.jersey).subscribe(() => this.goBack());
     }
   }
 }
