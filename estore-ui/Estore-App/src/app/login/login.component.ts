@@ -51,24 +51,20 @@ export class LoginComponent implements OnInit {
    * This allows the user to login using a string username 
    */
   login(username: string): void {
-    // alert(`username: ` + username)
     username = username.trim().toLowerCase();
-    let type = false;
-    if (!username) {return ;} // check to see if this is filled 
+    let total_price = 0;
+    let jerseyArray: Array<Jersey> = [];
+    let userCart = {total_price, jerseyArray} as Cart;
 
-    if(this.customerService.getCustomerByUsername(username) == undefined){
-      // create a new one 
-      this.customerService.createCustomer({username, type} as Customer)
-      .subscribe(cust => {
-        this.customers.push(cust);
-      })
-      alert(`created a new user ${username}`)
-    }else if(this.customerService.getCustomerByUsername(username) != undefined){
-      this.customerService.getCustomerByUsername(username).subscribe(cust => {
-        this.customers.push(cust); 
-      })
-      alert(`added user: ${username} to the customers array`)
+    if (!username) {
+      return;
     }
+
+    this.customerService.createCustomer({userCart, username} as Customer)
+      .subscribe(cust => {
+      this.customers.push(cust);
+    })
+    console.log(this.customers)
    
   }
 }
