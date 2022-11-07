@@ -41,7 +41,9 @@ export class InventoryComponent implements OnInit {
   }
 
   delete(jersey: Jersey): void {
-    this.jerseys = this.jerseys.filter(h => h !== jersey);
-    this.jerseyService.deleteJersey(jersey.id).subscribe();
+    if(window.confirm('Are you sure you want to delete this jersey?') == true) {
+      this.jerseys = this.jerseys.filter(h => h !== jersey);
+      this.jerseyService.deleteJersey(jersey.id).subscribe();
+    }
   }
 }
