@@ -34,6 +34,6 @@
 
   <br>
 
-  <button type="button" class="badge" (click)="goBack()">Back</button>
-  <button type="button" class="badge" (click)="goBack()">Add to Cart</button>
+  <button type="button" class="badge" (click)="goBack()">Back</button> <!--Change these 1 to be the cart id and jersey ids, not sure how to get it-->
+  <button type="button" class="badge" (click)="cartService.addJerseyToCart(1, 1)">Add to Cart</button>
 </div>

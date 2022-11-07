@@ -22,6 +22,10 @@ export class CheckoutComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  onClick(): void {
+    alert("Thank you for your purchase!")
+  }
   // getTotalCost(): number {
   //   return this.cartService.getTotalCost();
   // }

@@ -1,6 +1,6 @@
 package com.estore.api.estoreapi.persistence;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
+// import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -13,7 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.propertyeditors.CustomMapEditor;
+// import org.springframework.beans.propertyeditors.CustomMapEditor;
 
 import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.model.Customer;

@@ -149,6 +149,7 @@ public class CartFileDAO implements CartDAO {
         Cart cart = getSpecificCart(cartId); 
         boolean isAdded; 
         synchronized(allCarts){
+            load();
             if(jersey == null || cart == null){
                 System.out.println("cart is null in add jersey to cart");
                 return null; 
@@ -169,6 +170,7 @@ public class CartFileDAO implements CartDAO {
         Cart cart = getSpecificCart(cartId);
         boolean isDeleted;
         synchronized(allCarts){
+            load();
             if(jersey == null || cart == null){
                 return null; 
             }
@@ -191,6 +193,7 @@ public class CartFileDAO implements CartDAO {
         boolean isDeleted; 
         
         synchronized(allCarts){
+            load();
             isDeleted = cart.deleteEntireCart();
             save(); 
             if(isDeleted == false){

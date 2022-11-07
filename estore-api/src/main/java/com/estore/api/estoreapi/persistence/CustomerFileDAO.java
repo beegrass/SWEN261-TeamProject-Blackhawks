@@ -139,6 +139,7 @@ public class CustomerFileDAO implements CustomerDAO{
     public Customer createNewCustomer(Customer customer) throws IOException{
         load();
         synchronized(allCustomers){
+            load();
             if(allCustomers.containsKey(customer.getUserId()) == true){
                 // if already in there 
                 return null; 
