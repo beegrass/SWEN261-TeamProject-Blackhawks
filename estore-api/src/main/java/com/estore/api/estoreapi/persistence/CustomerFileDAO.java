@@ -190,18 +190,18 @@ public class CustomerFileDAO implements CustomerDAO{
      * @throws IOException
      */
     @Override
-    public Customer deleteEntireJerseyFromCart(int userId, Jersey jersey) throws IOException{
+    public Customer deleteEntireJerseyFromCart(String username, Jersey jersey) throws IOException{
         synchronized(allCustomers){
-            if(allCustomers.containsKey(userId) == false){
+            if(getSpecificCustomer(username) == null){
                 return null;
             }else{
-                Customer customer = allCustomers.get(userId); 
+                Customer customer = getSpecificCustomer(username);
                 Cart custCart = customer.getUsersCart();
                 Cart del = cartFileDAO.deleteEntireJerseyFromCart(custCart.getId(), jersey);
                 if(del == null){return null;}
                 Cart updated = cartFileDAO.getSpecificCart(custCart.getId());
                 customer.updateCart(updated);
-                allCustomers.put(userId,customer); 
+                allCustomers.put(customer.getUserId(),customer); 
                 save(); 
                 return customer; 
             }

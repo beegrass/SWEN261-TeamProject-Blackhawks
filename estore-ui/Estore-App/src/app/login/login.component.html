@@ -3,6 +3,7 @@
 <div class="user-form">
     Username: 
     <form (ngSubmit) = "isAdmin()">
+    <form (ngSubmit) = "isAdmin(); login(onSubmit())">
         <input [(ngModel)]="username" name="username" placeholder="username">
     </form>
 </div>

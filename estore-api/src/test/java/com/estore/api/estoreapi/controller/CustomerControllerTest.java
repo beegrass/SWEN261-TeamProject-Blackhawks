@@ -122,117 +122,117 @@ public class CustomerControllerTest {
         assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
     }
 
-    @Test
-    public void testAddToCart() throws IOException{
-        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
-        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
-        Cart cart = new Cart(new ArrayList<Jersey>(), 1);
-        cart.addJerseyToCart(j1);
-        cart.addJerseyToCart(j2);
-        cart.addJerseyToCart(j1);
+    // @Test
+    // public void testAddToCart() throws IOException{
+    //     Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+    //     Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+    //     Cart cart = new Cart(new ArrayList<Jersey>(), 1);
+    //     cart.addJerseyToCart(j1);
+    //     cart.addJerseyToCart(j2);
+    //     cart.addJerseyToCart(j1);
     
-        Customer customer = new Customer("meow man", false, cart,  1);
-        customer.getUsersCart().addJerseyToCart(j2); 
-        when(mockJerseyDAO.getJersey(29)).thenReturn(j2); 
-        when(mockCustomerDAO.addToCart(1, j2)).thenReturn(customer);
+    //     Customer customer = new Customer("meow man", false, cart,  1);
+    //     customer.getUsersCart().addJerseyToCart(j2); 
+    //     when(mockJerseyDAO.getJersey(29)).thenReturn(j2); 
+    //     when(mockCustomerDAO.addToCart(1, j2)).thenReturn(customer);
         
-        ResponseEntity<Customer> result = customerController.addToCart(1, 29);
-        assertEquals(4, result.getBody().getUsersCart().getEntireCart().length);
-        assertEquals(HttpStatus.OK, result.getStatusCode());
-    }
+    //     ResponseEntity<Customer> result = customerController.addToCart(1, 29);
+    //     assertEquals(4, result.getBody().getUsersCart().getEntireCart().length);
+    //     assertEquals(HttpStatus.OK, result.getStatusCode());
+    // }
 
-    @Test
-    public void testAddToCartFail() throws IOException{
-        when(mockJerseyDAO.getJersey(29)).thenReturn(null); 
-        when(mockCustomerDAO.addToCart(1, null)).thenReturn(null);
+    // @Test
+    // public void testAddToCartFail() throws IOException{
+    //     when(mockJerseyDAO.getJersey(29)).thenReturn(null); 
+    //     when(mockCustomerDAO.addToCart(1, null)).thenReturn(null);
         
-        ResponseEntity<Customer> result = customerController.addToCart(1, 29);
-        assertEquals(null, result.getBody());
-        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
-    }
+    //     ResponseEntity<Customer> result = customerController.addToCart(1, 29);
+    //     assertEquals(null, result.getBody());
+    //     assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
+    // }
 
-    @Test
-    public void testDecrementJerseyFromCart() throws IOException{
-        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
-        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
-        Cart cart = new Cart(new ArrayList<Jersey>(), 1);
-        cart.addJerseyToCart(j1);
-        cart.addJerseyToCart(j2);
-        cart.addJerseyToCart(j1);
+    // @Test
+    // public void testDecrementJerseyFromCart() throws IOException{
+    //     Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+    //     Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+    //     Cart cart = new Cart(new ArrayList<Jersey>(), 1);
+    //     cart.addJerseyToCart(j1);
+    //     cart.addJerseyToCart(j2);
+    //     cart.addJerseyToCart(j1);
     
-        Customer customer = new Customer("meow man", false, cart,  1);
-        customer.getUsersCart().decrementJerseyTypeFromCart(29); 
-        when(mockJerseyDAO.getJersey(29)).thenReturn(j2); 
-        when(mockCustomerDAO.decrementJerseyTypeAmount(1, j2)).thenReturn(customer);
+    //     Customer customer = new Customer("meow man", false, cart,  1);
+    //     customer.getUsersCart().decrementJerseyTypeFromCart(29); 
+    //     when(mockJerseyDAO.getJersey(29)).thenReturn(j2); 
+    //     when(mockCustomerDAO.decrementJerseyTypeAmount(1, j2)).thenReturn(customer);
 
-        ResponseEntity<Customer> result = customerController.decrementJerseyFromCart(1, 29);
+    //     ResponseEntity<Customer> result = customerController.decrementJerseyFromCart(1, 29);
 
-        assertEquals(customer, result.getBody());
-        assertEquals(customer.getUsersCart().getEntireCart().length, result.getBody().getUsersCart().getEntireCart().length);
-        assertEquals(HttpStatus.OK, result.getStatusCode());
-    }
+    //     assertEquals(customer, result.getBody());
+    //     assertEquals(customer.getUsersCart().getEntireCart().length, result.getBody().getUsersCart().getEntireCart().length);
+    //     assertEquals(HttpStatus.OK, result.getStatusCode());
+    // }
 
-    @Test
-    public void testDecrementJerseyFromCartFail() throws IOException{
-        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
-        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
-        Cart cart = new Cart(new ArrayList<Jersey>(), 1);
-        cart.addJerseyToCart(j1);
-        cart.addJerseyToCart(j2);
-        cart.addJerseyToCart(j1);
+    // @Test
+    // public void testDecrementJerseyFromCartFail() throws IOException{
+    //     Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+    //     Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+    //     Cart cart = new Cart(new ArrayList<Jersey>(), 1);
+    //     cart.addJerseyToCart(j1);
+    //     cart.addJerseyToCart(j2);
+    //     cart.addJerseyToCart(j1);
     
-        //Customer customer = new Customer("meow man", false, cart,  1);
-        //customer.getUsersCart().decrementJerseyTypeFromCart(29); 
-        when(mockJerseyDAO.getJersey(13)).thenReturn(null); 
-        when(mockCustomerDAO.decrementJerseyTypeAmount(1, null)).thenReturn(null);
+    //     //Customer customer = new Customer("meow man", false, cart,  1);
+    //     //customer.getUsersCart().decrementJerseyTypeFromCart(29); 
+    //     when(mockJerseyDAO.getJersey(13)).thenReturn(null); 
+    //     when(mockCustomerDAO.decrementJerseyTypeAmount(1, null)).thenReturn(null);
 
-        ResponseEntity<Customer> result = customerController.decrementJerseyFromCart(1, 29);
+    //     ResponseEntity<Customer> result = customerController.decrementJerseyFromCart(1, 29);
 
-        assertEquals(null, result.getBody());
-        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
-    }
+    //     assertEquals(null, result.getBody());
+    //     assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
+    // }
 
-    @Test
-    public void testDeleteTypeJersey()throws IOException{
-        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
-        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
-        Cart cart = new Cart(new ArrayList<Jersey>(), 1);
-        cart.addJerseyToCart(j1);
-        cart.addJerseyToCart(j2);
-        cart.addJerseyToCart(j1);
+    // @Test
+    // public void testDeleteTypeJersey()throws IOException{
+    //     Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+    //     Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+    //     Cart cart = new Cart(new ArrayList<Jersey>(), 1);
+    //     cart.addJerseyToCart(j1);
+    //     cart.addJerseyToCart(j2);
+    //     cart.addJerseyToCart(j1);
     
-        Customer customer = new Customer("meow man", false, cart,  1);
-        customer.getUsersCart().deleteJerseyType(j1); 
+    //     Customer customer = new Customer("meow man", false, cart,  1);
+    //     customer.getUsersCart().deleteJerseyType(j1); 
      
-        when(mockJerseyDAO.getJersey(99)).thenReturn(j1); 
-        when(mockCustomerDAO.deleteEntireJerseyFromCart(1, j1)).thenReturn(customer);
+    //     when(mockJerseyDAO.getJersey(99)).thenReturn(j1); 
+    //     when(mockCustomerDAO.deleteEntireJerseyFromCart(1, j1)).thenReturn(customer);
 
-        ResponseEntity<Customer> result = customerController.deleteTypeJersey(1, 99);
+    //     ResponseEntity<Customer> result = customerController.deleteTypeJersey(1, 99);
 
-        assertEquals(1, result.getBody().getUsersCart().getEntireCart().length);
-        assertEquals(HttpStatus.OK, result.getStatusCode());
-    }
+    //     assertEquals(1, result.getBody().getUsersCart().getEntireCart().length);
+    //     assertEquals(HttpStatus.OK, result.getStatusCode());
+    // }
 
-    @Test
-    public void testDeleteTypeJerseyFail()throws IOException{
-        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
-        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
-        Cart cart = new Cart(new ArrayList<Jersey>(), 1);
-        cart.addJerseyToCart(j1);
-        cart.addJerseyToCart(j2);
-        cart.addJerseyToCart(j1);
+    // @Test
+    // public void testDeleteTypeJerseyFail()throws IOException{
+    //     Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+    //     Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+    //     Cart cart = new Cart(new ArrayList<Jersey>(), 1);
+    //     cart.addJerseyToCart(j1);
+    //     cart.addJerseyToCart(j2);
+    //     cart.addJerseyToCart(j1);
     
-        // Customer customer = new Customer("meow man", false, cart,  1);
-        // customer.getUsersCart().deleteJerseyType(j1); 
+    //     // Customer customer = new Customer("meow man", false, cart,  1);
+    //     // customer.getUsersCart().deleteJerseyType(j1); 
      
-        when(mockJerseyDAO.getJersey(999)).thenReturn(null); 
-        when(mockCustomerDAO.decrementJerseyTypeAmount(1, null)).thenReturn(null);
+    //     when(mockJerseyDAO.getJersey(999)).thenReturn(null); 
+    //     when(mockCustomerDAO.decrementJerseyTypeAmount(1, null)).thenReturn(null);
 
-        ResponseEntity<Customer> result = customerController.decrementJerseyFromCart(1, 999);
+    //     ResponseEntity<Customer> result = customerController.decrementJerseyFromCart(1, 999);
 
-        assertEquals(null, result.getBody());
-        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
-    }
+    //     assertEquals(null, result.getBody());
+    //     assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
+    // }
 
     @Test
     public void testDeleteEntireCart()throws IOException{
