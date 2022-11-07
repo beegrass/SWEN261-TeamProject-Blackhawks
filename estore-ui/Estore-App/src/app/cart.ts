@@ -1,6 +1,8 @@
+import { Jersey } from "./jersey";
+
 export interface Cart {
 
-  total_amount_jerseys: number;
+  jersey_list: Jersey[];
   total_price: number;
   id: number;
 
