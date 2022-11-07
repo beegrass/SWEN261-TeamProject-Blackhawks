@@ -119,6 +119,7 @@ public class CustomerFileDAO implements CustomerDAO{
     @Override 
     public Customer createNewCustomer(Customer customer) throws IOException{
         synchronized(allCustomers){
+            load();
             if(allCustomers.containsKey(customer.getUserId()) == true){
                 // if already in there 
                 return null; 
@@ -148,6 +149,7 @@ public class CustomerFileDAO implements CustomerDAO{
     @Override
     public Customer addToCart(int userId, Jersey jersey) throws IOException{
         synchronized(allCustomers){
+            load();
             if(allCustomers.containsKey(userId) == false){
                 return null;
             }else{
@@ -175,6 +177,7 @@ public class CustomerFileDAO implements CustomerDAO{
     @Override
     public Customer deleteEntireJerseyFromCart(int userId, Jersey jersey) throws IOException{
         synchronized(allCustomers){
+            load();
             if(allCustomers.containsKey(userId) == false){
                 return null;
             }else{
@@ -201,6 +204,7 @@ public class CustomerFileDAO implements CustomerDAO{
     @Override
     public Customer decrementJerseyTypeAmount(int userId, Jersey jersey) throws IOException{
         synchronized(allCustomers){
+            load();
             if(allCustomers.containsKey(userId) == false){
                 return null;
             }else{
@@ -227,6 +231,7 @@ public class CustomerFileDAO implements CustomerDAO{
     @Override
     public Customer deleteEntireCart(int userId) throws IOException{
         synchronized(allCustomers){
+            load();
             if(allCustomers.containsKey(userId) == false){
                 return null;
             }else{
