@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Jersey } from '../jersey';
-import { JERSEYS } from '../mock-jerseys';
+// import { JERSEYS } from '../mock-jerseys';
 import { JerseyService } from '../jersey.service';
 import { MessageService } from '../message.service';
 
@@ -10,8 +10,9 @@ import { MessageService } from '../message.service';
   styleUrls: ['./jerseys.component.css']
 })
 export class JerseysComponent implements OnInit {
-
   jerseys: Jersey[] = [];
+
+  loops: Number[] = [0, 0, 0];
 
   constructor(private jerseyService: JerseyService, private messageService: MessageService) { }
 
@@ -21,7 +22,9 @@ export class JerseysComponent implements OnInit {
 
   getJerseys(): void {
     this.jerseyService.getJerseys()
-      .subscribe(jerseys => this.jerseys = jerseys);
+    .subscribe(Jerseys => this.jerseys = Jerseys);
   }
+
+  
 
 }

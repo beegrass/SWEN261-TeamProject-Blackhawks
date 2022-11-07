@@ -1,11 +1,35 @@
-  <div *ngIf="jersey">
+<div class="topnav">
+  <a routerLink="/jerseys">Jerseys</a>
+  <a routerLink="">Logout</a>
+</div>
 
-    <h2>{{jersey.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{jersey.id}}</div>
-    <div><span>name: </span>{{jersey.name}}</div>
-    <div><span>number: </span>{{jersey.number}}</div>
-    <div><span>price: </span>{{jersey.price}}</div>
-    <div><span>color: </span>{{jersey.color}}</div>
-    <div><span>size: </span>{{jersey.size}}</div>
+<br>
+
+<div *ngIf="jersey" align="center">
+  <table align="center" border="1" cellpadding="1" cellspacing="1" style="width:500px">
+    <tbody>
+      <tr>
+        <td class="image" rowspan="4" style="width:234px">
+          <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
+        </td>
+        <td class="name" style="width:253px">{{jersey.name}} #{{jersey.number}}</td>
+      </tr>
+      <tr>
+        <td class="size" style="width:253px">{{jersey.size}}</td>
+      </tr>
+      <tr>
+        <td class="price" style="width:253px">${{jersey.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <label for="quantity">Qty: </label>
   
-  </div>
+  <input type="number" id="quantity" name="quantity"
+       min="1" max="100">
+
+  <br>
+
+  <button type="button" class="badge" (click)="goBack()">Back</button>
+  <button type="button" class="badge" (click)="goBack()">Add to Cart</button>
+</div>

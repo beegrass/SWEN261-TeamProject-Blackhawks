@@ -1,14 +1,26 @@
+<div class="topnav">
+  <a routerLink="">Logout</a>
+</div>
+
+<br>
+
 <div>
   <app-jersey-search></app-jersey-search>
 </div>
   
 <div>
-  <ul class="jerseys">
-    <li *ngFor="let jersey of jerseys">
-      <a routerLink="/detail/{{jersey.id}}">
-        <span class ="badge">{{jersey.id}}</span> 
-      </a>
-        <span class="name">{{jersey.name}}</span>
-    </li>
-  </ul>
+  <table class="jerseys">
+    <ng-container *ngFor="let jersey of jerseys">
+      <td>
+        <a routerLink="/detail/{{jersey.id}}">
+          <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
+        </a>
+        <table class="info">
+          <th class="name">{{jersey.name}} {{jersey.number}}</th>
+          <th class="size">{{jersey.size}}</th>
+        </table> 
+        <span class="price-badge">${{jersey.price}}</span> 
+      </td>
+    </ng-container>
+  </table>
 </div>
