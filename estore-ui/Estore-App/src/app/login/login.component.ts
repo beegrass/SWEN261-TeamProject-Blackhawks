@@ -7,6 +7,7 @@ import { Cart } from 'app/cart';
 import { Jersey } from "app/jersey";
 import { Customer } from 'app/customer';
 import { Observable } from 'rxjs/internal/Observable';
+import { JerseyService } from 'app/jersey.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -63,9 +64,10 @@ export class LoginComponent implements OnInit {
    */
   login(username: string): void {
     username = username.trim().toLowerCase();
-    let cart_list: Jersey[] = [];
+    let cart_list: Jersey[] = new Array();
     let total_price = 0;
     let userCart = {cart_list, total_price} as Cart;
+    this.cartService.createCart(userCart); 
     
     if (!username && username.toLowerCase() != 'admin') {
       return; // returns early if username is admin or doesn't exist otherwise create new cust and add to array of customer
