@@ -82,6 +82,7 @@
     border-radius: 3px;
     cursor: pointer;
     font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
   }
   
   .btn:hover {
