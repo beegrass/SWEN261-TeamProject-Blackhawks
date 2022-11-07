@@ -93,42 +93,42 @@ public class CustomerController {
         }
     }
 
-    // @PutMapping("/add/")
-    // public ResponseEntity<Customer> addToCart(@RequestParam int userId, @RequestParam int jerseyId){
-    //     LOG.info("PUT /customer/add/?userId= " + userId + "&jerseyId=" + jerseyId);
-    //     try{
-    //         Jersey jersey = jerseyDAO.getJersey(jerseyId);
-    //         Customer result = customerDAO.addToCart(userId, jersey); // there is an issue with how its saving the data here 
-    //         if(result == null || jersey == null){
-    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //         }else{
-    //             return new ResponseEntity<Customer>(result, HttpStatus.OK); 
-    //         }
-    //     }catch(IOException e){
-    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
-    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    // }
+    @PutMapping("/add/")
+    public ResponseEntity<Customer> addToCart(@RequestParam int userId, @RequestParam int jerseyId){
+        LOG.info("PUT /customer/add/?userId= " + userId + "&jerseyId=" + jerseyId);
+        try{
+            Jersey jersey = jerseyDAO.getJersey(jerseyId);
+            Customer result = customerDAO.addToCart(userId, jersey); // there is an issue with how its saving the data here 
+            if(result == null || jersey == null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }else{
+                return new ResponseEntity<Customer>(result, HttpStatus.OK); 
+            }
+        }catch(IOException e){
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-    // @PutMapping("/decrement/")
-    // public ResponseEntity<Customer> decrementJerseyFromCart(@RequestParam int userId, @RequestParam int jerseyId){
-    //     LOG.info("PUT /customer/decrement/?userId= " + userId + "&jerseyId=" + jerseyId);
-    //     try{
-    //         Jersey jersey = jerseyDAO.getJersey(jerseyId);
-    //         if(jersey == null){
-    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //         }
-    //         Customer result = customerDAO.decrementJerseyTypeAmount(userId, jersey); 
-    //         if(result == null){
-    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //         }else{
-    //             return new ResponseEntity<Customer>(result, HttpStatus.OK); 
-    //         }
-    //     }catch(IOException e){
-    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
-    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    // }
+    @PutMapping("/decrement/")
+    public ResponseEntity<Customer> decrementJerseyFromCart(@RequestParam int userId, @RequestParam int jerseyId){
+        LOG.info("PUT /customer/decrement/?userId= " + userId + "&jerseyId=" + jerseyId);
+        try{
+            Jersey jersey = jerseyDAO.getJersey(jerseyId);
+            if(jersey == null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            Customer result = customerDAO.decrementJerseyTypeAmount(userId, jersey); 
+            if(result == null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }else{
+                return new ResponseEntity<Customer>(result, HttpStatus.OK); 
+            }
+        }catch(IOException e){
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PutMapping("/deleteJerseyType/")
     public ResponseEntity<Customer> deleteTypeJersey(@RequestParam String username, @RequestParam int jerseyId){

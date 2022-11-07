@@ -132,22 +132,22 @@ public class CustomerFileDAOTest {
     }
 
 
-    @Test
-    public void testDeleteEntireJerseyFromCart() throws IOException{
-        int id = 2; 
-        Jersey jersey = testJersey[0];
-        Customer result = customerFileDAO.deleteEntireJerseyFromCart(id, jersey);
-        assertEquals(result.getUsersCart().getEntireCart().length, 1);
-    }
+    // @Test
+    // public void testDeleteEntireJerseyFromCart() throws IOException{
+    //     int id = 2; 
+    //     Jersey jersey = testJersey[0];
+    //     Customer result = customerFileDAO.deleteEntireJerseyFromCart(id, jersey);
+    //     assertEquals(result.getUsersCart().getEntireCart().length, 1);
+    // }
 
     
-    @Test
-    public void testDeleteEntireJerseyFromCartFail() throws IOException{
-        int id = 27; 
-        Jersey jersey = testJersey[0];
-        Customer result = customerFileDAO.deleteEntireJerseyFromCart(id, jersey);
-        assertEquals(result, null);
-    }
+    // @Test
+    // public void testDeleteEntireJerseyFromCartFail() throws IOException{
+    //     int id = 27; 
+    //     Jersey jersey = testJersey[0];
+    //     Customer result = customerFileDAO.deleteEntireJerseyFromCart(id, jersey);
+    //     assertEquals(result, null);
+    // }
 
     @Test
     public void testDecrementJerseyTypeAmount()throws IOException{

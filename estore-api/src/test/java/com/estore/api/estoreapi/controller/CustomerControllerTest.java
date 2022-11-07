@@ -192,26 +192,26 @@ public class CustomerControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
-    @Test
-    public void testDeleteTypeJersey()throws IOException{
-        Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
-        Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
-        Cart cart = new Cart(new ArrayList<Jersey>(), 1);
-        cart.addJerseyToCart(j1);
-        cart.addJerseyToCart(j2);
-        cart.addJerseyToCart(j1);
+    // @Test
+    // public void testDeleteTypeJersey()throws IOException{
+    //     Jersey j1 = new Jersey(99,"Marc-Andre Fleury", 29, 129.99, "Red", "Large", "image1.png");
+    //     Jersey j2 = new Jersey(29,"Todd", 29, 199.22, "Red", "Small", "image1.png");
+    //     Cart cart = new Cart(new ArrayList<Jersey>(), 1);
+    //     cart.addJerseyToCart(j1);
+    //     cart.addJerseyToCart(j2);
+    //     cart.addJerseyToCart(j1);
     
-        Customer customer = new Customer("meow man", false, cart,  1);
-        customer.getUsersCart().deleteJerseyType(j1); 
+    //     Customer customer = new Customer("meow man", false, cart,  1);
+    //     customer.getUsersCart().deleteJerseyType(j1); 
      
-        when(mockJerseyDAO.getJersey(99)).thenReturn(j1); 
-        when(mockCustomerDAO.deleteEntireJerseyFromCart(1, j1)).thenReturn(customer);
+    //     when(mockJerseyDAO.getJersey(99)).thenReturn(j1); 
+    //     when(mockCustomerDAO.deleteEntireJerseyFromCart(1, j1)).thenReturn(customer);
 
-        ResponseEntity<Customer> result = customerController.deleteTypeJersey(1, 99);
+    //     ResponseEntity<Customer> result = customerController.deleteTypeJersey(1, 99);
 
-        assertEquals(1, result.getBody().getUsersCart().getEntireCart().length);
-        assertEquals(HttpStatus.OK, result.getStatusCode());
-    }
+    //     assertEquals(1, result.getBody().getUsersCart().getEntireCart().length);
+    //     assertEquals(HttpStatus.OK, result.getStatusCode());
+    // }
 
     @Test
     public void testDeleteTypeJerseyFail()throws IOException{
