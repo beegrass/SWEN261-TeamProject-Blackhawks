@@ -100,6 +100,7 @@ public class CustomerController {
             Jersey jersey = jerseyDAO.getJersey(jerseyId);
             Customer result = customerDAO.addToCart(userId, jersey); // there is an issue with how its saving the data here 
             if(result == null || jersey == null){
+                System.out.println("theres an issue with add to cart controller ");
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }else{
                 return new ResponseEntity<Customer>(result, HttpStatus.OK); 

@@ -125,9 +125,10 @@ public class CartFileDAO implements CartDAO {
      */
     @Override
     public Cart decrementJerseyTypeAmount(int cartId, int jerseyId) throws IOException {
+        load();
         Cart cart = allCarts.get(cartId);
         boolean isDecremented; 
-        synchronized(allCarts){
+        synchronized(allCarts){ 
             if(cart != null ){ 
                 isDecremented = cart.decrementJerseyTypeFromCart(jerseyId);
                 if(isDecremented == false){
@@ -144,10 +145,12 @@ public class CartFileDAO implements CartDAO {
 
     @Override
     public Cart addJerseyToCart(int cartId, Jersey jersey) throws IOException{
+        load();
         Cart cart = getSpecificCart(cartId); 
         boolean isAdded; 
         synchronized(allCarts){
             if(jersey == null || cart == null){
+                System.out.println("cart is null in add jersey to cart");
                 return null; 
             }
             isAdded = cart.addJerseyToCart(jersey); 
@@ -162,6 +165,7 @@ public class CartFileDAO implements CartDAO {
 
     @Override
     public Cart deleteEntireJerseyFromCart(int cartId, Jersey jersey) throws IOException {
+        load();
         Cart cart = getSpecificCart(cartId);
         boolean isDeleted;
         synchronized(allCarts){
@@ -182,6 +186,7 @@ public class CartFileDAO implements CartDAO {
 
     @Override
     public Cart deleteEntireCart(int cartId) throws IOException {
+        load();
         Cart cart = getSpecificCart(cartId);
         boolean isDeleted; 
         
@@ -199,8 +204,9 @@ public class CartFileDAO implements CartDAO {
 
     @Override
     public Cart createNewCart(Cart cart) throws IOException {
-        
+        load();
         synchronized(allCarts){
+            
             // Jersey [] testing = new Jersey[1];
             // testing[0] = new Jersey(10,"poop",25,125.55,"Red", "large", "img.png"); 
             List<Jersey> converted = Arrays.asList(cart.getEntireCart());
