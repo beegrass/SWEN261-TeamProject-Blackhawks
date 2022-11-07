@@ -43,8 +43,19 @@ export class LoginComponent implements OnInit {
    * @returns true if admin, false is customer
    */
   isAdmin(): boolean {
-    console.warn("admin" == this.onSubmit().toLowerCase());
-    return "admin" == this.onSubmit().toLowerCase();
+    var name = this.onSubmit().toLowerCase();
+    var result = name == "admin";
+    if (name == "") {
+      alert("Enter a valid username")
+    } else {
+      console.warn(result)
+      if (result) {
+        this.router.navigate(["/inventory"])
+      } else {
+        this.router.navigate(["/jerseys"])
+      }
+    }
+    return result;
   }
 
   /**
@@ -54,12 +65,11 @@ export class LoginComponent implements OnInit {
     username = username.trim().toLowerCase();
     let cart_list: Jersey[] = [];
     let total_price = 0;
-    let userCart = this.cartService.createCart({cart_list, total_price} as Cart);
+    let userCart = {cart_list, total_price} as Cart;
     
-    if (!username) {
-      return;
+    if (!username && username.toLowerCase() != 'admin') {
+      return; // returns early if username is admin or doesn't exist otherwise create new cust and add to array of customer
     }
-
     this.customerService.createCustomer({userCart, username} as Customer)
       .subscribe(cust => {
       this.customers.push(cust);
