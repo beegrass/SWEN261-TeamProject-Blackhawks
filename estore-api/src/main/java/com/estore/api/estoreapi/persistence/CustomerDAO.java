@@ -27,7 +27,7 @@ import com.estore.api.estoreapi.model.Jersey;
      * @return Customer is it exists, null if it doesnt 
      * @throws IOException 
      */
-    Customer getSpecificCustomer(int userId) throws IOException; 
+    Customer getSpecificCustomer(String username) throws IOException; 
 
     /**
      * 
@@ -53,7 +53,7 @@ import com.estore.api.estoreapi.model.Jersey;
      * @return customer if added null if not found 
      * @throws IOException
      */
-    Customer deleteEntireJerseyFromCart(int userId, Jersey jersey) throws IOException;
+    Customer deleteEntireJerseyFromCart(String username, Jersey jersey) throws IOException;
 
     /**
      * decrements the jersey type amount from the customers cart 

@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { JerseyService } from '../jersey.service';
+import { CartService } from 'app/cart.service';
+import { Cart } from 'app/cart';
 
 @Component({
   selector: 'app-jersey-detail',
@@ -18,7 +20,8 @@ export class JerseyDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private jerseyService: JerseyService,
-    private location: Location
+    private location: Location,
+    protected cartService: CartService
   ) {}
 
   ngOnInit(): void {

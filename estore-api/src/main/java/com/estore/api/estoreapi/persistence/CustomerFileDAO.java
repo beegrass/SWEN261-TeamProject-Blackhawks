@@ -91,6 +91,7 @@ public class CustomerFileDAO implements CustomerDAO{
      */
     @Override
     public Cart getCart(int userId) {
+        
         if(allCustomers.containsKey(userId) == false){
             return null; 
         }else{
@@ -98,17 +99,35 @@ public class CustomerFileDAO implements CustomerDAO{
         }
     }
 
+    // /**
+    //  * returns the customer of that id 
+    //  * @param userId - the id of the user
+    //  */
+    // @Override
+    // public Customer getSpecificCustomer(int userId) throws IOException{
+    //     if(allCustomers.containsKey(userId) == false){
+    //         return null; 
+    //     }else{
+    //         return allCustomers.get(userId); 
+    //     }
+    // }
+
+    
     /**
      * returns the customer of that id 
      * @param userId - the id of the user
      */
     @Override
-    public Customer getSpecificCustomer(int userId) throws IOException{
-        if(allCustomers.containsKey(userId) == false){
-            return null; 
-        }else{
-            return allCustomers.get(userId); 
+    public Customer getSpecificCustomer(String username) throws IOException{
+        load();
+        for(Customer cust : allCustomers.values()){
+            if(cust.getUsername().equals(username) == true){
+                return allCustomers.get(cust.getUserId()); 
+            }
         }
+
+        return null; 
+        
     }
 
     /**
@@ -118,6 +137,7 @@ public class CustomerFileDAO implements CustomerDAO{
      */
     @Override 
     public Customer createNewCustomer(Customer customer) throws IOException{
+        load();
         synchronized(allCustomers){
             load();
             if(allCustomers.containsKey(customer.getUserId()) == true){
@@ -148,8 +168,9 @@ public class CustomerFileDAO implements CustomerDAO{
      */
     @Override
     public Customer addToCart(int userId, Jersey jersey) throws IOException{
+        load();
         synchronized(allCustomers){
-            load();
+            
             if(allCustomers.containsKey(userId) == false){
                 return null;
             }else{
@@ -175,19 +196,19 @@ public class CustomerFileDAO implements CustomerDAO{
      * @throws IOException
      */
     @Override
-    public Customer deleteEntireJerseyFromCart(int userId, Jersey jersey) throws IOException{
+    public Customer deleteEntireJerseyFromCart(String username, Jersey jersey) throws IOException{
+        load(); 
         synchronized(allCustomers){
-            load();
-            if(allCustomers.containsKey(userId) == false){
+            if(getSpecificCustomer(username) == null){
                 return null;
             }else{
-                Customer customer = allCustomers.get(userId); 
+                Customer customer = getSpecificCustomer(username);
                 Cart custCart = customer.getUsersCart();
                 Cart del = cartFileDAO.deleteEntireJerseyFromCart(custCart.getId(), jersey);
                 if(del == null){return null;}
                 Cart updated = cartFileDAO.getSpecificCart(custCart.getId());
                 customer.updateCart(updated);
-                allCustomers.put(userId,customer); 
+                allCustomers.put(customer.getUserId(),customer); 
                 save(); 
                 return customer; 
             }
@@ -203,8 +224,9 @@ public class CustomerFileDAO implements CustomerDAO{
      */
     @Override
     public Customer decrementJerseyTypeAmount(int userId, Jersey jersey) throws IOException{
+        load(); 
         synchronized(allCustomers){
-            load();
+          
             if(allCustomers.containsKey(userId) == false){
                 return null;
             }else{
@@ -230,8 +252,9 @@ public class CustomerFileDAO implements CustomerDAO{
      */
     @Override
     public Customer deleteEntireCart(int userId) throws IOException{
+        load();
         synchronized(allCustomers){
-            load();
+        
             if(allCustomers.containsKey(userId) == false){
                 return null;
             }else{

@@ -44,6 +44,7 @@ import { Cart } from './cart';
     deleteJerseyType(cartId: number, jerseyId: number) {
       const url = "PUT /cart/deleteJerseyType/?cart=" + cartId + "&jerseyId=" + jerseyId
       return this.http.put(url, this.httpOptions).pipe(
+        tap(_ => this.log(`updated cart id=${cartId}`)),
         catchError(this.handleError<Cart>('deleteJerseyType'))
       );
     }
