@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
     let userCart = {cart_list, total_price} as Cart;
     
     if (!username && username.toLowerCase() != 'admin') {
+      console.log("poop")
       return; // returns early if username is admin or doesn't exist otherwise create new cust and add to array of customer
     }
     this.customerService.createCustomer({userCart, username} as Customer)
