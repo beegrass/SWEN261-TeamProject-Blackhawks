@@ -35,8 +35,7 @@ This section describes the features of the application.
 Inventory editing
 Interactive storefront
 Color accessibility settings
-login/logout with admin priviliges
-
+login/logout with admin privileges
 
 ### Definition of MVP
 NHL Jersey store with the capability to persist with the user who shopped there. In addition, the store should have the capability to edit the inventory in various ways.
@@ -51,7 +50,6 @@ Color Blindness Accessibility
 GUI usability improvements
 Inventory Management and Storefront GUI
 Accessibility features
-
 
 ## Application Domain
 
@@ -86,7 +84,7 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 This section describes the web interface flow; this is how the user views and interacts
 with the e-store application.
 
-The user interface will begin with the default page of the storefront. Once there, the user will have the option to login as a customer or admin. If an admin, they will be taken to an inventory management page. In addition, after the customer browses the store, they will navigate to a checkout page where they will be able to pay for their items.df
+The user interface will begin with the default page of the storefront. Once there, the user will have the option to login as a customer or admin. If an admin, they will be taken to an inventory management page. If a user, they will be taken to a page to browse the available inventory where they can add jerseys into their cart. In addition, after the customer browses the store, they will navigate to a cart page then to checkout page where they will be able to pay for their items.
 
 
 ### View Tier
