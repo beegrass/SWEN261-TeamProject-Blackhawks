@@ -3,26 +3,22 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics._
-
 ## Team Information
-* Team name: TEAMNAME
+* Team name: BLACKHAWKS
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * HAYDEN CABRAL
+  * ETHAN ABBATE
+  * ANGELA NGO
+  * VINCENT SCHWARTZ
 
 ## Executive Summary
 
-This is a summary of the project.
+The project is an NHL jersey store for the Chicago Blackhawks. In addition to the store itself, the project will contain the tools necessary for an administrator to control the inventory of products.
 
 ### Purpose
-> _Provide a very brief statement about the project and the most
-> important user group and user goals._
+
+This project is a jersey store for the NHL franchise Chicago Blackhawks. The most important user group for this project is the customer, as a vast majority of
+design decisions rely on making a great customer experience while shopping on the e-store.
 
 ### Glossary and Acronyms
 > _Provide a table of terms and acronyms._
@@ -36,29 +32,32 @@ This is a summary of the project.
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
+Inventory editing
+Interactive storefront
+Color accessibility settings
+login/logout with admin privileges
 
 ### Definition of MVP
-> _Provide a simple description of the Minimum Viable Product._
+NHL Jersey store with the capability to persist with the user who shopped there. In addition, the store should have the capability to edit the inventory in various ways.
 
 ### MVP Features
-> _Provide a list of top-level Epics and/or Stories of the MVP._
+Buyer
+Owner
+Maintain Inventory
+Color Blindness Accessibility
 
 ### Roadmap of Enhancements
-> _Provide a list of top-level features in the order you plan to consider them._
-
+GUI usability improvements
+Inventory Management and Storefront GUI
+Accessibility features
 
 ## Application Domain
 
 This section describes the application domain.
 
-![Domain Model](domain-model-placeholder.png)
+![Domain Model](domain-model.png)
 
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+Almost everything within the domain depends on whether the user is an admin or not, as in each case many features become available depending on the answer. In addition, the Jersey object is the backbone of the store, as this is the only product that the store will sell.
 
 
 ## Architecture and Design
@@ -85,8 +84,7 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 This section describes the web interface flow; this is how the user views and interacts
 with the e-store application.
 
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
+The user interface will begin with the default page of the storefront. Once there, the user will have the option to login as a customer or admin. If an admin, they will be taken to an inventory management page. If a user, they will be taken to a page to browse the available inventory where they can add jerseys into their cart. In addition, after the customer browses the store, they will navigate to a cart page then to checkout page where they will be able to pay for their items.
 
 
 ### View Tier
