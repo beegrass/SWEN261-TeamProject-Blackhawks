@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Jersey } from './jersey';
-import { JERSEYS } from './mock-jerseys';
+// import { JERSEYS } from './mock-jerseys';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
@@ -10,6 +10,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class JerseyService {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(
     private http: HttpClient,
@@ -35,13 +38,27 @@ export class JerseyService {
       );
   }
 
-  /* GET jerseys whose name contains search term */
+  /** GET jersey by id. Return `undefined` when id not found */
+  getJerseyNo404<Data>(id: number): Observable<Jersey> {
+    const url = `${this.jerseysUrl}/?id=${id}`;
+    return this.http.get<Jersey[]>(url)
+      .pipe(
+        map(jerseys => jerseys[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? 'fetched' : 'did not find';
+          this.log(`${outcome} jersey id=${id}`);
+        }),
+        catchError(this.handleError<Jersey>(`getJersey id=${id}`))
+      );
+  }
+
+  /* GET Jersey whose name contains search term */
   searchJerseys(term: string): Observable<Jersey[]> {
     if (!term.trim()) {
-      // if not search term, return empty Jersey array.
+      // if not search term, return empty jersey array.
       return of([]);
     }
-    return this.http.get<Jersey[]>(`${this.jerseysUrl}/?name=${term}`).pipe(
+    return this.http.get<Jersey[]>(`${this.jerseysUrl}/searchByName/?name=${term}`).pipe(
       tap(x => x.length ?
         this.log(`found jerseys matching "${term}"`) :
         this.log(`no jerseys matching "${term}"`)),
@@ -53,6 +70,30 @@ export class JerseyService {
   private log(message: string) {
     this.messageService.add(`JerseyService: ${message}`);
   }
+
+  addJersey(jersey: Jersey): Observable<Jersey> {
+    return this.http.post<Jersey>(this.jerseysUrl, jersey, this.httpOptions).pipe(
+      tap((newJersey: Jersey) => this.log(`added Jersey w/ id=${newJersey.id}`)),
+      catchError(this.handleError<Jersey>('addJersey'))
+    );
+  }
+
+  deleteJersey(id: number): Observable<Jersey> {
+    const url = `${this.jerseysUrl}/${id}`;
+
+    return this.http.delete<Jersey>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted jersey id=${id}`)),
+      catchError(this.handleError<Jersey>('deleteJersey'))
+    );
+  }
+
+  updateJersey(jersey: Jersey): Observable<any> {
+    return this.http.put(this.jerseysUrl, jersey, this.httpOptions).pipe(
+      tap(_ => this.log(`updated jersey id=${jersey.id}`)),
+      catchError(this.handleError<any>('updateJersey'))
+    );
+  }
+
 
 
   /**

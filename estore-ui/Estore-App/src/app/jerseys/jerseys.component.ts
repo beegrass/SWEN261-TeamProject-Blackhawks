@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Jersey } from '../jersey';
-import { JERSEYS } from '../mock-jerseys';
 import { JerseyService } from '../jersey.service';
-import { MessageService } from '../message.service';
+import { CartService } from 'app/cart.service';
 
 @Component({
   selector: 'app-jerseys',
@@ -10,10 +9,9 @@ import { MessageService } from '../message.service';
   styleUrls: ['./jerseys.component.css']
 })
 export class JerseysComponent implements OnInit {
-
   jerseys: Jersey[] = [];
 
-  constructor(private jerseyService: JerseyService, private messageService: MessageService) { }
+  constructor(private jerseyService: JerseyService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getJerseys();
@@ -21,7 +19,11 @@ export class JerseysComponent implements OnInit {
 
   getJerseys(): void {
     this.jerseyService.getJerseys()
-      .subscribe(jerseys => this.jerseys = jerseys);
+    .subscribe(Jerseys => this.jerseys = Jerseys);
+  }
+
+  addJerseyToCart(jersey: Jersey, quantity: Number): void {
+    
   }
 
 }

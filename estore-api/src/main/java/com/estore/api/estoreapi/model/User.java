@@ -1,30 +1,31 @@
-// package com.estore.api.estoreapi.model;
-// import java.util.logging.Logger;
+package com.estore.api.estoreapi.model;
 
-// import com.fasterxml.jackson.annotation.JsonProperty;
-// import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+/**
+ * @author Ethan Abbate, Angela Ngo 
+ * Parent class for Customer and Admin 
+ */
 
-// /**
-//  * @author Ethan Abbate
-//  * A class that represents a User in the Estore system
-//  */
-// public class User {
+public class User {
+    private String username; 
+    private boolean type; 
+    private int id; 
 
-//     private static final Logger LOG = Logger.getLogger(Jersey.class.getName());
+    public User(String username, boolean type, int id){
+        this.type = type; 
+        this.username = username; 
+        this.id = id; 
+    }
+
+    public String getUsername(){
+        return username;
+    }
     
-//     @JsonProperty("userCart") private Cart cart;
-//     @JsonProperty("username") private String username;
-//     @JsonProperty("typeUser") private boolean type;
+    public boolean getUserType(){
+        return type; 
+    }
 
-//     /***
-//      * Constructor for a User in the estore
-//      * @param cart - The cart that is associated with the user
-//      * @param username - The username of the user
-//      * @param type - whether the user is an admin (true) or customer (false)
-//      */
-//     public User(@JsonProperty("userCart") Cart cart, @JsonProperty("username") String username, @JsonProperty("typeUser")  boolean type) {
-//         this.cart = cart;
-//         this.username = username;
-//         this.type = type;
-//     }
-// }
+    public int getUserId(){
+        return id; 
+    }
+   
+}

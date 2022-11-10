@@ -177,7 +177,8 @@ public class JerseyFileDAO implements JerseyDAO {
     @Override
     public Jersey createJersey(Jersey jersey) throws IOException {
         synchronized(jerseys) {
-            // We create a new hero object because the id field is immutable
+            load(); 
+            // We create a new jersey object because the id field is immutable
             // and we need to assign the next unique id
             Jersey newJersey = new Jersey(nextId(), jersey.getName(), jersey.getNumber(), jersey.getPrice(), 
                 jersey.getColor(), jersey.getSize(), jersey.getImage());
@@ -194,6 +195,7 @@ public class JerseyFileDAO implements JerseyDAO {
     @Override
     public Jersey updateJersey(Jersey jersey) throws IOException {
         synchronized(jerseys) {
+            load(); 
             if (jerseys.containsKey(jersey.getId()) == false)
                 return null;  // hero does not exist
 
@@ -207,6 +209,7 @@ public class JerseyFileDAO implements JerseyDAO {
     @Override
     public boolean deleteJersey(int id) throws IOException {
         synchronized(jerseys) {
+            load(); 
             if (jerseys.containsKey(id)) {
                 jerseys.remove(id);
                 return save();

@@ -160,7 +160,7 @@ public class Cart {
     public boolean deleteEntireCart(){
         boolean cartEmpty = false;
         if(cart.size() > 0){
-            cart.removeAll(cart); 
+            cart.clear();
             totalCost = 0.00; 
             cartEmpty = true; 
         } 
