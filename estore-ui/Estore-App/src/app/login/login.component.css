@@ -33,3 +33,10 @@ h2 {
 .colorblindess-dropdown {
     text-align: right;
 }
+
+.cb-dropdown {
+    height: 45px; 
+    border: 1px solid gray; 
+    text-align: center;
+    margin: 10px;
+}
