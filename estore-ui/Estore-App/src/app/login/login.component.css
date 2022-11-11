@@ -29,3 +29,7 @@ h2 {
 .login-button:hover {
     background-color: #a04545;
   }
+
+.colorblindess-dropdown {
+    text-align: right;
+}
