@@ -120,32 +120,28 @@ The user interface will begin with the default page of the storefront. Once ther
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
 ### Static Code Analysis/Design Improvements
-> _Discuss design improvements that you would make if the project were
-> to continue. These improvement should be based on your direct
-> analysis of where there are problems in the code base which could be
-> addressed with design changes, and describe those suggested design
-> improvements._
 
-> _With the results from the Static Code Analysis exercise, 
-> discuss the resulting issues/metrics measurements along with your analysis
-> and recommendations for further improvements. Where relevant, include 
-> screenshots from the tool and/or corresponding source code that was flagged._
-> ![API overall static code coverage](Api-overall.png)
-> Overall our API had good coverage, no duplications, bugs or vulnerabilities. One thing
-> that can be improved on our API is that there is many code smells. Most of the major issues
-> were issues with large blocks of code that were unused were commented out instead of deleted.
-> In order to keep our code clean we should have deleted most of these unused blocks. Some of the
-> critical issues were about static methods or hardcoded strings so it would be a good idea to make
-> sure we are using java principles like static right with some of the methods. It would be a good
-> idea to try and get more code coverage as well.
-> ![API overall issues critical code coverage](critical-issue.png)
-> ![API overall issues major code coverage](critical-issue.png)
+![API overall static code coverage](Api-overall.png)
+Overall our API had good coverage, no duplications, bugs or vulnerabilities. One thing
+that can be improved on our API is that there is many code smells. Most of the major issues
+were issues with large blocks of code that were unused were commented out instead of deleted.
+In order to keep our code clean we should have deleted most of these unused blocks. Some of the
+critical issues were about static methods or hardcoded strings so it would be a good idea to make
+sure we are using java principles like static right with some of the methods. It would be a good
+idea to try and get more code coverage as well.
+![API overall issues critical code coverage](critical-issue.png)
+![API overall issues major code coverage](critical-issue.png)
 
-> ![UI overall static code coverage](ui-overall.png)
-> Overall our UI did have a good number of bugs but everything else was good. The bugs
-> boil down to adding header tags or description to some of the tables that we used within
-> our UI. Some other issues were some commented out code and deprecated attributes in the css.
-> ![UI overall issues from code coverage](ui-issue.png)
+![UI overall static code coverage](ui-overall.png)
+
+Overall our UI did have a good number of bugs but everything else was good. The bugs
+boil down to adding header tags or description to some of the tables that we used within
+our UI. Some other issues were some commented out code and deprecated attributes in the css.
+In the future it would be good to be more descriptive and use good standards when it comes
+to certain HTML elements such as tables. We also need to utilize the power of Angular better
+and understand it more in order to be able to work more effectively.
+
+![UI overall issues from code coverage](ui-issue.png)
 
 ## Testing
 > _This section will provide information about the testing performed
