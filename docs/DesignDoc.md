@@ -103,7 +103,7 @@ The user interface will begin with the default page of the storefront. Once ther
 ### ViewModel Tier
 > _Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
-> Tier above._
+> Tier above.
 
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
