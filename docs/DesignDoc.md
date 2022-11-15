@@ -176,15 +176,13 @@ and understand it more in order to be able to work more effectively.
 | **that havent been tested yet** | 6   |
 
 
-Issues During Acceptance testing
-There is an issue with when after you add your jersey to your cart, and then you get its total cost of the entire cart, but when you try to remove it from the cart right after it doesnt allow you to delete anything from it
-Customers not being able to be created during the login process, this is being dealt with by refactoring the code to not include the Cart object inside of a Customer object since it may have lead to some problems 
+#### **Issues During Acceptance testing**
+> - There is an issue with when after you add your jersey to your cart, and then you get its total cost of the entire cart, but when you try to remove it from the cart right after 
+> it doesnt allow you to delete anything from it
+> - Customers not being able to be created during the login process, this is being dealt with by refactoring the code to not include the Cart object inside of a Customer object 
+> since it may have lead to some problems 
+> - Have to redo testing for Controller methods for the Customer because of refactoring, but otherwise it should be fine 
 
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
 
 ### Unit Testing and Code Coverage
 > _Discuss your unit testing strategy. Report on the code coverage
