@@ -196,12 +196,12 @@ and understand it more in order to be able to work more effectively.
 
 
 #### Code Coverage As of 11/15/22
-> ##### Controller Tier 
-> ##### Persistence Tier 
+> ## Controller Tier 
+> ## Persistence Tier 
 > ![Customer File DAO](customer_file_dao_persistance.png)
 > ![Jersey File DAO](jersey_file_dao_persistence.png)
 >
-> ##### Model Tier 
+> ## Model Tier 
 > ![Customer Model](customer_model.png)
 > ![Jersey Model](jersey_model.png)
 
