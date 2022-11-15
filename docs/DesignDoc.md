@@ -48,9 +48,7 @@ Maintain Inventory
 Color Blindness Accessibility
 
 ### Roadmap of Enhancements
-GUI usability improvements
-Inventory Management and Storefront GUI
-Accessibility features
+As an effort to make the estore as accessible as possible, we are planning to implement a number of settings for different types of color blindless. In addition, several aesthetic and functional improvements such as REACT, storing our jerseys in a database using POSTRGRSQL, and others to make a more streamlined and professional experience.
 
 
 ## Application Domain
@@ -90,16 +88,18 @@ The user interface will begin with the default page of the storefront. Once ther
 
 
 ### View Tier
-> _Provide a summary of the View Tier UI of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
+The View Tier UI of the Estore should be a cohesive, connected experience in which all components of the UI are somehow interconnected. From the very beginning of the experience, the login page registers and confirms information about the user, whether they are an admin or not, and their username. This page also holds the accessibility settings relating to the UI, so that different users of varying colorblinness can use the store. If they are an admin, denoted by the 'admin' username, they are taken to a seperate page from the rest of the estore, in which they are able to add to, modify, and delete the existing inventory. Otherwise, if they are a regular user, they are taken to the main page of the estore. In this page, the user is able to browse the selection of jerseys and search for any specific one they want. Once they have decided on their selection(s), they are able to add those jerseys to their cart, which will persist if not emptied or checked out. After they view the cart, they are able to 
+navigate to a checkout form in which the cart will empty and they will purchase their products.
 
-> _You must also provide sequence diagrams as is relevant to a particular aspects 
-> of the design that you are describing.  For example, in e-store you might create a 
-> sequence diagram of a customer searching for an item and adding to their cart. 
-> Be sure to include an relevant HTTP reuqests from the client-side to the server-side 
-> to help illustrate the end-to-end flow._
+![Accessibility Settings](Accessibility.png)
+![Admin Updates Inventory](AdminUpdate.png)
+![Admin Adds to Inventory](AdminAdd.png)
+![Admin Deletes Part of Inventory](AdminDelete.png)
+![Admin Searches for Jersey](AdminSearch.png)
+![Customer Adds to Cart](CustAdd.png)
+![Customer Removes Item from Cart](CustRemove.png)
+![Customer Removes Entire Cart](CustRemoveAll.png)
+![Customer Searches for](CustSearch.png)
 
 
 ### ViewModel Tier
