@@ -169,10 +169,11 @@ and understand it more in order to be able to work more effectively.
 > and the results of the testing._
 
 ### Acceptance Testing
+| How many user stories have... | Number |
 | ----------- | ----------- |
-| **How many user stories have passed**  | 20   |
-| **How many user stories have some acceptance criteria failing** | 5       |
-| **How many user stories that havent been tested yet** | 6   |
+| **passed**  | 20   |
+| **some acceptance criteria failing** | 5       |
+| **that havent been tested yet** | 6   |
 
 
 Issues During Acceptance testing
