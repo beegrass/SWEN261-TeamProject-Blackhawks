@@ -15,17 +15,23 @@ import { JerseyService } from 'app/jersey.service';
 })
 export class LoginComponent implements OnInit {
   customers : Customer[] = []; 
+  currentId : number = -1; 
   username: string = "";
 
   // Example 1: <input [(ngModel)]="person.firstName" name="first">
 
   constructor(
     private router: Router,
-    private cartService : CartService,
     private customerService : CustomerService
   ) { }
 
   ngOnInit(): void {
+    this.getCustomers();
+  }
+
+  getCustomers(): void{
+    this.customerService.getCustomers()
+      .subscribe(customers => this.customers = customers); 
   }
 
   /**
@@ -63,20 +69,24 @@ export class LoginComponent implements OnInit {
    * This allows the user to login using a string username 
    */
   login(username: string): void {
-    username = username.trim().toLowerCase();
-    let cart_list: Jersey[] = new Array();
-    let total_price = 0;
-    let userCart = {cart_list, total_price} as Cart;
-    this.cartService.createCart(userCart); 
-    
-    if (!username && username.toLowerCase() != 'admin') {
-      console.log("poop")
-      return; // returns early if username is admin or doesn't exist otherwise create new cust and add to array of customer
+    if(!username ){
+      alert("Invalid input given: input a username")
     }
-    this.customerService.createCustomer({userCart, username} as Customer)
-      .subscribe(cust => {
-      this.customers.push(cust);
-    })
-    console.log(this.customers)
+    
+    for(var customer of this.customers){
+      if(customer.username == username){
+        this.currentId = customer.id
+        return; 
+      }
+    }
+    // if the user doesnt exist -> create a new account and add it to the array
+    this.customerService.createCustomer({username} as Customer)
+      .subscribe(customer => {
+        this.customers.push(customer);
+        this.currentId = customer.id;
+      });
+
   }
+
+  
 }
