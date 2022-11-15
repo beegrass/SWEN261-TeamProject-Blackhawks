@@ -129,8 +129,8 @@ public class CustomerFileDAOTest {
         // Analyze
         assertNotNull(result);
         Customer actual = customerFileDAO.getCustomer(customer.getId());
-        assertEquals(actual.getId(),customer.getId());
-        assertEquals(actual.getUserName(),customer.getUserName());
+        assertEquals(customer.getId(),actual.getId());
+        assertEquals(customer.getUserName(),actual.getUserName());
     }
 
     @Test
@@ -145,7 +145,7 @@ public class CustomerFileDAOTest {
         ArrayList<Jersey> actual = testCustomers[0].getCart();
 
         // Analysis
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -156,10 +156,10 @@ public class CustomerFileDAOTest {
         ArrayList<Jersey> expected = null;
 
         // Invoke
-        ArrayList<Jersey> actual = customerFileDAO.addJerseyToCart(customer, jersey);
+        Customer actual = customerFileDAO.addJerseyToCart(customer, jersey);
 
         // Analysis
-        assertEquals(expected, actual);
+        assertEquals(expected, actual.getCart());
 
     }
 
@@ -177,7 +177,7 @@ public class CustomerFileDAOTest {
         ArrayList<Jersey> actual = testCustomers[0].getCart();
 
         // Analysis
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -187,10 +187,10 @@ public class CustomerFileDAOTest {
         ArrayList<Jersey> expected = new ArrayList<>();
         
         // Invoke
-        ArrayList<Jersey> actual = customerFileDAO.removeFromCart(testCustomers[0], jersey);
+        Customer actual = customerFileDAO.removeFromCart(testCustomers[0], jersey);
 
         // Analysis
-        assertEquals(actual, expected);
+        assertEquals(expected, actual.getCart());
     }
 
     @Test
@@ -201,10 +201,10 @@ public class CustomerFileDAOTest {
         ArrayList<Jersey> expected = null;
 
         // Invoke
-        ArrayList<Jersey> actual = customerFileDAO.removeFromCart(customer, jersey);
+        Customer actual = customerFileDAO.removeFromCart(customer, jersey);
 
         // Analysis
-        assertEquals(expected, actual);
+        assertEquals(expected, actual.getCart());
     }
 
     @Test
@@ -218,10 +218,10 @@ public class CustomerFileDAOTest {
         customerFileDAO.addJerseyToCart(testCustomers[0], jersey);
         customerFileDAO.addJerseyToCart(testCustomers[0], jersey);
         customerFileDAO.addJerseyToCart(testCustomers[0], jersey);
-        ArrayList<Jersey> actual = customerFileDAO.emptyCart(testCustomers[0]);
+        Customer actual = customerFileDAO.emptyCart(testCustomers[0]);
 
         // Analysis
-        assertEquals(actual, expected);
+        assertEquals(expected, actual.getCart());
     }
 
     @Test
@@ -230,10 +230,10 @@ public class CustomerFileDAOTest {
         ArrayList<Jersey> expected = new ArrayList<>();
         
         // Invoke
-        ArrayList<Jersey> actual = customerFileDAO.emptyCart(testCustomers[0]);
+        Customer actual = customerFileDAO.emptyCart(testCustomers[0]);
 
         // Analysis
-        assertEquals(actual, expected);
+        assertEquals(expected, actual.getCart());
     }
 
     @Test
@@ -243,10 +243,10 @@ public class CustomerFileDAOTest {
         ArrayList<Jersey> expected = null;
         
         // Invoke
-        ArrayList<Jersey> actual = customerFileDAO.emptyCart(customer);
+        Customer actual = customerFileDAO.emptyCart(customer);
 
         // Analysis
-        assertEquals(actual, expected);
+        assertEquals(expected, actual.getCart());
     }
 
     @Test
@@ -263,7 +263,7 @@ public class CustomerFileDAOTest {
         double actual = customerFileDAO.getTotalCost(testCustomers[0]);
 
         // Analysis
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -275,7 +275,7 @@ public class CustomerFileDAOTest {
         double actual = customerFileDAO.getTotalCost(testCustomers[0]);
 
         // Analysis
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
