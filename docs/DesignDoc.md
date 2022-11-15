@@ -113,13 +113,11 @@ navigate to a checkout form in which the cart will empty and they will purchase 
 
 ### Model Tier
 ![uml class diagram model tier](uml_class_diagram_model_tier.png)
-> _Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
+
 There are two classes that make up our object, that will be the Jersey and Customer class. 
 
 **Jersey Class**
-> _The jersey class consists of the following attributes: 
+> The jersey class consists of the following attributes: 
 > 1. Id of jersey
 > 2. Name
 > 3. Size
@@ -127,7 +125,7 @@ There are two classes that make up our object, that will be the Jersey and Custo
 > 5. Number (on the jersey)
 > 6. Price
 > 7. Image 
-> These attributes can be accessed through accessors and can be changed through mutators._
+> These attributes can be accessed through accessors and can be changed through mutators.
 
 **Customer Class**
 > _In the customer class, there are 3 attributes: id, username and cart. These 
