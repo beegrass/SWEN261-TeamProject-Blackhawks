@@ -107,7 +107,9 @@ navigate to a checkout form in which the cart will empty and they will purchase 
 > Tier above._
 
 > _At appropriate places as part of this narrative provide one or more
-> static models (UML class diagrams) with some details such as critical attributes and methods._
+> static models (UML class diagrams) with some details such as critical attributes and methods.
+
+![uml class diagram view model tier](ViewModelUMLDiagram.png)
 
 
 ### Model Tier
