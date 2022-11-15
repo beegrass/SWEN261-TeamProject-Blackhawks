@@ -100,7 +100,7 @@ public class CustomerController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Customer> createJersey(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         LOG.info("POST /customers " + customer);
         try {
             //check if a customer already exists with the given customer's name
@@ -132,14 +132,14 @@ public class CustomerController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("/add/{custId}/{jerseyId}")
-    public ResponseEntity<ArrayList<Jersey>> addJerseyToCart(@PathVariable int custId, @PathVariable int jerseyId) {
+    public ResponseEntity<Customer> addJerseyToCart(@PathVariable int custId, @PathVariable int jerseyId) {
         LOG.info("PUT /customers/add/" + custId + "/" + jerseyId);
         try {
             Customer customer = customerDao.getCustomer(custId);
             Jersey jersey = jerseyDao.getJersey(jerseyId);
             if (customerDao.addJerseyToCart(customer, jersey) != null) {
                 // ArrayList<Jersey> cart = customerDao.addJerseyToCart(customer, jersey);
-                return new ResponseEntity<ArrayList<Jersey>>(customer.getCart(),HttpStatus.OK);
+                return new ResponseEntity<Customer>(customer,HttpStatus.OK);
             }
             else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -162,14 +162,14 @@ public class CustomerController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("/remove/{custId}/{jerseyId}")
-    public ResponseEntity<ArrayList<Jersey>> removeJerseyFromCart(@PathVariable int custId, @PathVariable int jerseyId) {
+    public ResponseEntity<Customer> removeJerseyFromCart(@PathVariable int custId, @PathVariable int jerseyId) {
         LOG.info("PUT /customers/remove/" + custId + "/" + jerseyId);
         try {
             Customer customer = customerDao.getCustomer(custId);
             Jersey jersey = jerseyDao.getJersey(jerseyId);
             if (customerDao.removeFromCart(customer, jersey) != null) {
                 // ArrayList<Jersey> cart = customerDao.addJerseyToCart(customer, jersey);
-                return new ResponseEntity<ArrayList<Jersey>>(customer.getCart(),HttpStatus.OK);
+                return new ResponseEntity<Customer>(customer,HttpStatus.OK);
             }
             else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -208,14 +208,14 @@ public class CustomerController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("/{id}")
-    public ResponseEntity<ArrayList<Jersey>> emptyCart(@PathVariable int id) {
+    public ResponseEntity<Customer> emptyCart(@PathVariable int id) {
         LOG.info("PUT /customers/" + id);
         try {
             Customer customer = customerDao.getCustomer(id);
-            ArrayList<Jersey> updated = customerDao.emptyCart(customer);
+            Customer updated = customerDao.emptyCart(customer);
             if (updated != null) {
                 customerDao.emptyCart(customer);
-                return new ResponseEntity<ArrayList<Jersey>>(customer.getCart(),HttpStatus.OK);
+                return new ResponseEntity<Customer>(customer,HttpStatus.OK);
             }
             else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);

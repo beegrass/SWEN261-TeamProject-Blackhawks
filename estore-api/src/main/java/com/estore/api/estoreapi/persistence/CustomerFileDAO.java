@@ -174,7 +174,7 @@ public class CustomerFileDAO implements CustomerDAO {
     }
 
     @Override
-    public ArrayList<Jersey> addJerseyToCart(Customer customer, Jersey jersey) throws IOException {
+    public Customer addJerseyToCart(Customer customer, Jersey jersey) throws IOException {
         synchronized(customers) {
             load(); 
             if (customers.containsKey(customer.getId()) == false)
@@ -183,12 +183,12 @@ public class CustomerFileDAO implements CustomerDAO {
                 customer.addToCart(jersey);
                 customers.put(customer.getId(),customer);
             save(); // may throw an IOException
-            return customer.getCart();
+            return customer;
         }
     }
 
     @Override
-    public ArrayList<Jersey> removeFromCart(Customer customer, Jersey jersey) throws IOException {
+    public Customer removeFromCart(Customer customer, Jersey jersey) throws IOException {
         synchronized(customers) {
             load(); 
             if (customers.containsKey(customer.getId()) == false)
@@ -197,12 +197,12 @@ public class CustomerFileDAO implements CustomerDAO {
                 customer.removeFromCart(jersey);
                 customers.put(customer.getId(),customer);
             save(); // may throw an IOException
-            return customer.getCart();
+            return customer;
         }
     }
 
     @Override
-    public ArrayList<Jersey> emptyCart(Customer customer) throws IOException {
+    public Customer emptyCart(Customer customer) throws IOException {
         synchronized(customers) {
             load(); 
             if (customers.containsKey(customer.getId()) == false)
@@ -211,7 +211,7 @@ public class CustomerFileDAO implements CustomerDAO {
                 customer.emptyCart();
                 customers.put(customer.getId(),customer);
             save(); // may throw an IOException
-            return customer.getCart();
+            return customer;
         }
     }
 

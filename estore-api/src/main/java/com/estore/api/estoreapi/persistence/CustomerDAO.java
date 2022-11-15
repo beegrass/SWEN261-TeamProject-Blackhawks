@@ -45,11 +45,11 @@ public interface CustomerDAO {
      */
     
 
-    ArrayList<Jersey> addJerseyToCart(Customer customer, Jersey jersey) throws IOException;
+    Customer addJerseyToCart(Customer customer, Jersey jersey) throws IOException;
 
-    ArrayList<Jersey> removeFromCart(Customer customer, Jersey jersey) throws IOException;
+    Customer removeFromCart(Customer customer, Jersey jersey) throws IOException;
 
-    ArrayList<Jersey> emptyCart(Customer customer) throws IOException;
+    Customer emptyCart(Customer customer) throws IOException;
 
     double getTotalCost(Customer customer) throws IOException;
 
