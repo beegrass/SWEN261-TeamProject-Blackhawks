@@ -102,12 +102,12 @@ navigate to a checkout form in which the cart will empty and they will purchase 
 
 
 ### ViewModel Tier
-> _Provide a summary of this tier of your architecture. This
+<!-- > _Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
 
 > _At appropriate places as part of this narrative provide one or more
-> static models (UML class diagrams) with some details such as critical attributes and methods.
+> static models (UML class diagrams) with some details such as critical attributes and methods. -->
 
 ![uml class diagram view model tier](ViewModelUMLDiagram.png)
 
