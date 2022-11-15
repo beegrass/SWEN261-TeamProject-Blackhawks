@@ -132,11 +132,11 @@ There are two classes that make up our object, that will be the Jersey and Custo
 > attributes have various methods in them to access and mutators in them. The only methods that are different from average mutators are the ones for the cart attribute. Since cart 
 > is an ArrayList of Jerseys, the user can choose to remove or add a jersey to the cart or remove all instances of the jersey from the cart._
 
-> ***special methods***
->   totalCost() method 
->       that gets the total cost from iterating through the cart arraylist and adding up the prices.
->   EmptyCart() method
->       a special method that empties out all the instances of the Jerseys in the cart Arraylist
+> **special methods**
+> - totalCost() method 
+>      - that gets the total cost from iterating through the cart arraylist and adding up the prices.
+> - EmptyCart() method
+>     - a special method that empties out all the instances of the Jerseys in the cart Arraylist
 
 The way that the two classes interact is that the Customer class has a cart that can contain Jerseys, since the Customer can buy different Jerseys. 
 
