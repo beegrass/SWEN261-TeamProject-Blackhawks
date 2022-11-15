@@ -112,13 +112,11 @@ navigate to a checkout form in which the cart will empty and they will purchase 
 
 ### Model Tier
 ![uml class diagram model tier](uml_class_diagram_model_tier.png)
-> _Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
+
 There are two classes that make up our object, that will be the Jersey and Customer class. 
 
 **Jersey Class**
-> _The jersey class consists of the following attributes: 
+> The jersey class consists of the following attributes: 
 > 1. Id of jersey
 > 2. Name
 > 3. Size
@@ -126,14 +124,18 @@ There are two classes that make up our object, that will be the Jersey and Custo
 > 5. Number (on the jersey)
 > 6. Price
 > 7. Image 
-> These attributes can be accessed through accessors and can be changed through mutators._
+> These attributes can be accessed through accessors and can be changed through mutators.
 
 **Customer Class**
 > _In the customer class, there are 3 attributes: id, username and cart. These 
 > attributes have various methods in them to access and mutators in them. The only methods that are different from average mutators are the ones for the cart attribute. Since cart 
-> is an ArrayList of Jerseys, the user can choose to remove or add a jersey to the cart or remove all instances of the jersey from the cart. There is also a get totalCost() method 
-> that gets the total cost from iterating through the cart arraylist and adding up the prices. EmptyCart() is a special method that empties out all the instances of the Jerseys in 
-> the cart Arraylist._
+> is an ArrayList of Jerseys, the user can choose to remove or add a jersey to the cart or remove all instances of the jersey from the cart._
+
+> **special methods**
+> - totalCost() method 
+>      - that gets the total cost from iterating through the cart arraylist and adding up the prices.
+> - EmptyCart() method
+>     - a special method that empties out all the instances of the Jerseys in the cart Arraylist
 
 The way that the two classes interact is that the Customer class has a cart that can contain Jerseys, since the Customer can buy different Jerseys. 
 
