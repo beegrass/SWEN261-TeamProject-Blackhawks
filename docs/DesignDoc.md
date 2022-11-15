@@ -170,15 +170,48 @@ and understand it more in order to be able to work more effectively.
 > and the results of the testing._
 
 ### Acceptance Testing
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+| How many user stories have... | Number |
+| ----------- | ----------- |
+| **passed**  | 20   |
+| **some acceptance criteria failing** | 5       |
+| **that havent been tested yet** | 6   |
+
+
+#### **Issues During Acceptance testing**
+> - There is an issue with when after you add your jersey to your cart, and then you get its total cost of the entire cart, but when you try to remove it from the cart right after 
+> it doesnt allow you to delete anything from it
+> - Customers not being able to be created during the login process, this is being dealt with by refactoring the code to not include the Cart object inside of a Customer object 
+> since it may have lead to some problems 
+> - Have to redo testing for Controller methods for the Customer because of refactoring, but otherwise it should be fine 
+
 
 ### Unit Testing and Code Coverage
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
+
+#### Unit Testing Strategy 
+
+> The goal we want to achieve is 90%-100% code coverage. In order to get to that goal, we have decided to do thorough testing in order to get the highest coverage possible. This is > our strategy thus far. 
+> 1. Work on one method at a time 
+> 2. Make sure to write tests for the happy path and then the “unhappy path” 
+> 3. Make sure that you write tests that contain errors to see if the method is able to catch and deal with them 
+> 4. If there is a problem with debugging what went wrong in unit test, consult other group members or professor for help 
+
+
+#### Code Coverage As of 11/15/22
+> ## Controller Tier 
+> ## Persistence Tier 
+> ![Customer File DAO](customer_file_dao_persistance.png)
+> ![Jersey File DAO](jersey_file_dao_persistence.png)
+>
+> ## Model Tier 
+> ![Customer Model](customer_model.png)
+> ![Jersey Model](jersey_model.png)
+
+#### Statement 
+> As of right now, our code coverage has significantly met our expectations. The only downside as of right now is that our Controller tier has not 
+> been entirely tested because of refactoring. Prior to refactoring, we were having a lot of issues with a new Customer being created. It kept on 
+> running into the error that it was creating a null object, saying that createNewCustomer() method wasn’t working and returning null because of our > null case. But after a lot of troubleshooting, there are a lot of areas where the issue couldve come from e.g.  the cart and or customer not 
+> created properly or something else. It was an anomaly because our tests all passed in insomnia and in the unit testing, so we weren’t sure how it 
+> kept on creating a null object instead of a customer. This confused us thoroughly so we started over by getting rid of the Cart class completely 
+> and using an ArrayList of Jerseys to represent the Cart in the Customer. 
+
+
