@@ -48,9 +48,7 @@ Maintain Inventory
 Color Blindness Accessibility
 
 ### Roadmap of Enhancements
-GUI usability improvements
-Inventory Management and Storefront GUI
-Accessibility features
+As an effort to make the estore as accessible as possible, we are planning to implement a number of settings for different types of color blindless. In addition, several aesthetic and functional improvements such as REACT, storing our jerseys in a database using POSTRGRSQL, and others to make a more streamlined and professional experience.
 
 ## Application Domain
 
@@ -89,16 +87,18 @@ The user interface will begin with the default page of the storefront. Once ther
 
 
 ### View Tier
-> _Provide a summary of the View Tier UI of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
+The View Tier UI of the Estore should be a cohesive, connected experience in which all components of the UI are somehow interconnected. From the very beginning of the experience, the login page registers and confirms information about the user, whether they are an admin or not, and their username. This page also holds the accessibility settings relating to the UI, so that different users of varying colorblinness can use the store. If they are an admin, denoted by the 'admin' username, they are taken to a seperate page from the rest of the estore, in which they are able to add to, modify, and delete the existing inventory. Otherwise, if they are a regular user, they are taken to the main page of the estore. In this page, the user is able to browse the selection of jerseys and search for any specific one they want. Once they have decided on their selection(s), they are able to add those jerseys to their cart, which will persist if not emptied or checked out. After they view the cart, they are able to 
+navigate to a checkout form in which the cart will empty and they will purchase their products.
 
-> _You must also provide sequence diagrams as is relevant to a particular aspects 
-> of the design that you are describing.  For example, in e-store you might create a 
-> sequence diagram of a customer searching for an item and adding to their cart. 
-> Be sure to include an relevant HTTP reuqests from the client-side to the server-side 
-> to help illustrate the end-to-end flow._
+![Accessibility Settings](Accessibility.png)
+![Admin Updates Inventory](AdminUpdate.png)
+![Admin Adds to Inventory](AdminAdd.png)
+![Admin Deletes Part of Inventory](AdminDelete.png)
+![Admin Searches for Jersey](AdminSearch.png)
+![Customer Adds to Cart](CustAdd.png)
+![Customer Removes Item from Cart](CustRemove.png)
+![Customer Removes Entire Cart](CustRemoveAll.png)
+![Customer Searches for](CustSearch.png)
 
 
 ### ViewModel Tier
@@ -111,24 +111,55 @@ The user interface will begin with the default page of the storefront. Once ther
 
 
 ### Model Tier
+![uml class diagram model tier](uml_class_diagram_model_tier.png)
 > _Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
+There are two classes that make up our object, that will be the Jersey and Customer class. 
 
-> _At appropriate places as part of this narrative provide one or more
-> static models (UML class diagrams) with some details such as critical attributes and methods._
+**Jersey Class**
+> _The jersey class consists of the following attributes: 
+> 1. Id of jersey
+> 2. Name
+> 3. Size
+> 4. Color 
+> 5. Number (on the jersey)
+> 6. Price
+> 7. Image 
+> These attributes can be accessed through accessors and can be changed through mutators._
+
+**Customer Class**
+> _In the customer class, there are 3 attributes: id, username and cart. These 
+> attributes have various methods in them to access and mutators in them. The only methods that are different from average mutators are the ones for the cart attribute. Since cart 
+> is an ArrayList of Jerseys, the user can choose to remove or add a jersey to the cart or remove all instances of the jersey from the cart. There is also a get totalCost() method 
+> that gets the total cost from iterating through the cart arraylist and adding up the prices. EmptyCart() is a special method that empties out all the instances of the Jerseys in 
+> the cart Arraylist._
+
+The way that the two classes interact is that the Customer class has a cart that can contain Jerseys, since the Customer can buy different Jerseys. 
 
 ### Static Code Analysis/Design Improvements
-> _Discuss design improvements that you would make if the project were
-> to continue. These improvement should be based on your direct
-> analysis of where there are problems in the code base which could be
-> addressed with design changes, and describe those suggested design
-> improvements._
 
-> _With the results from the Static Code Analysis exercise, 
-> discuss the resulting issues/metrics measurements along with your analysis
-> and recommendations for further improvements. Where relevant, include 
-> screenshots from the tool and/or corresponding source code that was flagged._
+![API overall static code coverage](Api-overall.png)
+Overall our API had good coverage, no duplications, bugs or vulnerabilities. One thing
+that can be improved on our API is that there is many code smells. Most of the major issues
+were issues with large blocks of code that were unused were commented out instead of deleted.
+In order to keep our code clean we should have deleted most of these unused blocks. Some of the
+critical issues were about static methods or hardcoded strings so it would be a good idea to make
+sure we are using java principles like static right with some of the methods. It would be a good
+idea to try and get more code coverage as well.
+![API overall issues critical code coverage](critical-issue.png)
+![API overall issues major code coverage](critical-issue.png)
+
+![UI overall static code coverage](ui-overall.png)
+
+Overall our UI did have a good number of bugs but everything else was good. The bugs
+boil down to adding header tags or description to some of the tables that we used within
+our UI. Some other issues were some commented out code and deprecated attributes in the css.
+In the future it would be good to be more descriptive and use good standards when it comes
+to certain HTML elements such as tables. We also need to utilize the power of Angular better
+and understand it more in order to be able to work more effectively.
+
+![UI overall issues from code coverage](ui-issue.png)
 
 ## Testing
 > _This section will provide information about the testing performed
