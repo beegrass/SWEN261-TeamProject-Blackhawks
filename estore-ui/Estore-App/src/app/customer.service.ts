@@ -36,6 +36,7 @@ export class CustomerService {
    * @returns Observable<Customer> 
    */
     createCustomer(customer : Customer): Observable<Customer> {
+      console.log("this is the customer: " + customer)
       return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
         tap((newCustomer : Customer) => this.log(`created new Customer w/ id=${newCustomer.id}`)),
         catchError(this.handleError<Customer>('createCustomer'))
