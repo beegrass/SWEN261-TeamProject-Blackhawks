@@ -1,9 +1,9 @@
 import { Observable } from "rxjs";
-import { Cart } from "./cart";
+import { Jersey } from "./jersey";
+
 
 export interface Customer {
-    userCart: Cart;
+    cart: Array<Jersey>;
     username: string;
     id: number;
-   
 }

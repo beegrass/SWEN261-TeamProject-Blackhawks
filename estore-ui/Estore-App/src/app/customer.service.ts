@@ -6,6 +6,8 @@ import { Cart } from './cart';
 import { CartService } from './cart.service';
 import { CartComponent } from './cart/cart.component';
 import { Customer } from './customer';
+import { Jersey } from './jersey';
+import { MessageService } from './message.service';
 
 
 @Injectable({
@@ -13,113 +15,133 @@ import { Customer } from './customer';
 })
 export class CustomerService {
 
-  private customersUrl = 'http://localhost:8080/customer' // URL to our api
+  private customersUrl = 'http://localhost:8080/customers' // URL to our api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  messageService: any;
-
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private messageService : MessageService
   ) { }
 
-  /**
-   * Method that creates a customer and assigns them an
-   * empty cart
-   * @param customer - customer to be create
-   * @returns - newly created customer
-   */
-  
+
   private log(message: string) {
-    this.messageService.add(`CartService: ${message}`)
+    this.messageService.add(`CustomerService: ${message}`)
   }
+
+   /**
+   * Creates a new customer from given body 
+   * @param customer 
+   * @returns Observable<Customer> 
+   */
+    createCustomer(customer : Customer): Observable<Customer> {
+      return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
+        tap((newCustomer : Customer) => this.log(`created new Customer w/ id=${newCustomer.id}`)),
+        catchError(this.handleError<Customer>('createCustomer'))
+      );
+    }
   
   /**
-   * Creates an observable customer that can be used in angular
-   * @param customer - customer that will become observable
-   * @returns - the observable customer
+   * This gets the specific Customer based on the id number given
+   * @param id 
+   * @returns Observable<Customer>
    */
-  createCustomer(customer : Customer): Observable<Customer> {
-    return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
-      tap((newCustomer : Customer) => this.log(`added Jersey w/ id=${newCustomer.id}`)),
-      catchError(this.handleError<Customer>('create Customer'))
+  getCustomer(id: number): Observable<Customer> {
+    const url = `${this.customersUrl}/${id}`;
+    return this.http.get<Customer>(url).pipe(
+      tap(_ => this.log(`fetched Customer id=${id}`)),
+      catchError(this.handleError<Customer>(`getCustomer id=${id}`))
     );
-  } 
+  }
 
   /**
-   * GET customer by id. Will return `undefined` if not found
+   * adds a new Jersey to the Customers cart 
+   * @param customer 
+   * @param jersey 
+   * @returns Observable<any> returns the observable customer 
    */
-  getCustomer<Data>(id: number): Observable<Customer> {
+  addJerseyToCart(customer : Customer, jersey: Jersey): Observable<any> {
+    const url = `${this.customersUrl}/add/${customer.id}/${jersey.id}`
+    return this.http.put(url,this.httpOptions).pipe(
+      tap(_ => this.log(`add Jersey to Customer Cart=${customer.id}`)),
+      catchError(this.handleError<any>('addJerseyToCart'))
+    );
+  }
+
+  /**
+   * removes jersey from the Customers cart 
+   * @param customer 
+   * @param jersey 
+   * @returns Observable<any> returns the observable customer 
+   */
+   removeJerseyFromCart(customer : Customer, jersey: Jersey): Observable<any> {
+    const url = `${this.customersUrl}/remove/${customer.id}/${jersey.id}`
+    return this.http.put(url,this.httpOptions).pipe(
+      tap(_ => this.log(`remove Jersey from Customer Cart=${customer.id}`)),
+      catchError(this.handleError<any>('removeJerseyFromCart'))
+    );
+  }
+
+  /**
+   * empties the customers cart through the server 
+   * @param customer 
+   * @returns Observable<any> 
+   */
+  emptyCart(customer : Customer): Observable<any> {
+    const url = `${this.customersUrl}/${customer.id}`
+    return this.http.put(url, this.httpOptions).pipe(
+      tap(_ => this.log(`emptied customers cart=${customer.id}`)),
+      catchError(this.handleError<any>('emptyCart'))
+    );
+  }
+
+
+  /**
+   * This gets the total cost of the Customers cart 
+   * @param id of the Customer
+   * @returns Observable<Number>
+   */
+   getTotalCost(id: number): Observable<Number>{
+    const url = `${this.customersUrl}/cost/${id}`;
+    return this.http.get<Number>(url).pipe(
+      tap(_ => this.log(`get total cost of customer =${id}`)),
+      catchError(this.handleError<Number>(`getTotalCost customer=${id}`))
+    );
+  }
+
+
+  
+  /**
+   * returns an array list of Customers from the server 
+   * @returns 
+   */
+  getCustomers(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(this.customersUrl)
+      .pipe(
+        tap(_ => this.log('fetched customers')),
+        catchError(this.handleError<Customer[]>('getCustomers', []))
+      );
+  }
+
+
+  /** GET Customer by id. Return `undefined` when id not found */
+  getCustomerNo404<Data>(id: number): Observable<Customer> {
     const url = `${this.customersUrl}/?id=${id}`;
     return this.http.get<Customer[]>(url)
       .pipe(
         map(customers => customers[0]), // returns a {0|1} element array
         tap(h => {
           const outcome = h ? 'fetched' : 'did not find';
-          this.log(`${outcome} hero id=${id}`);
+          this.log(`${outcome} customer id=${id}`);
         }),
-        catchError(this.handleError<Customer>(`getHero id=${id}`))
+        catchError(this.handleError<Customer>(`getCustomer id=${id}`))
       );
   }
 
-  /**
-   * GET customer by username. Will return `undefined` if not found
-   */
-   getCustomerByUsername<Data>(username : string ): Observable<Customer> {
-    const url = `${this.customersUrl}/customer/${username}`;
-    return this.http.get<Customer[]>(url)
-      .pipe(
-        map(customers => customers[0]), // returns a {0|1} element array
-        tap(h => {
-          const outcome = h ? 'fetched' : 'did not find';
-          this.log(`${outcome} customer=${username}`);
-        }),
-        catchError(this.handleError<Customer>(`get customer =${username}`))
-      );
-  }
 
-  deleteCustomer(custId: number) {
-    const url = `${this.customersUrl}/${custId}`;
-    return this.http.delete<Customer>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${custId}`)),
-      catchError(this.handleError<Customer>('deleteHero'))
-    );
-  }
 
-  /**
-   * Creates a new customer with the given username 
-   * otherwise returns a get of the customer that already exists
-   * this is get customer 
-   * @param customer 
-   * @returns 
-   */
-  userLogin(username : String): Observable<Customer> {
-    const url = `${this.customersUrl}/${username}`;
-    return this.http.get<Customer>(url).pipe(
-      tap(_ => this.log(`fetched customer=${username}`)),
-      catchError(this.handleError<Customer>(`gettingSpecificCustomer customer=${username}`))
-    );
-  }
 
-  //   if(customer.id == admin_id){
-  //     return this.http.get<Customer>(url_get, this.httpOptions);
-  //   } else if (customer.id != admin_id && this.http.get<Customer>(url_get, this.httpOptions) == null ) {
-  //     return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError<Customer>('createdCustomer'))
-  //     );
-  //   } else {
-  //     return this.http.get<Customer>(url_get, this.httpOptions);
-  //   }
-  // }
-
-  getCustomerCart(customer: Customer): Observable<Cart> {
-      const url = "GET /customer/cart/?userId=" + customer.id;
-      return this.http.get<Cart>(url, this.httpOptions).pipe(
-        catchError(this.handleError<Cart>('deleteEntireCart'))
-      );
-  }
 
   /**
    * Handle Http operation that failed.
@@ -130,6 +152,8 @@ export class CustomerService {
    */
    private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
@@ -139,4 +163,6 @@ export class CustomerService {
       return of(result as T);
     };
   }
+
+  
 }
