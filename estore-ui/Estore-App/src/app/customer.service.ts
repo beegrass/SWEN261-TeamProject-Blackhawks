@@ -1,10 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClientBackendService } from 'angular-in-memory-web-api';
 import { catchError, map, Observable, of, tap } from 'rxjs';
-import { Cart } from './cart';
-import { CartService } from './cart.service';
-import { CartComponent } from './cart/cart.component';
 import { Customer } from './customer';
 import { Jersey } from './jersey';
 import { MessageService } from './message.service';
