@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Jersey } from '../jersey';
 import { JerseyService } from '../jersey.service';
 import { CartService } from 'app/cart.service';
+import { LoginComponent } from 'app/login/login.component';
 
 @Component({
   selector: 'app-jerseys',
@@ -25,5 +26,14 @@ export class JerseysComponent implements OnInit {
   addJerseyToCart(jersey: Jersey, quantity: Number): void {
     
   }
+
+  // public isCool(): boolean {
+  //   return LoginComponent.isDefault()
+  // }
+
+
+  
+
+
 
 }

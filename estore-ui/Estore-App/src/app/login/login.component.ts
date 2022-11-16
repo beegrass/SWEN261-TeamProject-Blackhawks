@@ -14,8 +14,12 @@ import { JerseyService } from 'app/jersey.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  static isDefault() {
+    throw new Error('Method not implemented.');
+  }
   customers : Customer[] = []; 
   username: string = "";
+  colorOption: string = "";
 
   // Example 1: <input [(ngModel)]="person.firstName" name="first">
 
@@ -57,6 +61,38 @@ export class LoginComponent implements OnInit {
       }
     }
     return result;
+  }
+
+  public isDefault(): boolean {
+    if(this.colorOption == "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public isDeuteranopia(): boolean {
+    if(this.colorOption == "deuteranopia") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public isProtanopia(): boolean {
+    if(this.colorOption == "protanopia") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public isHighContrast(): boolean {
+    if(this.colorOption == "high-contrast") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**

@@ -40,3 +40,36 @@ h2 {
     text-align: center;
     margin: 10px;
 }
+
+.login-button-deuteranopia {
+    color:white;
+    background-color: #1100ff;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.login-button-deuteranopia:hover {
+    background-color: #456ca0;
+  }
+
+  .login-button-hc {
+    color:white;
+    background-color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.login-button-hc:hover {
+    background-color: rgb(80, 80, 80);
+  }
+
+  .login-button-protanopia {
+    color:white;
+    background-color: #ff8c00;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.login-button-protanopia:hover {
+    background-color: #b48249;
+  }
