@@ -5,6 +5,7 @@ import { Cart } from '../cart';
 import { Jersey } from '../jersey';
 import { CustomerService } from 'app/customer.service';
 import { LoginComponent } from 'app/login/login.component';
+import { Customer } from 'app/customer';
 
 @Component({
   selector: 'app-cart',
@@ -23,7 +24,7 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getJerseys();
+    this.getCart();
 
   }
 
@@ -36,9 +37,28 @@ export class CartComponent implements OnInit {
     this.cart = this.loginComponent.getCurrentCustomerCart()
   }
 
-  getJerseys(): void {
-    // get jerseys in the cart
+  /**
+   * Not entirely sure  what this method will take in 
+   * it should either take in the entire jersey or the jersey id 
+   * 
+   * gets the current customer from the logincomponent in order 
+   * to utilize the customer servcice add Jersey to cart method
+   * 
+   * calls get cart at the end to update the current cart data 
+   * @param jersey 
+   */
+  addToCart(jersey : Jersey): void{
+    let customer : Customer = this.loginComponent.getCurrentCustomer(); 
+    this.customerService.addJerseyToCart(customer, jersey)
+      .subscribe(); // note for vince: not sure if you need to do suscribe to get cust obj
+    
+    this.getCart(); 
   }
+
+  // getJerseys(): void {
+  //   // loads the jerseys into the cart 
+  //   for()
+  // }
 
 
 

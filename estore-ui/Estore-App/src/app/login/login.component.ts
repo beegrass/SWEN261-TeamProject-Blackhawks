@@ -8,6 +8,7 @@ import { Jersey } from "app/jersey";
 import { Customer } from 'app/customer';
 import { Observable } from 'rxjs/internal/Observable';
 import { JerseyService } from 'app/jersey.service';
+import { NONE_TYPE } from '@angular/compiler';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -112,6 +113,19 @@ export class LoginComponent implements OnInit {
         return username; 
       });
     return username; 
+  }
+
+  getCurrentCustomerId(): Number{
+    return this.currentId;
+  }
+
+  getCurrentCustomer(): Customer{
+    let customer : Customer = {} as Customer; 
+    this.customerService.getCustomer(this.currentId)
+      .subscribe(customerObservable => {
+        customer = customerObservable;
+      });
+    return customer;
   }
   
 }
