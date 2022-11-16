@@ -6,7 +6,7 @@
 
 <div>
     <table class="jerseys">
-      <ng-container *ngFor="let jersey of jerseys">
+      <ng-container *ngFor="let jersey of cart">
         <tr>
           <a routerLink="/detail/{{jersey.id}}">
             <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">

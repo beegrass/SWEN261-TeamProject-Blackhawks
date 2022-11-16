@@ -78,6 +78,7 @@ export class LoginComponent implements OnInit {
     for(var customer of this.customers){
       if(customer.username == username){
         this.currentId = customer.id
+        console.log(this.currentId)
         return; 
       }
     }

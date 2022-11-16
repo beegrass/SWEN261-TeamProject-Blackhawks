@@ -24,15 +24,5 @@ export class JerseysComponent implements OnInit {
     .subscribe(Jerseys => this.jerseys = Jerseys);
   }
 
-  /**
-   * adds a certain quantity of type jersey to the current customers cart 
-   * @param jersey 
-   * @param quantity 
-   */
-  addJerseyToCart(jersey: Jersey, quantity: Number): void {
-    for(let i = 0; i < quantity ; i++){
-      this.cartComponent.addToCart(jersey);
-    }
-  }
-
+  
 }
