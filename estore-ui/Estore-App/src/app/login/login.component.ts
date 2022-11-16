@@ -16,7 +16,7 @@ import { NONE_TYPE } from '@angular/compiler';
 })
 export class LoginComponent implements OnInit {
   customers : Customer[] = []; 
-  currentId : number = -1; 
+  currentId : number = 1; 
   username: string = "";
 
   // Example 1: <input [(ngModel)]="person.firstName" name="first">
