@@ -57,9 +57,10 @@ export class JerseyDetailComponent implements OnInit {
    * calls get cart at the end to update the current cart data 
    * @param jersey 
    */
-     addToCart(jersey : Jersey, quantity : number): void{
+     addToCart(jersey : Jersey, quantity : string): void{
+      let quantity_number  = parseInt(quantity)
       let customer : Customer = this.loginComponent.getCurrentCustomer(); 
-      for(let i = 0; i < quantity ; i++){
+      for(let i = 0; i < quantity_number ; i++){
         this.customerService.addJerseyToCart(customer, jersey)
         .subscribe(); // note for vince: not sure if you need to do subscribe to get cust obj 
       }
