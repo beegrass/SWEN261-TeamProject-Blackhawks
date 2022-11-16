@@ -70,7 +70,6 @@ export class LoginComponent implements OnInit {
    * This allows the user to login using a string username 
    */
   login(username: string): void {
-
     if(!username ){
       alert("Invalid input given: input a username")
     }
@@ -78,7 +77,7 @@ export class LoginComponent implements OnInit {
     for(var customer of this.customers){
       if(customer.username == username){
         this.currentId = customer.id
-        console.log(this.currentId)
+        console.warn(this.currentId)
         return; 
       }
     }
@@ -88,6 +87,7 @@ export class LoginComponent implements OnInit {
         this.customers.push(customer);
         this.getCustomers();
         this.currentId = customer.id;
+        console.warn(this.currentId)
       });
 
   }
@@ -111,6 +111,7 @@ export class LoginComponent implements OnInit {
     this.customerService.getCustomer(this.currentId)
       .subscribe(customerObservable => {
         username = customerObservable.username;
+        console.warn(username)
         return username; 
       });
     return username; 

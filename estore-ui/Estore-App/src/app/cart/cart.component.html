@@ -8,9 +8,7 @@
     <table class="cart">
       <ng-container *ngFor="let jersey of cart">
         <tr>
-          <a routerLink="/detail/{{jersey.id}}">
-            <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
-          </a>
+          <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
           <table class="info">
             <th class="name">{{jersey.name}} {{jersey.number}}</th>
             <th class="size">{{jersey.size}}</th>

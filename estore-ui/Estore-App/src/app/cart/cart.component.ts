@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { Location } from '@angular/common';
-import { Cart } from '../cart';
 import { Jersey } from '../jersey';
 import { CustomerService } from 'app/customer.service';
 import { LoginComponent } from 'app/login/login.component';
@@ -35,6 +34,7 @@ export class CartComponent implements OnInit {
     // gets the cart
     // needs to access the login component in order to get the current 
     this.cart = this.loginComponent.getCurrentCustomerCart()
+    console.log(this.cart)
   }
 
 

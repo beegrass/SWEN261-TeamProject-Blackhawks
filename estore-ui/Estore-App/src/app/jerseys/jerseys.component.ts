@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Jersey } from '../jersey';
 import { JerseyService } from '../jersey.service';
+import { CartService } from 'app/cart.service';
 import { CartComponent } from 'app/cart/cart.component';
 import { LoginComponent } from 'app/login/login.component';
 @Component({
