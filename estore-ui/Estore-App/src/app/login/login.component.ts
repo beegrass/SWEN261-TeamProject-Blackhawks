@@ -8,6 +8,7 @@ import { Jersey } from "app/jersey";
 import { Customer } from 'app/customer';
 import { Observable } from 'rxjs/internal/Observable';
 import { JerseyService } from 'app/jersey.service';
+import { NONE_TYPE } from '@angular/compiler';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -69,6 +70,7 @@ export class LoginComponent implements OnInit {
    * This allows the user to login using a string username 
    */
   login(username: string): void {
+
     if(!username ){
       alert("Invalid input given: input a username")
     }
@@ -76,6 +78,7 @@ export class LoginComponent implements OnInit {
     for(var customer of this.customers){
       if(customer.username == username){
         this.currentId = customer.id
+        console.log(this.currentId)
         return; 
       }
     }
@@ -83,10 +86,47 @@ export class LoginComponent implements OnInit {
     this.customerService.createCustomer({username} as Customer)
       .subscribe(customer => {
         this.customers.push(customer);
+        this.getCustomers();
         this.currentId = customer.id;
       });
 
   }
 
+  getCurrentCustomerCart(): Array<Jersey>{
+    let customerCart : Array<Jersey> = []; 
+    this.customerService.getCustomer(this.currentId)
+      .subscribe(customerObservable => {
+        customerCart = customerObservable.cart;
+        return customerCart; 
+      });
+    return customerCart; 
+  }
+
+  /**
+   * this gets the current customers username 
+   * @returns 
+   */
+  getCurrentCustomersUsername(): String{
+    let username : String = ""; 
+    this.customerService.getCustomer(this.currentId)
+      .subscribe(customerObservable => {
+        username = customerObservable.username;
+        return username; 
+      });
+    return username; 
+  }
+
+  getCurrentCustomerId(): Number{
+    return this.currentId;
+  }
+
+  getCurrentCustomer(): Customer{
+    let customer : Customer = {} as Customer; 
+    this.customerService.getCustomer(this.currentId)
+      .subscribe(customerObservable => {
+        customer = customerObservable;
+      });
+    return customer;
+  }
   
 }
