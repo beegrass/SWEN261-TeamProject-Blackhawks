@@ -11,7 +11,7 @@ import { CartService } from 'app/cart.service';
 export class JerseysComponent implements OnInit {
   jerseys: Jersey[] = [];
 
-  constructor(private jerseyService: JerseyService, private cartService: CartService) { }
+  constructor(private jerseyService: JerseyService) { }
 
   ngOnInit(): void {
     this.getJerseys();
