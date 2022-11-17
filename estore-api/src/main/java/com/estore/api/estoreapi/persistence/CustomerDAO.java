@@ -18,7 +18,10 @@ public interface CustomerDAO {
 
     Customer[] findCustomers(String username, ArrayList<Jersey> cart) throws IOException;
 
-    Customer getCustomer(int username) throws IOException;
+    Customer getCustomer(int id) throws IOException;
+
+    Jersey[] getCart(int id) throws IOException;
+    
     /**
      * Creates and saves a {@linkplain Customer customer}
      * 

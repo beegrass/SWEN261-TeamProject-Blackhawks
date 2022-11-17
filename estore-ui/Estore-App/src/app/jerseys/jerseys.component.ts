@@ -14,16 +14,12 @@ export class JerseysComponent implements OnInit {
 
   constructor(private jerseyService: JerseyService,
     private cartComponent : CartComponent,
-    private loginComponent : LoginComponent
   ) { }
 
   ngOnInit(): void {
     this.getJerseys();
   }
-// // gets the customer via the id and then cart throuhg
-//   getCurrentCustomer() : Number{
 
-//   }
   getJerseys(): void {
     this.jerseyService.getJerseys()
     .subscribe(Jerseys => this.jerseys = Jerseys);

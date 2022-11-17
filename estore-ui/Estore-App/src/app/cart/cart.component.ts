@@ -13,7 +13,7 @@ import { Customer } from 'app/customer';
 })
 export class CartComponent implements OnInit {
 
-  cart : Array<Jersey> = [];
+  cart : Jersey[] = [];
   
   constructor(
     private route: ActivatedRoute,
@@ -30,18 +30,10 @@ export class CartComponent implements OnInit {
   /**
    * This gets the cart of the current user that is logged in 
    */
-  getCart() : void {
-    // gets the cart
-    // needs to access the login component in order to get the current 
-    this.cart = this.loginComponent.getCurrentCustomerCart()
-    console.log(this.cart)
+   getCart(): void {
+    this.customerService.getCart(1)
+    .subscribe(Jerseys => this.cart = Jerseys);
   }
-
-
-  // getJerseys(): void {
-  //   // loads the jerseys into the cart 
-  //   for()
-  // }
 
 
 

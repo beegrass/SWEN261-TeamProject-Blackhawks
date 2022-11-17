@@ -156,6 +156,21 @@ public class CustomerFileDAO implements CustomerDAO {
     }
 
     @Override
+    public Jersey[] getCart(int id) throws IOException {
+        synchronized(customers) {
+            if (customers.containsKey(id)){
+                Customer customer = customers.get(id);
+                ArrayList<Jersey> cart = customer.getCart();
+                Jersey[] arrCart = new Jersey[cart.size()];
+                arrCart = cart.toArray(arrCart);
+                return arrCart;
+            }
+            else
+                return null;
+        }
+    }
+
+    @Override
     public Customer createCustomer(Customer customer) throws IOException {
         synchronized(customers) {
             load(); 

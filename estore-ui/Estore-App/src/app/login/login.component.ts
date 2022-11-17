@@ -92,15 +92,10 @@ export class LoginComponent implements OnInit {
 
   }
 
-  getCurrentCustomerCart(): Array<Jersey>{
-    let customerCart : Array<Jersey> = []; 
-    this.customerService.getCustomer(this.currentId)
-      .subscribe(customerObservable => {
-        customerCart = customerObservable.cart;
-        return customerCart; 
-      });
-    return customerCart; 
-  }
+  // getCart(): void {
+  //   this.customerService.getCart()
+  //   .subscribe(Jerseys => this.cart = Jerseys);
+  // }
 
   /**
    * this gets the current customers username 
