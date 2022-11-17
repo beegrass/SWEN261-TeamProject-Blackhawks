@@ -69,7 +69,6 @@ td {
 }
 
 .topnav {
-  background-color: rgb(150, 0, 0);
   overflow: hidden;
   display: flex;
 }

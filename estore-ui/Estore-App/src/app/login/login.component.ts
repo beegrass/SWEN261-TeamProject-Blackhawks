@@ -21,14 +21,15 @@ export class LoginComponent implements OnInit {
   username: string = "";
   colorOption: string = "";
 
+  
   // Example 1: <input [(ngModel)]="person.firstName" name="first">
-
+  
   constructor(
     private router: Router,
     private cartService : CartService,
     private customerService : CustomerService
-  ) { }
-
+    ) {}
+    
   ngOnInit(): void {
   }
 
@@ -63,36 +64,27 @@ export class LoginComponent implements OnInit {
     return result;
   }
 
-  public isDefault(): boolean {
-    if(this.colorOption == "") {
-      return true;
+  /**
+   * Creates a localStorage that holds the value of
+   * the colorblindess mode the user chooses on the login page
+   * @returns the string of the color of the website
+   */
+  colorblindMode(): string {
+    let color;
+    if (this.colorOption == '') {
+      color = 'default';
+    } else if (this.colorOption =='deuteranopia') {
+      color = 'deuteranopia';
+    } else if (this.colorOption =='protanopia') {
+      color = 'protanopia';
     } else {
-      return false;
+      color = 'high contrast';
     }
-  }
-
-  public isDeuteranopia(): boolean {
-    if(this.colorOption == "deuteranopia") {
-      return true;
-    } else {
-      return false;
+    let data = {
+      'color': color
     }
-  }
-
-  public isProtanopia(): boolean {
-    if(this.colorOption == "protanopia") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  public isHighContrast(): boolean {
-    if(this.colorOption == "high-contrast") {
-      return true;
-    } else {
-      return false;
-    }
+    localStorage.setItem('colorblindKey', JSON.stringify(data));    
+    return color;
   }
 
   /**
@@ -114,5 +106,6 @@ export class LoginComponent implements OnInit {
       this.customers.push(cust);
     })
     console.log(this.customers)
+    // color blind localstorage
   }
 }

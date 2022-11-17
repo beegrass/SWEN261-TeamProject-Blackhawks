@@ -1,18 +1,18 @@
 
 
-<h1 *ngIf = "isDefault()"style="color: #aa0404; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
+<h1 *ngIf = "colorblindMode() == 'default'"style="color: #aa0404; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
     Chicago Blackhawks
 </h1>
 
-<h1 *ngIf = "isDeuteranopia()" style="color: #1100ff; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
+<h1 *ngIf = "colorblindMode() == 'deuteranopia'" style="color: #1100ff; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
     Chicago Blackhawks
 </h1>
 
-<h1 *ngIf = "isProtanopia()" style="color: #ff8c00; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
+<h1 *ngIf = "colorblindMode() == 'protanopia'" style="color: #ff8c00; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
     Chicago Blackhawks
 </h1>
 
-<h1 *ngIf = "isHighContrast()" style="color: #000000; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
+<h1 *ngIf = "colorblindMode() == 'high contrast'" style="color: #000000; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
     Chicago Blackhawks
 </h1>
 
@@ -30,10 +30,10 @@
 </div>
 
 <div class="nav-login">
-    <button *ngIf = "isDefault()" class="login-button" (click)="isAdmin()">Sign in</button>
-    <button *ngIf = "isDeuteranopia()" class="login-button-deuteranopia" (click)="isAdmin()">Sign in</button>
-    <button *ngIf = "isProtanopia()" class="login-button-protanopia" (click)="isAdmin()">Sign in</button>
-    <button *ngIf = "isHighContrast()" class="login-button-hc" (click)="isAdmin()">Sign in</button>
+    <button *ngIf = "colorblindMode() == 'default'" class="login-button" (click)="isAdmin()">Sign in</button>
+    <button *ngIf = "colorblindMode() == 'deuteranopia'" class="login-button-deuteranopia" (click)="isAdmin()">Sign in</button>
+    <button *ngIf = "colorblindMode() == 'protanopia'" class="login-button-protanopia" (click)="isAdmin()">Sign in</button>
+    <button *ngIf = "colorblindMode() == 'high contrast'" class="login-button-hc" (click)="isAdmin()">Sign in</button>
 </div>
 
 <div style="text-align: center;">

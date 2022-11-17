@@ -1,4 +1,11 @@
-<div class="topnav">
+<div *ngIf="selectColorMode() == 'default'"class="topnav" style="background-color: #aa0404">
+  <a routerLink="">Logout</a>
+  <a routerLink="/cart">
+    <img src="assets/cart.png" alt="cart image" height="15" width="20">
+  </a>
+</div>
+
+<div *ngIf="selectColorMode() == 'deuteranopia'" class="topnav" style="background-color: #1100ff;">
   <a routerLink="">Logout</a>
   <a routerLink="/cart">
     <img src="assets/cart.png" alt="cart image" height="15" width="20">
@@ -6,12 +13,10 @@
 </div>
 
 <br>
-
 <div>
   <app-jersey-search></app-jersey-search>
 </div>
-<!-- <div *ngIf = "login.isDeuteranopia">LFGGGGG</div> -->
-  
+
 <div>
   <table class="jerseys">
     <ng-container *ngFor="let jersey of jerseys">

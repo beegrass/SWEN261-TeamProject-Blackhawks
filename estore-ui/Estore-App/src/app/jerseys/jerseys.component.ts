@@ -27,13 +27,12 @@ export class JerseysComponent implements OnInit {
     
   }
 
-  // public isCool(): boolean {
-  //   return LoginComponent.isDefault()
-  // }
+  selectColorMode(): string {
+    let colorData = localStorage.getItem('colorblindKey');
+    let parsed = JSON.parse(colorData!);
+    let color = parsed.color;
 
-
-  
-
-
-
+    console.log(color);
+    return color;
+  }
 }
