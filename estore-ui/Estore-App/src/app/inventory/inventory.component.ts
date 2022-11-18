@@ -46,4 +46,5 @@ export class InventoryComponent implements OnInit {
       this.jerseyService.deleteJersey(jersey.id).subscribe();
     }
   }
+  
 }

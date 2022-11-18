@@ -15,6 +15,7 @@ import { LoginService } from 'app/login.service';
 export class CartComponent implements OnInit {
 
   cart : Jersey[] = [];
+  totalCost : number = 0;
   
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +40,23 @@ export class CartComponent implements OnInit {
    getCart(): void {
     this.customerService.getCart(this.getCustId)
     .subscribe(Jerseys => this.cart = Jerseys);
+  }
+
+  removeJerseyFromCart(jersey: Jersey): void {
+    if(window.confirm('Are you sure you want to remove this jersey?') == true) {
+      let customerId : number = this.getCustId
+      this.customerService.removeJerseyFromCart(customerId, jersey)
+      .subscribe( observer => 
+        console.log("this is what returned after remove from cart : " + observer)
+      );
+    }
+  }
+
+  getTotalCost(): number {
+    this.customerService.getTotalCost(this.getCustId).subscribe(
+      observableNumber => this.totalCost = observableNumber.valueOf()
+    );
+    return this.totalCost
   }
 
 

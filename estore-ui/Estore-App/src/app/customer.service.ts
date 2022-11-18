@@ -73,13 +73,6 @@ export class CustomerService {
    * @returns Observable<any> returns the observable customer 
    */
   addJerseyToCart(customerId : number, jersey: Jersey): Observable<any> {
-    // const url = `${this.customersUrl}/add/${customer.id}/${jersey.id}`
-    // return this.http.put(url,this.httpOptions).pipe(
-    //   tap(_ => this.log(`add Jersey to Customer Cart=${customer.id}`)),
-    //   catchError(this.handleError<any>('addJerseyToCart'))
-    // );
-
-    // code below works for presetting the customer id
     const url = `${this.customersUrl}/add/${customerId}/${jersey.id}`
     return this.http.put(url,this.httpOptions).pipe(
       tap(_ => this.log(`add Jersey to Customer Cart=${customerId}`)),
@@ -89,14 +82,14 @@ export class CustomerService {
 
   /**
    * removes jersey from the Customers cart 
-   * @param customer 
+   * @param customerId 
    * @param jersey 
    * @returns Observable<any> returns the observable customer 
    */
-   removeJerseyFromCart(customer : Customer, jersey: Jersey): Observable<any> {
-    const url = `${this.customersUrl}/remove/${customer.id}/${jersey.id}`
+   removeJerseyFromCart(customerId : number, jersey: Jersey): Observable<any> {
+    const url = `${this.customersUrl}/remove/${customerId}/${jersey.id}`
     return this.http.put(url,this.httpOptions).pipe(
-      tap(_ => this.log(`remove Jersey from Customer Cart=${customer.id}`)),
+      tap(_ => this.log(`remove Jersey from Customer Cart=${customerId}`)),
       catchError(this.handleError<any>('removeJerseyFromCart'))
     );
   }
