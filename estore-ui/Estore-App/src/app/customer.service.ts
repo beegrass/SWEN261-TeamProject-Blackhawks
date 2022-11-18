@@ -16,6 +16,8 @@ export class CustomerService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  totalCost : number = 0;
+
   constructor(
     private http: HttpClient,
     private messageService : MessageService

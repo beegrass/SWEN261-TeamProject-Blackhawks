@@ -52,12 +52,12 @@ export class CartComponent implements OnInit {
     }
   }
 
-  getTotalCost(): number {
-    this.customerService.getTotalCost(this.getCustId).subscribe(
-      observableNumber => this.totalCost = observableNumber.valueOf()
-    );
-    return this.totalCost
-  }
+  // getTotalCost(): number {
+  //   this.customerService.getTotalCost(this.getCustId).subscribe(
+  //     observableNumber => this.totalCost = observableNumber.valueOf()
+  //   );
+  //   return this.totalCost
+  // }
 
 
 
