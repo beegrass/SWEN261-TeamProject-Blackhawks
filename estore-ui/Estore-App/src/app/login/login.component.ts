@@ -9,6 +9,9 @@ import { Customer } from 'app/customer';
 import { Observable } from 'rxjs/internal/Observable';
 import { JerseyService } from 'app/jersey.service';
 import { NONE_TYPE } from '@angular/compiler';
+import { LoginService} from '../login.service'
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,7 +26,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private customerService : CustomerService
+    private customerService : CustomerService,
+    private loginService : LoginService
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +48,14 @@ export class LoginComponent implements OnInit {
   onSubmit(): string {
     console.warn("username: " + this.username) 
     return this.username;
+  }
+
+  get getCustId():number {
+    return this.loginService.customerId
+  }
+
+  set setCustId(id : number) {
+    this.loginService.customerId = id;
   }
 
   /**
@@ -76,8 +88,10 @@ export class LoginComponent implements OnInit {
     
     for(var customer of this.customers){
       if(customer.username == username){
-        this.currentId = customer.id
-        console.warn(this.currentId)
+        //this.setCustId(customer.id)
+        this.setCustId = customer.id
+        //this.currentId = customer.id
+        console.warn(this.getCustId)
         return; 
       }
     }
@@ -112,11 +126,11 @@ export class LoginComponent implements OnInit {
     return username; 
   }
 
-  getCurrentCustomerId(): Number{
+  get getCurrentCustomerId(): Number{
     return this.currentId;
   }
 
-  getCurrentCustomer(): Customer{
+  get getCurrentCustomer(): Customer{
     let customer : Customer = {} as Customer; 
     this.customerService.getCustomer(this.currentId)
       .subscribe(customerObservable => {

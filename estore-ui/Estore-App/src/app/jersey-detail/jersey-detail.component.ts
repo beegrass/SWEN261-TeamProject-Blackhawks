@@ -10,6 +10,7 @@ import { CartComponent } from 'app/cart/cart.component';
 import { LoginComponent } from 'app/login/login.component';
 import { Customer } from 'app/customer';
 import { CustomerService } from 'app/customer.service';
+import { LoginService } from 'app/login.service';
 
 @Component({
   selector: 'app-jersey-detail',
@@ -28,7 +29,8 @@ export class JerseyDetailComponent implements OnInit {
     protected cartService: CartService,
     private cartComponent : CartComponent, 
     private loginComponent : LoginComponent,
-    private customerService : CustomerService
+    private customerService : CustomerService,
+    private loginService : LoginService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +47,9 @@ export class JerseyDetailComponent implements OnInit {
       .subscribe(jersey => this.jersey = jersey);
   }
 
-
+  getCustId():number {
+    return this.loginService.customerId
+  }
 
     /**
    * Not entirely sure  what this method will take in 
@@ -59,7 +63,7 @@ export class JerseyDetailComponent implements OnInit {
    */
      addToCart(jersey : Jersey, quantity : string): void{
       let quantity_number  = parseInt(quantity)
-      let customer : Customer = this.customerService.getCustomer(1) as unknown as Customer
+      let customer : Customer = this.customerService.getCustomer(this.getCustId()) as unknown as Customer
       for(let i = 0; i < quantity_number ; i++){
         this.customerService.addJerseyToCart(customer, jersey)
         .subscribe(); // note for vince: not sure if you need to do subscribe to get cust obj 
