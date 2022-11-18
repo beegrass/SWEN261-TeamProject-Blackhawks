@@ -11,7 +11,7 @@
   <app-jersey-search></app-jersey-search>
 </div>
   
-<div>
+<!-- <div>
   <table class="jerseys">
     <ng-container *ngFor="let jersey of jerseys">
       <td>
@@ -26,4 +26,21 @@
       </td>
     </ng-container>
   </table>
-</div>
+</div> -->
+<table>
+  <ng-container *ngFor="let jersey of jerseys; let i=index;">
+    <tr *ngIf="i % 3 == 0">
+      <ng-container *ngFor="let pos of [0, 1, 2]">
+        <td *ngIf="i+pos < jerseys.length">
+          <a routerLink="/detail/{{jerseys[i+pos].id}}">
+            <img src={{jerseys[i+pos].image}} alt={{jerseys[i+pos].name}} height="300" width="300">
+          </a>
+          <table class="info">
+            <th class="name">{{jerseys[i+pos].name}} {{jerseys[i+pos].number}}</th>
+            <th class="size">{{jerseys[i+pos].size}}</th>
+          </table> 
+        <span class="price-badge">${{jerseys[i+pos].price}}</span> </td>
+      </ng-container>
+    </tr>
+  </ng-container>
+</table>

@@ -47,7 +47,7 @@ export class JerseyDetailComponent implements OnInit {
       .subscribe(jersey => this.jersey = jersey);
   }
 
-  getCustId():number {
+  get getCustId():number {
     return this.loginService.customerId
   }
 
@@ -63,7 +63,7 @@ export class JerseyDetailComponent implements OnInit {
    */
      addToCart(jersey : Jersey, quantity : string): void{
       let quantity_number  = parseInt(quantity)
-      let customer : Customer = this.customerService.getCustomer(this.getCustId()) as unknown as Customer
+      let customer : Customer = this.customerService.getCustomer(this.getCustId) as unknown as Customer
       for(let i = 0; i < quantity_number ; i++){
         this.customerService.addJerseyToCart(customer, jersey)
         .subscribe(); // note for vince: not sure if you need to do subscribe to get cust obj 

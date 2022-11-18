@@ -29,7 +29,7 @@ export class CartComponent implements OnInit {
 
   }
 
-  getCustId():number {
+  get getCustId():number {
     return this.loginService.customerId
   }
 
@@ -37,7 +37,7 @@ export class CartComponent implements OnInit {
    * This gets the cart of the current user that is logged in 
    */
    getCart(): void {
-    this.customerService.getCart(this.getCustId())
+    this.customerService.getCart(this.getCustId)
     .subscribe(Jerseys => this.cart = Jerseys);
   }
 

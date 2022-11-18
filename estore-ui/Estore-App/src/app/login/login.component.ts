@@ -100,8 +100,8 @@ export class LoginComponent implements OnInit {
       .subscribe(customer => {
         this.customers.push(customer);
         this.getCustomers();
-        this.currentId = customer.id;
-        console.warn(this.currentId)
+        this.setCustId = customer.id
+        console.warn(this.getCustId)
       });
 
   }
