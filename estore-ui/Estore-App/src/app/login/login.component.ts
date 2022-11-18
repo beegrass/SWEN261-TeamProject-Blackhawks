@@ -19,7 +19,7 @@ import { LoginService} from '../login.service'
 })
 export class LoginComponent implements OnInit {
   customers : Customer[] = []; 
-  currentId : number = 1; 
+  currentId : number = -1; 
   username: string = "";
 
   // Example 1: <input [(ngModel)]="person.firstName" name="first">
@@ -99,11 +99,14 @@ export class LoginComponent implements OnInit {
     this.customerService.createCustomer({username} as Customer)
       .subscribe(customer => {
         this.customers.push(customer);
-        this.getCustomers();
+        //this.getCustomers();
         this.setCustId = customer.id
-        console.warn(this.getCustId)
       });
+    console.warn("this is the id of the new customer: "  + this.getCustId)
 
+    return;
+
+      
   }
 
   // getCart(): void {

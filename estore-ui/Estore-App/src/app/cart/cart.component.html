@@ -18,6 +18,23 @@
         </tr>
       </ng-container>
     </table>
+    <!-- <table margin-left:auto margin-right:auto padding>
+      <ng-container *ngFor="let jersey of cart; let i=index;">
+        <tr *ngIf="i % 3 == 0">
+          <ng-container *ngFor="let pos of [0, 1, 2]">
+            <td *ngIf="i+pos < cart.length" padding:50px>
+              <img src={{cart[i+pos].image}} alt={{cart[i+pos].name}} height="300" width="300">
+              <table class="info">
+                <th class="name">{{cart[i+pos].name}} {{cart[i+pos].number}}</th>
+                <th class="size">{{cart[i+pos].size}}</th>
+              </table> 
+              <span class="price-badge">${{cart[i+pos].price}}</span> 
+              <button type="button" class="badge" >Remove from Cart</button>
+            </td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </table> -->
   </div>
 
 <div id="mybutton">

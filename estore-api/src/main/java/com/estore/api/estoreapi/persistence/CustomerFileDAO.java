@@ -172,8 +172,8 @@ public class CustomerFileDAO implements CustomerDAO {
 
     @Override
     public Customer createCustomer(Customer customer) throws IOException {
+        load();
         synchronized(customers) {
-            load(); 
             for(Customer cust : getCustomersArray())
             {
                 if(cust.getUserName().toLowerCase().equals(customer.getUserName().toLowerCase()))
@@ -190,8 +190,8 @@ public class CustomerFileDAO implements CustomerDAO {
 
     @Override
     public Customer addJerseyToCart(Customer customer, Jersey jersey) throws IOException {
-        synchronized(customers) {
-            load(); 
+        load();
+        synchronized(customers) { 
             if (customers.containsKey(customer.getId()) == false)
                 return null;  // customer does not exist
 
@@ -204,8 +204,8 @@ public class CustomerFileDAO implements CustomerDAO {
 
     @Override
     public Customer removeFromCart(Customer customer, Jersey jersey) throws IOException {
-        synchronized(customers) {
-            load(); 
+        load();
+        synchronized(customers) { 
             if (customers.containsKey(customer.getId()) == false)
                 return null;  // customer does not exist
 
@@ -218,8 +218,8 @@ public class CustomerFileDAO implements CustomerDAO {
 
     @Override
     public Customer emptyCart(Customer customer) throws IOException {
+        load(); 
         synchronized(customers) {
-            load(); 
             if (customers.containsKey(customer.getId()) == false)
                 return null;  // customer does not exist
 
@@ -232,8 +232,8 @@ public class CustomerFileDAO implements CustomerDAO {
 
     @Override
     public double getTotalCost(Customer customer) throws IOException {
-        synchronized(customers) {
-            load(); 
+        load();
+        synchronized(customers) { 
             double totalCost = customer.getTotalCost(); 
             return totalCost;
         }

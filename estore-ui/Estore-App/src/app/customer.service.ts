@@ -72,7 +72,7 @@ export class CustomerService {
    * @param jersey 
    * @returns Observable<any> returns the observable customer 
    */
-  addJerseyToCart(customer : Customer, jersey: Jersey): Observable<any> {
+  addJerseyToCart(customerId : number, jersey: Jersey): Observable<any> {
     // const url = `${this.customersUrl}/add/${customer.id}/${jersey.id}`
     // return this.http.put(url,this.httpOptions).pipe(
     //   tap(_ => this.log(`add Jersey to Customer Cart=${customer.id}`)),
@@ -80,9 +80,9 @@ export class CustomerService {
     // );
 
     // code below works for presetting the customer id
-    const url = `${this.customersUrl}/add/${1}/${jersey.id}`
+    const url = `${this.customersUrl}/add/${customerId}/${jersey.id}`
     return this.http.put(url,this.httpOptions).pipe(
-      tap(_ => this.log(`add Jersey to Customer Cart=${1}`)),
+      tap(_ => this.log(`add Jersey to Customer Cart=${customerId}`)),
       catchError(this.handleError<any>('addJerseyToCart'))
     );
   }
