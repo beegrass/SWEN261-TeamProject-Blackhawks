@@ -129,7 +129,7 @@ export class LoginComponent implements OnInit {
     return username; 
   }
 
-  get getCurrentCustomerId(): Number{
+  get getCurrentCustomerId(): number{
     return this.currentId;
   }
 

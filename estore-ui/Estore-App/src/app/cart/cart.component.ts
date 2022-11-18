@@ -7,6 +7,7 @@ import { LoginComponent } from 'app/login/login.component';
 import { Customer } from 'app/customer';
 import { LoginService } from 'app/login.service';
 
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -34,6 +35,19 @@ export class CartComponent implements OnInit {
     return this.loginService.customerId
   }
 
+  get getTotalCost():number {
+    return this.customerService.totalCost
+  }
+
+  set setTotalCost(cost : number) {
+    if(this.customerService.totalCost < 0){
+      this.customerService.setTotalCostCustService = 0
+    }else{
+      this.customerService.setTotalCostCustService = cost 
+    }
+    
+  }
+
   /**
    * This gets the cart of the current user that is logged in 
    */
@@ -43,21 +57,21 @@ export class CartComponent implements OnInit {
   }
 
   removeJerseyFromCart(jersey: Jersey): void {
+    console.warn(this.cart)
     if(window.confirm('Are you sure you want to remove this jersey?') == true) {
       let customerId : number = this.getCustId
+      // this.cart = this.cart.filter(h => h !== jersey);
       this.customerService.removeJerseyFromCart(customerId, jersey)
       .subscribe( observer => 
         console.log("this is what returned after remove from cart : " + observer)
       );
+      this.customerService.getTotalCost(customerId)
+        .subscribe( observer =>
+          this.setTotalCost = observer
+        )
     }
+    console.log("total cost is now: $" + this.customerService.totalCost)
   }
-
-  // getTotalCost(): number {
-  //   this.customerService.getTotalCost(this.getCustId).subscribe(
-  //     observableNumber => this.totalCost = observableNumber.valueOf()
-  //   );
-  //   return this.totalCost
-  // }
 
 
 

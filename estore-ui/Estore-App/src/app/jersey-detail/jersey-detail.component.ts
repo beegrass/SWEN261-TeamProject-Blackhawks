@@ -20,6 +20,7 @@ import { LoginService } from 'app/login.service';
 export class JerseyDetailComponent implements OnInit {
   // @Input() jersey?: Jersey;
   jersey: Jersey | undefined;
+  cart: Jersey[] = [];
 
 
   constructor(
@@ -47,8 +48,23 @@ export class JerseyDetailComponent implements OnInit {
       .subscribe(jersey => this.jersey = jersey);
   }
 
+  getCart(): void {
+    this.customerService.getCart(this.loginService.customerId)
+      .subscribe(cart => this.cart = cart);
+  }
+
   get getCustId():number {
     return this.loginService.customerId
+  }
+
+  get getTotalCost():number {
+    return this.customerService.totalCost
+  }
+
+  set setTotalCost(cost : number) {
+    let total : number = 0
+    
+
   }
 
     /**
@@ -64,13 +80,14 @@ export class JerseyDetailComponent implements OnInit {
      addToCart(jersey : Jersey, quantity : string): void{
       let quantity_number  = parseInt(quantity)
       let customerId : number = this.getCustId
-      // Customer = this.customerService.getCustomer(this.getCustId) as unknown as Customer
       for(let i = 0; i < quantity_number ; i++){
         this.customerService.addJerseyToCart(customerId, jersey)
         .subscribe( observer => 
           console.log("this is what returned after add to cart : " + observer)
         );
+        this.cart.push(jersey);
       }
+      console.log("total cost is now: $" + this.getTotalCost)
       
     }
 

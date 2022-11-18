@@ -33,10 +33,16 @@ export class CustomerService {
    * @param customer 
    * @returns Observable<Customer> 
    */
+
+    set setTotalCostCustService(price : number){
+      this.totalCost += price; 
+    }
+
+    
     createCustomer(customer : Customer): Observable<Customer> {
       console.log("this is the customer: " + customer)
       return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
-        tap((newCustomer : Customer) => this.log(`created new Customer w/ id=${newCustomer.id}`)),
+        tap((newCustomer : Customer) => console.log(`created new Customer w/ id=${newCustomer.id}`)),
         catchError(this.handleError<Customer>('createCustomer'))
       );
     }
@@ -50,7 +56,7 @@ export class CustomerService {
   getCustomer(id: number): Observable<Customer> {
     const url = `${this.customersUrl}/${id}`;
     return this.http.get<Customer>(url).pipe(
-      tap(_ => this.log(`fetched Customer id=${id}`)),
+      tap(_ => console.log(`fetched Customer id=${id}`)),
       catchError(this.handleError<Customer>(`getCustomer id=${id}`))
     );
   }
@@ -63,7 +69,7 @@ export class CustomerService {
    getCart(id: number): Observable<Jersey[]> {
     const url = `${this.customersUrl}/cart/${id}`;
     return this.http.get<Jersey[]>(url).pipe(
-      tap(_ => this.log(`fetched Customer id=${id}`)),
+      tap(_ => console.log(`fetched Customer id=${id}`)),
       catchError(this.handleError<Jersey[]>(`getCart id=${id}`))
     );
   }
@@ -77,7 +83,7 @@ export class CustomerService {
   addJerseyToCart(customerId : number, jersey: Jersey): Observable<any> {
     const url = `${this.customersUrl}/add/${customerId}/${jersey.id}`
     return this.http.put(url,this.httpOptions).pipe(
-      tap(_ => this.log(`add Jersey to Customer Cart=${customerId}`)),
+      tap(_ => console.log(`add Jersey to Customer Cart=${customerId}`)),
       catchError(this.handleError<any>('addJerseyToCart'))
     );
   }
@@ -91,7 +97,7 @@ export class CustomerService {
    removeJerseyFromCart(customerId : number, jersey: Jersey): Observable<any> {
     const url = `${this.customersUrl}/remove/${customerId}/${jersey.id}`
     return this.http.put(url,this.httpOptions).pipe(
-      tap(_ => this.log(`remove Jersey from Customer Cart=${customerId}`)),
+      tap(_ => console.log(`remove Jersey from Customer Cart=${customerId}`)),
       catchError(this.handleError<any>('removeJerseyFromCart'))
     );
   }
@@ -104,7 +110,7 @@ export class CustomerService {
   emptyCart(customer : Customer): Observable<any> {
     const url = `${this.customersUrl}/${customer.id}`
     return this.http.put(url, this.httpOptions).pipe(
-      tap(_ => this.log(`emptied customers cart=${customer.id}`)),
+      tap(_ => console.log(`emptied customers cart=${customer.id}`)),
       catchError(this.handleError<any>('emptyCart'))
     );
   }
@@ -115,11 +121,11 @@ export class CustomerService {
    * @param id of the Customer
    * @returns Observable<Number>
    */
-   getTotalCost(id: number): Observable<Number>{
+   getTotalCost(id: number): Observable<number>{
     const url = `${this.customersUrl}/cost/${id}`;
-    return this.http.get<Number>(url).pipe(
-      tap(_ => this.log(`get total cost of customer =${id}`)),
-      catchError(this.handleError<Number>(`getTotalCost customer=${id}`))
+    return this.http.get<number>(url).pipe(
+      tap(_ => console.log(`get total cost of customer =${id}`)),
+      catchError(this.handleError<number>(`getTotalCost customer=${id}`))
     );
   }
 
@@ -132,7 +138,7 @@ export class CustomerService {
   getCustomers(): Observable<Customer[]> {
     return this.http.get<Customer[]>(this.customersUrl)
       .pipe(
-        tap(_ => this.log('fetched customers')),
+        tap(_ => console.log('fetched customers')),
         catchError(this.handleError<Customer[]>('getCustomers', []))
       );
   }
@@ -146,7 +152,7 @@ export class CustomerService {
         map(customers => customers[0]), // returns a {0|1} element array
         tap(h => {
           const outcome = h ? 'fetched' : 'did not find';
-          this.log(`${outcome} customer id=${id}`);
+          console.log(`${outcome} customer id=${id}`);
         }),
         catchError(this.handleError<Customer>(`getCustomer id=${id}`))
       );
