@@ -55,10 +55,15 @@ public class Customer {
      */
     public void removeFromCart(Jersey jersey) {
         //cart.remove(jersey);
+        int countOfRemovedJersey= 0; 
+        // BUG: it removes it but it removes ALL cases of that one jersey 
         ArrayList<Jersey> newCart = new ArrayList<Jersey>();
         for(int i = 0; i < cart.size(); i++){
-            if(cart.get(i).getId() != jersey.getId()){ // this is a brute force way 
+            int jerseyId = cart.get(i).getId(); 
+            if(jerseyId != jersey.getId() || countOfRemovedJersey == 1){ // this is a brute force way 
                 newCart.add(cart.get(i)); 
+            }else{
+                countOfRemovedJersey = 1; 
             }
         }
 
