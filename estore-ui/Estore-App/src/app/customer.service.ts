@@ -80,9 +80,9 @@ export class CustomerService {
    * @param jersey 
    * @returns Observable<any> returns the observable customer 
    */
-  addJerseyToCart(customerId : number, jersey: Jersey): Observable<any> {
+  addJerseyToCart(customerId : number, jersey: Jersey): Observable<Customer> {
     const url = `${this.customersUrl}/add/${customerId}/${jersey.id}`
-    return this.http.put(url,this.httpOptions).pipe(
+    return this.http.put<Customer>(url,this.httpOptions).pipe(
       tap(_ => console.log(`add Jersey to Customer Cart=${customerId}`)),
       catchError(this.handleError<any>('addJerseyToCart'))
     );
@@ -94,9 +94,9 @@ export class CustomerService {
    * @param jersey 
    * @returns Observable<any> returns the observable customer 
    */
-   removeJerseyFromCart(customerId : number, jersey: Jersey): Observable<any> {
+   removeJerseyFromCart(customerId : number, jersey: Jersey): Observable<Customer> {
     const url = `${this.customersUrl}/remove/${customerId}/${jersey.id}`
-    return this.http.put(url,this.httpOptions).pipe(
+    return this.http.put<Customer>(url,this.httpOptions).pipe(
       tap(_ => console.log(`remove Jersey from Customer Cart=${customerId}`)),
       catchError(this.handleError<any>('removeJerseyFromCart'))
     );

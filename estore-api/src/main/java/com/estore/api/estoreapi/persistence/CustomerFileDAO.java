@@ -206,11 +206,12 @@ public class CustomerFileDAO implements CustomerDAO {
     public Customer removeFromCart(Customer customer, Jersey jersey) throws IOException {
         load();
         synchronized(customers) { 
-            if (customers.containsKey(customer.getId()) == false)
-                return null;  // customer does not exist
-
-                customer.removeFromCart(jersey);
-                customers.put(customer.getId(),customer);
+            if (customers.containsKey(customer.getId()) == false){ // customer does not exist 
+                return null;
+            }
+                
+            customer.removeFromCart(jersey);
+            customers.put(customer.getId(),customer);
             save(); // may throw an IOException
             return customer;
         }

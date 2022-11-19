@@ -53,7 +53,19 @@ public class Customer {
      * Removes a jersey from the cart of the user
      * @param jersey The jersey to remove from cart
      */
-    public void removeFromCart(Jersey jersey) {cart.remove(jersey);}
+    public void removeFromCart(Jersey jersey) {
+        //cart.remove(jersey);
+        ArrayList<Jersey> newCart = new ArrayList<Jersey>();
+        for(int i = 0; i < cart.size(); i++){
+            if(cart.get(i).getId() != jersey.getId()){ // this is a brute force way 
+                newCart.add(cart.get(i)); 
+            }
+        }
+
+        cart = newCart; 
+        System.out.println("this is the cart after removing from the cart  : "); 
+        System.out.println(cart); 
+    }
 
     /**
      * Removes all jerseys from the cart of the user

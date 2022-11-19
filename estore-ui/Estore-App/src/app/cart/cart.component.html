@@ -6,15 +6,15 @@
 
 <div>
     <table class="cart">
-      <ng-container *ngFor="let jersey of cart">
-        <tr>
+      <ng-container *ngFor="let jersey of getTheCartTest">
+        <tr> 
           <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
           <table class="info">
             <th class="name">{{jersey.name}} {{jersey.number}}</th>
             <th class="size">{{jersey.size}}</th>
           </table> 
           <span class="price-badge">${{jersey.price}}</span> 
-          <button type="button" class="badge" (click)="removeJerseyFromCart(jersey)">Remove from Cart</button>
+          <button type="button" class="badge" (click)="removeJerseyFromCart(jersey);ngOnInit()">Remove from Cart</button>
         </tr>
       </ng-container>
     </table>

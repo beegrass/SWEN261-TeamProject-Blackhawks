@@ -28,6 +28,8 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCart();
+    console.log("this is what is printing on intialization")
+    console.log(this.cart)
 
   }
 
@@ -35,18 +37,9 @@ export class CartComponent implements OnInit {
     return this.loginService.customerId
   }
 
-  get getTotalCost():number {
-    return this.customerService.totalCost
-  }
-
-  set setTotalCost(cost : number) {
-    if(this.customerService.totalCost < 0){
-      this.customerService.setTotalCostCustService = 0
-    }else{
-      this.customerService.setTotalCostCustService = cost 
-    }
-    
-  }
+  get getTheCartTest() : Array <Jersey> {
+    return this.cart;
+  } 
 
   /**
    * This gets the cart of the current user that is logged in 
@@ -60,17 +53,21 @@ export class CartComponent implements OnInit {
     console.warn(this.cart)
     if(window.confirm('Are you sure you want to remove this jersey?') == true) {
       let customerId : number = this.getCustId
-      // this.cart = this.cart.filter(h => h !== jersey);
+      this.cart = this.cart.filter(h => h !== jersey);
       this.customerService.removeJerseyFromCart(customerId, jersey)
-      .subscribe( observer => 
-        console.log("this is what returned after remove from cart : " + observer)
-      );
-      this.customerService.getTotalCost(customerId)
-        .subscribe( observer =>
-          this.setTotalCost = observer
-        )
-    }
-    console.log("total cost is now: $" + this.customerService.totalCost)
+      .subscribe( updatedCustomer => {
+        this.customerService.getCart(updatedCustomer.id).subscribe(Jerseys => this.cart = Jerseys)
+      }
+    );
+    //this.ngOnInit()
+    console.warn("this is the cart after the delete")
+    console.log(this.cart)
+
+    console.warn("this is the cart when calling the method getCart() on init")
+    this.getCart()
+    console.warn(this.cart)
+  }
+
   }
 
 
