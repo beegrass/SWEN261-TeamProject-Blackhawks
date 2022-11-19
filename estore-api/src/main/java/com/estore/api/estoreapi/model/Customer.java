@@ -68,6 +68,7 @@ public class Customer {
         }
 
         cart = newCart; 
+        
         System.out.println("this is the cart after removing from the cart  : "); 
         System.out.println(cart); 
     }

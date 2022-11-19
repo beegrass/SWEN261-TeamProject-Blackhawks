@@ -57,15 +57,15 @@ export class JerseyDetailComponent implements OnInit {
     return this.loginService.customerId
   }
 
-  get getTotalCost():number {
-    return this.customerService.totalCost
-  }
+  // get getTotalCost():number {
+  //   return this.customerService.totalCost
+  // }
 
-  set setTotalCost(cost : number) {
-    let total : number = 0
+  // set setTotalCost(cost : number) {
+  //   let total : number = 0
     
 
-  }
+  // }
 
     /**
    * Not entirely sure  what this method will take in 
@@ -87,8 +87,14 @@ export class JerseyDetailComponent implements OnInit {
         );
         this.cart.push(jersey);
       }
-      console.log("total cost is now: $" + this.getTotalCost)
-      
+
+      this.customerService.getTotalCost(customerId).subscribe(
+        total => {
+          this.cartComponent.setTotalCost = total
+          console.log("this is the total cost:" + total)
+        }
+      );
+
     }
 
   save(): void {

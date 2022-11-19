@@ -28,6 +28,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCart();
+    this.getTotalCostInternal(); 
     console.log("this is what is printing on intialization")
     console.log(this.cart)
 
@@ -45,6 +46,8 @@ export class CartComponent implements OnInit {
     return this.cart;
   } 
 
+ 
+
   /**
    * This gets the cart of the current user that is logged in 
    */
@@ -61,6 +64,13 @@ export class CartComponent implements OnInit {
       this.customerService.removeJerseyFromCart(customerId, jersey)
       .subscribe( updatedCustomer => {
         this.customerService.getCart(updatedCustomer.id).subscribe(Jerseys => this.cart = Jerseys)
+        }
+      );
+    
+    this.customerService.getTotalCost(this.getCustId).subscribe(
+      total => {
+        this.setTotalCost = this.totalCost - jersey.price
+        console.log("this is the updated total cost in the remove function: " + this.totalCost)
       }
     );
     //this.ngOnInit()
@@ -70,8 +80,27 @@ export class CartComponent implements OnInit {
     console.warn("this is the cart when calling the method getCart() on init")
     this.getCart()
     console.warn(this.cart)
+    
+    console.warn("this is the updated price: " + this.totalCost); 
+
+
   }
 
+  }
+
+  set setTotalCost(total : number){
+    this.totalCost = total; 
+  }
+
+  get getTotalCost() : number{
+    return this.totalCost; 
+  }
+
+  getTotalCostInternal(){
+    this.customerService.getTotalCost(this.getCustId).subscribe(
+      total => this.totalCost = total
+    );
+    
   }
 
 

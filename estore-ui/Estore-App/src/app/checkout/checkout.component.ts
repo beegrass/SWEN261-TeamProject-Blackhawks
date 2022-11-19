@@ -47,12 +47,8 @@ export class CheckoutComponent implements OnInit {
     return this.loginService.customerId
   }
 
-  // getTotalCost(): number {
-  //   this.customerService.getTotalCost(this.getCustId).subscribe(
-  //     observableNumber => this.totalCost = observableNumber.valueOf()
-  //   );
-  //   return this.totalCost
-  // }
-
+  get getTotalCost() : number { 
+    return this.cartComponent.getTotalCost;
+  }
 
 }
