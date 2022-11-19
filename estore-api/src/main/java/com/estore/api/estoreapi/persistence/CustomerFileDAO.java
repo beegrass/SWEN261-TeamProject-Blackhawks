@@ -221,11 +221,11 @@ public class CustomerFileDAO implements CustomerDAO {
     public Customer emptyCart(Customer customer) throws IOException {
         load(); 
         synchronized(customers) {
-            if (customers.containsKey(customer.getId()) == false)
+            if (customers.containsKey(customer.getId()) == false){
                 return null;  // customer does not exist
-
-                customer.emptyCart();
-                customers.put(customer.getId(),customer);
+            }
+            customer.emptyCart();
+            customers.put(customer.getId(),customer);
             save(); // may throw an IOException
             return customer;
         }

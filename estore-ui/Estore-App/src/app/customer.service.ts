@@ -107,11 +107,11 @@ export class CustomerService {
    * @param customer 
    * @returns Observable<any> 
    */
-  emptyCart(customer : Customer): Observable<any> {
-    const url = `${this.customersUrl}/${customer.id}`
-    return this.http.put(url, this.httpOptions).pipe(
-      tap(_ => console.log(`emptied customers cart=${customer.id}`)),
-      catchError(this.handleError<any>('emptyCart'))
+  emptyCart(customerId : number): Observable<Customer> {
+    const url = `${this.customersUrl}/${customerId}`
+    return this.http.put<Customer>(url, this.httpOptions).pipe(
+      tap(_ => console.log(`emptied customers cart=${customerId}`)),
+      catchError(this.handleError<Customer>('emptyCart'))
     );
   }
 

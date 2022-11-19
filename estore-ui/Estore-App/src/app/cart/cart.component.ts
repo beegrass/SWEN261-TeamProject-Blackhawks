@@ -36,6 +36,10 @@ export class CartComponent implements OnInit {
   get getCustId():number {
     return this.loginService.customerId
   }
+  
+  set updateTheCartTest(cart : Array<Jersey>){
+    this.cart = cart; 
+  }
 
   get getTheCartTest() : Array <Jersey> {
     return this.cart;

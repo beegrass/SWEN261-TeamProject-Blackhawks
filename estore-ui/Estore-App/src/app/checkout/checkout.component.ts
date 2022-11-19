@@ -5,6 +5,7 @@ import { Cart } from 'app/cart';
 import { CartService } from '../cart.service';
 import { CustomerService } from 'app/customer.service';
 import { LoginService } from 'app/login.service';
+import { CartComponent } from 'app/cart/cart.component';
 
 @Component({
   selector: 'app-checkout',
@@ -19,7 +20,8 @@ export class CheckoutComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private customerService : CustomerService,
-    private loginService : LoginService
+    private loginService : LoginService, 
+    private cartComponent : CartComponent
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +33,14 @@ export class CheckoutComponent implements OnInit {
 
   onClick(): void {
     alert("Thank you for your purchase!")
+  }
+
+  emptyCart() : void {
+    this.customerService.emptyCart(this.getCustId).subscribe(
+      updatedCustomer => {
+        this.cartComponent.updateTheCartTest = updatedCustomer.cart; 
+      }
+    )
   }
 
   get getCustId():number {

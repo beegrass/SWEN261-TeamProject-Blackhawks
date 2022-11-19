@@ -75,7 +75,9 @@ public class Customer {
     /**
      * Removes all jerseys from the cart of the user
      */
-    public void emptyCart() {cart.clear();}
+    public void emptyCart() {
+        cart = new ArrayList<Jersey>();
+    }
 
     public double getTotalCost() {
         double totalCost = 0;
