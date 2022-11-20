@@ -8,25 +8,22 @@
 <h3>Current Inventory:</h3>
 
 <div>
-    <table>
-      <ng-container *ngFor="let jersey of jerseys; let i=index;">
-        <tr *ngIf="i % 3 == 0">
-          <ng-container *ngFor="let pos of [0, 1, 2]">
-            <td *ngIf="i+pos < jerseys.length">
-              <div class = "jersey">
+    <table class="jerseys">
+      <ng-container *ngFor="let jersey of jerseys">
+        <td>
+            <div class = "jersey">
 
-                <a routerLink="/admin-detail/{{jerseys[i+pos].id}}">
-                    <img src={{jerseys[i+pos].image}} alt={{jerseys[i+pos].name}} height="300" width="300">
+                <a routerLink="/admin-detail/{{jersey.id}}">
+                    <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
                 </a>
                 <button class = jerseyButton (click) = "delete(jersey);">&#10006;</button>
-              </div>
-            <table class="info">
-              <th class="name">{{jerseys[i+pos].name}} {{jerseys[i+pos].number}}</th>
-              <th class="size">{{jerseys[i+pos].size}}</th>
-              <th>${{jerseys[i+pos].price}}</th>
-            </table> 
-          </ng-container>
-        </tr>
+            </div>
+          <table class="info">
+            <th class="name">{{jersey.name}} {{jersey.number}}</th>
+            <th class="size">{{jersey.size}}</th>
+          </table> 
+          <span class="price-badge">${{jersey.price}}</span> 
+        </td>
       </ng-container>
     </table>
   </div>

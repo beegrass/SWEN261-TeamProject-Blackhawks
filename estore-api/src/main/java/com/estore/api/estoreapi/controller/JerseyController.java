@@ -139,8 +139,8 @@ public class JerseyController {
             Jersey result = jerseyDao.createJersey(jersey);
             if(result != null)
             {
-                // Jersey newJersey = jerseyDao.createJersey(jersey);
-                return new ResponseEntity<Jersey>(jersey, HttpStatus.CREATED);
+                Jersey newJersey = jerseyDao.createJersey(jersey);
+                return new ResponseEntity<Jersey>(newJersey, HttpStatus.CREATED);
             }
             else
             {
