@@ -131,25 +131,27 @@
 
 
 .info .name {
-  background-color: rgba(234,70,86,255);
+  background-color: #aa0404;
   border-radius: 4px 0 0 4px;
   align-self: center;
 }
 
 .info-p .name {
-  background-color: rgba(234,70,86,255);
+  background-color: #ff8c00;
   border-radius: 4px 0 0 4px;
   align-self: center;
 }
 
 .info-d .name {
+  color:rgb(255, 255, 255);
   background-color: #1100ff;
   border-radius: 4px 0 0 4px;
   align-self: center;
 }
 
 .info-h .name {
-  background-color: rgba(234,70,86,255);
+  color:rgb(255, 255, 255);
+  background-color: #000000;
   border-radius: 4px 0 0 4px;
   align-self: center;
 }
