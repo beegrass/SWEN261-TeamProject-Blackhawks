@@ -102,6 +102,9 @@ export class LoginComponent implements OnInit {
   }
 
   createNewCustomer(username : string) : void {
+    if(! username){
+      alert("Invalid input: please put in a username to create a new account")
+    }
     // if the user doesnt exist -> create a new account and add it to the array
     this.customerService.createCustomer({username} as Customer)
       .subscribe(customer => {
