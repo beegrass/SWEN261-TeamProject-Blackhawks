@@ -14,8 +14,7 @@ import { CartComponent } from 'app/cart/cart.component';
 })
 export class CheckoutComponent implements OnInit {
 
-  totalCost : number = 0;
-
+  totalCost : number = 0
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -25,6 +24,7 @@ export class CheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.totalCost  = this.cartComponent.getTotalCost; 
   }
 
   goBack(): void {
@@ -48,7 +48,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   get getTotalCost() : number { 
-    return this.cartComponent.getTotalCost;
+    return this.totalCost; 
   }
 
 }
