@@ -13,8 +13,62 @@
   border: 1px solid #ddd
 }
 
+.jerseys-d {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+
+.jerseys-d img {
+  height: 200;
+  width: 200;
+  border-radius: 8px;
+  border: 1px solid #ddd
+}
+
+.jerseys-p {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+
+.jerseys-p img {
+  height: 200;
+  width: 200;
+  border-radius: 8px;
+  border: 1px solid #ddd
+}
+
+.jerseys-h {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+
+.jerseys-h img {
+  height: 200;
+  width: 200;
+  border-radius: 8px;
+  border: 1px solid #ddd
+}
+
 .jerseys img:hover {
   box-shadow: 0 0 2px 1px rgb(255, 0, 0);
+}
+
+.jerseys-d img:hover {
+  box-shadow: 0 0 2px 1px #1100ff;
+}
+
+.jerseys-p img:hover {
+  box-shadow: 0 0 2px 1px #ff8c00;;
+}
+
+.jerseys-h img:hover {
+  box-shadow: 0 0 2px 1px rgb(0, 0, 0);
 }
 
 .jerseys img:active {
@@ -53,12 +107,53 @@
   border-color: rgb(194, 194, 194);
   table-layout: fixed;
 }
+.info-p {
+  background-color: rgb(194, 194, 194);
+  align-items: center;
+  border-radius: 4px 4px 4px 4px;
+  border-color: rgb(194, 194, 194);
+  table-layout: fixed;
+}
+.info-d {
+  background-color: rgb(194, 194, 194);
+  align-items: center;
+  border-radius: 4px 4px 4px 4px;
+  border-color: rgb(194, 194, 194);
+  table-layout: fixed;
+}
+.info-h {
+  background-color: rgb(194, 194, 194);
+  align-items: center;
+  border-radius: 4px 4px 4px 4px;
+  border-color: rgb(194, 194, 194);
+  table-layout: fixed;
+}
+
 
 .info .name {
   background-color: rgba(234,70,86,255);
   border-radius: 4px 0 0 4px;
   align-self: center;
 }
+
+.info-p .name {
+  background-color: rgba(234,70,86,255);
+  border-radius: 4px 0 0 4px;
+  align-self: center;
+}
+
+.info-d .name {
+  background-color: #1100ff;
+  border-radius: 4px 0 0 4px;
+  align-self: center;
+}
+
+.info-h .name {
+  background-color: rgba(234,70,86,255);
+  border-radius: 4px 0 0 4px;
+  align-self: center;
+}
+
 
 .jerseys .price-badge {
   background-color: #d4d5d6;

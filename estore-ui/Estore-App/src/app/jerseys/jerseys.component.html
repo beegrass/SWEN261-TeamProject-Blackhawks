@@ -12,13 +12,78 @@
   </a>
 </div>
 
+<div *ngIf="selectColorMode() == 'protanopia'" class="topnav" style="background-color: #ff8c00;">
+  <a routerLink="">Logout</a>
+  <a routerLink="/cart">
+    <img src="assets/cart.png" alt="cart image" height="15" width="20">
+  </a>
+</div>
+
+<div *ngIf="selectColorMode() == 'high contrast'" class="topnav" style="background-color: #000000;">
+  <a routerLink="">Logout</a>
+  <a routerLink="/cart">
+    <img src="assets/cart.png" alt="cart image" height="15" width="20">
+  </a>
+</div>
+
 <br>
 <div>
   <app-jersey-search></app-jersey-search>
 </div>
 
-<div>
+<div *ngIf="selectColorMode() == 'default'">
   <table class="jerseys">
+    <ng-container *ngFor="let jersey of jerseys">
+      <td>
+        <a routerLink="/detail/{{jersey.id}}">
+          <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
+        </a>
+        <table class="info-d">
+          <th class="name">{{jersey.name}} {{jersey.number}}</th>
+          <th class="size">{{jersey.size}}</th>
+        </table> 
+        <span class="price-badge">${{jersey.price}}</span> 
+      </td>
+    </ng-container>
+  </table>
+</div>
+
+<div *ngIf="selectColorMode() == 'deuteranopia'">
+  <table class="jerseys-d">
+    <ng-container *ngFor="let jersey of jerseys">
+      <td>
+        <a routerLink="/detail/{{jersey.id}}">
+          <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
+        </a>
+        <table class="info">
+          <th class="name">{{jersey.name}} {{jersey.number}}</th>
+          <th class="size">{{jersey.size}}</th>
+        </table> 
+        <span class="price-badge">${{jersey.price}}</span> 
+      </td>
+    </ng-container>
+  </table>
+</div>
+
+<div *ngIf="selectColorMode() == 'protanopia'">
+  <table class="jerseys-p">
+    <ng-container *ngFor="let jersey of jerseys">
+      <td>
+        <a routerLink="/detail/{{jersey.id}}">
+          <img src={{jersey.image}} alt={{jersey.name}} height="300" width="300">
+        </a>
+        <table class="info">
+          <th class="name">{{jersey.name}} {{jersey.number}}</th>
+          <th class="size">{{jersey.size}}</th>
+        </table> 
+        <span class="price-badge">${{jersey.price}}</span> 
+      </td>
+    </ng-container>
+  </table>
+</div>
+
+<div *ngIf="selectColorMode() == 'high contrast'">
+  <table class="jerseys-h">
     <ng-container *ngFor="let jersey of jerseys">
       <td>
         <a routerLink="/detail/{{jersey.id}}">

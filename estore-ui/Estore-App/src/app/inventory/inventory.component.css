@@ -1,12 +1,42 @@
 .options-button {
-    color:white;
-    background-color: #aa0404;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  color:white;
+  background-color: #aa0404;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .options-button:hover {
-    background-color: #a04545;
+  background-color: #a04545;
+}
+
+.options-button-d {
+  color:white;
+  background-color: #1100ff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.options-button-d:hover {
+    background-color: #456ca0;
   }
+
+.options-button-hc {
+  color:white;
+  background-color: #000000;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.options-button-hc {
+  background-color: rgb(80, 80, 80);
+}
+
+.options-button-p {
+  color:white;
+  background-color: #ff8c00;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.options-button-p:hover {
+  background-color: #b48249;
+}
 
   /* jerseysComponent's private CSS styles */
 .jerseys {
@@ -25,6 +55,64 @@
 
 .jerseys img:hover {
   box-shadow: 0 0 2px 1px rgb(255, 0, 0);
+}
+
+.jerseys-d {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+
+.jerseys-d img {
+  height: 200;
+  width: 200;
+  border-radius: 8px;
+  border: 1px solid #ddd
+}
+
+.jerseys-p {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+
+.jerseys-p img {
+  height: 200;
+  width: 200;
+  border-radius: 8px;
+  border: 1px solid #ddd
+}
+
+.jerseys-h {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+
+.jerseys-h img {
+  height: 200;
+  width: 200;
+  border-radius: 8px;
+  border: 1px solid #ddd
+}
+
+.jerseys img:hover {
+  box-shadow: 0 0 2px 1px rgb(255, 0, 0);
+}
+
+.jerseys-d img:hover {
+  box-shadow: 0 0 2px 1px #1100ff;
+}
+
+.jerseys-p img:hover {
+  box-shadow: 0 0 2px 1px #ff8c00;;
+}
+
+.jerseys-h img:hover {
+  box-shadow: 0 0 2px 1px rgb(0, 0, 0);
 }
 
 .jerseys img:active {
