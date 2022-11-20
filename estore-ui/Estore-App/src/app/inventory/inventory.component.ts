@@ -37,6 +37,7 @@ export class InventoryComponent implements OnInit {
     this.jerseyService.addJersey({ name, number, price, color, size, image } as Jersey)
       .subscribe(jersey => {
         this.jerseys.push(jersey);
+        console.log("this is the jerseys new id: " + jersey.id)
       });
   }
 
@@ -46,4 +47,5 @@ export class InventoryComponent implements OnInit {
       this.jerseyService.deleteJersey(jersey.id).subscribe();
     }
   }
+  
 }

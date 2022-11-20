@@ -32,7 +32,7 @@ public class JerseyFileDAO implements JerseyDAO {
     private ObjectMapper objectMapper;  // Provides conversion between jersey
                                         // objects and JSON text format written
                                         // to the file
-    private static int nextId;  // The next Id to assign to a new jersey
+    private static int nextId = 1;  // The next Id to assign to a new jersey
     private String filename;    // Filename to read from and write to
 
     public JerseyFileDAO(@Value("${jerseys.file}") String filename,ObjectMapper objectMapper) throws IOException {
@@ -48,7 +48,7 @@ public class JerseyFileDAO implements JerseyDAO {
      */
     private synchronized static int nextId() {
         int id = nextId;
-        ++nextId;
+        nextId++;
         return id;
     }
 
@@ -176,8 +176,10 @@ public class JerseyFileDAO implements JerseyDAO {
      */
     @Override
     public Jersey createJersey(Jersey jersey) throws IOException {
+        load(); 
+        jersey.getId(); 
         synchronized(jerseys) {
-            load(); 
+            System.out.print("create jersey is called");
             // We create a new jersey object because the id field is immutable
             // and we need to assign the next unique id
             Jersey newJersey = new Jersey(nextId(), jersey.getName(), jersey.getNumber(), jersey.getPrice(), 
