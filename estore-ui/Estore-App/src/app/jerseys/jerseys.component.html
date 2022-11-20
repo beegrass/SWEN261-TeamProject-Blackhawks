@@ -1,6 +1,6 @@
 <div class="topnav">
   <a routerLink="">Logout</a>
-  <a routerLink="/cart" >
+  <a routerLink="/cart">
     <img src="assets/cart.png" alt="cart image" height="15" width="20">
   </a>
 </div>
@@ -11,7 +11,7 @@
   <app-jersey-search></app-jersey-search>
 </div>
   
-<!-- <div>
+<div>
   <table class="jerseys">
     <ng-container *ngFor="let jersey of jerseys">
       <td>
@@ -26,22 +26,4 @@
       </td>
     </ng-container>
   </table>
-</div> -->
-<table margin-left:auto margin-right:auto padding>
-  <ng-container *ngFor="let jersey of jerseys; let i=index;">
-    <tr *ngIf="i % 3 == 0">
-      <ng-container *ngFor="let pos of [0, 1, 2]">
-        <td *ngIf="i+pos < jerseys.length" padding:50px>
-          <a routerLink="/detail/{{jerseys[i+pos].id}}">
-            <img src={{jerseys[i+pos].image}} alt={{jerseys[i+pos].name}} height="300" width="300">
-          </a>
-          <table class="info">
-            <th class="name">{{jerseys[i+pos].name}} {{jerseys[i+pos].number}}</th>
-            <th class="size">{{jerseys[i+pos].size}}</th>
-            <th class="price">${{jerseys[i+pos].price}}</th>
-          </table>
-        </td>
-      </ng-container>
-    </tr>
-  </ng-container>
-</table>
+</div>
