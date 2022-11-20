@@ -19,6 +19,15 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  selectColorMode(): string {
+    let colorData = localStorage.getItem('colorblindKey');
+    let parsed = JSON.parse(colorData!);
+    let color = parsed.color;
+
+    console.log(color);
+    return color;
+  }
+
   goBack(): void {
     this.location.back();
   }

@@ -30,4 +30,13 @@ export class CartComponent implements OnInit {
     // get jerseys in the cart
   }
 
+  selectColorMode(): string {
+    let colorData = localStorage.getItem('colorblindKey');
+    let parsed = JSON.parse(colorData!);
+    let color = parsed.color;
+
+    console.log(color);
+    return color;
+  }
+
 }
