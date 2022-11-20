@@ -32,7 +32,8 @@ export class AdminDetailComponent implements OnInit {
   getJersey(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
     this.jerseyService.getJersey(id)
-      .subscribe(jersey => this.jersey = jersey);
+      .subscribe(jersey => {this.jersey = jersey
+      console.warn("this is the id of the jersey : " + jersey.id)});
   }
 
   save(): void {
