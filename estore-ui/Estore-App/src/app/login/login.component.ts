@@ -18,6 +18,7 @@ import { LoginService} from '../login.service'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+[x: string]: any;
   customers : Customer[] = []; 
   currentId : number = -1; 
   username: string = "";
@@ -95,6 +96,12 @@ export class LoginComponent implements OnInit {
         return; 
       }
     }
+    return; 
+
+      
+  }
+
+  createNewCustomer(username : string) : void {
     // if the user doesnt exist -> create a new account and add it to the array
     this.customerService.createCustomer({username} as Customer)
       .subscribe(customer => {
@@ -103,10 +110,8 @@ export class LoginComponent implements OnInit {
         this.setCustId = customer.id
       });
     console.warn("this is the id of the new customer: "  + this.getCustId)
-
-    return;
-
-      
+    alert("new account made! you can now login");
+    window.location.reload();
   }
 
   // getCart(): void {
