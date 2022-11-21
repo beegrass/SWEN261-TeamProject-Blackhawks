@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { CartService } from '../cart.service';
+
 import { CustomerService} from '../customer.service';
-import { Cart } from 'app/cart';
-import { Jersey } from "app/jersey";
 import { Customer } from 'app/customer';
-import { Observable } from 'rxjs/internal/Observable';
-import { JerseyService } from 'app/jersey.service';
-import { NONE_TYPE } from '@angular/compiler';
+
 import { LoginService} from '../login.service'
 
 
@@ -101,6 +96,10 @@ export class LoginComponent implements OnInit {
       
   }
 
+  /**
+   * This creates a new customer using the username 
+   * @param username 
+   */
   createNewCustomer(username : string) : void {
     if(! username){
       alert("Invalid input: please put in a username to create a new account")
@@ -116,11 +115,6 @@ export class LoginComponent implements OnInit {
     alert("new account made! you can now login");
     window.location.reload();
   }
-
-  // getCart(): void {
-  //   this.customerService.getCart()
-  //   .subscribe(Jerseys => this.cart = Jerseys);
-  // }
 
   /**
    * this gets the current customers username 
