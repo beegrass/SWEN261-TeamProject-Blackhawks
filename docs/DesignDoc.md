@@ -238,7 +238,8 @@ There are two classes that make up our object, that will be the Jersey and Custo
 **Customer Class**
 > _In the customer class, there are 3 attributes: id, username and cart. These 
 > attributes have various methods in them to access and mutators in them. The only methods that are different from average
-> mutators are the ones for the cart attribute. Since cart is an ArrayList of Jerseys, the user can choose to remove or add > a jersey to the cart or remove all instances of the jersey from the cart._
+> mutators are the ones for the cart attribute. Since cart is an ArrayList of Jerseys, the user can choose to remove or add 
+> a jersey to the cart or remove all instances of the jersey from the cart._
 
 > **special methods**
 > - totalCost() method 
