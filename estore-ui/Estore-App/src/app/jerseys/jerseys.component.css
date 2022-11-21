@@ -1,83 +1,110 @@
-/* jerseysComponent's private CSS styles */
-.jerseys {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 15em;
-}
-
-.jerseys img {
-  height: 200;
-  width: 200;
-  border-radius: 8px;
-  border: 1px solid #ddd
-}
-
-.jerseys-d {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 15em;
-}
-
-.jerseys-d img {
-  height: 200;
-  width: 200;
-  border-radius: 8px;
-  border: 1px solid #ddd
-}
-
-.jerseys-p {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 15em;
-}
-
-.jerseys-p img {
-  height: 200;
-  width: 200;
-  border-radius: 8px;
-  border: 1px solid #ddd
-}
-
-.jerseys-h {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 15em;
-}
-
-.jerseys-h img {
-  height: 200;
-  width: 200;
-  border-radius: 8px;
-  border: 1px solid #ddd
-}
-
-.jerseys img:hover {
-  box-shadow: 0 0 2px 1px rgb(255, 0, 0);
-}
-
-.jerseys-d img:hover {
-  box-shadow: 0 0 2px 1px #1100ff;
-}
-
-.jerseys-p img:hover {
-  box-shadow: 0 0 2px 1px #ff8c00;;
-}
-
-.jerseys-h img:hover {
-  box-shadow: 0 0 2px 1px rgb(0, 0, 0);
-}
-
-.jerseys img:active {
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
-}
-
-.jerseys table {
-  width: 100%;
-}
+  /* jerseysComponent's private CSS styles */
+  .jerseys {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 15em;
+  }
+  
+  .jerseys img {
+    height: 200;
+    width: 200;
+    border-radius: 8px;
+    border: 1px solid #ddd
+  }
+  
+  .jerseys img:hover {
+    box-shadow: 0 0 2px 1px rgb(255, 0, 0);
+  }
+  
+  .jerseys-d {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 15em;
+  }
+  
+  .jerseys-d img {
+    height: 200;
+    width: 200;
+    border-radius: 8px;
+    border: 1px solid #ddd
+  }
+  
+  .jerseys-d img:hover {
+    box-shadow: 0 0 2px 1px #1100ff;
+  }
+  
+  .jerseys-p {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 15em;
+  }
+  
+  .jerseys-p img {
+    height: 200;
+    width: 200;
+    border-radius: 8px;
+    border: 1px solid #ddd
+  }
+  
+  .jerseys-p img:hover {
+    box-shadow: 0 0 2px 1px #ff8c00
+  }
+  
+  
+  .jerseys-h {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 15em;
+  }
+  
+  .jerseys-h img {
+    height: 200;
+    width: 200;
+    border-radius: 8px;
+    border: 1px solid #ddd
+  }
+  
+  .jerseys-h img:hover {
+    box-shadow: 0 0 2px 1px #000000
+  }
+  
+  
+  
+  .jerseys img:active {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+  }
+  
+  .jerseys-d img:active {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+  }
+  
+  .jerseys-p img:active {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+  }
+  
+  .jerseys-h img:active {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+  }
+  
+  .jerseys table {
+    width: 100%;
+  }
+  
+  .jerseys-d table {
+    width: 100%;
+  }
+  
+  .jerseys-p table {
+    width: 100%;
+  }
+  
+  .jerseys-h table {
+    width: 100%;
+  }
 
 .jerseys .name-badge {
   display: inline-block;
@@ -107,31 +134,11 @@
   border-color: rgb(194, 194, 194);
   table-layout: fixed;
 }
-.info-p {
-  background-color: rgb(194, 194, 194);
-  align-items: center;
-  border-radius: 4px 4px 4px 4px;
-  border-color: rgb(194, 194, 194);
-  table-layout: fixed;
-}
-.info-d {
-  background-color: rgb(194, 194, 194);
-  align-items: center;
-  border-radius: 4px 4px 4px 4px;
-  border-color: rgb(194, 194, 194);
-  table-layout: fixed;
-}
-.info-h {
-  background-color: rgb(194, 194, 194);
-  align-items: center;
-  border-radius: 4px 4px 4px 4px;
-  border-color: rgb(194, 194, 194);
-  table-layout: fixed;
-}
 
 
 .info .name {
-  background-color: #aa0404;
+  background-color: rgb(80, 80, 80);
+  color: #f2f2f2;
   border-radius: 4px 0 0 4px;
   align-self: center;
 }

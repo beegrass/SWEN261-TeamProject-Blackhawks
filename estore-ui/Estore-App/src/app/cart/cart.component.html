@@ -44,11 +44,10 @@
 
 <div id="mybutton">
     <a routerLink="/checkout">
-      <button *ngIf = "selectColorMode() == 'default'" class = "options-button">Checkout</button>
-      <button *ngIf = "selectColorMode() == 'deuteranopia'" class = "options-button-d" >Checkout</button>
-      <button *ngIf = "selectColorMode() == 'protanopia'" class = "options-button-p">Checkout</button>
-      <button *ngIf = "selectColorMode() == 'high contrast'" class = "options-button-hc">Checkout</button>
-      <button class="checkout">Checkout: ${{getTotalCost}}</button>
+      <button *ngIf = "selectColorMode() == 'default'" class = "options-button">Checkout: ${{getTotalCost}}</button>
+      <button *ngIf = "selectColorMode() == 'deuteranopia'" class = "options-button-d" >Checkout: ${{getTotalCost}}</button>
+      <button *ngIf = "selectColorMode() == 'protanopia'" class = "options-button-p">Checkout: ${{getTotalCost}}</button>
+      <button *ngIf = "selectColorMode() == 'high contrast'" class = "options-button-hc">Checkout: ${{getTotalCost}}</button>
     </a>
 </div>
 

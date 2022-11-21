@@ -43,10 +43,14 @@
         <option value="protanopia">Protanopia</option>
         <option value="high-contrast">High Contrast</option>
     </select>
-    <button class="login-button" (click)="isAdmin(); login(onSubmit());">Login As Existing User</button>
+
+    <button *ngIf = "colorblindMode() == 'default'" class="login-button"(click)="isAdmin(); login(onSubmit());">Login As Existing User</button>
+    <button *ngIf = "colorblindMode() == 'deuteranopia'" class="login-button-deuteranopia" (click)="isAdmin(); login(onSubmit());">Login As Existing User</button>
+    <button *ngIf = "colorblindMode() == 'protanopia'" class="login-button-protanopia" (click)="isAdmin(); login(onSubmit());">Login As Existing User</button>
+    <button *ngIf = "colorblindMode() == 'high contrast'" class="login-button-hc" (click)="isAdmin(); login(onSubmit());">Login As Existing User</button>
 </div>
 
 <div class = "nav-login">
-    <button type="create-new-acc-button" value="Create A New Account" (click)=" createNewCustomer(onSubmit());">Create A New Account</button>
+    <button style = "font-family: Arial, Helvetica, sans-serif;" type="create-new-acc-button" value="Create A New Account" (click)=" createNewCustomer(onSubmit());">Create A New Account</button>
     
 </div>

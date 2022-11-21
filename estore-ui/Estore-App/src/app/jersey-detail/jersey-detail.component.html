@@ -58,10 +58,8 @@
   <button *ngIf = "selectColorMode() == 'protanopia'" class = "options-button-p"  type="button" (click)="goBack()">Back</button>
   <button *ngIf = "selectColorMode() == 'high contrast'" class = "options-button-hc"  type="button" (click)="goBack()">Back</button>
   <!--Change these 1 to be the cart id and jersey ids, not sure how to get it-->
-  <button *ngIf = "selectColorMode() == 'default'" class = "options-button" type="button" (click)="cartService.addJerseyToCart(1, 1)">Add to Cart</button>
-  <button *ngIf = "selectColorMode() == 'deuteranopia'" class = "options-button-d" (click)="cartService.addJerseyToCart(1, 1)">Add to Cart</button>
-  <button *ngIf = "selectColorMode() == 'protanopia'" class = "options-button-p" (click)="cartService.addJerseyToCart(1, 1)">Add to Cart</button>
-  <button *ngIf = "selectColorMode() == 'high contrast'" class = "options-button-hc" (click)="cartService.addJerseyToCart(1, 1)">Add to Cart</button>
-  <button type="button" class="badge" (click)="goBack()">Back</button> <!--Change these 1 to be the cart id and jersey ids, not sure how to get it-->
-  <button type="button" class="badge" (click)="addToCart(jersey, quantity.value);">Add to Cart</button>
+  <button *ngIf = "selectColorMode() == 'default'" class = "options-button" type="button" (click)="addToCart(jersey, quantity.value);">Add to Cart</button>
+  <button *ngIf = "selectColorMode() == 'deuteranopia'" class = "options-button-d" (click)="addToCart(jersey, quantity.value);">Add to Cart</button>
+  <button *ngIf = "selectColorMode() == 'protanopia'" class = "options-button-p" (click)="addToCart(jersey, quantity.value);">Add to Cart</button>
+  <button *ngIf = "selectColorMode() == 'high contrast'" class = "options-button-hc" (click)="addToCart(jersey, quantity.value);">Add to Cart</button>
 </div>

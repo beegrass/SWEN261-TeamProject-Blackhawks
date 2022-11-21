@@ -73,15 +73,11 @@
   
           </div>
           
-<<<<<<< HEAD
-          <button *ngIf = "selectColorMode() == 'default'" type="submit" value="Continue to checkout" class="options-button" (click)="onClick()">Continue to checkout</button>
-          <button *ngIf = "selectColorMode() == 'deuteranopia'" type="submit" value="Continue to checkout" class="options-button-d" (click)="onClick()">Continue to checkout</button>
-          <button *ngIf = "selectColorMode() == 'protanopia'" type="submit" value="Continue to checkout" class="options-button-p" (click)="onClick()">Continue to checkout</button>
-          <button *ngIf = "selectColorMode() == 'high contrast'" type="submit" value="Continue to checkout" class="options-button-h" (click)="onClick()">Continue to checkout</button>
+          <button *ngIf = "selectColorMode() == 'default'" type="submit" value="Continue to checkout" class="options-button" (click)=" emptyCart(); onClick(); ">Continue to checkout</button>
+          <button *ngIf = "selectColorMode() == 'deuteranopia'" type="submit" value="Continue to checkout" class="options-button-d" (click)=" emptyCart(); onClick(); ">Continue to checkout</button>
+          <button *ngIf = "selectColorMode() == 'protanopia'" type="submit" value="Continue to checkout" class="options-button-p" (click)=" emptyCart(); onClick(); ">Continue to checkout</button>
+          <button *ngIf = "selectColorMode() == 'high contrast'" type="submit" value="Continue to checkout" class="options-button-h" (click)=" emptyCart(); onClick(); ">Continue to checkout</button>
 
-=======
-        <a routerLink = "/jerseys"> <button type="submit" value="Continue to checkout" class="btn" (click)=" emptyCart(); onClick(); ">Continue to checkout</button></a>
->>>>>>> 323ef2ee225b4ab7543e356e3d143e5049a75846
         </form>
       </div>
     </div>

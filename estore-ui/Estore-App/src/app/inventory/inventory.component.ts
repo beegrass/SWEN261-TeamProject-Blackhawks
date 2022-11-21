@@ -22,7 +22,6 @@ export class InventoryComponent implements OnInit {
     this.getJerseys();
   }
 
-<<<<<<< HEAD
   selectColorMode(): string {
     let colorData = localStorage.getItem('colorblindKey');
     let parsed = JSON.parse(colorData!);
@@ -32,11 +31,9 @@ export class InventoryComponent implements OnInit {
     return color;
   }
 
-=======
   /**
    * gets the most updated jerseys 
    */
->>>>>>> d69ec66c3f7b00ab37f3049051e1689d284c5317
   getJerseys(): void {
     this.jerseyService.getJerseys()
       .subscribe(jerseys => this.jerseys = jerseys);
