@@ -29,12 +29,7 @@
     </form>
 </div>
 
-<div class="nav-login">
-    <button *ngIf = "colorblindMode() == 'default'" class="login-button" (click)="isAdmin()">Sign in</button>
-    <button *ngIf = "colorblindMode() == 'deuteranopia'" class="login-button-deuteranopia" (click)="isAdmin()">Sign in</button>
-    <button *ngIf = "colorblindMode() == 'protanopia'" class="login-button-protanopia" (click)="isAdmin()">Sign in</button>
-    <button *ngIf = "colorblindMode() == 'high contrast'" class="login-button-hc" (click)="isAdmin()">Sign in</button>
-</div>
+
 
 <div style="text-align: center;">
     <select [(ngModel)] = "colorOption" class="cb-dropdown">
