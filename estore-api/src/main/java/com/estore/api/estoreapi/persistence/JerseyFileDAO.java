@@ -208,6 +208,9 @@ public class JerseyFileDAO implements JerseyDAO {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean deleteJersey(int id) throws IOException {
         synchronized(jerseys) {

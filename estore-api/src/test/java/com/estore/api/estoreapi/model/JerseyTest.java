@@ -169,18 +169,4 @@ public class JerseyTest {
         assertEquals(expected_image,jersey.getImage());
     }
 
-    // @Test
-    // public void testToString() {
-    //     // Setup
-    //     int id = 99;
-    //     String name = "Wi-Fire";
-    //     String expected_string = String.format(Hero.STRING_FORMAT,id,name);
-    //     Hero hero = new Hero(id,name);
-
-    //     // Invoke
-    //     String actual_string = hero.toString();
-
-    //     // Analyze
-    //     assertEquals(expected_string,actual_string);
-    // }
 }

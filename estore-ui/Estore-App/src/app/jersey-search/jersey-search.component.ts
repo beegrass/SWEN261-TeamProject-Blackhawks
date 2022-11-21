@@ -7,6 +7,9 @@ import {
 import { Jersey } from '../jersey';
 import { JerseyService } from '../jersey.service';
 
+/**
+ * this deals with searching for the jersey 
+ */
 @Component({
   selector: 'app-jersey-search',
   templateUrl: './jersey-search.component.html',

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
-import { Location } from '@angular/common';
 import { Jersey } from '../jersey';
 import { CustomerService } from 'app/customer.service';
-import { LoginComponent } from 'app/login/login.component';
-import { Customer } from 'app/customer';
 import { LoginService } from 'app/login.service';
 
-
+/**
+ * This component is responsible for showing the cart features like removing jersey from your cart  and getting the total cost 
+ * @Author Angela Ngo
+ */
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -19,10 +18,7 @@ export class CartComponent implements OnInit {
   totalCost : number = 0;
   
   constructor(
-    private route: ActivatedRoute,
-    private location: Location,
     private customerService : CustomerService,
-    private loginComponent : LoginComponent,
     private loginService : LoginService
   ) { }
 
@@ -34,14 +30,26 @@ export class CartComponent implements OnInit {
 
   }
 
+  /**
+   * returns the customers id 
+   * @return  number - the id of the customer 
+   */
   get getCustId():number {
     return this.loginService.customerId
   }
   
+  /**
+   * updates the cart 
+   * @param cart - the cart to set to 
+   */
   set updateTheCartTest(cart : Array<Jersey>){
     this.cart = cart; 
   }
 
+  /**
+   * This gets the cart in the html 
+   * @param cart - the array of jerseys 
+   */
   get getTheCartTest() : Array <Jersey> {
     return this.cart;
   } 
@@ -56,6 +64,11 @@ export class CartComponent implements OnInit {
     .subscribe(Jerseys => this.cart = Jerseys);
   }
 
+  /**
+   * removes the given jersey from the cart
+   * 
+   * @param jersey - the jersey you want to remove from the cart 
+   */
   removeJerseyFromCart(jersey: Jersey): void {
     console.warn(this.cart)
     if(window.confirm('Are you sure you want to remove this jersey?') == true) {
@@ -73,7 +86,7 @@ export class CartComponent implements OnInit {
         console.log("this is the updated total cost in the remove function: " + this.totalCost)
       }
     );
-    //this.ngOnInit()
+    
     console.warn("this is the cart after the delete")
     console.log(this.cart)
 
@@ -82,20 +95,29 @@ export class CartComponent implements OnInit {
     console.warn(this.cart)
     
     console.warn("this is the updated price: " + this.totalCost); 
-
-
   }
 
   }
 
+  /**
+   * sets the total cost of the cart 
+   * @param total - the total cost to set to 
+   */
   set setTotalCost(total : number){
     this.totalCost = total; 
   }
 
+  /**
+   * accessor for the total cost - is used in the html 
+   * @returns totalCost - the total cost of the cart 
+   */
   get getTotalCost() : number{
     return this.totalCost; 
   }
 
+  /**
+   * this gets the total cost from the customer service and assigns it to the total in this component 
+   */
   getTotalCostInternal(){
     this.customerService.getTotalCost(this.getCustId).subscribe(
       total => this.totalCost = total
