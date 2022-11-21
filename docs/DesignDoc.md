@@ -59,15 +59,14 @@ As an effort to make the estore as accessible as possible, we are planning to im
 
 # Application Domain
 
-This section describes the application domain.
+![Domain Model](domain_model_recent.png)
 
-![Domain Model](final_domain_model.png)
-
-
+## Description of Significant Objects 
+> **Customer** : is a user who has a shopping cart which contains jerseys 
+> **Admin** : is a user who has access to change the e-store's inventory which contains jerseys
+> **Jerseys** : an object that contains the attributes of price, size amount etc. 
 
 # Architecture and Design
-
-This section describes the application architecture.
 
 ## Summary
 
@@ -83,6 +82,7 @@ The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeS
 
 Both the ViewModel and Model are built using Java and Spring Framework. Details of the components within these tiers are supplied below.
 
+## Design Principle Analysis 
 
 ## Overview of User Interface
 
