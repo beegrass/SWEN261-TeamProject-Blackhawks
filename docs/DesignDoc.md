@@ -54,9 +54,6 @@ There will be **two types of users** that will be able to interact with our webs
 | modify a jersey | empty entire cart purchased | |  
 
 
-## Roadmap of Enhancements
-As an effort to make the estore as accessible as possible, we are planning to implement a number of settings for different types of color blindless. In addition, several aesthetic and functional improvements such as REACT, storing our jerseys in a database using POSTRGRSQL, and others to make a more streamlined and professional experience.
-
 # Application Domain
 
 ![Domain Model](domain_model_recent.png)
@@ -83,13 +80,17 @@ The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeS
 Both the ViewModel and Model are built using Java and Spring Framework. Details of the components within these tiers are supplied below.
 
 ## Design Principle Analysis 
+### Single Responsibility Principle 
+> Was used in model tier, where Jersey and Customer each have a single responsibility. A Jerseys responsibility was to create and update its data. A > Customer’s responsibility was to be created and edit their cart. Was also used in the controllers for Jersey and Customer. Their responsibility was > to handle their respective API requests and provide
+> responses using HTTP protocols.
+
 
 ## Overview of User Interface
 
 This section describes the web interface flow; this is how the user views and interacts
 with the e-store application.
 
-The user interface will begin with the default page of the storefront. Once there, the user will have the option to login as a customer or admin. If an admin, they will be taken to an inventory management page. In addition, after the customer browses the store, they will navigate to a checkout page where they will be able to pay for their items.df
+The user interface will begin with the default page of the storefront. Once there, the user will have the option to login as a customer or admin. If an admin, they will be taken to an inventory management page. In addition, after the customer browses the store, they will navigate to a checkout page where they will be able to pay for their items.
 
 
 ## View Tier
@@ -228,6 +229,9 @@ to certain HTML elements such as tables. We also need to utilize the power of An
 and understand it more in order to be able to work more effectively.
 
 ![UI overall issues from code coverage](ui-issue.png)
+
+## Roadmap of Enhancements
+As an effort to make the estore as accessible as possible, we are planning to implement a number of settings for different types of color blindless. In addition, several aesthetic and functional improvements such as REACT, storing our jerseys in a database using POSTRGRSQL, and others to make a more streamlined and professional experience.
 
 # Testing
 > _This section will provide information about the testing performed
