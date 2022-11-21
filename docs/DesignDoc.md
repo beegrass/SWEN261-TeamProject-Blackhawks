@@ -256,20 +256,20 @@ and understand it more in order to be able to work more effectively.
 
 #### Code Coverage As of 11/15/22
 > ## Controller Tier 
+> ![Customer Controller](customerController.png)
+> ![Jersey Controller](jerseyController.png)
 > ## Persistence Tier 
-> ![Customer File DAO](customer_file_dao_persistance.png)
-> ![Jersey File DAO](jersey_file_dao_persistence.png)
+> ![Customer File DAO](customerFileDAO.png)
+> ![Jersey File DAO](jerseyFileDAO.png)
 >
 > ## Model Tier 
-> ![Customer Model](customer_model.png)
+> ![Customer Model](customerModel.png)
 > ![Jersey Model](jersey_model.png)
 
 #### Statement 
-> As of right now, our code coverage has significantly met our expectations. The only downside as of right now is that our Controller tier has not 
-> been entirely tested because of refactoring. Prior to refactoring, we were having a lot of issues with a new Customer being created. It kept on 
-> running into the error that it was creating a null object, saying that createNewCustomer() method wasn’t working and returning null because of our > null case. But after a lot of troubleshooting, there are a lot of areas where the issue couldve come from e.g.  the cart and or customer not 
-> created properly or something else. It was an anomaly because our tests all passed in insomnia and in the unit testing, so we weren’t sure how it 
-> kept on creating a null object instead of a customer. This confused us thoroughly so we started over by getting rid of the Cart class completely 
-> and using an ArrayList of Jerseys to represent the Cart in the Customer. 
+> As of right now, our code coverage has significantly met our expectations. After refactoring our controller tier, we ran > into issues where mockito tests were failing but testing with insomnia showed otherwise. This is the reason why our
+> customer controller tier is not 100% tested. Before refactoring, our program running into the error that it was creating > a null object, saying that createNewCustomer() method wasn’t working and returning null because of our null case. After a > lot of troubleshooting, there are a lot of areas where the issue could've come from e.g. the cart and customer are not 
+> created properly. It was an anomaly because our tests all passed in insomnia and in the unit testing, so we weren’t sure > how it kept on creating a null object instead of a customer. This confused us thoroughly so we started over by getting
+> rid of the Cart class completely and using an ArrayList of Jerseys to represent the Cart in the Customer. 
 
 
