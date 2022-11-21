@@ -64,15 +64,6 @@ export class CartComponent implements OnInit {
     .subscribe(Jerseys => this.cart = Jerseys);
   }
 
-  selectColorMode(): string {
-    let colorData = localStorage.getItem('colorblindKey');
-    let parsed = JSON.parse(colorData!);
-    let color = parsed.color;
-
-    console.log(color);
-    return color;
-  }
-
   /**
    * removes the given jersey from the cart
    * 
@@ -132,6 +123,15 @@ export class CartComponent implements OnInit {
       total => this.totalCost = total
     );
     
+  }
+
+  selectColorMode(): string {
+    let colorData = localStorage.getItem('colorblindKey');
+    let parsed = JSON.parse(colorData!);
+    let color = parsed.color;
+
+    console.log(color);
+    return color;
   }
 
 
