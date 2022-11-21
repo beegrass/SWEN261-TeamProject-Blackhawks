@@ -82,23 +82,50 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 ## Design Principle Analysis 
 ### Single Responsibility Principle 
 #### Where was it used?
-> Was used in model tier, where Jersey and Customer each have a single responsibility. A Jerseys responsibility was to create and update its data. 
+> Was used in model tier, where **Jersey and Customer** each have a single responsibility. A Jerseys responsibility was to create and update its data. 
 > A Customer’s responsibility was to be created and edit their cart. Was also used in the Controller tier for Jersey and Customer. Their 
-> responsibility  was to to handle their respective API requests and provide responses using HTTP protocols. 
+> responsibility  was to to handle their respective API requests and provide responses using HTTP protocols. This was also used in the front end where each component was responsible 
+> for a single thing. For example, **Admin Detail component vs Jersey Detail** component. These two are do almost the same function which is showing the details of the jersey. The 
+> only difference was that Admin Detail allowed for the information in the jerseys (i.e. price or name) to be updated by the Admin and Jersey Detail only shows the information. 
+> Since two different uses needed to do a similar functionality, we made it less complicated by making 2 different components.  
 
 #### Why was it used?
 > The Single Responsibility Principle makes your software easier to implement and prevents unexpected side-effects of future changes. 
 > If this principle is not implemented, it would make it incredibly difficult to modify and make unit tests. 
+
+#### Future uses?
+> With the way that we have our data structured, it is fine the way it is with the single responsibility principle. If we choose to further simplify our code, e.g. make a Cart class > from the Customer, I think we could implement it there. Another way we could implement it is in some of our components in the UI, but I think we did a good job with implementing 
+> that principle there. 
 
 ### Dependency Inversion Principle  
 #### Where was it used? 
 > This is used in the Persistence and Controller tier of our API. The **definition** of this principle is that a high level module should not depend on a low level one. This means 
 > that both should depend on abstraction. In our Persistence an example of where this is used is the **CustomerDAO** this is an interface to **CustomerFileDAO** which actually 
 > implements the methods. However, in the Controller tier the **CustomerController** takes in the CustomerDAO instead of CustomerFileDAO as a form of *dependency injection*. 
-> Dependency injection allows for the low level module to be made outside and to be injected into the higher module through the constructor. 
-
+> Dependency injection allows for the low level module to be made outside and to be injected into the higher module through the constructor. In the front end, this principle is used 
+> when different components use services which interact with the Controllers in the API.  A class receives its resources without having to create or know about them. Injectors 
+> receive instruction and instantiate a service depending on which one was requested.
 #### Why is it used? 
 > This is used to make testing easier. With Dependency injection, you are enabled to create mock databases and test the application without affecting the actual database. 
+
+#### Future uses? 
+> This could be further implemented throughout our front end as some of the methods we used in the components were brute force methods. For example, when we had to try and calculate
+> the total cost of a Customers cart there was not a lot of use of this principle where it should be. 
+
+### Information Expert Principle 
+#### Where is it used? 
+> This principle states that the behaviors follow the data. This is shown in our back-end in the model tier. An example would be the **Jersey** 
+> class; In this is class the Jersey is created here, therefore this means that the data (e.g. name, price, etc..) will also be here. Since that is 
+> true, the methods that have to do with the Jersey class such as accessors and mutators are also in this class. In the front-end this principle is 
+> shown in the different components we use. An example would be the **inventory component**, in this component this only has to do with Jerseys. So 
+> therefore, this class has Jersey data and can also modify them. 
+
+#### Why is it used? 
+> It was used in the backend mostly because it makes sense to. It helps to determine where to delegate responsibilities such as methods and computed fields which is why it was 
+> seen frequently in our backend. For the frontend, it is harder to say that this follows the principles thoroughly, but it is essentially the same reason.
+
+#### Future uses?
+> This principle could be further implemented in the frontend but a lot of our components do interact with each other. Therefore, it might not be possible to implement.
 
 ## Overview of User Interface
 
