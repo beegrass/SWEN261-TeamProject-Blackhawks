@@ -62,9 +62,9 @@ As an effort to make the estore as accessible as possible, we are planning to im
 ![Domain Model](domain_model_recent.png)
 
 ## Description of Significant Objects 
-> **Customer** : is a user who has a shopping cart which contains jerseys 
-> **Admin** : is a user who has access to change the e-store's inventory which contains jerseys
-> **Jerseys** : an object that contains the attributes of price, size amount etc. 
+> - **Customer** : is a user who has a shopping cart which contains jerseys 
+> - **Admin** : is a user who has access to change the e-store's inventory which contains jerseys
+> - **Jerseys** : an object that contains the attributes of price, size amount etc. 
 
 # Architecture and Design
 
