@@ -92,9 +92,13 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 
 ### Dependency Inversion Principle  
 #### Where was it used? 
+> This is used in the Persistence and Controller tier of our API. The **definition** of this principle is that a high level module should not depend on a low level one. This means 
+> that both should depend on abstraction. In our Persistence an example of where this is used is the **CustomerDAO** this is an interface to **CustomerFileDAO** which actually 
+> implements the methods. However, in the Controller tier the **CustomerController** takes in the CustomerDAO instead of CustomerFileDAO as a form of *dependency injection*. 
+> Dependency injection allows for the low level module to be made outside and to be injected into the higher module through the constructor. 
 
 #### Why is it used? 
-
+> This is used to make testing easier. With Dependency injection, you are enabled to create mock databases and test the application without affecting the actual database. 
 
 ## Overview of User Interface
 
