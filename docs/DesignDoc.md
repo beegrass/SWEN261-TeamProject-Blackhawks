@@ -81,10 +81,19 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 
 ## Design Principle Analysis 
 ### Single Responsibility Principle 
+#### Where was it used?
 > Was used in model tier, where Jersey and Customer each have a single responsibility. A Jerseys responsibility was to create and update its data. 
-> A Customer’s responsibility was to be created and edit their cart. Was also used in the controllers for Jersey and Customer. Their responsibility 
-> to handle their respective API requests and provide
-> responses using HTTP protocols.
+> A Customer’s responsibility was to be created and edit their cart. Was also used in the Controller tier for Jersey and Customer. Their 
+> responsibility  was to to handle their respective API requests and provide responses using HTTP protocols. 
+
+#### Why was it used?
+> The Single Responsibility Principle makes your software easier to implement and prevents unexpected side-effects of future changes. 
+> If this principle is not implemented, it would make it incredibly difficult to modify and make unit tests. 
+
+### Dependency Inversion Principle  
+#### Where was it used? 
+
+#### Why is it used? 
 
 
 ## Overview of User Interface
