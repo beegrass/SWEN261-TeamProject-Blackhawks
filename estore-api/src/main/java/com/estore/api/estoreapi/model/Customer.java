@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * This is the model tier class for Customer object alongside its functions 
- * @AUthor Angela and Vince 
+ * Represents a Customer entity
+ * NOTE: deleted logger cause it was an unused import 
+ * @author Vincent Schwartz
  */
+
 public class Customer {
   
     
@@ -15,13 +17,21 @@ public class Customer {
     @JsonProperty("username") private String username;
     @JsonProperty("cart") private ArrayList<Jersey> cart;
 
+    /**
+     * Create a customer with the given username
+     * @param id The id of the customer
+     * @param username The username of the customer
+     * 
+     * {@literal @}JsonProperty is used in serialization and deserialization
+     * of the JSON object to the Java object in mapping the fields. If a field
+     * is not provided in the JSON object, the Java field gets the default Java
+     * value, i.e. 0 for int
+     */
     public Customer(@JsonProperty("id") int id, @JsonProperty("username") String username) {
         this.id = id;
         this.username = username;
         this.cart = new ArrayList<Jersey>();
     }
-
-
 
     /**
      * Retrieves the id of the customer
@@ -89,6 +99,9 @@ public class Customer {
         return totalCost;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return this.username;

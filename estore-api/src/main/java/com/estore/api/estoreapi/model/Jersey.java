@@ -129,7 +129,6 @@ public class Jersey {
 
     /**
      * {@inheritDoc}
-     * To do: finish toString
      */
     @Override
     public String toString() {
