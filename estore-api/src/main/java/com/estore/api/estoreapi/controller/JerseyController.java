@@ -46,7 +46,7 @@ public class JerseyController {
         this.jerseyDao = jerseyDao;
     }
 
-       /**
+    /**
      * Updates the {@linkplain Jersey jersey} with the provided {@linkplain Jersey jersey} object, if it exists
      * 
      * @param jersey The {@link Jersey jersey} to update
@@ -74,7 +74,7 @@ public class JerseyController {
         }
     }
 
-/**
+    /**
      * Responds to the GET request for a {@linkplain Jersey jersey} for the given id
      * 
      * @param id The id used to locate the {@link Jersey jersey}
@@ -122,6 +122,7 @@ public class JerseyController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     /**
      * Creates a {@linkplain Jersey jersey} with the provided jersey object
      * 
@@ -151,7 +152,7 @@ public class JerseyController {
         }
     }
              
-      /**
+    /**
      * Responds to the GET request for all {@linkplain Jersey jerseys} whose name contains
      * the text in name
      * 
@@ -267,7 +268,7 @@ public class JerseyController {
     }
 
 
-     /**
+    /**
      * Responds to the GET request for all {@linkplain Jersey jerseys} whose size contains
      * the text in size
      * 
@@ -299,7 +300,7 @@ public class JerseyController {
     }
 
 
-      /**
+    /**
      * Deletes a {@linkplain Jersey jersey} with the given id
      * 
      * @param id The id of the {@link Jersey jersey} to deleted

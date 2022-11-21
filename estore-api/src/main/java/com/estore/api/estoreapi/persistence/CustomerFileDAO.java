@@ -16,6 +16,15 @@ import org.springframework.stereotype.Component;
 import com.estore.api.estoreapi.model.Customer;
 import com.estore.api.estoreapi.model.Jersey;
 
+/**
+ * Implements the functionality for JSON file-based peristance for Customers
+ * 
+ * {@literal @}Component Spring annotation instantiates a single instance of this
+ * class and injects the instance into other classes as needed
+ * 
+ * @author Vincent Schwartz
+ */
+
 @Component
 public class CustomerFileDAO implements CustomerDAO {
     private static final Logger LOG  = Logger.getLogger(CustomerFileDAO.class.getName());

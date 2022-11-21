@@ -91,6 +91,15 @@ public class CustomerController {
         }
     }
 
+    /**
+     * Responds to the GET request for a {@linkplain Customer customer cart} for the given id
+     * 
+     * @param id The id used to locate the {@link Customer customer}
+     * 
+     * @return ResponseEntity with {@link Jersey[] cart} object and HTTP status of OK if found<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @GetMapping("/cart/{id}")
     public ResponseEntity<Jersey[]> getCart(@PathVariable int id) {
         LOG.info("GET /customers/cart/" + id);
@@ -144,7 +153,7 @@ public class CustomerController {
      * @param custId The {@link Customer customer} who's cart will be added to
      * @param jerseyId The {@link Jersey jersey} to add to the cart
      * 
-     * @return ResponseEntity with updated {@link <ArrayList<Jersey>> jersey} object and HTTP status of OK if added<br>
+     * @return ResponseEntity with updated {@link Customer customer} object and HTTP status of OK if added<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
@@ -174,7 +183,7 @@ public class CustomerController {
      * @param custId The {@link Customer customer} who's cart will be added to
      * @param jerseyId The {@link Jersey jersey} to add to the cart
      * 
-     * @return ResponseEntity with updated {@link <ArrayList<Jersey>> jersey} object and HTTP status of OK if added<br>
+     * @return ResponseEntity with updated {@link Customer customer} object and HTTP status of OK if added<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
@@ -199,10 +208,13 @@ public class CustomerController {
     }
 
     /**
-     * Returns the total cost of the jerseys in the specific customer id's cart 
-     * returns NOT FOUND response entity if not found, or internal server error if otherwise 
-     * @param id - id of the customer 
-     * @return ResponseEntity<Double> 
+     * Responds to the GET request for a {@linkplain Customer customer cost} for the given id
+     * 
+     * @param id The id used to locate the {@link Customer customer}
+     * 
+     * @return ResponseEntity with {@link Double totalCost} object and HTTP status of OK if found<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/cost/{id}")
     public ResponseEntity<Double> getTotalCost(@PathVariable int id) {
@@ -226,7 +238,7 @@ public class CustomerController {
      * 
      * @param custId The {@link Customer customer} who's cart will be emptied
      * 
-     * @return ResponseEntity with updated {@link <ArrayList<Jersey>> jersey} object and HTTP status of OK if added<br>
+     * @return ResponseEntity with updated {@link Customer customer} object and HTTP status of OK if added<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
