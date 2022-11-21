@@ -5,20 +5,19 @@ import { Location } from '@angular/common';
 
 import { JerseyService } from '../jersey.service';
 import { CartService } from 'app/cart.service';
-import { Cart } from 'app/cart';
 import { CartComponent } from 'app/cart/cart.component';
-import { LoginComponent } from 'app/login/login.component';
-import { Customer } from 'app/customer';
 import { CustomerService } from 'app/customer.service';
 import { LoginService } from 'app/login.service';
 
+/**
+ * this component has to do the details of the jersey 
+ */
 @Component({
   selector: 'app-jersey-detail',
   templateUrl: './jersey-detail.component.html',
   styleUrls: ['./jersey-detail.component.css']
 })
 export class JerseyDetailComponent implements OnInit {
-  // @Input() jersey?: Jersey;
   jersey: Jersey | undefined;
   cart: Jersey[] = [];
 
@@ -28,8 +27,7 @@ export class JerseyDetailComponent implements OnInit {
     private jerseyService: JerseyService,
     private location: Location,
     protected cartService: CartService,
-    private cartComponent : CartComponent, 
-    private loginComponent : LoginComponent,
+    private cartComponent : CartComponent,
     private customerService : CustomerService,
     private loginService : LoginService
   ) {}
@@ -38,10 +36,16 @@ export class JerseyDetailComponent implements OnInit {
     this.getJersey();
   }
 
+  /**
+   * goes back to previous page 
+   */
   goBack(): void {
     this.location.back();
   }
 
+  /**
+   * gets a jersey from the backend and gets the id through the html of inventory when you select a jersey
+   */
   getJersey(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
     this.jerseyService.getJersey(id)
@@ -49,24 +53,23 @@ export class JerseyDetailComponent implements OnInit {
         console.log("this is the id of the jersey: " + jersey.id)});
   }
 
+  /**
+   * gets the cart information from the customer service 
+   */
   getCart(): void {
     this.customerService.getCart(this.loginService.customerId)
       .subscribe(cart => this.cart = cart);
   }
 
+  /**
+   * get the customer id 
+   * @return number - customer id 
+   */
   get getCustId():number {
     return this.loginService.customerId
   }
 
-  // get getTotalCost():number {
-  //   return this.customerService.totalCost
-  // }
 
-  // set setTotalCost(cost : number) {
-  //   let total : number = 0
-    
-
-  // }
 
     /**
    * Not entirely sure  what this method will take in 
@@ -98,6 +101,7 @@ export class JerseyDetailComponent implements OnInit {
 
     }
 
+  
   save(): void {
     if (this.jersey) {
       this.jerseyService.updateJersey(this.jersey)

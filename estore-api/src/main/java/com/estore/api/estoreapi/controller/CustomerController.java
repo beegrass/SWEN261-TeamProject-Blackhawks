@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-// import org.springframework.web.client.HttpClientErrorException.NotFound;
+
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,6 +20,10 @@ import com.estore.api.estoreapi.persistence.JerseyDAO;
 import com.estore.api.estoreapi.model.Customer;
 import com.estore.api.estoreapi.model.Jersey;
 
+/**
+ * @Author Angela + Vince 
+ * Purpose of this class to be the viewmodel between the view and the model tiers 
+ */
 @RestController
 @RequestMapping("customers")
 public class CustomerController {
@@ -194,6 +198,12 @@ public class CustomerController {
         }
     }
 
+    /**
+     * Returns the total cost of the jerseys in the specific customer id's cart 
+     * returns NOT FOUND response entity if not found, or internal server error if otherwise 
+     * @param id - id of the customer 
+     * @return ResponseEntity<Double> 
+     */
     @GetMapping("/cost/{id}")
     public ResponseEntity<Double> getTotalCost(@PathVariable int id) {
         LOG.info("GET /customers/cost/" + id);

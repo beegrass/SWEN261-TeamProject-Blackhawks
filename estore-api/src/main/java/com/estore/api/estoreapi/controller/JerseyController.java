@@ -135,11 +135,9 @@ public class JerseyController {
     public ResponseEntity<Jersey> createJersey(@RequestBody Jersey jersey) {
         LOG.info("POST /jerseys " + jersey);
         try {
-            //check if a jersey already exists with the given jersey's name
             Jersey result = jerseyDao.createJersey(jersey);
             if(result != null)
             {
-                // Jersey newJersey = jerseyDao.createJersey(jersey);
                 return new ResponseEntity<Jersey>(jersey, HttpStatus.CREATED);
             }
             else
@@ -309,6 +307,7 @@ public class JerseyController {
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @Author Angela Ngo
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Jersey> deleteJersey(@PathVariable int id) {

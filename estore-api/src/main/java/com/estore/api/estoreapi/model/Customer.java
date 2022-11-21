@@ -1,12 +1,15 @@
 package com.estore.api.estoreapi.model;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * This is the model tier class for Customer object alongside its functions 
+ * @AUthor Angela and Vince 
+ */
 public class Customer {
-    private static final Logger LOG = Logger.getLogger(Jersey.class.getName());
+  
     
     @JsonProperty("id") private int id;
     @JsonProperty("username") private String username;
@@ -18,11 +21,7 @@ public class Customer {
         this.cart = new ArrayList<Jersey>();
     }
 
-    // public Customer(Customer customer) {
-    //     this.id = customer.getId();
-    //     this.username = customer.getUserName();
-    //     this.cart.addAll(customer.getCart());
-    // }
+
 
     /**
      * Retrieves the id of the customer
@@ -54,9 +53,7 @@ public class Customer {
      * @param jersey The jersey to remove from cart
      */
     public void removeFromCart(Jersey jersey) {
-        //cart.remove(jersey);
         int countOfRemovedJersey= 0; 
-        // BUG: it removes it but it removes ALL cases of that one jersey 
         ArrayList<Jersey> newCart = new ArrayList<Jersey>();
         for(int i = 0; i < cart.size(); i++){
             int jerseyId = cart.get(i).getId(); 
@@ -80,6 +77,10 @@ public class Customer {
         cart = new ArrayList<Jersey>();
     }
 
+    /**
+     * Gets the total cost of the customers cart
+     * @return totalCost double 
+     */
     public double getTotalCost() {
         double totalCost = 0;
         for(int i = 0; i < cart.size(); i++){
