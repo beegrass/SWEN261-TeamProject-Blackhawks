@@ -81,7 +81,9 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 
 ## Design Principle Analysis 
 ### Single Responsibility Principle 
-> Was used in model tier, where Jersey and Customer each have a single responsibility. A Jerseys responsibility was to create and update its data. A > Customer’s responsibility was to be created and edit their cart. Was also used in the controllers for Jersey and Customer. Their responsibility was > to handle their respective API requests and provide
+> Was used in model tier, where Jersey and Customer each have a single responsibility. A Jerseys responsibility was to create and update its data. 
+> A Customer’s responsibility was to be created and edit their cart. Was also used in the controllers for Jersey and Customer. Their responsibility 
+> to handle their respective API requests and provide
 > responses using HTTP protocols.
 
 
