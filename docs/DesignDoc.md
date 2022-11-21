@@ -160,9 +160,20 @@ For delete, an admin will login and view all jerseys. Then they can click a jers
 For searching for a jersey an admin will log into the store. They can then put in search terms to find a specific jersey they want to look for to either update or delete that jersey. From the search terms the jerseys that match are displayed on the storefront to the admin.
 
 ![Customer Adds to Cart](CustAdd.png)
+
+Customer will log in if they have an account, and will create a new one otherwise. After verifying the existence of the customer and logging in by typing their username, the customer is taken to the storefront. The storefront will return all available jerseys. The customer clicks on the jersey they will purchase, bringing them to the jersey's detail page. After selecting the jersey, the will input the number they want to add to the cart, and the jersey will be added to the customer's cart.
+
 ![Customer Removes Item from Cart](CustRemove.png)
+
+Customer will log in if they have an account, and will create a new one otherwise. After verifying the existence of the customer and logging in by typing their username, the customer is taken to the storefront. The customer then clicks the go to cart button, and will be taken to their cart with all jerseys currently in the cart displayed. After returning the requested cart, the customer removes specific jerseys from their cart by clicking the button associated with that jersey. The cart will then update and return the updated cart without the jersey that the customer deleted.
+
 ![Customer Removes Entire Cart](CustRemoveAll.png)
-![Customer Searches for](CustSearch.png)
+
+ Customer will log in if they have an account, and will create a new one otherwise. After verifying the existence of the customer and logging in by typing their username, the customer is taken to the storefront. The customer then clicks the go to cart button, and will be taken to their cart with all jerseys currently in the cart displayed. After returning the requested cart, the cart will then return and update the emptied cart after the customer chooses to empty all items from it.
+ 
+![Customer Searches for Jersey](CustSearch.png)
+
+A Customer will log in if they have an account, and will create a new one otherwise. After verifying the existence of the customer and logging in by typing their username, the customer is taken to the storefront. The customer then enters the name of the jersey they are searching for in the search bar. The storefront will then return all matches relating to the search from the jersey JSON, and each of those results will take the customer to the details of the jersey in question.
 
 
 ## ViewModel Tier
