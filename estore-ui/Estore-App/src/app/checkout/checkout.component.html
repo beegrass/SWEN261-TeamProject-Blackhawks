@@ -73,33 +73,26 @@
   
           </div>
           
+<<<<<<< HEAD
           <button *ngIf = "selectColorMode() == 'default'" type="submit" value="Continue to checkout" class="options-button" (click)="onClick()">Continue to checkout</button>
           <button *ngIf = "selectColorMode() == 'deuteranopia'" type="submit" value="Continue to checkout" class="options-button-d" (click)="onClick()">Continue to checkout</button>
           <button *ngIf = "selectColorMode() == 'protanopia'" type="submit" value="Continue to checkout" class="options-button-p" (click)="onClick()">Continue to checkout</button>
           <button *ngIf = "selectColorMode() == 'high contrast'" type="submit" value="Continue to checkout" class="options-button-h" (click)="onClick()">Continue to checkout</button>
 
+=======
+        <a routerLink = "/jerseys"> <button type="submit" value="Continue to checkout" class="btn" (click)=" emptyCart(); onClick(); ">Continue to checkout</button></a>
+>>>>>>> 323ef2ee225b4ab7543e356e3d143e5049a75846
         </form>
       </div>
     </div>
-
-<!-- Cart functionality WIP DUMMY for now -->
+<!-- 
+Cart functionality WIP DUMMY for now 
     <div class="col-25">
       <div class="container">
-        <h4>Cart
-          <span class="price" style="color:black">
-            <i class="fa fa-shopping-cart"></i>
-            <b>4</b>
-          </span>
-        </h4>
-        <p><a href="http://localhost:4200/detail/17">Patrick Kane - M</a> <span class="price">$129.99</span></p>
-        <p><a href="http://localhost:4200/detail/17">Patrick Kane - M</a> <span class="price">$129.99</span></p>
-        <p><a href="http://localhost:4200/detail/17">Patrick Kane - M</a> <span class="price">$129.99</span></p>
-        <p><a href="http://localhost:4200/detail/17">Patrick Kane - M</a> <span class="price">$129.99</span></p>
-        <hr>
-        <p>Total <span class="price" style="color:black"><b>$519.96</b></span></p>
+        <p>Total <span class="price" style="color:black"><b>${{getTotalCost}}</b></span></p>
       </div>
     </div>
-  </div> 
+  </div>  -->
 
 
 

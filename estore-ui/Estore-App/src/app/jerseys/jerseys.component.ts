@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Jersey } from '../jersey';
 import { JerseyService } from '../jersey.service';
 import { CartService } from 'app/cart.service';
+import { CartComponent } from 'app/cart/cart.component';
 import { LoginComponent } from 'app/login/login.component';
-
 @Component({
   selector: 'app-jerseys',
   templateUrl: './jerseys.component.html',
@@ -12,7 +12,9 @@ import { LoginComponent } from 'app/login/login.component';
 export class JerseysComponent implements OnInit {
   jerseys: Jersey[] = [];
 
-  constructor(private jerseyService: JerseyService, private cartService: CartService) { }
+  constructor(private jerseyService: JerseyService,
+    private cartComponent : CartComponent,
+  ) { }
 
   ngOnInit(): void {
     this.getJerseys();
@@ -35,4 +37,5 @@ export class JerseysComponent implements OnInit {
     console.log(color);
     return color;
   }
+  
 }
