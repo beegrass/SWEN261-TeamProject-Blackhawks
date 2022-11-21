@@ -21,31 +21,38 @@ This project is a jersey store for the NHL franchise Chicago Blackhawks. The mos
 design decisions rely on making a great customer experience while shopping on the e-store.
 
 ## Glossary and Acronyms
-> _Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
 | SPA | Single Page |
+| MVP | Minimum Viable Product|
+| UI | User Interface |
+| API | Application Programming Interface | 
+| HTTP | Hypertext Transfer Protocol |
+| RESTful | Representational state transfer |
+| MVVM | Model–View–ViewModel |
 
 
 # Requirements
 
 This section describes the features of the application.
 
-Inventory editing
-Interactive storefront
-Color accessibility settings
-login/logout with admin priviliges
-
-
 ## Definition of MVP
-NHL Jersey store with the capability to persist with the user who shopped there. In addition, the store should have the capability to edit the inventory in various ways.
+There will be **two types of users** that will be able to interact with our website, a **Customer** and an **Admin**. There is only ONE admin and this admin can edit the inventory. Several customers can be created and can make changes to their carts before proceeding to checkout. At checkout, their carts should be empty after purchasing. Or, if they didn’t proceed to checkout with jerseys in their cart, it will still be in their cart when they log back in. These changes to the backend should be reflected in the frontend user interface (UI) as well. 
 
-## MVP Features
-Buyer
-Owner
-Maintain Inventory
-Color Blindness Accessibility
+
+## Epics For Main Features 
+> - As an Owner, I want to maintain inventory so that I can update what items I'm selling.
+> - An Owner must be able to maintain inventory, including possible fulfillment in accordance with their permissions.
+> - As a Buyer I want to browse the store so that I can add or remove items to my shopping cart, check out, and see my spending.
+
+### MVP Functions
+| Admin       | Customer    | 10% Feature       |
+| -----------     | -----------           | -----------    |
+| can login / logout | can login / logout | have drop down to change color of buttons and text |
+| add and remove jersey from inventory | add and remove jersey from cart | |
+| modify a jersey | empty entire cart purchased | |  
+
 
 ## Roadmap of Enhancements
 As an effort to make the estore as accessible as possible, we are planning to implement a number of settings for different types of color blindless. In addition, several aesthetic and functional improvements such as REACT, storing our jerseys in a database using POSTRGRSQL, and others to make a more streamlined and professional experience.
