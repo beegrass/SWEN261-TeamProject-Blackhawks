@@ -42,12 +42,12 @@ There will be **two types of users** that will be able to interact with our webs
 
 
 ## Epics For Main Features 
-> - As an Owner, I want to maintain inventory so that I can update what items I'm selling.
-> - An Owner must be able to maintain inventory, including possible fulfillment in accordance with their permissions.
-> - As a Buyer I want to browse the store so that I can add or remove items to my shopping cart, check out, and see my spending.
+> - As an Admin, I want to maintain inventory so that I can update what items I'm selling.
+> - An Admin must be able to maintain inventory, including possible fulfillment in accordance with their permissions.
+> - As a Customer I want to browse the store so that I can add or remove items to my shopping cart, check out, and see my spending.
 
 ### MVP Functions
-| Admin       | Customer    | 10% Feature       |
+| Admin       | Customer    | 10% Feature (Color Blindness Accessibility)     |
 | -----------     | -----------           | -----------    |
 | can login / logout | can login / logout | have drop down to change color of buttons and text |
 | add and remove jersey from inventory | add and remove jersey from cart | |
@@ -61,9 +61,8 @@ As an effort to make the estore as accessible as possible, we are planning to im
 
 This section describes the application domain.
 
-![Domain Model](domain-model.png)
+![Domain Model](final_domain_model.png)
 
-Almost everything within the domain depends on whether the user is an admin or not, as in each case many features become available depending on the answer. In addition, the Jersey object is the backbone of the store, as this is the only product that the store will sell.
 
 
 # Architecture and Design
