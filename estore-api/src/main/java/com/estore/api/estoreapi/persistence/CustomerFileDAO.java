@@ -16,6 +16,15 @@ import org.springframework.stereotype.Component;
 import com.estore.api.estoreapi.model.Customer;
 import com.estore.api.estoreapi.model.Jersey;
 
+/**
+ * Implements the functionality for JSON file-based peristance for Customers
+ * 
+ * {@literal @}Component Spring annotation instantiates a single instance of this
+ * class and injects the instance into other classes as needed
+ * 
+ * @author Vincent Schwartz
+ */
+
 @Component
 public class CustomerFileDAO implements CustomerDAO {
     private static final Logger LOG  = Logger.getLogger(CustomerFileDAO.class.getName());
@@ -78,7 +87,6 @@ public class CustomerFileDAO implements CustomerDAO {
         for(int i = 0; i < customerArrayList.size(); i++){
             customerArray[i] = customerArrayList.get(i);
         }
-        // customerArrayList.toArray(customerArray);
         return customerArray;
     }
     
@@ -138,6 +146,9 @@ public class CustomerFileDAO implements CustomerDAO {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Customer[] getCustomers() throws IOException {
         synchronized(customers) {
@@ -145,6 +156,9 @@ public class CustomerFileDAO implements CustomerDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Customer getCustomer(int id) throws IOException {
         synchronized(customers) {
@@ -155,6 +169,9 @@ public class CustomerFileDAO implements CustomerDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Jersey[] getCart(int id) throws IOException {
         synchronized(customers) {
@@ -170,6 +187,9 @@ public class CustomerFileDAO implements CustomerDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Customer createCustomer(Customer customer) throws IOException {
         load();
@@ -183,46 +203,55 @@ public class CustomerFileDAO implements CustomerDAO {
             // and we need to assign the next unique id
             Customer newCustomer = new Customer(nextId(), customer.getUserName());
             customers.put(newCustomer.getId(), newCustomer);
-            save(); // may throw an IOException
+            save();
             return newCustomer;
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Customer addJerseyToCart(Customer customer, Jersey jersey) throws IOException {
         load();
         synchronized(customers) { 
             if (customers.containsKey(customer.getId()) == false)
-                return null;  // customer does not exist
+                return null;  
 
                 customer.addToCart(jersey);
                 customers.put(customer.getId(),customer);
-            save(); // may throw an IOException
+            save(); 
             return customer;
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Customer removeFromCart(Customer customer, Jersey jersey) throws IOException {
         load();
         synchronized(customers) { 
-            if (customers.containsKey(customer.getId()) == false){ // customer does not exist 
+            if (customers.containsKey(customer.getId()) == false){ 
                 return null;
             }
                 
             customer.removeFromCart(jersey);
             customers.put(customer.getId(),customer);
-            save(); // may throw an IOException
+            save(); 
             return customer;
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Customer emptyCart(Customer customer) throws IOException {
         load(); 
         synchronized(customers) {
             if (customers.containsKey(customer.getId()) == false){
-                return null;  // customer does not exist
+                return null; 
             }
             customer.emptyCart();
             customers.put(customer.getId(),customer);
@@ -231,6 +260,9 @@ public class CustomerFileDAO implements CustomerDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getTotalCost(Customer customer) throws IOException {
         load();

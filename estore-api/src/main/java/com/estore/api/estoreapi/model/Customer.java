@@ -1,28 +1,37 @@
 package com.estore.api.estoreapi.model;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Represents a Customer entity
+ * NOTE: deleted logger cause it was an unused import 
+ * @author Vincent Schwartz
+ */
+
 public class Customer {
-    private static final Logger LOG = Logger.getLogger(Jersey.class.getName());
+  
     
     @JsonProperty("id") private int id;
     @JsonProperty("username") private String username;
     @JsonProperty("cart") private ArrayList<Jersey> cart;
 
+    /**
+     * Create a customer with the given username
+     * @param id The id of the customer
+     * @param username The username of the customer
+     * 
+     * {@literal @}JsonProperty is used in serialization and deserialization
+     * of the JSON object to the Java object in mapping the fields. If a field
+     * is not provided in the JSON object, the Java field gets the default Java
+     * value, i.e. 0 for int
+     */
     public Customer(@JsonProperty("id") int id, @JsonProperty("username") String username) {
         this.id = id;
         this.username = username;
         this.cart = new ArrayList<Jersey>();
     }
-
-    // public Customer(Customer customer) {
-    //     this.id = customer.getId();
-    //     this.username = customer.getUserName();
-    //     this.cart.addAll(customer.getCart());
-    // }
 
     /**
      * Retrieves the id of the customer
@@ -54,9 +63,7 @@ public class Customer {
      * @param jersey The jersey to remove from cart
      */
     public void removeFromCart(Jersey jersey) {
-        //cart.remove(jersey);
         int countOfRemovedJersey= 0; 
-        // BUG: it removes it but it removes ALL cases of that one jersey 
         ArrayList<Jersey> newCart = new ArrayList<Jersey>();
         for(int i = 0; i < cart.size(); i++){
             int jerseyId = cart.get(i).getId(); 
@@ -80,6 +87,10 @@ public class Customer {
         cart = new ArrayList<Jersey>();
     }
 
+    /**
+     * Gets the total cost of the customers cart
+     * @return totalCost double 
+     */
     public double getTotalCost() {
         double totalCost = 0;
         for(int i = 0; i < cart.size(); i++){
@@ -88,6 +99,9 @@ public class Customer {
         return totalCost;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return this.username;

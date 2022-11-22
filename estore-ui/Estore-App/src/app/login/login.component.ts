@@ -96,6 +96,10 @@ export class LoginComponent implements OnInit {
       
   }
 
+  /**
+   * This creates a new customer using the username 
+   * @param username 
+   */
   createNewCustomer(username : string) : void {
     if(! username){
       alert("Invalid input: please put in a username to create a new account")

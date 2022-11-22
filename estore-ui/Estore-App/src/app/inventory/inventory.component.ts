@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Jersey } from '../jersey';
 import { JerseyService } from '../jersey.service';
 
+/**
+ * @Author Hayden, Vince and Ethan 
+ */
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
@@ -33,6 +36,16 @@ export class InventoryComponent implements OnInit {
       .subscribe(jerseys => this.jerseys = jerseys);
   }
 
+  /**
+   * adds a new jersey to the json file 
+   * 
+   * @param name - name of the player for the jersey
+   * @param num  - number of the jersey
+   * @param p - price 
+   * @param color - color of the jersey 
+   * @param size - size of jersey 
+   * @param image - image of jersey 
+   */
   add(name: string, num: string, p: string, color: string, size: string, image: string): void {
     let number = parseFloat(num);
     let price = parseFloat(p);
@@ -50,6 +63,11 @@ export class InventoryComponent implements OnInit {
       });
   }
 
+
+  /**
+   * deletes the jersey from the inventory -- asks for confirmation before doing it 
+   * @param jersey - jersey wanted to be deleted from inventory 
+   */
   delete(jersey: Jersey): void {
     if(window.confirm('Are you sure you want to delete this jersey?') == true) {
       this.jerseys = this.jerseys.filter(h => h !== jersey);

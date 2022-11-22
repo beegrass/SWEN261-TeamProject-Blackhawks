@@ -158,7 +158,7 @@ public class JerseyFileDAO implements JerseyDAO {
     }
 
     /**
-    ** {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Jersey getJersey(int id) throws IOException {
@@ -171,8 +171,7 @@ public class JerseyFileDAO implements JerseyDAO {
     }
 
     /**
-     * @param jersey this is the given jersey that we want to add to the map of jerseys
-     * @return newJersey this returns the jersey that was created 
+     * {@inheritDoc}
      */
     @Override
     public Jersey createJersey(Jersey jersey) throws IOException {
@@ -191,8 +190,7 @@ public class JerseyFileDAO implements JerseyDAO {
     }
     
     /**
-     * @param jersey takes in a jersey to put into jerseys map 
-     * @return jersey this returns the jersey that was updated
+     * {@inheritDoc}
      */
     @Override
     public Jersey updateJersey(Jersey jersey) throws IOException {
@@ -208,6 +206,9 @@ public class JerseyFileDAO implements JerseyDAO {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean deleteJersey(int id) throws IOException {
         synchronized(jerseys) {

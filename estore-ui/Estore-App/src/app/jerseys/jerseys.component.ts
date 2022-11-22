@@ -18,9 +18,7 @@ export class JerseysComponent implements OnInit {
 
   ngOnInit(): void {
     this.getJerseys();
-
-    this.cartComponent.getCart();
-    this.cartComponent.getTotalCostInternal(); 
+    this.cartComponent.ngOnInit(); 
     
   }
 

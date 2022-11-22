@@ -91,10 +91,25 @@ The View Tier UI of the Estore should be a cohesive, connected experience in whi
 navigate to a checkout form in which the cart will empty and they will purchase their products.
 
 ![Accessibility Settings](Accessibility.png)
+
+For the accessibility settings the user can press the accessibility dropdown. Then they recieve the options and can select based on their colorblindness type or a high contrast mode (colorblind modes: Deuternopia, Protanopia). Then the Jersey store will change colors based off the chosen colorblind mode.
+
 ![Admin Updates Inventory](AdminUpdate.png)
+
+For the admin features such as updating the jersey first the admin must log in. Once they log in as an admin they will be viewing all the current jerseys that are in the inventory in the storefront. They can then click the specific jersey and then the page will switch to showing the jersey details. There will be text boxes that show the current data within the jersey and then the admin change change the details accordingly. Once the admin clicks the "save" button it will then update the JSON file containing the jerseys and then the storefront will then display the updated jersey.
+
 ![Admin Adds to Inventory](AdminAdd.png)
+
+An admin will log in or again to access the inventory storefront. Then when the click the add button the website will display an empty text boxes, the admin is required to input all fields with valid data or else the jersey will not be added. Once the new jersey is going to be added to the JSON there will be a check if that exact jersey already exists, if so then it will fail to be added. Otherwise if it is a unique jersey it will be added to the inventory and displayed to the storefront.
+
 ![Admin Deletes Part of Inventory](AdminDelete.png)
+
+For delete, an admin will login and view all jerseys. Then they can click a jersey and it will display the jersey details, then can click the delete button. This will delete the jersey from the JSON file and show it is no longer in the storefront.
+
 ![Admin Searches for Jersey](AdminSearch.png)
+
+For searching for a jersey an admin will log into the store. They can then put in search terms to find a specific jersey they want to look for to either update or delete that jersey. From the search terms the jerseys that match are displayed on the storefront to the admin.
+
 ![Customer Adds to Cart](CustAdd.png)
 ![Customer Removes Item from Cart](CustRemove.png)
 ![Customer Removes Entire Cart](CustRemoveAll.png)
@@ -256,20 +271,20 @@ and understand it more in order to be able to work more effectively.
 
 #### Code Coverage As of 11/15/22
 > ## Controller Tier 
+> ![Customer Controller](customerController.png)
+> ![Jersey Controller](jerseyController.png)
 > ## Persistence Tier 
-> ![Customer File DAO](customer_file_dao_persistance.png)
-> ![Jersey File DAO](jersey_file_dao_persistence.png)
+> ![Customer File DAO](customerFileDAO.png)
+> ![Jersey File DAO](jerseyFileDAO.png)
 >
 > ## Model Tier 
-> ![Customer Model](customer_model.png)
+> ![Customer Model](customerModel.png)
 > ![Jersey Model](jersey_model.png)
 
 #### Statement 
-> As of right now, our code coverage has significantly met our expectations. The only downside as of right now is that our Controller tier has not 
-> been entirely tested because of refactoring. Prior to refactoring, we were having a lot of issues with a new Customer being created. It kept on 
-> running into the error that it was creating a null object, saying that createNewCustomer() method wasn’t working and returning null because of our > null case. But after a lot of troubleshooting, there are a lot of areas where the issue couldve come from e.g.  the cart and or customer not 
-> created properly or something else. It was an anomaly because our tests all passed in insomnia and in the unit testing, so we weren’t sure how it 
-> kept on creating a null object instead of a customer. This confused us thoroughly so we started over by getting rid of the Cart class completely 
-> and using an ArrayList of Jerseys to represent the Cart in the Customer. 
+> As of right now, our code coverage has significantly met our expectations. After refactoring our controller tier, we ran > into issues where mockito tests were failing but testing with insomnia showed otherwise. This is the reason why our
+> customer controller tier is not 100% tested. Before refactoring, our program running into the error that it was creating > a null object, saying that createNewCustomer() method wasn’t working and returning null because of our null case. After a > lot of troubleshooting, there are a lot of areas where the issue could've come from e.g. the cart and customer are not 
+> created properly. It was an anomaly because our tests all passed in insomnia and in the unit testing, so we weren’t sure > how it kept on creating a null object instead of a customer. This confused us thoroughly so we started over by getting
+> rid of the Cart class completely and using an ArrayList of Jerseys to represent the Cart in the Customer. 
 
 

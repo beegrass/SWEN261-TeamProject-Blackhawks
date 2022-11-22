@@ -11,6 +11,7 @@ import com.estore.api.estoreapi.model.Jersey;
  */
 
 public interface JerseyDAO {
+
     /**
      * Retrieves all {@linkplain Jersey jersey's}
      * 
@@ -62,7 +63,7 @@ public interface JerseyDAO {
      */
     Jersey createJersey(Jersey jersey) throws IOException;
 
-     /**
+    /**
      * Updates and saves a {@linkplain Jersey jersey}
      * 
      * @param {@link Jersey jersey} object to be updated and saved
