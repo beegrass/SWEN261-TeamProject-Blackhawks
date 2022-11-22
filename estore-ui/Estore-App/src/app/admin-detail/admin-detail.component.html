@@ -28,17 +28,9 @@
   
     <br>
     <div *ngIf="jersey">  
-      <br>
-    <div *ngIf="jersey">  
-    <button *ngIf = "selectColorMode() == 'default'" class = "options-button" (click)="goBack()">Back</button>
-    <button *ngIf = "selectColorMode() == 'deuteranopia'" class = "options-button-d" (click)="goBack()">Back</button>
-    <button *ngIf = "selectColorMode() == 'protanopia'" class = "options-button-p" (click)="goBack()">Back</button>
-    <button *ngIf = "selectColorMode() == 'high contrast'" class = "options-button-hc" (click)="goBack()">Back</button>
-
-    <button *ngIf = "selectColorMode() == 'deuteranopia'" class = "options-button-d" type="button" (click)="save()">Save</button>
-    <button *ngIf = "selectColorMode() == 'protanopia'" class = "options-button-p" type="button" (click)="save()">Save</button>
-    <button *ngIf = "selectColorMode() == 'default'" class = "options-button" type="button" (click)="save()">Save</button>
-    <button *ngIf = "selectColorMode() == 'high contrast'" class = "options-button-hc" type="button" (click)="save()">Save</button>
+    <button type="button" class="options-button" (click)="goBack()">Back</button>
+    <button class = "options-button" type="button" (click)="save()">Save</button>
+    
 <!-- <button (click) = "showModify = !showModify" (click) = "showAdd = false" class="options-button">Modify Jersey</button> -->
     
         

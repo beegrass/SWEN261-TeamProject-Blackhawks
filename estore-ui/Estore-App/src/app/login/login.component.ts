@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CustomerService} from '../customer.service';
-
 import { Customer } from 'app/customer';
+
 import { LoginService} from '../login.service'
 
 
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   customers : Customer[] = []; 
   currentId : number = -1; 
   username: string = "";
-  colorOption: string = "";
+
   // Example 1: <input [(ngModel)]="person.firstName" name="first">
 
   constructor(
@@ -114,30 +114,6 @@ export class LoginComponent implements OnInit {
     console.warn("this is the id of the new customer: "  + this.getCustId)
     alert("new account made! you can now login");
     window.location.reload();
-  }
-
-  
-  /**
-   * Creates a localStorage that holds the value of
-   * the colorblindness mode the user chooses on the login page
-   * @returns the string of the color of the website
-   */
-   colorblindMode(): string {
-    let color;
-    if (this.colorOption == '') {
-      color = 'default';
-    } else if (this.colorOption =='deuteranopia') {
-      color = 'deuteranopia';
-    } else if (this.colorOption =='protanopia') {
-      color = 'protanopia';
-    } else {
-      color = 'high contrast';
-    }
-    let data = {
-      'color': color
-    }
-    localStorage.setItem('colorblindKey', JSON.stringify(data));    
-    return color;
   }
 
   /**

@@ -69,7 +69,7 @@ export class JerseyDetailComponent implements OnInit {
     return this.loginService.customerId
   }
 
- 
+
 
     /**
    * Not entirely sure  what this method will take in 
@@ -107,14 +107,5 @@ export class JerseyDetailComponent implements OnInit {
       this.jerseyService.updateJersey(this.jersey)
         .subscribe(() => this.goBack());
     }
-  }
-
-  selectColorMode(): string {
-    let colorData = localStorage.getItem('colorblindKey');
-    let parsed = JSON.parse(colorData!);
-    let color = parsed.color;
-
-    console.log(color);
-    return color;
   }
 }
