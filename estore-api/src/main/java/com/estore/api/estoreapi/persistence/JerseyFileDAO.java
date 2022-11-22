@@ -32,7 +32,7 @@ public class JerseyFileDAO implements JerseyDAO {
     private ObjectMapper objectMapper;  // Provides conversion between jersey
                                         // objects and JSON text format written
                                         // to the file
-    private static int nextId;  // The next Id to assign to a new jersey
+    private static int nextId = 1;  // The next Id to assign to a new jersey
     private String filename;    // Filename to read from and write to
 
     public JerseyFileDAO(@Value("${jerseys.file}") String filename,ObjectMapper objectMapper) throws IOException {
@@ -48,7 +48,7 @@ public class JerseyFileDAO implements JerseyDAO {
      */
     private synchronized static int nextId() {
         int id = nextId;
-        ++nextId;
+        nextId++;
         return id;
     }
 
@@ -158,7 +158,7 @@ public class JerseyFileDAO implements JerseyDAO {
     }
 
     /**
-    ** {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Jersey getJersey(int id) throws IOException {
@@ -171,13 +171,14 @@ public class JerseyFileDAO implements JerseyDAO {
     }
 
     /**
-     * @param jersey this is the given jersey that we want to add to the map of jerseys
-     * @return newJersey this returns the jersey that was created 
+     * {@inheritDoc}
      */
     @Override
     public Jersey createJersey(Jersey jersey) throws IOException {
+        load(); 
+        jersey.getId(); 
         synchronized(jerseys) {
-            load(); 
+            System.out.print("create jersey is called");
             // We create a new jersey object because the id field is immutable
             // and we need to assign the next unique id
             Jersey newJersey = new Jersey(nextId(), jersey.getName(), jersey.getNumber(), jersey.getPrice(), 
@@ -189,8 +190,7 @@ public class JerseyFileDAO implements JerseyDAO {
     }
     
     /**
-     * @param jersey takes in a jersey to put into jerseys map 
-     * @return jersey this returns the jersey that was updated
+     * {@inheritDoc}
      */
     @Override
     public Jersey updateJersey(Jersey jersey) throws IOException {
@@ -206,6 +206,9 @@ public class JerseyFileDAO implements JerseyDAO {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean deleteJersey(int id) throws IOException {
         synchronized(jerseys) {

@@ -1,17 +1,15 @@
 package com.estore.api.estoreapi.model;
 
-import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Represents a Jersey entity
- * 
+ * NOTE: deleted logger cause it was an unused import 
  * @author Vincent Schwartz
  */
 
 public class Jersey {
-    private static final Logger LOG = Logger.getLogger(Jersey.class.getName());
 
     // Package private for tests
     static final String STRING_FORMAT = "Jersey [id=%d, name=%s]";
@@ -131,7 +129,6 @@ public class Jersey {
 
     /**
      * {@inheritDoc}
-     * To do: finish toString
      */
     @Override
     public String toString() {

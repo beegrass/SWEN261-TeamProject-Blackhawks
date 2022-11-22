@@ -1,186 +1,316 @@
 package com.estore.api.estoreapi.persistence;
 
-// import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-// import org.springframework.beans.propertyeditors.CustomMapEditor;
 
-import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.model.Customer;
 import com.estore.api.estoreapi.model.Jersey;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Tag("Persistence-tier")
 public class CustomerFileDAOTest {
-    CustomerFileDAO customerFileDAO; 
-    Customer [] testCustomers = new Customer[2];
-    Cart [] testCarts; 
-    ObjectMapper mockObjectMapper; 
-    Jersey [] testJersey; 
-    CartFileDAO cartFileDAO; 
-    
+    CustomerFileDAO customerFileDAO;
+    Customer[] testCustomers;
+    ObjectMapper mockObjectMapper;
+
+    /**
+     * Before each test, we will create and inject a Mock Object Mapper to
+     * isolate the tests from the underlying file
+     * @throws IOException
+     */
     @BeforeEach
-    public void setupCustomerFileDAO() throws IOException{
+    public void setupCustomerFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
-        
-        testCarts = new Cart[2]; 
-        List<Jersey> list1 = new ArrayList<>();
-        List<Jersey> list2 = new ArrayList<>();
+        testCustomers = new Customer[4];
+        testCustomers[0] = new Customer(99, "Tony Audi");
+        testCustomers[1] = new Customer(100, "Bobby");
+        testCustomers[2] = new Customer(101, "Bruce Herring");
+        testCustomers[3] = new Customer(102, "Z");
 
-        testCarts[0] = new Cart(list1 , 1); 
-        testCarts[1] =new Cart(list2, 2); 
-
-        testJersey = new Jersey[3]; 
-        testJersey[0] =  new Jersey(1,"colin guy", 25, 123.99, "Red", "Medium", "img.png");
-        testJersey[1] = new Jersey(2, "patrick kane", 10, 250.30, "Red", "Small", "img.png");
-        testJersey[2] = new Jersey(3, "meow man", 36, 2536.33, "Red", "Large", "img.png");
-        
-        // two jerseys 
-        testCarts[0].addJerseyToCart(testJersey[0]);
-        testCarts[0].addJerseyToCart(testJersey[1]);
-
-        //3 jersey
-        testCarts[1].addJerseyToCart(testJersey[2]);
-        testCarts[1].addJerseyToCart(testJersey[0]);
-        testCarts[1].addJerseyToCart(testJersey[0]);
-
-
-        //create the two customers 
-        testCustomers[0] = new Customer("Bobby", false, testCarts[0], 1);
-        testCustomers[1] = new Customer("Trollo", false, testCarts[1],2 );
-
-        // set up the mocks 
+        // When the object mapper is supposed to read from the file
+        // the mock object mapper will return the hero array above
         when(mockObjectMapper
-        .readValue(new File("doesnt_matter.txt"),Cart[].class))
-            .thenReturn(testCarts);
-            cartFileDAO = new CartFileDAO("doesnt_matter.txt", mockObjectMapper);
-       
-        when(mockObjectMapper
-        .readValue(new File("doesnt_matter.txt"),Customer[].class))
-            .thenReturn(testCustomers);
-            customerFileDAO = new CustomerFileDAO("doesnt_matter.txt",mockObjectMapper, cartFileDAO);
-    
+            .readValue(new File("doesnt_matter.txt"),Customer[].class))
+                .thenReturn(testCustomers);
+                customerFileDAO = new CustomerFileDAO("doesnt_matter.txt",mockObjectMapper);
     }
 
     @Test
-    public void testGetSpecificCustomer() throws IOException{
-        Customer result = customerFileDAO.getSpecificCustomer("Bobby"); 
-        assertEquals(result.getUserId(), testCustomers[0].getUserId());
-        assertEquals(result.getUserType(), testCustomers[0].getUserType());
-        assertEquals(result.getUsername(), testCustomers[0].getUsername()); 
+    public void testGetCustomers() throws IOException {
+        // Invoke
+        Customer[] customers = customerFileDAO.getCustomers();
+
+        // Analyze
+        assertEquals(customers.length,testCustomers.length);
+        for (int i = 0; i < testCustomers.length;i++){
+            assertEquals(customers[i],testCustomers[i]);
+        }
     }
 
     @Test
-    public void testGetSpecificCustomerFail() throws IOException{
-        Customer result = customerFileDAO.getSpecificCustomer("Errrrrrrr");
-        assertEquals(result, null);
+    public void testGetCustomer() throws IOException {
+        // Invoke
+        Customer customer = customerFileDAO.getCustomer(99);
+
+        // Analzye
+        assertEquals(customer,testCustomers[0]);
     }
 
     @Test
-    public void testGetCart(){
-        Cart result = customerFileDAO.getCart(1); 
-        assertEquals(result.getId(), testCarts[0].getId());
-        assertEquals(result.getEntireCart().length, testCarts[0].getEntireCart().length); 
-    }
+    public void testGetCustomerNotFound() throws IOException {
+        // Invoke
+        Customer customer = customerFileDAO.getCustomer(98);
 
-     
-    @Test
-    public void testGetCartFail(){
-        Cart result = customerFileDAO.getCart(27); 
-        assertEquals(result, null);
-      
+        // Analyze
+        assertEquals(customer,null);
     }
 
     @Test
-    public void testCreateNewCustomer() throws IOException{
-        List<Jersey> list3 = new ArrayList<>();
-        Cart cart = new Cart(list3, 3);
-        cart.addJerseyToCart(testJersey[0]);
-        Customer cust = new Customer("meow guy", false, cart, 3);
-        Customer result = customerFileDAO.createNewCustomer(cust);
+    public void testGetCustomerUserName() throws IOException {
+        // Invoke
+        Customer[] customers = customerFileDAO.findCustomers("Tony", null);
 
-        assertEquals(cust.getUserId(), result.getUserId());
-        assertEquals(cust.getUserType(), result.getUserType());
-        assertEquals(cust.getUsername(), result.getUsername());
-        assertEquals(cust.getUsersCart().getEntireCart().length, result.getUsersCart().getEntireCart().length);
+        // Analyze
+        assertEquals(customers.length,1);
+        assertEquals(customers[0],testCustomers[0]);
     }
 
     @Test
-    public void testAddToCart()throws IOException{
-        Jersey jersey = new Jersey(23, "poop guy",  56, 129.99, "Red", "Medium", "img.png"); 
-        Customer result = customerFileDAO.addToCart(2, jersey); 
+    public void testGetCustomerCart() throws IOException {
+        // Setup
+        Jersey jersey = new Jersey(2, "Name", 50, 129.99, "Red", "S", "image.png");
+        testCustomers[0].addToCart(jersey);
+        System.out.println(testCustomers[0].getCart());
+        
+        // Invoke
+        ArrayList<Jersey> cart = new ArrayList<>();
+        cart.add(jersey);
+        Customer[] customers = customerFileDAO.findCustomers(null, cart);
 
-        assertEquals(result.getUsersCart().getEntireCart().length, 4);
+        // Analyze
+        assertEquals(1, customers.length);
+        assertEquals(customers[0],testCustomers[0]);
     }
 
     @Test
-    public void testAddToCartFail()throws IOException{
-        Jersey jersey = new Jersey(23, "poop guy",  56, 129.99, "Red", "Medium", "img.png"); 
-        Customer result = customerFileDAO.addToCart(27, jersey); 
+    public void testFindCustomersAll() throws IOException {
+        // Invoke
+        Customer[] customers = customerFileDAO.findCustomers(null, null);
 
-        assertEquals(result, null);
+        // Analyze
+        assertEquals(customers.length,4);
+        assertEquals(customers[0],testCustomers[0]);
+        assertEquals(customers[1],testCustomers[1]);
+        assertEquals(customers[2],testCustomers[2]);
+        assertEquals(customers[3],testCustomers[3]);
     }
 
+    @Test
+    public void testCreateCustomer() throws IOException {
+        // Setup
+        Customer customer = new Customer(103,"Wonder-Person");
+
+        // Invoke
+        Customer result = assertDoesNotThrow(() -> customerFileDAO.createCustomer(customer),
+                                "Unexpected exception thrown");
+        
+
+        // Analyze
+        assertNotNull(result);
+        Customer actual = customerFileDAO.getCustomer(customer.getId());
+        assertEquals(customer.getId(),actual.getId());
+        assertEquals(customer.getUserName(),actual.getUserName());
+    }
+
+    @Test
+    public void testAddToCart() throws IOException {
+        // Setup
+        Jersey jersey = new Jersey(1, "Name", 99, 129.99, "Red", "S", "images.png");
+        ArrayList<Jersey> expected = new ArrayList<>();
+        expected.add(jersey);
+
+        // Invoke
+        customerFileDAO.addJerseyToCart(testCustomers[0], jersey);
+        ArrayList<Jersey> actual = testCustomers[0].getCart();
+
+        // Analysis
+        assertEquals(expected, actual);
+    }
 
     // @Test
-    // public void testDeleteEntireJerseyFromCart() throws IOException{
-    //     int id = 2; 
-    //     Jersey jersey = testJersey[0];
-    //     Customer result = customerFileDAO.deleteEntireJerseyFromCart(id, jersey);
-    //     assertEquals(result.getUsersCart().getEntireCart().length, 1);
+    // public void testAddToCartNotFound() throws IOException {
+    //     // Setup
+    //     Customer customer = new Customer(10, "Beans");
+    //     Jersey jersey = new Jersey(1, "Name", 99, 129.99, "Red", "S", "images.png");
+    //     ArrayList<Jersey> expected = null;
+
+    //     // Invoke
+    //     Customer actual = customerFileDAO.addJerseyToCart(customer, jersey);
+
+    //     // Analysis
+    //     assertEquals(expected, actual.getCart());
+
     // }
 
-    
+    @Test
+    public void testRemoveFromCart() throws IOException {
+        // Setup
+        Jersey jersey = new Jersey(1, "Name", 99, 129.99, "Red", "S", "images.png");
+        ArrayList<Jersey> expected = new ArrayList<>();
+        expected.add(jersey);
+        
+        // Invoke
+        customerFileDAO.addJerseyToCart(testCustomers[0], jersey);
+        customerFileDAO.addJerseyToCart(testCustomers[0], jersey);
+        customerFileDAO.removeFromCart(testCustomers[0], jersey);
+        ArrayList<Jersey> actual = testCustomers[0].getCart();
+
+        // Analysis
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testRemoveFromEmpty() throws IOException {
+        // Setup
+        Jersey jersey = new Jersey(1, "Name", 99, 129.99, "Red", "S", "images.png");
+        ArrayList<Jersey> expected = new ArrayList<>();
+        
+        // Invoke
+        Customer actual = customerFileDAO.removeFromCart(testCustomers[0], jersey);
+
+        // Analysis
+        assertEquals(expected, actual.getCart());
+    }
+
     // @Test
-    // public void testDeleteEntireJerseyFromCartFail() throws IOException{
-    //     int id = 27; 
-    //     Jersey jersey = testJersey[0];
-    //     Customer result = customerFileDAO.deleteEntireJerseyFromCart(id, jersey);
-    //     assertEquals(result, null);
+    // public void testRemoveFromCartNotFound() throws IOException {
+    //     // Setup
+    //     Customer customer = new Customer(10, "Beans");
+    //     Jersey jersey = new Jersey(1, "Name", 99, 129.99, "Red", "S", "images.png");
+    //     ArrayList<Jersey> expected = null;
+
+    //     // Invoke
+    //     Customer actual = customerFileDAO.removeFromCart(customer, jersey);
+
+    //     // Analysis
+    //     assertEquals(expected, actual.getCart());
     // }
 
     @Test
-    public void testDecrementJerseyTypeAmount()throws IOException{
-        int id = 2; 
-        Jersey jersey = testJersey[0];
-        Customer result = customerFileDAO.decrementJerseyTypeAmount(id, jersey);
-        assertEquals(result.getUsersCart().getEntireCart().length ,2);
-    }
+    public void testEmptyCart() throws IOException {
+        // Setup
+        Jersey jersey = new Jersey(1, "Name", 99, 129.99, "Red", "S", "images.png");
+        ArrayList<Jersey> expected = new ArrayList<>();
+        
+        // Invoke
+        customerFileDAO.addJerseyToCart(testCustomers[0], jersey);
+        customerFileDAO.addJerseyToCart(testCustomers[0], jersey);
+        customerFileDAO.addJerseyToCart(testCustomers[0], jersey);
+        customerFileDAO.addJerseyToCart(testCustomers[0], jersey);
+        Customer actual = customerFileDAO.emptyCart(testCustomers[0]);
 
-    
-    @Test
-    public void testDecrementJerseyTypeAmountFail() throws IOException{
-        int id = 27; 
-        Jersey jersey = testJersey[0];
-        Customer result = customerFileDAO.decrementJerseyTypeAmount(id, jersey);
-        assertEquals(result, null);
-    }
-
-    @Test 
-    public void testDeleteEntireCart() throws IOException{
-        int id = 1; 
-        Customer result = customerFileDAO.deleteEntireCart(id);
-        assertEquals(result.getUsersCart().getEntireCart().length, 0);
-
+        // Analysis
+        assertEquals(expected, actual.getCart());
     }
 
     @Test
-    public void testDeleteEntireCartNull() throws IOException{
-        int id = 27;
-        Customer result = customerFileDAO.deleteEntireCart(id);
-        assertEquals(result, null); 
-    }
- 
+    public void testEmptyCartEmpty() throws IOException {
+        // Setup
+        ArrayList<Jersey> expected = new ArrayList<>();
+        
+        // Invoke
+        Customer actual = customerFileDAO.emptyCart(testCustomers[0]);
 
+        // Analysis
+        assertEquals(expected, actual.getCart());
+    }
+
+    // @Test
+    // public void testEmptyCartNotFound() throws IOException {
+    //     // Setup
+    //     Customer customer = new Customer(10, "Beans");
+    //     ArrayList<Jersey> expected = null;
+        
+    //     // Invoke
+    //     Customer actual = customerFileDAO.emptyCart(customer);
+
+    //     // Analysis
+    //     assertEquals(expected, actual.getCart());
+    // }
+
+    @Test
+    public void testGetTotalCost() throws IOException {
+        // Setup
+        Jersey jersey = new Jersey(1, "Name", 99, 10, "Red", "S", "images.png");
+        double expected = 40;
+        
+        // Invoke
+        testCustomers[0].addToCart(jersey);
+        testCustomers[0].addToCart(jersey);
+        testCustomers[0].addToCart(jersey);
+        testCustomers[0].addToCart(jersey);
+        double actual = customerFileDAO.getTotalCost(testCustomers[0]);
+
+        // Analysis
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetTotalCostEmpty() throws IOException {
+        // Setup
+        double expected = 0;
+        
+        // Invoke
+        double actual = customerFileDAO.getTotalCost(testCustomers[0]);
+
+        // Analysis
+        assertEquals(expected, actual);
+    }
+
+    // @Test
+    // public void testGetTotalCostNotFound() throws IOException {
+    //     // Setup
+    //     Customer customer = new Customer(10, "Beans");
+    //     double expected = 0.0;
+
+    //     // Invoke
+    //     double actual = customerFileDAO.getTotalCost(customer);
+
+    //     // Analysis
+    //     assertEquals(expected, actual);
+    // }
+
+    @Test
+    public void testGetCart() throws IOException {
+        // Setup
+        Jersey[] expected = testCustomers[0].getCart().toArray(new Jersey[0]);
+        
+        // Invoke
+        Jersey[] cart = customerFileDAO.getCart(99);
+
+        // Analzye
+        assertArrayEquals(cart,expected);
+    }
+
+    // @Test
+    // public void testGetCartNotFound() throws IOException {
+    //     // Invoke
+    //     Jersey[] cart = customerFileDAO.getCart(99);
+
+    //     // Analyze
+    //     assertEquals(cart,null);
+    // }
 
 }

@@ -11,6 +11,7 @@ import com.estore.api.estoreapi.model.Jersey;
  */
 
 public interface JerseyDAO {
+
     /**
      * Retrieves all {@linkplain Jersey jersey's}
      * 
@@ -33,16 +34,6 @@ public interface JerseyDAO {
      * @throws IOException if an issue with underlying storage
      */
     Jersey[] findJerseys(String name, int number, double price, String color, String size) throws IOException;
-
-    /**
-     * Finds all {@linkplain Jersey jerseys} whose name contains the given text
-     * 
-     * @param name The name to match against
-     * 
-     * @return An array of {@link Jersey jerseys} whose names contains the given text, may be empty
-     * 
-     * @throws IOException if an issue with underlying storage
-     */
     
 
     /**
@@ -72,7 +63,7 @@ public interface JerseyDAO {
      */
     Jersey createJersey(Jersey jersey) throws IOException;
 
-     /**
+    /**
      * Updates and saves a {@linkplain Jersey jersey}
      * 
      * @param {@link Jersey jersey} object to be updated and saved

@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cart } from './cart';
+import { Customer } from './customer';
 
 /**
  * Service for angular elements to talk to the api with cart objects.
@@ -33,11 +34,11 @@ import { Cart } from './cart';
       );
     }
 
-    addJerseyToCart(cartId: number, jerseyId: number): Observable<any> {
+    addJerseyToCart(cartId: number, jerseyId: number): Observable<Customer> {
       const url = "PUT /cart/increment/?cart=" + cartId + "&jerseyId=" + jerseyId
-      return this.http.put(url, this.httpOptions).pipe(
+      return this.http.put<Customer>(url, this.httpOptions).pipe(
         tap(_ => this.log(`updated cart id=${cartId}`)),
-        catchError(this.handleError<Cart>('addJerseyToCart'))
+        catchError(this.handleError<Customer>('addJerseyToCart'))
       );
     }
 
@@ -95,4 +96,3 @@ import { Cart } from './cart';
 }
     
   
-    

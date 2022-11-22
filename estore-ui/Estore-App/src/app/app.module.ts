@@ -11,13 +11,13 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { InventoryComponent } from './inventory/inventory.component';
 
 import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
+
 import { Router, RouterModule } from '@angular/router';
 import { JerseysComponent } from './jerseys/jerseys.component';
 import { MessagesComponent } from './messages/messages.component';
 import { JerseySearchComponent } from './jersey-search/jersey-search.component';
 import { JerseyDetailComponent } from './jersey-detail/jersey-detail.component';
-import { CustDashboardComponent } from './cust-dashboard/cust-dashboard.component';
+
 import { AdminDetailComponent } from './admin-detail/admin-detail.component';
 
 
@@ -27,7 +27,6 @@ import { AdminDetailComponent } from './admin-detail/admin-detail.component';
     CartComponent,
     CheckoutComponent,
     LoginComponent,
-    LogoutComponent,
     JerseysComponent,
     MessagesComponent,
     JerseyDetailComponent,
@@ -36,7 +35,7 @@ import { AdminDetailComponent } from './admin-detail/admin-detail.component';
     CheckoutComponent,
     JerseysComponent,
     InventoryComponent,
-    CustDashboardComponent,
+
     AdminDetailComponent,
   ],
   imports: [
