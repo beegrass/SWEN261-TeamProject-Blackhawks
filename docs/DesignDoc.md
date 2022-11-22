@@ -276,8 +276,8 @@ There are two classes that make up our object, that will be the Jersey and Custo
 The way that the two classes interact is that the Customer class has a cart that can contain Jerseys, since the Customer can buy different Jerseys. 
 
 ## Static Code Analysis/Design Improvements
-
-![API overall static code coverage](Api-overall.png)
+### API Static Code Analysis
+![API overall static code coverage](estore-api-overall-final.png)
 Overall our API had good coverage, no duplications, bugs or vulnerabilities. One thing
 that can be improved on our API is that there is many code smells. Most of the major issues
 were issues with large blocks of code that were unused were commented out instead of deleted.
@@ -285,19 +285,41 @@ In order to keep our code clean we should have deleted most of these unused bloc
 critical issues were about static methods or hardcoded strings so it would be a good idea to make
 sure we are using java principles like static right with some of the methods. It would be a good
 idea to try and get more code coverage as well.
-![API overall issues critical code coverage](critical-issue.png)
-![API overall issues major code coverage](critical-issue.png)
 
+#### Critical issues 
+![API overall issues critical code coverage](critical-api.png)
+![API overall issues critical code coverage](int-depth-critical-api.png)
+> Here, a lot of our issues came from not declaring some variables to be static. Particularly, our nextId variable was marked.
+> it was marked because it thought that by not making it static it could lead to errors with creating / referencing the id for the Customer or  
+> jersey. 
+
+#### Major issues 
+![API overall issues major code coverage](major-api.png)
+![API overall issues major code coverage](in-depth-major-api.png)
+> Here, a lot of our issues came from not using the built in formatting for to construct the string that is 
+> going to be used in the Logger function for our controller. It is a matter of preference I believe of this choice. 
+
+#### Minor Issues
+![API overall issues major code coverage](minor-api.png)
+![API overall issues major code coverage](in-depth-minor-api.png)
+
+> Here a lot of the problems came from having to replace the type specification in this constructor call with the diamond operator ("<>").
+> however, their explanation doesnt make that much sense in regards to why you should just have it be empty instead of filled. While its 
+> understandble they thought it was a problem because java automatically does this for you, its not that much of a problem in reality. 
+
+### UI Static Code Analysis 
 ![UI overall static code coverage](ui-overall.png)
+![UI overall issues from code coverage](ui-issue.png)
+![UI overall issues from code coverage](static-code-analysis-ui.png)
 
 Overall our UI did have a good number of bugs but everything else was good. The bugs
 boil down to adding header tags or description to some of the tables that we used within
 our UI. Some other issues were some commented out code and deprecated attributes in the css.
 In the future it would be good to be more descriptive and use good standards when it comes
 to certain HTML elements such as tables. We also need to utilize the power of Angular better
-and understand it more in order to be able to work more effectively.
+and understand it more in order to be able to work more effectively. The majority of our code smells were from commented out code 
+which we neglected to delete. 
 
-![UI overall issues from code coverage](ui-issue.png)
 
 ## Roadmap of Enhancements
 As an effort to make the estore as accessible as possible, we are planning to implement a number of settings for different types of color blindless. In addition, several aesthetic and functional improvements such as REACT, storing our jerseys in a database using POSTRGRSQL, and others to make a more streamlined and professional experience.
@@ -317,10 +339,9 @@ As an effort to make the estore as accessible as possible, we are planning to im
 ### **Issues During Acceptance testing**
 > - There is an issue with when after you add your jersey to your cart, and then you get its total cost of the entire cart, but when you try to remove it from the cart right after 
 > it doesnt allow you to delete anything from it
-> - Customers not being able to be created during the login process, this is being dealt with by refactoring the code to not include the Cart object inside of a Customer object 
-> since it may have lead to some problems 
 > - Have to redo testing for Controller methods for the Customer because of refactoring, but otherwise it should be fine 
-
+> - this is a current issue as of right now, but there is a problem with adding multiple jerseys to the cart where it keeps saying that it cant do 
+> that which is weird 
 
 ## Unit Testing and Code Coverage
 
@@ -335,6 +356,7 @@ As an effort to make the estore as accessible as possible, we are planning to im
 
 #### Code Coverage As of 11/15/22
 > ## Controller Tier 
+
 > ## Persistence Tier 
 > ![Customer File DAO](customer_file_dao_persistance.png)
 > ![Jersey File DAO](jersey_file_dao_persistence.png)
