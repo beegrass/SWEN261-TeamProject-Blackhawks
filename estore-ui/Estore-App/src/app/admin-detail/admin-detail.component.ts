@@ -56,13 +56,4 @@ export class AdminDetailComponent implements OnInit {
       this.jerseyService.updateJersey(this.jersey).subscribe(() => this.goBack());
     }
   }
-
-  selectColorMode(): string {
-    let colorData = localStorage.getItem('colorblindKey');
-    let parsed = JSON.parse(colorData!);
-    let color = parsed.color;
-
-    console.log(color);
-    return color;
-  }
 }

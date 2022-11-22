@@ -1,42 +1,12 @@
 .options-button {
-  color:white;
-  background-color: #aa0404;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.options-button:hover {
-  background-color: #a04545;
-}
-
-.options-button-d {
-  color:white;
-  background-color: #1100ff;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.options-button-d:hover {
-    background-color: #456ca0;
+    color:white;
+    background-color: #aa0404;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
-.options-button-hc {
-  color:white;
-  background-color: #000000;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.options-button-hc {
-  background-color: rgb(80, 80, 80);
-}
-
-.options-button-p {
-  color:white;
-  background-color: #ff8c00;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.options-button-p:hover {
-  background-color: #b48249;
-}
+.options-button:hover {
+    background-color: #a04545;
+  }
 
   /* jerseysComponent's private CSS styles */
 .jerseys {
@@ -57,92 +27,11 @@
   box-shadow: 0 0 2px 1px rgb(255, 0, 0);
 }
 
-.jerseys-d {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 15em;
-}
-
-.jerseys-d img {
-  height: 200;
-  width: 200;
-  border-radius: 8px;
-  border: 1px solid #ddd
-}
-
-.jerseys-d img:hover {
-  box-shadow: 0 0 2px 1px #1100ff;
-}
-
-.jerseys-p {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 15em;
-}
-
-.jerseys-p img {
-  height: 200;
-  width: 200;
-  border-radius: 8px;
-  border: 1px solid #ddd
-}
-
-.jerseys-p img:hover {
-  box-shadow: 0 0 2px 1px #ff8c00
-}
-
-
-.jerseys-h {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 15em;
-}
-
-.jerseys-h img {
-  height: 200;
-  width: 200;
-  border-radius: 8px;
-  border: 1px solid #ddd
-}
-
-.jerseys-h img:hover {
-  box-shadow: 0 0 2px 1px #000000
-}
-
-
-
 .jerseys img:active {
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
 }
 
-.jerseys-d img:active {
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
-}
-
-.jerseys-p img:active {
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
-}
-
-.jerseys-h img:active {
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
-}
-
 .jerseys table {
-  width: 100%;
-}
-
-.jerseys-d table {
-  width: 100%;
-}
-
-.jerseys-p table {
-  width: 100%;
-}
-
-.jerseys-h table {
   width: 100%;
 }
 
@@ -176,8 +65,7 @@
 }
 
 .info .name {
-  background-color: rgb(80, 80, 80);
-  color: #f2f2f2;
+  background-color: rgba(234,70,86,255);
   border-radius: 4px 0 0 4px;
   align-self: center;
 }

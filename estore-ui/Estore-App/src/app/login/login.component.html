@@ -1,21 +1,5 @@
-<h1 *ngIf = "colorblindMode() == 'default'"style="color: #aa0404; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
-    Chicago Blackhawks
+<h1 style="color: #aa0404; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Chicago Blackhawks
 </h1>
-
-<h1 *ngIf = "colorblindMode() == 'deuteranopia'" style="color: #1100ff; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
-    Chicago Blackhawks
-</h1>
-
-<h1 *ngIf = "colorblindMode() == 'protanopia'" style="color: #ff8c00; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
-    Chicago Blackhawks
-</h1>
-
-<h1 *ngIf = "colorblindMode() == 'high contrast'" style="color: #000000; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; align-items: center;">
-    Chicago Blackhawks
-</h1>
-
-
-
 <h2>Login page</h2>
 <div class="user-form">
     Username:
@@ -26,19 +10,8 @@
     </form>
 </div>
 
-
-<div style="text-align: center;">
-    <select [(ngModel)] = "colorOption" class="cb-dropdown">
-        <option value="">Color</option>
-        <option value="deuteranopia">Deuteranopia</option>
-        <option value="protanopia">Protanopia</option>
-        <option value="high-contrast">High Contrast</option>
-    </select>
-
-    <button *ngIf = "colorblindMode() == 'default'" class="login-button"(click)="isAdmin(); login(onSubmit());">Login As Existing User</button>
-    <button *ngIf = "colorblindMode() == 'deuteranopia'" class="login-button-deuteranopia" (click)="isAdmin(); login(onSubmit());">Login As Existing User</button>
-    <button *ngIf = "colorblindMode() == 'protanopia'" class="login-button-protanopia" (click)="isAdmin(); login(onSubmit());">Login As Existing User</button>
-    <button *ngIf = "colorblindMode() == 'high contrast'" class="login-button-hc" (click)="isAdmin(); login(onSubmit());">Login As Existing User</button>
+<div class="nav-login">
+    <button class="login-button" (click)="isAdmin(); login(onSubmit());">Login As Existing User</button>
 </div>
 
 <div class = "nav-login">

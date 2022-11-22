@@ -22,15 +22,9 @@ export class InventoryComponent implements OnInit {
     this.getJerseys();
   }
 
-  selectColorMode(): string {
-    let colorData = localStorage.getItem('colorblindKey');
-    let parsed = JSON.parse(colorData!);
-    let color = parsed.color;
-
-    
-    return color;
-  } 
-
+  /**
+   * gets the most updated jerseys 
+   */
   getJerseys(): void {
     this.jerseyService.getJerseys()
       .subscribe(jerseys => this.jerseys = jerseys);
