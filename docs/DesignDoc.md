@@ -288,7 +288,7 @@ idea to try and get more code coverage as well.
 
 #### Critical issues 
 ![API overall issues critical code coverage](critical-api.png)
-![API overall issues critical code coverage](int-depth-critical-api.png)
+![API overall issues critical code coverage](in-depth-critical-api.png)
 > Here, a lot of our issues came from not declaring some variables to be static. Particularly, our nextId variable was marked.
 > it was marked because it thought that by not making it static it could lead to errors with creating / referencing the id for the Customer or  
 > jersey. 
@@ -308,10 +308,7 @@ idea to try and get more code coverage as well.
 > understandble they thought it was a problem because java automatically does this for you, its not that much of a problem in reality. 
 
 ### UI Static Code Analysis 
-![UI overall static code coverage](ui-overall.png)
-![UI overall issues from code coverage](ui-issue.png)
-![UI overall issues from code coverage](static-code-analysis-ui.png)
-
+![UI overall static code coverage](overall-static-analysis-ui.png)
 Overall our UI did have a good number of bugs but everything else was good. The bugs
 boil down to adding header tags or description to some of the tables that we used within
 our UI. Some other issues were some commented out code and deprecated attributes in the css.
@@ -320,9 +317,34 @@ to certain HTML elements such as tables. We also need to utilize the power of An
 and understand it more in order to be able to work more effectively. The majority of our code smells were from commented out code 
 which we neglected to delete. 
 
+#### Critical issues 
+![UI overall issues critical code coverage](critical-ui.png)
+![API overall issues critical code coverage](in-depth-critical-ui.png)
+> Here, a lot of our issues came declaring our variables as VAR instead of using the LET key word. This is critical because 
+> it may become a source of scope issues. What that means is that let and var have different scopes, so if "var" was used to declare a variable 
+> that needs to be used often, it may run into issues.
+
+#### Major issues 
+![API overall issues major code coverage](major-ui.png)
+![API overall issues major code coverage](in-depth-major-ui.png)
+> Here, a lot of our issues came from not deleting commented out code. This causes crowding and limits readability. The more in depth picture 
+> talks about adding headers to the table. This is not that big of a deal because this also just promotes readability. it provides some context when > users navigates a table. Without it the user gets rapidly lost in the flow of data.
+
+#### Minor Issues
+![API overall issues major code coverage](minor-ui.png)
+![API overall issues major code coverage](in-depth-minor-ui.png)
+
+> Here a lot of the problems came from not taking out unused import statements in the components. This can be a problem, but we didn't have time to
+> edit our files in lieu of testing. We also had some minor issues about the table again. It's mostly about syntax which is why this code 
+> smell was picked up. It states that it prefers a description so that visually impaired people will be able to understand what the 
+> table is trying to communicate which i think it helpful. 
+
+
+
 
 ## Roadmap of Enhancements
-As an effort to make the estore as accessible as possible, we are planning to implement a number of settings for different types of color blindless. In addition, several aesthetic and functional improvements such as REACT, storing our jerseys in a database using POSTRGRSQL, and others to make a more streamlined and professional experience.
+> Since the majority of our issues are for purely  reason to make the code more readable, the next step after we finish fixing the rest of our semantic bugs is to edit our code to take out commented out code and follow standard formatting practices. These formatting practices are helpful 
+because it helps with limited errors as following one guide line does that. Another thing that would be practical to implement based off our prior analysis is improving upon the accessibility of the code. This is mostly in the UI as one of the code smells we had was about adding a header for our table to provide a description of what it is to a visually impaired user. This would benefit us because our 10% feature has to do with accessibility, so therefore we could stand to edit our code to make it that way. Other changes that we propose is to add everal aesthetic and functional improvements such as REACT, storing our jerseys in a database using POSTRGRSQL, and others to make a more streamlined and professional experience.
 
 # Testing
 > _This section will provide information about the testing performed
@@ -331,17 +353,19 @@ As an effort to make the estore as accessible as possible, we are planning to im
 ## Acceptance Testing
 | How many user stories have... | Number |
 | ----------- | ----------- |
-| **passed**  | 20   |
-| **some acceptance criteria failing** | 5       |
-| **that havent been tested yet** | 6   |
+| **passed**  | 25   |
+| **some acceptance criteria failing** | 6     |
+| **that havent been tested yet** | 0   |
 
 
 ### **Issues During Acceptance testing**
-> - There is an issue with when after you add your jersey to your cart, and then you get its total cost of the entire cart, but when you try to remove it from the cart right after 
-> it doesnt allow you to delete anything from it
-> - Have to redo testing for Controller methods for the Customer because of refactoring, but otherwise it should be fine 
-> - this is a current issue as of right now, but there is a problem with adding multiple jerseys to the cart where it keeps saying that it cant do 
-> that which is weird 
+> - There is currently some bug with adding more than one jersey to the cart (in quantity section) for whatever reason its not 
+> consistent and we weren;t sure how to fix that bug 
+> - There is an issue with getting the total cost to update as you remove from your cart. It still works but sometimes it can be inconsistent and 
+> not update right after. You would have to go back a page and then go back to the cart to see the change 
+> - There are sometimes inconsistancies with how the cart is being rendered. We have tried a lot of different ways to see if it would change by 
+> calling getCart() (which reupdates the cart in the cartComponent) in different spots to try and see if it fixes it but it fails to.  
+
 
 ## Unit Testing and Code Coverage
 
