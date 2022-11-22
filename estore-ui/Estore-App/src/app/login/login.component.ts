@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { CartService } from '../cart.service';
+
 import { CustomerService} from '../customer.service';
-import { Cart } from 'app/cart';
-import { Jersey } from "app/jersey";
+
 import { Customer } from 'app/customer';
-import { Observable } from 'rxjs/internal/Observable';
-import { JerseyService } from 'app/jersey.service';
-import { NONE_TYPE } from '@angular/compiler';
 import { LoginService} from '../login.service'
 
 
@@ -22,7 +17,7 @@ export class LoginComponent implements OnInit {
   customers : Customer[] = []; 
   currentId : number = -1; 
   username: string = "";
-
+  colorOption: string = "";
   // Example 1: <input [(ngModel)]="person.firstName" name="first">
 
   constructor(
@@ -117,10 +112,29 @@ export class LoginComponent implements OnInit {
     window.location.reload();
   }
 
-  // getCart(): void {
-  //   this.customerService.getCart()
-  //   .subscribe(Jerseys => this.cart = Jerseys);
-  // }
+  
+  /**
+   * Creates a localStorage that holds the value of
+   * the colorblindness mode the user chooses on the login page
+   * @returns the string of the color of the website
+   */
+   colorblindMode(): string {
+    let color;
+    if (this.colorOption == '') {
+      color = 'default';
+    } else if (this.colorOption =='deuteranopia') {
+      color = 'deuteranopia';
+    } else if (this.colorOption =='protanopia') {
+      color = 'protanopia';
+    } else {
+      color = 'high contrast';
+    }
+    let data = {
+      'color': color
+    }
+    localStorage.setItem('colorblindKey', JSON.stringify(data));    
+    return color;
+  }
 
   /**
    * this gets the current customers username 

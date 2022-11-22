@@ -51,4 +51,13 @@ export class CheckoutComponent implements OnInit {
     return this.totalCost; 
   }
 
+  
+  selectColorMode(): string {
+    let colorData = localStorage.getItem('colorblindKey');
+    let parsed = JSON.parse(colorData!);
+    let color = parsed.color;
+
+    console.log(color);
+    return color;
+  }
 }

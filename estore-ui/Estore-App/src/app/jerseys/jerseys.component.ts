@@ -18,6 +18,10 @@ export class JerseysComponent implements OnInit {
 
   ngOnInit(): void {
     this.getJerseys();
+
+    this.cartComponent.getCart();
+    this.cartComponent.getTotalCostInternal(); 
+    
   }
 
   getJerseys(): void {
@@ -25,5 +29,14 @@ export class JerseysComponent implements OnInit {
     .subscribe(Jerseys => this.jerseys = Jerseys);
   }
 
+  
+  selectColorMode(): string {
+    let colorData = localStorage.getItem('colorblindKey');
+    let parsed = JSON.parse(colorData!);
+    let color = parsed.color;
+
+    return color;
+  }
+  
   
 }

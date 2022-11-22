@@ -74,15 +74,15 @@ export class CartComponent implements OnInit {
       }
     );
     //this.ngOnInit()
-    console.warn("this is the cart after the delete")
-    console.log(this.cart)
+    // console.warn("this is the cart after the delete")
+    // console.log(this.cart)
 
-    console.warn("this is the cart when calling the method getCart() on init")
-    this.getCart()
-    console.warn(this.cart)
+    // console.warn("this is the cart when calling the method getCart() on init")
+    // this.getCart()
+    // console.warn(this.cart)
     
-    console.warn("this is the updated price: " + this.totalCost); 
-
+    // console.warn("this is the updated price: " + this.totalCost); 
+    this.ngOnInit();
 
   }
 
@@ -94,6 +94,7 @@ export class CartComponent implements OnInit {
 
   get getTotalCost() : number{
     return this.totalCost; 
+    
   }
 
   getTotalCostInternal(){
@@ -103,6 +104,13 @@ export class CartComponent implements OnInit {
     
   }
 
+  selectColorMode(): string {
+    let colorData = localStorage.getItem('colorblindKey');
+    let parsed = JSON.parse(colorData!);
+    let color = parsed.color;
 
+
+    return color;
+  }
 
 }
