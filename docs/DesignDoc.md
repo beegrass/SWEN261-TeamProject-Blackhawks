@@ -347,11 +347,8 @@ As an effort to make the estore as accessible as possible, we are planning to im
 > ![Jersey Model](jersey_model.png)
 
 #### Statement 
-> As of right now, our code coverage has significantly met our expectations. The only downside as of right now is that our Controller tier has not 
-> been entirely tested because of refactoring. Prior to refactoring, we were having a lot of issues with a new Customer being created. It kept on 
-> running into the error that it was creating a null object, saying that createNewCustomer() method wasn’t working and returning null because of our > null case. But after a lot of troubleshooting, there are a lot of areas where the issue couldve come from e.g.  the cart and or customer not 
-> created properly or something else. It was an anomaly because our tests all passed in insomnia and in the unit testing, so we weren’t sure how it 
-> kept on creating a null object instead of a customer. This confused us thoroughly so we started over by getting rid of the Cart class completely 
-> and using an ArrayList of Jerseys to represent the Cart in the Customer. 
+> As of right now, our code coverage has significantly met our expectations. The controller tier has been tested and the Customer Controller was the only 
+> main class that lacked code coverage. Everything else was almost perfect. Check over these classes and refactoring our code has led to us solving our
+> previous problems we had with Customer and how to manage their cart.
 
 
