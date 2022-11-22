@@ -276,8 +276,8 @@ There are two classes that make up our object, that will be the Jersey and Custo
 The way that the two classes interact is that the Customer class has a cart that can contain Jerseys, since the Customer can buy different Jerseys. 
 
 ## Static Code Analysis/Design Improvements
-### API Static Code Analysis
-![API overall static code coverage](estore-api-overall-final.png)
+
+![API overall static code coverage](Api-overall.png)
 Overall our API had good coverage, no duplications, bugs or vulnerabilities. One thing
 that can be improved on our API is that there is many code smells. Most of the major issues
 were issues with large blocks of code that were unused were commented out instead of deleted.
@@ -314,8 +314,7 @@ boil down to adding header tags or description to some of the tables that we use
 our UI. Some other issues were some commented out code and deprecated attributes in the css.
 In the future it would be good to be more descriptive and use good standards when it comes
 to certain HTML elements such as tables. We also need to utilize the power of Angular better
-and understand it more in order to be able to work more effectively. The majority of our code smells were from commented out code 
-which we neglected to delete. 
+and understand it more in order to be able to work more effectively.
 
 #### Critical issues 
 ![UI overall issues critical code coverage](critical-ui.png)
@@ -378,8 +377,10 @@ because it helps with limited errors as following one guide line does that. Anot
 > 4. If there is a problem with debugging what went wrong in unit test, consult other group members or professor for help 
 
 
-#### Code Coverage As of 11/21/22
-> ## Controller Tier 
+#### Code Coverage As of 11/15/22
+> ## Controller Tier
+> ![Customer Controller](customerController.png)
+> ![Jersey Controller](jerseyController.png)
 
 > ## Persistence Tier 
 > ![Customer File DAO](customer_file_dao_persistance.png)
@@ -390,11 +391,8 @@ because it helps with limited errors as following one guide line does that. Anot
 > ![Jersey Model](jersey_model.png)
 
 #### Statement 
-> As of right now, our code coverage has significantly met our expectations. The only downside as of right now is that our Controller tier has not 
-> been entirely tested because of refactoring. Prior to refactoring, we were having a lot of issues with a new Customer being created. It kept on 
-> running into the error that it was creating a null object, saying that createNewCustomer() method wasn’t working and returning null because of our > null case. But after a lot of troubleshooting, there are a lot of areas where the issue couldve come from e.g.  the cart and or customer not 
-> created properly or something else. It was an anomaly because our tests all passed in insomnia and in the unit testing, so we weren’t sure how it 
-> kept on creating a null object instead of a customer. This confused us thoroughly so we started over by getting rid of the Cart class completely 
-> and using an ArrayList of Jerseys to represent the Cart in the Customer. 
+> As of right now, our code coverage has significantly met our expectations. The controller tier has been tested and the Customer Controller was the
+> only main class that lacked code coverage. Everything else was almost perfect. Checking over these classes and refactoring our code has led to us 
+> solving our previous problems we had with Customer and how to manage their cart.
 
 
